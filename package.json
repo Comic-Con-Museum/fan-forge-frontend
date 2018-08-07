@@ -6,7 +6,7 @@
   "author": "",
   "license": "MIT",
   "scripts": {
-    "start": "npm run clean && cross-env NODE_ENV=development babel-watch server/index.js",
+    "start": "react-scripts start",
     "start:prod": "npm run build && npm run serve",
     "serve": "cross-env NODE_ENV=production node buildServer/index.js",
     "build": "npm run build:client && npm run build:server && npm run build:node",
@@ -14,7 +14,6 @@
     "build:server": "rimraf buildServer && cross-env NODE_ENV=production webpack --progress -p --config webpack/server.prod.js",
     "build:node": "cross-env NODE_ENV=production babel server/index.js -o buildServer/index.js",
     "clean": "rimraf buildClient buildServer",
-    "precommit": "lint-staged",
     "cm": "git-cz",
     "lint": "eslint --fix src server webpack",
     "format": "prettier --single-quote --semi=false --write '{src,server,webpack}/**/*.js' && npm run lint"
@@ -24,13 +23,18 @@
     "express": "^4.15.2",
     "history": "^4.6.3",
     "react": "^16.0.0",
+    "react-addons-css-transition-group": "^15.6.2",
     "react-dom": "^16.0.0",
     "react-redux": "^5.0.5",
+    "react-transition-group": "^2.4.0",
     "react-universal-component": "^2.5.0",
+    "react-scripts": "1.0.10",
     "redux": "^3.7.0",
     "redux-devtools-extension": "^2.13.2",
     "redux-first-router": "^1.9.15",
     "redux-first-router-link": "^1.1.4",
+    "reselect": "^3.0.1",
+    "transition-group": "^0.0.2",
     "webpack-flush-chunks": "^1.1.22"
   },
   "devDependencies": {

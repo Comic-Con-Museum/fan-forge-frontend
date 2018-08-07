@@ -1,69 +1,20 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import Link, { NavLink } from 'redux-first-router-link'
+import { NavLink } from 'redux-first-router-link'
+import { goToPage } from '../actions'
+import '../css/Sidebar.css'
 
-import styles from '../css/Sidebar'
-
-const Sidebar = ({ path, dispatch }) => (
-  <div className={styles.sidebar}>
-    <h2>SEO-FRIENDLY LINKS</h2>
-
-    <NavLink to='/' exact activeClassName={styles.active}>
-      Home
+const Sidebar = ({ onClick, path }) => (
+  <div className='sidebar'>
+    <NavLink activeClassName='active' exact to='/'>
+      HOME
     </NavLink>
-
-    <NavLink
-      activeClassName={styles.active}
-      to={{ type: 'LIST', payload: { category: 'redux' } }}
-    >
-      Redux
+    <NavLink activeClassName='active' to='/entry'>
+      Idea Page
     </NavLink>
-
-    <Link
-      className={isActive(path, '/list/react')}
-      to={{ type: 'LIST', payload: { category: 'react' } }}
-    >
-      React
-    </Link>
-
-    <div style={{ height: 20 }} />
-
-    <h2>EVENT HANDLERS</h2>
-
-    <span
-      role='link'
-      tabIndex='0'
-      className={isActive(path, '/')}
-      onClick={() => dispatch({ type: 'HOME' })}
-    >
-      Home
-    </span>
-
-    <span
-      role='link'
-      tabIndex='0'
-      className={isActive(path, '/list/redux')}
-      onClick={() => dispatch({ type: 'LIST', payload: { category: 'redux' } })}
-    >
-      Redux
-    </span>
-
-    <span
-      role='link'
-      tabIndex='0'
-      className={isActive(path, '/list/react')}
-      onClick={() => dispatch({ type: 'LIST', payload: { category: 'react' } })}
-    >
-      React
-    </span>
   </div>
 )
 
-const isActive = (actualPath, expectedPath) =>
-  actualPath === expectedPath ? styles.active : ''
-
-const mapStateToProps = state => ({
-  path: state.location.pathname
-})
-
-export default connect(mapStateToProps)(Sidebar)
+const mapDispatch = { onClick: goToPage }
+const mapState = ({ location }) => ({ path: location.pathname })
+export default connect(mapState, mapDispatch)(Sidebar)
