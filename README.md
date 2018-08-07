@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-# DC-frontend
-Team DCs frontend repo, this holds all front end things for fan curation
-=======
 <a href="https://codesandbox.io/s/github/faceyspacey/redux-first-router-codesandbox" target="_blank">
   <img alt="Edit Redux-First Router Demo" src="https://codesandbox.io/static/img/play-codesandbox.svg">
 </a>
@@ -39,4 +35,3 @@ yarn start
 - [***server/configureStore.js***](./server/configureStore.js) - ***(observe how the matched route's thunk is awaited on)***
 
 
->>>>>>> history-boilerplate

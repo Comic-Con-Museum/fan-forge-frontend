@@ -1,7 +1,4 @@
 {
-<<<<<<< HEAD
-  "presets": ["env", "react"]
-=======
   "presets": [
     "env",
     "react",
@@ -17,5 +14,4 @@
       ]
     }
   }
->>>>>>> history-boilerplate
 }
