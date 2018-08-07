@@ -1,2 +1,9 @@
+<<<<<<< HEAD
 dist
 node_modules
+=======
+node_modules
+*.log
+buildClient
+buildServer
+>>>>>>> history-boilerplate
