@@ -12,9 +12,15 @@ const Sidebar = ({ onClick, path }) => (
     <NavLink activeClassName='active' to='/entry'>
       Idea Page
     </NavLink>
+    <NavLink activeClassName='active' to='/feed'>
+      Feed
+    </NavLink>
   </div>
 )
 
 const mapDispatch = { onClick: goToPage }
 const mapState = ({ location }) => ({ path: location.pathname })
-export default connect(mapState, mapDispatch)(Sidebar)
+export default connect(
+  mapState,
+  mapDispatch
+)(Sidebar)
