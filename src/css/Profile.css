@@ -2,8 +2,8 @@ h1 {
   color: #ddd;
 }
 .profile {
-  padding: 10px;
   overflow: scroll;
+  padding: 10px;
 }
 .profile label, h3 {
   color: black;
@@ -11,18 +11,18 @@ h1 {
   font-size: 20px;
   font-style: italic;
   font-weight: normal;
-  margin-bottom: 0px;
+  margin-bottom: 0;
 }
 
 .profile {
   display: block;
 }
 .profile textarea {
-  width: 80%;
   height: 40px;
   margin-left: 15px;
+  width: 80%;
 }
-div.bio {
+.bio {
   margin-left: 15px;
   margin-right: 15px;
 }

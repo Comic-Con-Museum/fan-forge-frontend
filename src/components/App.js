@@ -1,7 +1,8 @@
 import React from 'react'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+
 import Sidebar from './Sidebar'
 import Switcher from './Switcher'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import '../css/App.css'
 
@@ -14,5 +15,4 @@ export default () => (
       </div>
     </div>
   </MuiThemeProvider>
-
 )

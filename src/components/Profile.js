@@ -1,12 +1,10 @@
 import React from 'react'
-import Checkbox from 'material-ui/Checkbox';
-import TextField from 'material-ui/TextField';
-import RaisedButton from 'material-ui/RaisedButton';
+import { Checkbox, TextField, RaisedButton } from 'material-ui'
 import '../css/Profile.css'
 
 const styles = {
   field: {
-    marginLeft: 15,
+    marginLeft: 15
   },
   imageInput: {
     cursor: 'pointer',
@@ -16,96 +14,88 @@ const styles = {
     right: 0,
     left: 0,
     width: '100%',
-    opacity: 0,
-  },
+    opacity: 0
+  }
 }
 
-
 class Profile extends React.Component {
-
-  constructor(props){
-    super(props);
+  constructor(props) {
+    super(props)
     this.state = {
       name: 'Zach Jones',
       email: 'zachtjones16@gmail.com',
-      bio: "Here's a short bio, containing useful information about me, my passions, and who I am.",
+      bio:
+        "Here's a short bio, containing useful information about me, my passions, and who I am.",
       pic: 'https://graph.facebook.com/321231654995187/picture?type=large',
       tags: ['batman', 'superman', 'wonderwoman'],
       notificationMentions: true,
       notificationComments: true
-    };
+    }
 
     this.handleTagRemove = this.handleTagRemove.bind(this)
   }
 
-
-
-  handleBioChange = (event) => {
+  handleBioChange = event => {
     this.setState({
       bio: event.target.value
-    });
+    })
   }
 
-  handleNotificationMentionChange = (event) => {
+  handleNotificationMentionChange = event => {
     this.setState({
       notificationMentions: event.target.checked
-    });
+    })
   }
 
-  handleNotificationCommentsChange = (event) => {
+  handleNotificationCommentsChange = event => {
     this.setState({
       notificationComments: event.target.checked
     })
   }
 
-  handleTagRemove = (name) => {
-    const tags = this.state.tags
+  handleTagRemove = name => {
+    const { tags } = this.state
     const indexRemove = tags.indexOf(name)
     tags.splice(indexRemove, 1) // removes the element, but returns the removed elements
 
-    if (indexRemove != -1) {
-      this.setState((previous) => {
-        return {
-          tags: tags
-        }
+    if (indexRemove !== -1) {
+      this.setState({
+        tags
       })
     }
   }
 
-  handleSubmit = (event) => {
-    event.preventDefault();
-    //const data = new FormData(event.target);
+  handleSubmit = event => {
+    event.preventDefault()
+    // const data = new FormData(event.target);
 
     // can get the form data through:
-    //console.log(data.get('email'));
+    // console.log(data.get('email'));
 
     // or just use the state
-    console.log(this.state);
+    // console.log(this.state)
     // NOTE: you access formData fields with `data.get(fieldName)`
-    //const [month, day, year] = data.get('birthdate').split('/');
-    //const serverDate = `${year}-${month}-${day}`;
-    //data.set('birthdate', serverDate);
-    //data.set('username', data.get('username').toUpperCase());
-    /*fetch('/api/form-submit-url', {
+    // const [month, day, year] = data.get('birthdate').split('/');
+    // const serverDate = `${year}-${month}-${day}`;
+    // data.set('birthdate', serverDate);
+    // data.set('username', data.get('username').toUpperCase());
+    /* fetch('/api/form-submit-url', {
       method: 'POST',
       body: data,
     });*/
   }
 
-  renderTag = (tag) => {
-    return (
-      <Checkbox
-        key={tag}
-        style={styles.field}
-        label={tag}
-        checked={true}
-        onCheck={() => this.handleTagRemove(tag)}
-      />
-    );
-  }
+  renderTag = tag => (
+    <Checkbox
+      key={tag}
+      style={styles.field}
+      label={tag}
+      checked
+      onCheck={() => this.handleTagRemove(tag)}
+    />
+  )
 
   render() {
-
     return (
       <div className='profile'>
         <h3>{this.state.name}</h3>
@@ -113,38 +103,46 @@ class Profile extends React.Component {
         <TextField
           style={styles.field}
           value={this.state.email}
-          hintText="enter your email"
+          hintText='enter your email'
         />
         <h3>Profile image:</h3>
-        <img alt={this.state.name + "'s profile picture"} src={this.state.pic} />
+        <img
+          alt={`${this.state.name}'s profile`}
+          src={this.state.pic}
+        />
         <RaisedButton
-          label="Update image"
-          labelPosition="before"
+          label='Update image'
+          labelPosition='before'
           style={styles.field}
-          containerElement="label"
+          containerElement='label'
         >
-          <input type="file" name="file" style={styles.imageInput} id="profileImg" />
+          <input
+            type='file'
+            name='file'
+            style={styles.imageInput}
+            id='profileImg'
+          />
         </RaisedButton>
 
         <h3>Bio:</h3>
-        <div className="bio">
+        <div className='bio'>
           <TextField
             value={this.state.bio}
             onChange={this.handleBioChange}
-            multiLine={true}
-            fullWidth={true}
+            multiLine
+            fullWidth
           />
         </div>
         <h3>Notification Preferences</h3>
         <Checkbox
           style={styles.field}
-          label="mentions"
+          label='mentions'
           checked={this.state.notificationMentions}
           onCheck={this.handleNotificationMentionChange}
         />
         <Checkbox
           style={styles.field}
-          label="comments on my posts"
+          label='comments on my posts'
           checked={this.state.notificationComments}
           onCheck={this.handleNotificationCommentsChange}
         />
@@ -152,9 +150,8 @@ class Profile extends React.Component {
         <h3>Tags I follow</h3>
         {this.state.tags.map(this.renderTag)}
 
-        <RaisedButton label="Update my profile" fullWidth={true} />
+        <RaisedButton label='Update my profile' fullWidth />
       </div>
-
     )
   }
 }

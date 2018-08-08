@@ -4,7 +4,7 @@ import { NavLink } from 'redux-first-router-link'
 import { goToPage } from '../actions'
 import '../css/Sidebar.css'
 
-const Sidebar = ({ onClick, path }) => (
+const Sidebar = (/* { onClick, path }*/) => (
   <div className='sidebar'>
     <NavLink activeClassName='active' exact to='/'>
       HOME
@@ -20,4 +20,7 @@ const Sidebar = ({ onClick, path }) => (
 
 const mapDispatch = { onClick: goToPage }
 const mapState = ({ location }) => ({ path: location.pathname })
-export default connect(mapState, mapDispatch)(Sidebar)
+export default connect(
+  mapState,
+  mapDispatch
+)(Sidebar)
