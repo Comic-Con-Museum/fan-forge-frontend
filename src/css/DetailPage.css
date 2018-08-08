@@ -8,6 +8,11 @@
     margin: 20px
 }
 
+.detail-body h4 {
+    display: inline-block;
+    margin: 10px
+}
+
 h4 {
     color: white
 }
