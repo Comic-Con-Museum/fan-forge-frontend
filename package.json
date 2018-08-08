@@ -1,9 +1,9 @@
 {
-  "name": "redux-first-router-boilerplate",
-  "description": "Universal Redux-First Router Demo",
+  "name": "fan-curation-fe",
+  "description": "Fan Curation for Comic-con museum",
   "version": "1.0.0",
   "main": "server/index.js",
-  "author": "",
+  "author": "Intuit",
   "license": "MIT",
   "scripts": {
     "start": "react-scripts start",
