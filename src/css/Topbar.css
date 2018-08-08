@@ -1,45 +1,20 @@
 .topbar {
-  width: 150px;
+  position: absolute;
+  width: 100%;
+  height: 200px;
   margin-left: 5px;
   z-index: 2;
 }
-h2 {
-  font-size: 11px;
-  color: #646464;
-  font-weight: normal;
-  margin-top: 0px;
-  text-shadow: 1px 1px 1px #2d2d2d;
-}
-.topbar a, .topbar span {
-  display: block;
-  color: white;
-  background: rgb(35, 40, 42);
-  border-radius: 4px;
-  margin: 6px 0;
-  padding: 10px;
-  font-size: 0.875rem;
-  line-height: 8px;
-  text-decoration: none;
-  text-align: center;
-  cursor: pointer;
-  font-family: sans-serif;
-  -webkit-font-smoothing: antialiased;
-  transition: 0.3s ease all;
+
+.topbar .bannerImg {
+  width: 100%;
 }
 
-.topbar .active {
-  background-image: linear-gradient(270deg, #fed29d, #A58B66, #7abae8, #56a0d6);
-  background-size: 720%;
-  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.5);
-  transition: 0s ease all;
-}
-.topbar a:hover, .topbar span:hover {
-  background: rgb(132, 112, 89);
-}
-.topbar .active a:hover, .topbar .span span:hover {
-  background: rgb(254, 209, 158);
-}
-
-.topbar .active:hover {
-  background: rgb(224, 179, 128);
+.topbar .topnavbar {
+  margin-left: 25%;
+  border-left: 1px solid gray;
+  border-right: 1px solid gray;
+  border-bottom: 1px solid gray;
+  width: 50%;
+  background-color: white;
 }
