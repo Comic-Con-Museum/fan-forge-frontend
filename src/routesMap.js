@@ -1,6 +1,7 @@
 const routesMap = {
   HOME: '/',
-  ENTRY: '/entry'
+  ENTRY: '/entry',
+  SUBMIT: '/submit'
 }
 
 export default routesMap
