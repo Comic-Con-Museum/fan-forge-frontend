@@ -9,34 +9,36 @@ import FavoriteIcon from '@material-ui/icons/Favorite'
 import Typography from '@material-ui/core/Typography'
 import '../css/ExhibitCard.css'
 
-const bull = <span>•</span>
+const ExhibitCard = props => {
+  const { picture } = props
+  const { title } = props
+  const { summary } = props
 
-class ExhibitCard extends React.Component {
-  render() {
-    return (
+  return (
+    <div>
       <div>
-        <div>
-          <Card>
-            <CardMedia className="exhibit-card" image={this.props.picture} />
-            <CardContent>
-              <Typography gutterBottom variant="headline" component="h2">
-                {this.props.title}
-              </Typography>
-              <Typography component="p">{this.props.summary}</Typography>
-            </CardContent>
-            <CardActions>
-              <IconButton aria-label="Add to favorites">
-                <FavoriteIcon />
-              </IconButton>
-              <Button size="small" color="primary">
+        <Card>
+          <CardMedia className='exhibit-card' image={picture} />
+          <CardContent>
+            <Typography gutterBottom variant='headline' component='h2'>
+              {title}
+            </Typography>
+            <Typography component='p'>
+              {summary}
+            </Typography>
+          </CardContent>
+          <CardActions>
+            <IconButton aria-label='Add to favorites'>
+              <FavoriteIcon />
+            </IconButton>
+            <Button size='small' color='primary'>
                 Learn More
-              </Button>
-            </CardActions>
-          </Card>
-        </div>
+            </Button>
+          </CardActions>
+        </Card>
       </div>
-    )
-  }
+    </div>
+  )
 }
 
 export default ExhibitCard

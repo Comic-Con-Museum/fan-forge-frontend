@@ -5,14 +5,14 @@ import { goToPage } from '../actions'
 import '../css/Sidebar.css'
 
 const Sidebar = ({ onClick, path }) => (
-  <div className="sidebar">
-    <NavLink activeClassName="active" exact to="/">
+  <div className='sidebar'>
+    <NavLink activeClassName='active' exact to='/'>
       HOME
     </NavLink>
-    <NavLink activeClassName="active" to="/entry">
+    <NavLink activeClassName='active' to='/entry'>
       Idea Page
     </NavLink>
-    <NavLink activeClassName="active" to="/feed">
+    <NavLink activeClassName='active' to='/feed'>
       Feed
     </NavLink>
   </div>

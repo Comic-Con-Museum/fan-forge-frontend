@@ -28,14 +28,22 @@ const items = [
 ]
 
 const Home = () => (
-  <div className="home">
-    <div className="fullTop">
-      <UncontrolledCarousel className="fullimg" items={items} />
-      <img className="top-left iconimg" src={CCMLogo} alt="Logo" />
+  <div className='home'>
+    <div className='fullTop'>
+      <UncontrolledCarousel className='fullimg' items={items} />
+      <img className='top-left iconimg' src={CCMLogo} alt='Logo' />
       <h1>
         {' '}
-        You <a href="http://www.yahoo.com">create</a>. We{' '}
-        <a href="http://www.yahoo.com">Display</a>
+        You
+        {' '}
+        <a href='http://www.yahoo.com'>
+create
+        </a>
+. We
+        {' '}
+        <a href='http://www.yahoo.com'>
+Display
+        </a>
       </h1>
     </div>
     <div>
