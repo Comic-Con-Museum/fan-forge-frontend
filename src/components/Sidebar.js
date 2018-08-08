@@ -14,6 +14,7 @@ const Sidebar = () => (
     </NavLink>
     <NavLink activeClassName='active' to='/Profile'>
       My Profile
+    </NavLink>
     <NavLink activeClassName='active' to='/detail'>
       Detail
     </NavLink>
