@@ -3,6 +3,10 @@ body {
   background: rgb(27, 32, 34);
 }
 
+html {
+  background-color: #eee;
+}
+
 .hide {
   display: none;
 }

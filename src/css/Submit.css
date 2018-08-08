@@ -1,12 +1,73 @@
+.wizard {
+	height: 100%;
+}
+
 .wizard__form {
 	float: left;
-	width: 50vw;
+	width: 49vw;
 	padding: 70px;
+	position: relative;
+	min-height: 90vh;
 }
 
 .wizard__preview {
 	float: left;
-	width: 50vw;
+	width: 49vw;
+	height: 100%;
+}
+
+.wizard__preview img {
+	height: 100%;
+	width: 100%;
+	padding: 50px;
+}
+
+.wizard__form__title, .wizard__form__title2 {
+	font-size: 55px;
+	font-family: 'Roboto';
+	font-weight: 700;
+}
+
+.wizard__form__intro {
+	font-size: 28px;
+	margin-top: 50px;
+	font-family: 'Nunito Sans', sans-serif;
+	font-weight: 600;
+}
+
+.wizard__form .wizard__textfield {
+	margin-top: 40px;
+}
+
+.wizard__form .wizard__input {
+	font-size: 22px;
+}
+
+.wizard__form .wizard__input-txt {
+	font-size: 22px;
+}
+
+.wizard__image-container {
+	margin-top: 40px;
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-evenly;
+}
+
+.wizard__controls {
+	position: absolute;
+	bottom: 0;
+	right: 50px;
+}
+
+.wizard__controls button {
+	margin-left: 40px;
+	font-size: 16px;
+	padding: 5px 27px;
+}
+
+.wizard__controls .wizard__preview-btn {
+	display: none;
 }
 
 .wizard__dots {
@@ -18,18 +79,96 @@
 	transform: translateY(-50%);
 	display: flex;
 	flex-direction: column;
-	justify-content: space-around;
+	justify-content: center;
 	height: 80%;
 }
 
 .wizard__dots button {
-	border:none;
+	cursor: pointer;
+	border: none;
 	position: relative;
 	display: block;
 	padding: 0;
+	margin: 5px 0;
 	width: 16px;
 	height: 16px;
 	border-radius: 50%;
-	background-color: blue;
+	background-color: #3f51b5;
+}
 
+.wizard__dots button[disabled] {
+	cursor: none;
+	background-color: #2E3B84;
+}
+
+.wizard__dots button.current {
+	background-color: #DFF3E4;
+}
+
+@media screen and (max-width: 920px) {
+	.wizard__form {
+		width: 100vw;
+		padding: 45px;
+	}
+
+	.wizard__form .wizard__textfield {
+		margin-top: 20px;
+	}
+
+	.wizard__form__title {
+		font-size: 45px;
+	}
+
+	.wizard__form__title2 {
+		font-size: 35px;
+	}
+
+	.wizard__form__intro {
+		font-size: 23px;
+	}
+
+	.wizard__dots {
+		left: 10px;
+	}
+
+	.wizard__form .wizard__input {
+		font-size: 18px;
+	}
+	
+	.wizard__form .wizard__input-txt {
+		font-size: 18px;
+	}
+
+	.wizard__image-container {
+		display: block;
+		margin-top: 30px;
+	}
+
+	.wizard__image-container > button {
+		display: block;
+		margin: 10px auto;
+		width: 100%;
+	}
+
+	.wizard__preview {
+		display: none;
+	}
+
+	.wizard__controls .wizard__preview-btn {
+		display: block;
+	}
+
+	.wizard__controls {
+		width: 100%;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-evenly;
+	}
+
+	.wizard__controls button{
+		margin: 0;
+	}
 }
