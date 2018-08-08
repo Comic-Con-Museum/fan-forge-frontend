@@ -24,8 +24,8 @@ const UniversalComponent = universal(props => import(`./${props.page}`), {
     <div className='spinner'>
       <div />
     </div>
-  ),
-  error: () => <div className='notFound'>PAGE NOT FOUND - 404</div>
+  )//,
+  //error: () => <div className='notFound'>PAGE NOT FOUND - 404</div>
 })
 
 const mapState = ({ page, direction, ...state }) => ({
