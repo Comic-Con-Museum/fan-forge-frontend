@@ -19,6 +19,10 @@ export const goDetailPage = () => ({
   type: 'DETAILPAGE'
 })
 
+export const goFeed = () => ({
+  type: 'FEED'
+})
+
 export const notFound = () => ({
   type: NOT_FOUND
 })

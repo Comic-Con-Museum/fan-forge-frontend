@@ -7,6 +7,7 @@ const components = {
   LIST: 'List',
   ENTRY: 'Entry',
   DETAILPAGE: 'DetailPage',
+  FEED: 'Feed',
   [NOT_FOUND]: 'NotFound'
 }
 

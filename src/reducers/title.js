@@ -6,6 +6,8 @@ export default (state = 'RFR Demo', action = {}) => {
       return 'Entry'
     case 'DETAILPAGE':
       return 'DetailPage'
+    case 'FEED':
+      return 'Feed'
     default:
       return state
   }
