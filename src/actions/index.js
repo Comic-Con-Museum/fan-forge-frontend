@@ -15,6 +15,10 @@ export const goEntry = () => ({
   type: 'ENTRY'
 })
 
+export const goDetailPage = () => ({
+  type: 'DETAILPAGE'
+})
+
 export const notFound = () => ({
   type: NOT_FOUND
 })
