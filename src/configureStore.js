@@ -1,4 +1,6 @@
-import { createStore, applyMiddleware, combineReducers, compose } from 'redux'
+import {
+  createStore, applyMiddleware, combineReducers, compose
+} from 'redux'
 
 import { connectRoutes } from 'redux-first-router'
 
