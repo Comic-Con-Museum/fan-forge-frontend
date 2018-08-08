@@ -20,6 +20,8 @@ export class Submit extends Component {
       exhibit: '',
       summary: '',
       inspiration: '',
+      description: '',
+      tellus: '',
       currentStep: 0,
       maxStep: 0,
     }
@@ -132,6 +134,39 @@ export class Submit extends Component {
               fullWidth
               rows="8"
             />
+          </Step>
+          <Step key='2' stepNumber='2' className='form__leftPanel' currentStep={this.state.currentStep}>
+           <h1 className="wizard__form__title2">{strings[this.props.locale].wizard_complex}</h1>
+           <TextField
+              id="description"
+              label={strings[this.props.locale].wizard_provided}
+              value={this.state.description}
+              className="wizard__textfield"
+              InputLabelProps={{classes: {root: 'wizard__input wizard__input--big-label'}}}
+              inputProps={{className: 'wizard__input-txt'}}
+              onChange={(event) => this.handleChange('description', event)}
+              margin="normal"
+              multiline
+              fullWidth
+              rows="12"
+            />
+            <TextField
+              id="tellus"
+              label={strings[this.props.locale].wizard_tellus}
+              value={this.state.inspiration}
+              className="wizard__textfield"
+              InputLabelProps={{classes: {root: 'wizard__input wizard__input--medium-label'}}}
+              inputProps={{className: 'wizard__input-txt'}}
+              onChange={(event) => this.handleChange('tellus', event)}
+              margin="normal"
+              multiline
+              fullWidth
+              rows="12"
+            />
+          </Step>
+          <Step key='3' stepNumber='3' className='form__leftPanel' currentStep={this.state.currentStep}>
+           <h1 className="wizard__form__title">{strings[this.props.locale].wizard_title3}</h1>
+           <h3 className="wizard__form__intro">{strings[this.props.locale].wizard_looksgreat}</h3>
           </Step>
 
           <div className='wizard__controls'>
