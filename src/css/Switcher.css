@@ -1,3 +1,7 @@
+.content {
+  height: 100vh;
+}
+
 .spinner {
   display: -webkit-box;
   display: -ms-flexbox;

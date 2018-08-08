@@ -1,10 +1,13 @@
-import React from 'react'
-import '../css/Submit.css'
+import React, { Component } from 'react'
 import TagsInput from 'react-tagsinput'
-import 'react-tagsinput/react-tagsinput.css' 
-import { Row, Container, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Step from './Step';
 
-export default class Submit extends React.Component {
+import '../css/Submit.css'
+import 'react-tagsinput/react-tagsinput.css' 
+
+export default class Submit extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -12,13 +15,19 @@ export default class Submit extends React.Component {
       title: '',
       description: '',
       picture: '',
+      currentStep: 1,
     }
+    this.handleTags = this.handleTags.bind(this);
   }
 
-  handleChange(value, fieldName) {
-    const newState = {};
-    newState[fieldName] = value;
-    this.setState(newState);
+  handleChange(name, event) {
+    this.setState({
+      [name]: event.target.value,
+    });
+  };
+
+  handleTags(newTags) {
+    this.setState({tags: newTags});
   }
 
   handleFormSubmit(e) {
@@ -28,39 +37,24 @@ export default class Submit extends React.Component {
 
   render() {
     return (
-      <Container>
-        <Row>
-          <Form onSubmit={this.handleFormSubmit}>
-            <span class="input input--manami">
-              <input class="input__field input__field--manami" type="text" id="input-32" />
-              <label class="input__label input__label--manami" for="input-32">
-                <span class="input__label-content input__label-content--manami">Username</span>
-              </label>
-            </span>
-            <FormGroup>
-              <Label for="description">Description</Label>
-              <Input onChange={(value) => this.handleChange(value, 'description')} value={this.state.description} type="textarea" name="description" id="description" />
-            </FormGroup>
-            <FormGroup>
-              <Label for="picture">Picture</Label>
-              <Input type="file" name="picture" multiple id="picture" />
-              <FormText color="muted">
-                This is some placeholder block-level help text for the above input.
-                It's a bit lighter and easily wraps to a new line.
-              </FormText>
-            </FormGroup>
-            <FormGroup>
-              <Label for="exampleText">Tags</Label>
-              <TagsInput addOnBlur value={this.state.tags} onChange={(value) => this.handleChange(value, 'tags')} />
-            </FormGroup>
-            <FormGroup>
-              <Label for="exampleText">Top Artifact</Label>
-              <Input name="topArtifact" id="topArtifact" />
-            </FormGroup>
-            <Button type="submit">Submit</Button>
-          </Form>
-        </Row>
-      </Container>
+      <div className='wizard'>
+        <form className='wizard__form' onSubmit={this.handleFormSubmit} noValidate autoComplete="off">
+          <Step stepNumber='1' className='form__leftPanel' currentStep={this.state.currentStep}>
+           <h1> salut </h1>
+          </Step>
+        </form>
+        <div className='wizard__preview'>
+          <h1> hey hey hey ;) </h1>
+        </div>
+        <div className='wizard__controls'>
+          <div className='wizard__dots'>
+            <button className='current'/>
+            <button disabled/>
+            <button disabled/>
+            <button disabled/>
+          </div>
+        </div>
+      </div>
     );
   }
 };
