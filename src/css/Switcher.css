@@ -97,24 +97,24 @@
 /** NEXT TRANSITION **/
 
 .next .slide-enter {
-  transform: translateX(100%); 
-  opacity: 0; 
+  transform: translateX(100%);
+  opacity: 0;
 }
 
 .next .slide-enter-active {
-  transform: translateX(0%); 
+  transform: translateX(0%);
   opacity: 1;
   transition: all 500ms;
 }
 
 .next .slide-leave {
-  transform: translateX(0%); 
-  opacity: 1; 
+  transform: translateX(0%);
+  opacity: 1;
 }
 
 .next .slide-leave-active {
-  transform: translateX(-100%); 
-  opacity: 0; 
+  transform: translateX(-100%);
+  opacity: 0;
   transition: all 500ms;
 }
 
@@ -123,24 +123,24 @@
 /** BACK TRANSITION **/
 
 .back .slide-enter {
-  transform: translateX(-100%); 
-  opacity: 0; 
+  transform: translateX(-100%);
+  opacity: 0;
 }
 
 .back .slide-enter-active {
-  transform: translateX(0%); 
-  opacity: 1; 
+  transform: translateX(0%);
+  opacity: 1;
   transition: all 500ms;
 }
 
 .back .slide-leave {
-  transform: translateX(0%); 
-  opacity: 1; 
+  transform: translateX(0%);
+  opacity: 1;
 }
 
 .back .slide-leave-active {
-  transform: translateX(100%); 
-  opacity: 0; 
+  transform: translateX(100%);
+  opacity: 0;
   transition: all 500ms;
 }
 

@@ -50,13 +50,13 @@
   color: red;
 }
 
-span.directions {
-  display: inline;
+.directions {
   color: rgb(82, 175, 218);
+  display: inline;
 }
 
 .articleLinks {
   color: white;
-  -webkit-font-smoothing: antialiased;
   font-family: Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }

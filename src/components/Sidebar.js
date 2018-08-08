@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { NavLink } from 'redux-first-router-link'
 import { goToPage } from '../actions'
-// eslint-disable-line
 import '../css/Sidebar.css'
 
 const Sidebar = () => (
@@ -13,6 +12,8 @@ const Sidebar = () => (
     <NavLink activeClassName='active' to='/entry'>
       Idea Page
     </NavLink>
+    <NavLink activeClassName='active' to='/Profile'>
+      My Profile
     <NavLink activeClassName='active' to='/detail'>
       Detail
     </NavLink>
