@@ -2,9 +2,10 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { NavLink } from 'redux-first-router-link'
 import { goToPage } from '../actions'
+// eslint-disable-line
 import '../css/Sidebar.css'
 
-const Sidebar = ({ onClick, path }) => (
+const Sidebar = () => (
   <div className='sidebar'>
     <NavLink activeClassName='active' exact to='/'>
       HOME
