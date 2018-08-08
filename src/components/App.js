@@ -1,15 +1,13 @@
 import React from 'react'
-
 import Sidebar from './Sidebar'
 import Switcher from './Switcher'
+import '../css/App.css'
 
-import styles from '../css/App'
-
-const App = () => (
-  <div className={styles.app}>
-    <Sidebar />
-    <Switcher />
+export default () => (
+  <div>
+    <div className='app'>
+      <Sidebar />
+      <Switcher />
+    </div>
   </div>
 )
-
-export default App

@@ -1,11 +1,17 @@
 .switcher {
   position: relative;
   margin: 0 10px;
-  height: calc(100vh - 20px);
+  height: calc(100vh - 220px);
   overflow: hidden;
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
+}
+
+@media (max-height: 700px) { 
+  .switcher {
+    height: calc(100vh - 20px);
+  }
 }
 
 .switcher > div {
@@ -16,7 +22,6 @@
   height: 100%;
 
   background: #23282A;
-  background: linear-gradient(0deg, #23282A, #23282A, rgb(70, 43, 48));
   border: 1px solid rgba(40, 40, 50, 1);
   box-sizing: border-box;
   color: white;
@@ -57,7 +62,7 @@
   border-radius: 50%;
   background: #373737;
   background: -webkit-linear-gradient(left, #373737 10%, rgba(55,55,55,0) 42%);
-  background: linear-gradient(to right, rgb(220, 44, 48) 10%, rgba(55,55,55,0) 42%);
+  background: linear-gradient(to right, rgb(67, 170, 217) 10%, rgba(55,55,55,0) 42%);
   position: relative;
   -webkit-animation: load3 1.4s infinite linear;
   animation: load3 1.4s infinite linear;
@@ -67,7 +72,7 @@
 .spinner > div:before {
   width: 50%;
   height: 50%;
-  background: rgb(220, 44, 48);
+  background: rgb(67, 170, 217);
   border-radius: 100% 0 0 0;
   position: absolute;
   top: 0;
@@ -118,6 +123,56 @@
   }
 }
 
+/** NEXT TRANSITION **/
+
+.next .slide-enter {
+  transform: translateX(100%); 
+  opacity: 0; 
+}
+
+.next .slide-enter-active {
+  transform: translateX(0%); 
+  opacity: 1;
+  transition: all 500ms;
+}
+
+.next .slide-leave {
+  transform: translateX(0%); 
+  opacity: 1; 
+}
+
+.next .slide-leave-active {
+  transform: translateX(-100%); 
+  opacity: 0; 
+  transition: all 500ms;
+}
+
+
+
+/** BACK TRANSITION **/
+
+.back .slide-enter {
+  transform: translateX(-100%); 
+  opacity: 0; 
+}
+
+.back .slide-enter-active {
+  transform: translateX(0%); 
+  opacity: 1; 
+  transition: all 500ms;
+}
+
+.back .slide-leave {
+  transform: translateX(0%); 
+  opacity: 1; 
+}
+
+.back .slide-leave-active {
+  transform: translateX(100%); 
+  opacity: 0; 
+  transition: all 500ms;
+}
+
 /* NOT FOUND */
 
 .notFound {
@@ -125,7 +180,7 @@
   border: 1px solid rgb(30,30,30);
   box-sizing: border-box;
   padding: 10px;
-  color: red !important;
+  color: red;
   font-size: 32px;
   text-shadow: 1px 1px 1px black;
   display: flex;

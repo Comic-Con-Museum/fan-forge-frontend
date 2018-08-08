@@ -6,36 +6,48 @@
   display: block !important;
 }
 
-.title {
-  color: rgb(255, 44, 49);
-  font-size: 34px;
-  text-align: center;
-}
-
-.content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  flex-direction: column;
-}
-
-.caption {
-  color: rgb(150, 44, 49);
+.home h1 {
+  color: rgb(253, 208, 157);
+  font-family: Roboto, sans-serif;
   font-size: 18px;
+  text-align: center;
+  margin-top: 0px;
+  text-shadow: 1px 1px 1px rgb(5,5,5);
   -webkit-font-smoothing: antialiased;
-  margin-top: 10px;
-  text-shadow: 1px 1px 1px #2A0C0C;
 }
 
-.nico {
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
-  color: pink;
-  text-decoration: none;
+.home h2 {
+  color: rgb(65, 167, 214); 
+  font-family: Roboto, sans-serif;
+  font-size: 16px;
+  text-align: center;
+  font-weight: normal;
+  margin-top: -4px;
   -webkit-font-smoothing: antialiased;
 }
-.nico:hover {
-  text-decoration: underline;
+
+.home span {
+  color: rgb(106, 118, 124); 
+  display: block;
+  margin: 8px 0px;
+  position: relative;
+}
+
+.home pre {
+  margin-top: -20px;
+  color: rgb(106, 118, 124); 
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+}
+
+
+span.directions {
+  display: inline;
+  color: rgb(82, 175, 218); 
+}
+
+.articleLinks {
+  color: white;
+  -webkit-font-smoothing: antialiased;
+  font-family: Roboto, sans-serif;
 }

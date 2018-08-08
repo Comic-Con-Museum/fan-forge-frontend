@@ -1,4 +1,4 @@
 export { default as page } from './page'
-export { default as category } from './category'
-export { default as packages } from './packages'
+export { default as direction } from './direction'
 export { default as title } from './title'
+export { default as actions } from './actions'
