@@ -96,19 +96,30 @@ class Profile extends React.Component {
   )
 
   render() {
+    const {
+      name, email, pic, bio, notificationMentions, notificationComments, tags
+    } = this.state
+
+
     return (
       <div className='profile'>
-        <h3>{this.state.name}</h3>
-        <h3>Email:</h3>
+        <h3>
+          {name}
+        </h3>
+        <h3>
+Email:
+        </h3>
         <TextField
           style={styles.field}
-          value={this.state.email}
+          value={email}
           hintText='enter your email'
         />
-        <h3>Profile image:</h3>
+        <h3>
+Profile image:
+        </h3>
         <img
-          alt={`${this.state.name}'s profile`}
-          src={this.state.pic}
+          alt={`${name}'s profile`}
+          src={pic}
         />
         <RaisedButton
           label='Update image'
@@ -124,31 +135,37 @@ class Profile extends React.Component {
           />
         </RaisedButton>
 
-        <h3>Bio:</h3>
+        <h3>
+Bio:
+        </h3>
         <div className='bio'>
           <TextField
-            value={this.state.bio}
+            value={bio}
             onChange={this.handleBioChange}
             multiLine
             fullWidth
           />
         </div>
-        <h3>Notification Preferences</h3>
+        <h3>
+Notification Preferences
+        </h3>
         <Checkbox
           style={styles.field}
           label='mentions'
-          checked={this.state.notificationMentions}
+          checked={notificationMentions}
           onCheck={this.handleNotificationMentionChange}
         />
         <Checkbox
           style={styles.field}
           label='comments on my posts'
-          checked={this.state.notificationComments}
+          checked={notificationComments}
           onCheck={this.handleNotificationCommentsChange}
         />
 
-        <h3>Tags I follow</h3>
-        {this.state.tags.map(this.renderTag)}
+        <h3>
+Tags I follow
+        </h3>
+        {tags.map(this.renderTag)}
 
         <RaisedButton label='Update my profile' fullWidth />
       </div>

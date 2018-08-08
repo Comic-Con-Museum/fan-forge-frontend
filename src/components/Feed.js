@@ -6,7 +6,7 @@ import cardData from '../mockdata/cards.json'
 
 // springConfig={Presets.wobbly}
 
-const Feed = props => (
+const Feed = props => ( // eslint-disable-line
   <div className='feed'>
     <SpringGrid
       component='ul'
