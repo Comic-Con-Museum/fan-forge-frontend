@@ -1,44 +1,54 @@
 .home {
   border: 1px solid rgb(30,30,30);
   box-sizing: border-box;
-  padding: 10px;
   display: block !important;
 }
 
-.home h1 {
-  color: rgb(253, 208, 157);
-  font-family: Roboto, sans-serif;
-  font-size: 18px;
-  text-align: center;
-  margin-top: 0px;
-  text-shadow: 1px 1px 1px rgb(5,5,5);
-  -webkit-font-smoothing: antialiased;
-}
-
-.home h2 {
-  color: rgb(65, 167, 214);
-  font-family: Roboto, sans-serif;
-  font-size: 16px;
-  text-align: center;
-  font-weight: normal;
-  margin-top: -4px;
-  -webkit-font-smoothing: antialiased;
-}
-
-.home span {
-  color: rgb(106, 118, 124);
-  display: block;
-  margin: 8px 0px;
+.home .fullTop {
+  width: 100%;
+  height: 100%;
   position: relative;
+  text-align: center;
+  color: white;
+  overflow: hidden;
 }
 
-.home pre {
-  margin-top: -20px;
-  color: rgb(106, 118, 124);
-  font-size: 14px;
-  -webkit-font-smoothing: antialiased;
+.home .fullTop .top-left {
+    position: absolute;
+    top: 16px;
+    left: 32px;
 }
 
+.home .fullTop .iconimg {
+    width:10%; /* you can use % */
+    height: auto;
+}
+
+.home .fullTop .fullimg {
+    width:100%; /* you can use % */
+    height: 100%;
+}
+
+
+.home .fullTop .centeredShow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.home .fullTop h1 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: black;
+  font-size: 4rem;
+}
+
+.home .fullTop a {
+  color: red;
+}
 
 span.directions {
   display: inline;
