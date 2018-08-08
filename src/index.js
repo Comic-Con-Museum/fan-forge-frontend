@@ -11,7 +11,7 @@ const store = configureStore(history)
 const render = App =>
   ReactDOM.render(
     <Provider store={store}>
-      <App />
+      <App locale='en'/>
     </Provider>,
     document.getElementById('root')
   )
