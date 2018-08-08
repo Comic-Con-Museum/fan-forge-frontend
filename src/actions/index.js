@@ -15,6 +15,10 @@ export const goEntry = () => ({
   type: 'ENTRY'
 })
 
+export const goFeed = () => ({
+  type: 'FEED'
+})
+
 export const notFound = () => ({
   type: NOT_FOUND
 })

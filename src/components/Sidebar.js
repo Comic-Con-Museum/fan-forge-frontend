@@ -15,6 +15,9 @@ const Sidebar = (/* { onClick, path }*/) => (
     <NavLink activeClassName='active' to='/Profile'>
       My Profile
     </NavLink>
+    <NavLink activeClassName='active' to='/feed'>
+      Feed
+    </NavLink>
   </div>
 )
 
