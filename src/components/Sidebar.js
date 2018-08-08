@@ -12,6 +12,9 @@ const Sidebar = ({ onClick, path }) => (
     <NavLink activeClassName='active' to='/entry'>
       Idea Page
     </NavLink>
+    <NavLink activeClassName='active' to='/feed'>
+      Feed
+    </NavLink>
   </div>
 )
 
