@@ -1,5 +1,5 @@
 import React from 'react'
-import { Checkbox, TextField, RaisedButton } from 'material-ui'
+import { Checkbox, TextField, RaisedButton } from 'material-ui' // eslint-disable-line
 import '../css/Profile.css'
 
 const styles = {
