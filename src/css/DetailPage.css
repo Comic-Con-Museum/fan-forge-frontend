@@ -1,0 +1,22 @@
+.buttonWrapper {
+    text-align: center;
+    margin: 20px
+}
+
+.detail-body {
+    color: white;
+    margin: 20px
+}
+
+.detail-body h4 {
+    display: inline-block;
+    margin: 10px
+}
+
+h4 {
+    color: white
+}
+
+.carousel-item > img { 
+    width: 100%; 
+}

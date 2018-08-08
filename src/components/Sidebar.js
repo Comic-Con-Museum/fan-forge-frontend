@@ -4,7 +4,7 @@ import { NavLink } from 'redux-first-router-link'
 import { goToPage } from '../actions'
 import '../css/Sidebar.css'
 
-const Sidebar = (/* { onClick, path }*/) => (
+const Sidebar = () => (
   <div className='sidebar'>
     <NavLink activeClassName='active' exact to='/'>
       HOME
@@ -14,6 +14,8 @@ const Sidebar = (/* { onClick, path }*/) => (
     </NavLink>
     <NavLink activeClassName='active' to='/Profile'>
       My Profile
+    <NavLink activeClassName='active' to='/detail'>
+      Detail
     </NavLink>
     <NavLink activeClassName='active' to='/feed'>
       Feed
