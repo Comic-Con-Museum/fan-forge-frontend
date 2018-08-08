@@ -4,7 +4,8 @@
 }
 
 .detail-body {
-    color: white
+    color: white;
+    margin: 20px
 }
 
 h4 {
@@ -14,4 +15,3 @@ h4 {
 .carousel-item > img { 
     width: 100%; 
 }
-
