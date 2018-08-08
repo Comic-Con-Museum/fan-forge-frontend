@@ -1,4 +1,4 @@
-import {LOCALE_SWITCH} from '../actions';
+import { LOCALE_SWITCH } from '../actions'
 
 export default (state = 'en', action = {}) => {
   switch (action.type) {

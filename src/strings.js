@@ -1,8 +1,8 @@
-const strings = {
-  'en': {
-    'wizard_title': 'Welcome'
+export default {
+  en: {
+    wizard_title: 'Welcome'
   },
-  'es': {
-    'wizard_title': 'Holla'
+  es: {
+    wizard_title: 'Holla'
   }
 }

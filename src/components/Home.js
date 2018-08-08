@@ -1,4 +1,5 @@
 import React from 'react'
+// eslint-disable-line
 import '../css/Home.css'
 
 const Home = () => (
