@@ -2,3 +2,7 @@ node_modules
 *.log
 buildClient
 buildServer
+.idea
+dist
+dev
+package-lock.json

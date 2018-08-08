@@ -11,8 +11,7 @@ export default (state = 'next', action = {}) => {
   }
   if (type === 'HOME') {
     return 'back'
-  }
-  else if (type === 'ENTRY') {
+  } if (type === 'ENTRY') {
     return 'next'
   }
   return state
