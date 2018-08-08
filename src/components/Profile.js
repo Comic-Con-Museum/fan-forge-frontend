@@ -1,5 +1,5 @@
 import React from 'react'
-import { Checkbox, TextField, RaisedButton } from 'material-ui' // eslint-disable-line
+import { Checkbox, TextField, Button, FormControlLabel, FormGroup } from '@material-ui/core'
 import '../css/Profile.css'
 
 const styles = {
@@ -86,13 +86,19 @@ class Profile extends React.Component {
   }
 
   renderTag = tag => (
-    <Checkbox
-      key={tag}
-      style={styles.field}
-      label={tag}
-      checked
-      onCheck={() => this.handleTagRemove(tag)}
-    />
+    <FormGroup row key={tag}>
+      <FormControlLabel
+        control={
+          <Checkbox
+            style={styles.field}
+            checked
+            onChange={() => this.handleTagRemove(tag)}
+            value={tag}
+          />
+        }
+        label={tag}
+      />
+    </FormGroup>
   )
 
   render() {
@@ -112,7 +118,6 @@ Email:
         <TextField
           style={styles.field}
           value={email}
-          hintText='enter your email'
         />
         <h3>
 Profile image:
@@ -121,19 +126,19 @@ Profile image:
           alt={`${name}'s profile`}
           src={pic}
         />
-        <RaisedButton
-          label='Update image'
-          labelPosition='before'
+        <Button
+          children='update image'
+          variant='raised'
           style={styles.field}
-          containerElement='label'
         >
+          Update image
           <input
             type='file'
             name='file'
             style={styles.imageInput}
             id='profileImg'
           />
-        </RaisedButton>
+        </Button>
 
         <h3>
 Bio:
@@ -142,32 +147,44 @@ Bio:
           <TextField
             value={bio}
             onChange={this.handleBioChange}
-            multiLine
+            multiline
             fullWidth
           />
         </div>
         <h3>
 Notification Preferences
         </h3>
-        <Checkbox
-          style={styles.field}
-          label='mentions'
-          checked={notificationMentions}
-          onCheck={this.handleNotificationMentionChange}
-        />
-        <Checkbox
-          style={styles.field}
-          label='comments on my posts'
-          checked={notificationComments}
-          onCheck={this.handleNotificationCommentsChange}
-        />
+        <FormGroup row>
+          <FormControlLabel
+            control={
+              <Checkbox
+                style={styles.field}
+                checked={notificationMentions}
+                onChange={this.handleNotificationMentionChange}
+              />
+            }
+            label="mentions"
+          />
+        </FormGroup>
+        <FormGroup row>
+          <FormControlLabel
+            control={
+              <Checkbox
+                style={styles.field}
+                checked={notificationComments}
+                onChange={this.handleNotificationCommentsChange}
+              />
+            }
+            label='comments on my posts'
+          />
+        </FormGroup>
 
         <h3>
 Tags I follow
         </h3>
         {tags.map(this.renderTag)}
 
-        <RaisedButton label='Update my profile' fullWidth />
+        <Button children='Update my profile' variant='raised' fullWidth />
       </div>
     )
   }
