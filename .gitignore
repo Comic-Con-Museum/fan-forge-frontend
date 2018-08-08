@@ -3,3 +3,6 @@ node_modules
 buildClient
 buildServer
 .idea
+dist
+dev
+package-lock.json

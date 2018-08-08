@@ -5,7 +5,7 @@ import '../css/App.css'
 
 export default () => (
   <div>
-    <div className='app'>
+    <div className="app">
       <Sidebar />
       <Switcher />
     </div>

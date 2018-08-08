@@ -9,7 +9,7 @@ const Switcher = ({ page, direction, isLoading }) => (
   <TransitionGroup
     className={`switcher ${direction}`}
     duration={500}
-    prefix='slide'
+    prefix="slide"
   >
     <Transition key={page}>
       <UniversalComponent page={page} isLoading={isLoading} />
@@ -21,11 +21,11 @@ const UniversalComponent = universal(props => import(`./${props.page}`), {
   minDelay: 500,
   chunkName: props => props.page,
   loading: () => (
-    <div className='spinner'>
+    <div className="spinner">
       <div />
     </div>
   ),
-  error: () => <div className='notFound'>PAGE NOT FOUND - 404</div>
+  error: () => <div className="notFound">PAGE NOT FOUND - 404</div>
 })
 
 const mapState = ({ page, direction, ...state }) => ({

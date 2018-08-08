@@ -5,7 +5,7 @@ export default (state = 'RFR Demo', action = {}) => {
     case 'ENTRY':
       return 'Entry'
     case 'FEED':
-        return 'Feed'
+      return 'Feed'
     default:
       return state
   }
