@@ -22,3 +22,10 @@ export const goEntry = () => ({
 export const notFound = () => ({
   type: NOT_FOUND
 })
+
+export const localeSwitch = locale => ({
+  type: LOCALE_SWITCH,
+  payload: locale
+})
+
+export const LOCALE_SWITCH = 'LOCALE_SWITCH'
