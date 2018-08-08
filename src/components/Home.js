@@ -1,7 +1,6 @@
 import React from 'react'
 import { UncontrolledCarousel } from 'reactstrap'
 import '../css/Home.css'
-import CCMLogo from '../assets/Logo.png'
 import CCMSketch from '../assets/ccm_sketch.jpeg'
 import CCMBuilding from '../assets/ccm_building.jpeg'
 import CCMSanDiego from '../assets/ccm_sanDiego.jpeg'
@@ -31,7 +30,6 @@ const Home = () => (
   <div className='home'>
     <div className='fullTop'>
       <UncontrolledCarousel className='fullimg' items={items} />
-      <img className='top-left iconimg' src={CCMLogo} alt='Logo' />
       <h1>
         {' '}
         You

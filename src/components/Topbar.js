@@ -2,10 +2,10 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { NavLink } from 'redux-first-router-link'
 import { goToPage } from '../actions'
-import '../css/Sidebar.css'
+import '../css/Topbar.css'
 
-const Sidebar = () => (
-  <div className='sidebar'>
+const Topbar = () => (
+  <div className='topbar'>
     <NavLink activeClassName='active' exact to='/'>
       HOME
     </NavLink>
@@ -14,6 +14,7 @@ const Sidebar = () => (
     </NavLink>
     <NavLink activeClassName='active' to='/Profile'>
       My Profile
+    </NavLink>
     <NavLink activeClassName='active' to='/detail'>
       Detail
     </NavLink>
@@ -28,4 +29,4 @@ const mapState = ({ location }) => ({ path: location.pathname })
 export default connect(
   mapState,
   mapDispatch
-)(Sidebar)
+)(Topbar)

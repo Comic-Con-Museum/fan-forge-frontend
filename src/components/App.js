@@ -1,13 +1,13 @@
 import React from 'react'
 
-import Sidebar from './Sidebar'
+import Topbar from './Topbar'
 import Switcher from './Switcher'
 import '../css/App.css'
 
 export default () => (
   <div>
     <div className='app'>
-      <Sidebar />
+      <Topbar />
       <Switcher />
     </div>
   </div>
