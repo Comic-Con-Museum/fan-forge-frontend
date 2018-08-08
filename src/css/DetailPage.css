@@ -3,7 +3,15 @@
     margin: 20px
 }
 
-/* .userProfile .card {
-    background-color: '#333' !important;
-    border-color: '#333' !important
-} */
+.detail-body {
+    color: white
+}
+
+h4 {
+    color: white
+}
+
+.carousel-item > img { 
+    width: 100%; 
+}
+
