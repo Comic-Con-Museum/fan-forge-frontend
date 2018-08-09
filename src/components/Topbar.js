@@ -85,9 +85,6 @@ class Topbar extends Component {
         <NavLink className='navLinkTab' activeClassName='active' to='/detail'>
           <Tab label='Details' />
         </NavLink>
-        <NavLink className='navLinkTab' activeClassName='active' to='/feed/hot'>
-          <Tab label='Feed' />
-        </NavLink>
         <Button
           aria-owns={this.state.anchorEl ? 'simple-menu' : null}
           aria-haspopup="true"
