@@ -1,12 +1,21 @@
 .exhibit-card {
-    height: 20vmax;
-    width: auto;
+    background-size: auto;
+    height: 400px;
 }
 
 .exhibit-center {
-  margin-left: 50px;
-  margin-right: 300px;
+  margin-right: 50px;
+  margin-left: 25%;
   padding: 50px;
+}
+
+.exhibit-right {
+  width: 25%;
+  margin-right: 75%;
+  margin-left: 20px;
+  margin-top: 50px;
+  height: 400px;
+  position: fixed;
 }
 
 .exhibit-card-dark {
@@ -16,4 +25,8 @@
 .exhibit-modal {
   width: 50%;
   height: 50%;
+}
+
+.filter-container {
+  padding: 10px;
 }
