@@ -1,9 +1,5 @@
 import React, { Component } from 'react'
 import {
-  Button,
-  Container,
-  Row,
-  Col,
   Carousel,
   CarouselItem,
   CarouselControl,
@@ -17,8 +13,10 @@ import {
   Card,
   CardText,
   CardSubtitle,
-  CardTitle } from 'reactstrap'
+  CardTitle,
+  CardLink } from 'reactstrap'
 import SingleLineGridList from './SingleLineGridList'
+import { Grid, Button } from '@material-ui/core'
 import '../css/DetailPage.css'
 import classnames from 'classnames'
 
@@ -92,39 +90,42 @@ class DetailPage extends Component {
 
     return (
       <div>
-        <Container fluid>
-          <Row>
-            <Col sm='9'>
+        <Grid container direction="row" alignItems="center" spacing={24}>
+            <Grid item sm={9}>
               <Carousel
                 activeIndex={activeIndex}
                 next={this.next}
                 previous={this.previous}
+                pause='hover'
               >
                 <CarouselIndicators items={images} activeIndex={activeIndex} onClickHandler={this.goToIndex} />
                 {slides}
                 <CarouselControl direction='prev' directionText='Previous' onClickHandler={this.previous} />
                 <CarouselControl direction='next' directionText='Next' onClickHandler={this.next} />
               </Carousel>
-            </Col>
-            <Col sm='3'>
+            </Grid>
+            <Grid item sm={3}>
               <div className='buttonWrapper'>
-                <Button>Like This Idea!</Button>
+                <Button variant="contained">Like This Idea!
+                </Button>
               </div>
               <h4>325 people liked this idea!</h4>
               <Card>
-                <CardImg top width='100%' src='https://www.thefamouspeople.com/profiles/images/stan-lee-5.jpg' />
+                <div className="circular-landscape">
+                  <CardImg top width='100%' src='https://www.thefamouspeople.com/profiles/images/stan-lee-5.jpg' />
+                </div>
                 <CardBody>
                   <CardTitle>Stan Lee</CardTitle>
                   <CardSubtitle>comic-book writer</CardSubtitle>
                   <CardText>more information goes here</CardText>
-                  <Button>Follow</Button>
+                  <CardLink href='#'>Follow</CardLink>
                 </CardBody>
               </Card>
-            </Col>
-          </Row>
+            </Grid>
+          </Grid>
           <div className='detail-body'>
             <h4>Submitted Artifacts</h4>
-            <Button>Submit Your Artifact!</Button>
+            <Button variant="contained">Submit Your Artifact!</Button>
             <SingleLineGridList />
             <h4>Description</h4>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc. Curabitur tortor. Pellentesque nibh. Aenean quam. In scelerisque sem at dolor. Maecenas mattis. Sed convallis tristique sem. Proin ut ligula vel nunc egestas porttitor. Morbi lectus risus, iaculis vel, suscipit quis, luctus non, massa. Fusce ac turpis quis ligula lacinia aliquet. Mauris ipsum. Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh. Quisque volutpat condimentum velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam nec ante. Sed lacinia, urna non tincidunt mattis, tortor neque adipiscing diam, a cursus ipsum ante quis turpis. Nulla facilisi. Ut fringilla. Suspendisse potenti. Nunc feugiat mi a tellus consequat imperdiet. Vestibulum sapien. Proin quam. Etiam ultrices. Suspendisse in justo eu magna luctus suscipit. Sed lectus. Integer euismod lacus luctus magna. Quisque cursus, metus vitae pharetra auctor, sem massa mattis sem, at interdum magna augue eget diam. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Morbi lacinia molestie dui. Praesent blandit dolor. Sed non quam. In vel mi sit amet augue congue elementum. Morbi in ipsum sit amet pede facilisis laoreet. Donec lacus nunc, viverra nec.</p>
@@ -147,8 +148,6 @@ class DetailPage extends Component {
               </NavItem>
             </Nav>
           </div>
-
-        </Container>
       </div>)
   }
 }
