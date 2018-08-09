@@ -1,6 +1,6 @@
 ## Codechella Team DC 
 
-Front End for the Comic Con Museum Community Collaboration Project
+Front End Repository for the Comic Con Museum Community Collaboration Project
 
 ## Link to Website
 
