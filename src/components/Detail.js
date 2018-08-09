@@ -21,6 +21,7 @@ import '../css/DetailPage.css'
 import classnames from 'classnames'
 import { withStyles } from '@material-ui/core/styles'
 import Collapsible from 'react-collapsible'
+import axios from "axios/index";
 
 
 const images = [
@@ -48,13 +49,27 @@ const styles = {
   },
 };
 
-class DetailPage extends Component {
-  constructor() {
-    super()
+class Detail extends Component {
+  constructor(props) {
+    super(props)
     this.state = { activeIndex: 0, 
       activeTab: '1',
       description: true,
-      inspiration: true }
+      inspiration: true,
+      isLoaded: false
+    //    , id: this.props.id
+    }
+    this.loadDetails()
+  }
+
+  loadDetails() {
+    axios.get("/exhibit/" + this.state.id)
+      .then(data => {
+        console.log(data)
+      })
+      .catch(err =>
+        console.log(err)
+      )
   }
 
   onExiting = () => {
@@ -168,4 +183,4 @@ class DetailPage extends Component {
   }
 }
 
-export default withStyles(styles)(DetailPage)
+export default withStyles(styles)(Detail)

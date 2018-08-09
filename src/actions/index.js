@@ -16,12 +16,9 @@ export const goHome = () => ({
   type: 'HOME'
 })
 
-export const goEntry = () => ({
-  type: 'ENTRY'
-})
-
-export const goDetailPage = () => ({
-  type: 'DETAILPAGE'
+export const goDetail = id => ({
+  type: 'DETAIL',
+  payload: id
 })
 
 export const goFeed = type => ({

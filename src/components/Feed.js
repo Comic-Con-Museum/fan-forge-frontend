@@ -1,8 +1,7 @@
 import React from 'react'
 import InfiniteScroll from 'react-infinite-scroller';
-import cardData from '../mockdata/cards.json'
 import {connect} from "react-redux";
-import ExhibitGroup from './feed/ExhibitGroup'
+import ExhibitCard from './ExhibitCard'
 import Spinner from './Spinner'
 import axios from 'axios'
 
@@ -11,6 +10,7 @@ class Feed extends React.Component {
     super(props);
     this.state = {
       feedType: this.props.feedType,
+      eid: this.props.eid,
       items: [],
       displayedItems: [],
       hasMoreItems: true,
@@ -64,11 +64,12 @@ class Feed extends React.Component {
       console.log(JSON.stringify(this.state.displayedItems))
       this.state.displayedItems.forEach((item) => {
         items.push(
-          <ExhibitGroup
+          <ExhibitCard
             title={item.title}
             picture={item.picture}
             summary={item.summary}
             tags={item.tags}
+            eid={item.eid}
           />
         )
       })

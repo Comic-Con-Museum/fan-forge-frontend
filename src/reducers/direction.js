@@ -11,7 +11,7 @@ export default (state = 'next', action = {}) => {
   }
   if (type === 'HOME') {
     return 'back'
-  } if (type === 'ENTRY') {
+  } if (type === 'ENTRY' || type === 'SUBMIT' || type === 'HOME' || type === 'FEED' || type === 'USER_LOGGED_IN') {
     return 'next'
   }
   return state
