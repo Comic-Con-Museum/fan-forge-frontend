@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
 import { Tab, Tabs } from '@material-ui/core'
-import { connect } from 'react-redux'
 import { NavLink } from 'redux-first-router-link'
-import { goToPage } from '../actions'
-
-import CCMBanner from '../assets/ccm_banner.png'
-
+import Button from '@material-ui/core/Button';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import { localeSwitch } from '../actions/';
+import CCMBanner from '../assets/ccm_banner.png';
 import '../css/Topbar.css'
 
 class Topbar extends Component {
@@ -13,13 +14,25 @@ class Topbar extends Component {
     super(props);
     this.state = {
       value: 0,
-      showTabs: false
+      showTabs: false,
+      anchorEl: null
     };
     this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(event, value) {
     this.setState({ value })
+  };
+
+  handleLanguageClick = event => {
+    this.setState({ anchorEl: event.currentTarget });
+  };
+
+  handleLanguageClose = (event, lang) => {
+    if (lang) {
+      this.props.changeLocale(lang);
+    }
+    this.setState({ anchorEl: null });
   };
 
   render() {
@@ -53,11 +66,31 @@ class Topbar extends Component {
         <NavLink className='navLinkTab' activeClassName='active' to='/feed/hot'>
           <Tab label='Feed' />
         </NavLink>
+        <Button
+          aria-owns={this.state.anchorEl ? 'simple-menu' : null}
+          aria-haspopup="true"
+          onClick={this.handleLanguageClick}
+          className={`select_flag ${this.props.locale}_flag`}
+        />
+        <Menu
+          id="simple-menu"
+          anchorEl={this.state.anchorEl}
+          open={Boolean(this.state.anchorEl)}
+          onClose={(e) => this.handleLanguageClose(e, undefined)}
+        >
+          <MenuItem onClick={(e) => this.handleLanguageClose(e, "en")}>English</MenuItem>
+          <MenuItem onClick={(e) => this.handleLanguageClose(e, "es")}>Español</MenuItem>
+        </Menu>
       </Tabs>
       </div>
     )
   }
 }
-const mapDispatch = { onClick: goToPage }
-const mapState = ({ location }) => ({ path: location.pathname })
+
+const mapDispatch = (dispatch) => {
+  return({
+    changeLocale: (locale) => {dispatch(localeSwitch(locale))}
+  })
+}
+const mapState = ({ location, locale }) => ({ path: location.pathname, locale })
 export default connect(mapState, mapDispatch)(Topbar)
