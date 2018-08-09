@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import TagsInput from 'react-tagsinput'
+import ChipInput from 'material-ui-chip-input'
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { connect } from 'react-redux'
@@ -28,7 +28,8 @@ export class Submit extends Component {
       thumbnail: '',
       additionalFiles: [],
     }
-    this.handleTags = this.handleTags.bind(this);
+    this.addTag = this.addTag.bind(this);
+    this.deleteTag = this.deleteTag.bind(this);
     this.stepBack = this.stepBack.bind(this);
     this.stepNext = this.stepNext.bind(this);
     this.handleFiles = this.handleFiles.bind(this);
@@ -42,8 +43,21 @@ export class Submit extends Component {
     });
   };
 
-  handleTags(newTags) {
-    this.setState({tags: newTags});
+  addTag(newTag) {
+    const tagList = this.state.tags;
+    if (!tagList.includes(newTag)) {
+      tagList.push(newTag);
+      this.setState({tags: tagList});
+    }
+  }
+
+  deleteTag(tag) {
+    const tagList = this.state.tags;
+    const index = tagList.indexOf(tag);
+    if (index > -1) {
+      tagList.splice(index, 1);
+    }
+    this.setState({tags: tagList})
   }
 
   handleFiles(name, event) {
@@ -56,7 +70,9 @@ export class Submit extends Component {
 
   handleFormSubmit(e) {
     e.preventDefault();
-    this.props.dispatch(postExhibit(this.state));
+    if (this.state.currentStep == maxSteps && this.state.tags.length != 0) {
+      this.props.dispatch(postExhibit(this.state));
+    }
   }
 
   stepBack() {
@@ -95,7 +111,6 @@ export class Submit extends Component {
   render() {
     return (
       <div className='wizard'>
-        {this.props.submitStatus == 'loading' ? <div>LOADING</div> : ''}
         <form className='wizard__form' onSubmit={this.handleFormSubmit} noValidate autoComplete="off">
           <Step key='0' stepNumber='0' className='form__leftPanel' currentStep={this.state.currentStep}>
            <h1 className="wizard__form__title">{strings[this.props.locale].wizard_title}</h1>
@@ -107,7 +122,7 @@ export class Submit extends Component {
               id="title"
               label={strings[this.props.locale].wizard_exhibit_name}
               value={this.state.title}
-              className="wizard__textfield"
+              className="wizard__textfield wizard_textfield_title"
               InputLabelProps={{classes: {root: 'wizard__input'}}}
               inputProps={{className: 'wizard__input-txt'}}
               onChange={(event) => this.handleChange('title', event)}
@@ -173,7 +188,7 @@ export class Submit extends Component {
               required
               multiline
               fullWidth
-              rows="12"
+              rows="10"
             />
             <TextField
               id="tellus"
@@ -187,12 +202,26 @@ export class Submit extends Component {
               required
               multiline
               fullWidth
-              rows="12"
+              rows="10"
             />
           </Step>
           <Step key='3' stepNumber='3' className='form__leftPanel' currentStep={this.state.currentStep}>
-           <h1 className="wizard__form__title">{strings[this.props.locale].wizard_title3}</h1>
-           <h3 className="wizard__form__intro">{strings[this.props.locale].wizard_looksgreat}</h3>
+            <h1 className="wizard__form__title">{strings[this.props.locale].wizard_title3}</h1>
+            <h3 className="wizard__form__intro">{strings[this.props.locale].wizard_looksgreat}</h3>
+            <ChipInput
+              value={this.state.tags}
+              onAdd={this.addTag}
+              classes={{root: 'wizard_tag_container', helperText: 'wizard__tag_label'}}
+              onDelete={this.deleteTag}
+              helperText={strings[this.props.locale].wizard_addTags}
+              fullWidth
+            />
+            <div className="wizard__form__collab">
+              <h3>{strings[this.props.locale].wizard_inviteFriends}</h3>
+              <Button className='yellow-btn' variant="contained" onClick={this.stepNext} color="primary">
+                {strings[this.props.locale].wizard_sendInvite}
+              </Button>
+            </div>
           </Step>
 
           <div className='wizard__controls'>
@@ -202,8 +231,8 @@ export class Submit extends Component {
             <Button className='wizard__preview-btn' variant="contained" onClick={() => 1}>
               {strings[this.props.locale].preview}
             </Button>
-            <Button variant="contained" onClick={this.stepNext} color="primary"
-              type={this.state.currentStep == maxSteps ? 'submit' : 'button'} >
+            <Button className='yellow-btn' variant="contained" onClick={this.stepNext} color="primary"
+              type='submit'>
               {this.state.currentStep == maxSteps ? strings[this.props.locale].finish
               : strings[this.props.locale].next}
             </Button>
