@@ -7,10 +7,6 @@ export const goToPage = (type, category) => ({
   payload: category && { category }
 })
 
-export const goSubmit = () => ({
-  type: 'SUBMIT'
-});
-
 export const goHome = () => ({
   type: 'HOME'
 })

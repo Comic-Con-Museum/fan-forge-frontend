@@ -2,7 +2,6 @@ import React from 'react'
 import InfiniteScroll from 'react-infinite-scroller';
 import ExhibitCard from './feed/ExhibitCard'
 import cardData from '../mockdata/cards.json'
-import {Submit} from "./Submit";
 import {connect} from "react-redux";
 import ExhibitGroup from './feed/ExhibitGroup'
 
