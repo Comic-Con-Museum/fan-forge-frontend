@@ -4,7 +4,7 @@ const routesMap = {
   SUBMIT: '/submit',
   PROFILE: '/Profile',
   DETAILPAGE: '/detail',
-  FEED: '/feed'
+  FEED: '/feed/:type'
 }
 
 export default routesMap
