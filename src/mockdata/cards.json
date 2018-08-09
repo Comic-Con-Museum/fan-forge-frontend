@@ -2,13 +2,23 @@
   "title": "Superman's Insecurities",
   "picture": "http://www.guinnessworldrecords.com/images/superlative/superheroes/GWR-Superheroes-SUPERMAN.svg",
   "summary": "lakjsdf;aoieqgpnerinqrewopivmqwpodcisvauhfgiqwroae;tJRADFS,N.BVUOIGHRJEPFWL;M,RENGASPOIVDJ;",
-  "followers": 10
+  "followers": 10,
+  "tags": [
+    "Superman",
+    "Teenagers",
+    "DC"
+  ]
 },
 {
   "title": "Batman in the 50's",
   "picture": "https://upload.wikimedia.org/wikipedia/en/8/87/Batman_DC_Comics.png",
   "summary": "lakjsdf;aoieqgpnerinqrewopivmqwpodcisvauhfgiqwroae;tJRADFS,N.BVUOIGHRJEPFWL;M,RENGASPOIVDJ;",
-  "followers": 20
+  "followers": 20,
+  "tags": [
+    "DC",
+    "Old School",
+    "Batman"
+  ]
 },
 {
   "title": "Superman's Insecurities",

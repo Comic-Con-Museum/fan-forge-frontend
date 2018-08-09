@@ -23,8 +23,9 @@ export const goDetailPage = () => ({
   type: 'DETAILPAGE'
 })
 
-export const goFeed = () => ({
-  type: 'FEED'
+export const goFeed = type => ({
+  type: 'FEED',
+  payload: type
 })
 
 export const notFound = () => ({

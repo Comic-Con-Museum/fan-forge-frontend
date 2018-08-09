@@ -5,7 +5,32 @@ h1 {
   overflow: scroll;
   padding: 10px;
 }
-
+.dropzone {
+  width: 250px;
+  height: 30px;
+  border-width: 2px;
+  border-color: rgb(102, 102, 102);
+  border-style: dashed;
+  border-radius: 5px;
+  font-size: 14px;
+  font-style: italic;
+}
+.image {
+  display: block;
+  width: 150px;
+  margin-left: 50px;
+  margin-bottom: 5px;
+}
+.image img {
+  width: 150px;
+  margin-left: 0;
+}
+.tag {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: normal;
+  margin-left: 15px;
+}
 .profile, h3 {
   color: black;
   display: block;

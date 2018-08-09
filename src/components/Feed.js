@@ -1,15 +1,20 @@
 import React from 'react'
 import InfiniteScroll from 'react-infinite-scroller';
-import ExhibitCard from './ExhibitCard'
+import ExhibitCard from './feed/ExhibitCard'
 import cardData from '../mockdata/cards.json'
+import {Submit} from "./Submit";
+import {connect} from "react-redux";
+import ExhibitGroup from './feed/ExhibitGroup'
 
 class Feed extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      feedType: this.props.feedType,
       items: [],
       hasMoreItems: true
     }
+    console.log(this.state)
   }
 
   loadItems(page) {
@@ -37,13 +42,12 @@ class Feed extends React.Component {
     }
     this.state.items.map((item, i) => {
       items.push(
-        <li key={i.toString()}>
-          <ExhibitCard
-            title={item.title}
-            picture={item.picture}
-            summary={item.summary}
-          />
-        </li>
+        <ExhibitGroup
+          title={item.title}
+          picture={item.picture}
+          summary={item.summary}
+          tags={item.tags}
+        />
       )
     })
 
@@ -61,4 +65,5 @@ class Feed extends React.Component {
   }
 }
 
-export default Feed
+const mapStateToProps = ({ page, feed }) => ({ page:page, feedType:feed });
+export default connect(mapStateToProps)(Feed);

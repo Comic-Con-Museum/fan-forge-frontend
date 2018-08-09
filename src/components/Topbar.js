@@ -18,7 +18,7 @@ class Topbar extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange = (event, value) => {
+  handleChange(event, value) {
     this.setState({ value })
   };
 
@@ -50,7 +50,7 @@ class Topbar extends Component {
         <NavLink className='navLinkTab' activeClassName='active' to='/detail'>
           <Tab label='Details' />
         </NavLink>
-        <NavLink className='navLinkTab' activeClassName='active' to='/feed'>
+        <NavLink className='navLinkTab' activeClassName='active' to='/feed/hot'>
           <Tab label='Feed' />
         </NavLink>
       </Tabs>
