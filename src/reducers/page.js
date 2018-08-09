@@ -6,7 +6,6 @@ const components = {
   HOME: 'Home',
   LIST: 'List',
   ENTRY: 'Entry',
-  SUBMIT: 'Submit',
   PROFILE: 'Profile',
   DETAILPAGE: 'DetailPage',
   FEED: 'Feed',

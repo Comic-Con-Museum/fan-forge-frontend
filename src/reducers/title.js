@@ -4,8 +4,6 @@ export default (state = 'RFR Demo', action = {}) => {
       return 'RFR Demo'
     case 'ENTRY':
       return 'Entry'
-    case 'SUBMIT':
-      return 'Submit Form'
     case 'DETAILPAGE':
       return 'DetailPage'
     case 'FEED':
