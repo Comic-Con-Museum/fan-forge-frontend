@@ -9,7 +9,7 @@ const items = [
   {
     src: CCMSketch,
     altText: 'Submit a Design',
-    header: 'Submit A design',
+    header: 'Submit a design',
     caption:
       'Fan curated designs can make their way into the museum with enough support!'
   },

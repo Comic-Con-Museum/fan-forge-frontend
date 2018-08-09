@@ -20,3 +20,57 @@
 .topbar .navLinkTab {
   color: #FFF105;
 }
+
+.navLinkTab > button {
+  opacity: 1;
+}
+
+.topbar .navLinkTab .MuiTab-label-20 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: 7px;
+}
+
+.carousel-control-next,
+.carousel-control-prev {
+  opacity: 1;
+  width:  5%;
+}
+
+.carousel-control-next-icon {
+  cursor: pointer;
+  height: 40px;
+  width: 40px;
+  background-image: url(../assets/slider-arrow.svg);
+}
+
+.carousel-control-prev-icon {
+  cursor: pointer;
+  height: 40px;
+  width: 40px;
+  background-image: url(../assets/slider-arrow.svg);
+  transform: scaleX(-1);
+}
+
+.carousel-caption > h3 {
+  text-shadow: 0px 4px 3px rgba(0,0,0,0.4), 0px 8px 13px rgba(0,0,0,0.1), 0px 18px 23px rgba(0,0,0,0.1);
+  font-family: 'Roboto', sans-serif;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 40px;
+  color: #FFF105;
+}
+
+
+.carousel-caption > p {
+  text-shadow: 0px 4px 3px rgba(0,0,0,0.4), 0px 8px 13px rgba(0,0,0,0.1), 0px 18px 23px rgba(0,0,0,0.1);
+  font-family: 'Nunito Sans', sans-serif;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #FFF105;
+}
+
+.carousel-indicators .active {
+  background-color: #FFF105;
+}
