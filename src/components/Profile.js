@@ -1,6 +1,14 @@
 import React from 'react'
-import { Checkbox, TextField, Button, FormControlLabel, FormGroup } from '@material-ui/core'
-import CCMBanner from '../assets/Logo-wide.png'
+import {
+  Checkbox,
+  TextField,
+  Button,
+  FormControlLabel,
+  FormGroup,
+  Select,
+  MenuItem,
+  InputLabel
+} from '@material-ui/core'
 import '../css/Profile.css'
 
 const styles = {
@@ -19,12 +27,21 @@ class Profile extends React.Component {
       bio:
         "Here's a short bio, containing useful information about me, my passions, and who I am.",
       pic: 'https://graph.facebook.com/321231654995187/picture?type=large',
-      tags: ['batman', 'superman', 'wonderwoman'],
+      tags: ['Batman', 'Superman', 'Wonder Woman'],
       notificationMentions: true,
-      notificationComments: true
+      notificationComments: true,
+      allTags: ['Batman', 'Spiderman', 'Superman', 'Thanos', 'Wonder Woman']
     }
 
     this.handleTagRemove = this.handleTagRemove.bind(this)
+  }
+
+  addTag = (event) => {
+    const currentTags = this.state.tags
+    currentTags.push(event.target.value)
+    this.setState({
+      tags: currentTags
+    })
   }
 
   handleBioChange = event => {
@@ -83,6 +100,20 @@ class Profile extends React.Component {
     )
   }
 
+  renderTagChoices = () => {
+    const items = []
+    this.state.allTags.map((tag) => {
+      if (this.state.tags.indexOf(tag) === -1) {
+        items.push(
+          <MenuItem key={tag} value={tag}>
+            <em>{tag}</em>
+          </MenuItem>
+        )
+      }
+    })
+    return items
+  }
+
   renderTag = tag => (
     <FormGroup row key={tag}>
       <FormControlLabel
@@ -106,7 +137,6 @@ class Profile extends React.Component {
 
     return (
       <div className='profile'>
-        <img src={CCMBanner} width='100%'/>
         <div className='left'>
           <Button>
             <img
@@ -133,7 +163,18 @@ class Profile extends React.Component {
           <h3>Badges</h3>
           {this.renderBadges()}
 
-          <h3>Tags I follow</h3>
+          <h3>Tags I follow
+            <InputLabel htmlFor="add tag" style={{marginLeft: 20}}>Add tag</InputLabel>
+            <Select
+              onChange={this.addTag}
+              inputProps={{
+                id: 'add tag'
+              }}
+              value='Add tag'
+            >
+              {this.renderTagChoices()}
+            </Select>
+          </h3>
           {tags.map(this.renderTag)}
 
           <h3>Notification Preferences</h3>
