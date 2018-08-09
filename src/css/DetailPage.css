@@ -20,3 +20,29 @@ h4 {
 .carousel-item > img { 
     width: 100%; 
 }
+
+.Collapsible__trigger {
+    display: block;
+    font-weight: 400;
+    text-decoration: none;
+    color: grey;
+    position: relative;
+    border: 1px solid white;
+    padding: 10px;
+    background: grey;
+    color: white;
+}
+
+.Collapsible__trigger:after {
+    font-family: 'FontAwesome';
+    content: '\f107';
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    display: block;
+    transition: transform 300ms;
+}
+
+.Collapsible__trigger.is-open:after {
+    transform: rotateZ(180deg);
+}

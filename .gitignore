@@ -7,3 +7,4 @@ buildServer
 .idea
 package-lock.json
 .DS_Store
+yarn.lock
