@@ -3,8 +3,17 @@ import InfiniteScroll from 'react-infinite-scroller';
 import cardData from '../mockdata/cards.json'
 import {connect} from "react-redux";
 import ExhibitGroup from './feed/ExhibitGroup'
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
+import { withStyles } from '@material-ui/core/styles';
+import { NavLink } from 'redux-first-router-link'
 import Spinner from './Spinner'
 import axios from 'axios'
+
 
 class Feed extends React.Component {
   constructor(props) {
@@ -52,6 +61,80 @@ class Feed extends React.Component {
 
   }
 
+  renderFilterButtons() {
+    switch (this.props.feedType) {
+      case 'new':
+        return (
+          <div className='filter-container'>
+            <NavLink className='navLinkTab' activeClassName='active' to='/feed/hot'>
+              <Button color='primary'> Hot </Button>
+            </NavLink>
+            <NavLink className='navLinkTab' activeClassName='active' to='/feed/new'>
+              <Button color='secondary'> New </Button>
+            </NavLink>
+            <NavLink className='navLinkTab' activeClassName='active' to='/feed/curated'>
+              <Button color='primary'> Curator Picks </Button>
+            </NavLink>
+            <NavLink className='navLinkTab' activeClassName='active' to='/feed/approved'>
+              <Button color='primary'> Approved exhibits </Button>
+            </NavLink>
+          </div>
+        )
+      case 'approved':
+        return (
+          <div className='filter-container'>
+            <NavLink className='navLinkTab' activeClassName='active' to='/feed/hot'>
+              <Button color='primary'> Hot </Button>
+            </NavLink>
+            <NavLink className='navLinkTab' activeClassName='active' to='/feed/new'>
+              <Button color='primary'> New </Button>
+            </NavLink>
+            <NavLink className='navLinkTab' activeClassName='active' to='/feed/curated'>
+              <Button color='primary'> Curator Picks </Button>
+            </NavLink>
+            <NavLink className='navLinkTab' activeClassName='active' to='/feed/approved'>
+              <Button color='secondary'> Approved exhibits </Button>
+            </NavLink>
+          </div>
+        )
+      case 'curated':
+        return (
+          <div className='filter-container'>
+            <NavLink className='navLinkTab' activeClassName='active' to='/feed/hot'>
+              <Button color='primary'> Hot </Button>
+            </NavLink>
+            <NavLink className='navLinkTab' activeClassName='active' to='/feed/new'>
+              <Button color='primary'> New </Button>
+            </NavLink>
+            <NavLink className='navLinkTab' activeClassName='active' to='/feed/curated'>
+              <Button color='secondary'> Curator Picks </Button>
+            </NavLink>
+            <NavLink className='navLinkTab' activeClassName='active' to='/feed/approved'>
+              <Button color='primary'> Approved exhibits </Button>
+            </NavLink>
+          </div>
+        )
+      case 'hot':
+      default:
+        return (
+          <div className='filter-container'>
+            <NavLink className='navLinkTab' activeClassName='active' to='/feed/hot'>
+              <Button color='secondary'> Hot </Button>
+            </NavLink>
+            <NavLink className='navLinkTab' activeClassName='active' to='/feed/new'>
+              <Button color='primary'> New </Button>
+            </NavLink>
+            <NavLink className='navLinkTab' activeClassName='active' to='/feed/curated'>
+              <Button color='primary'> Curator Picks </Button>
+            </NavLink>
+            <NavLink className='navLinkTab' activeClassName='active' to='/feed/approved'>
+              <Button color='primary'> Approved exhibits </Button>
+            </NavLink>
+          </div>
+        )
+    }
+  }
+
   render() {
     const loading = <Spinner/>
     const items = []
@@ -76,6 +159,34 @@ class Feed extends React.Component {
 
     return (
       <div className='feed' style={{overflow:"auto"}}>
+        <div className='exhibit-right'>
+          <Card>
+            <CardContent>
+              <h1>
+                Submit your own exhibit!
+              </h1>
+              <p>
+                Here you can share your ideas for Comic-Con Museum exhibits and concepts, vote to support your favorite ideas to get them into reality!
+              </p>
+            </CardContent>
+            <CardActions>
+              <NavLink className='navLinkTab' activeClassName='active' to='/submit'>
+                <Button size='small'>
+                  Learn More
+                </Button>
+              </NavLink>
+            </CardActions>
+          </Card>
+          {this.renderFilterButtons()}
+          <TextField
+            className='tag-search'
+            id="password-input"
+            label="Search by tag"
+            type="password"
+            autoComplete="current-password"
+            margin="normal"
+          />
+        </div>
         <InfiniteScroll
           pageStart={0}
           loadMore={this.loadMoreDisplayedItems.bind(this)}
