@@ -1,7 +1,8 @@
 import React from 'react'
 import InfiniteScroll from 'react-infinite-scroller';
-import ExhibitCard from './ExhibitCard'
+import ExhibitCard from './feed/ExhibitCard'
 import cardData from '../mockdata/cards.json'
+import ExhibitGroup from './feed/ExhibitGroup'
 
 class Feed extends React.Component {
   constructor(props) {
@@ -37,13 +38,12 @@ class Feed extends React.Component {
     }
     this.state.items.map((item, i) => {
       items.push(
-        <li key={i.toString()}>
-          <ExhibitCard
-            title={item.title}
-            picture={item.picture}
-            summary={item.summary}
-          />
-        </li>
+        <ExhibitGroup
+          title={item.title}
+          picture={item.picture}
+          summary={item.summary}
+          tags={item.tags}
+        />
       )
     })
 
