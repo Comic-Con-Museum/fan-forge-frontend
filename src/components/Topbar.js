@@ -9,9 +9,13 @@ import CCMBanner from '../assets/ccm_banner.png'
 import '../css/Topbar.css'
 
 class Topbar extends Component {
-  state = {
-    value: 0
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: 0,
+      showTabs: false
+    };
+  }
 
   handleChange = (event, value) => {
     this.setState({ value })
@@ -19,51 +23,40 @@ class Topbar extends Component {
 
   render() {
     return (
-      <div className='topbar'>
+      <div
+        className='topbar'
+      >
         <img className='bannerImg' src={CCMBanner} alt='Logo' />
         <Tabs
-          className='topnavbar'
-          value={this.state.value}
-          onChange={this.handleChange}
-          indicatorColor=''
-          textColor=''
-          centered
-        >
-          <Tab label='Item One' />
-          <Tab label='Item Two' />
-          <Tab label='Item Three' />
-        </Tabs>
+        onMouseOver={() => this.setState({showTabs: true})}
+        onMouseOut={() => this.setState({showTabs: false})}
+        className='topnavbar'
+        value={this.state.value}
+        onChange={this.handleChange}
+        indicatorColor=''
+        textColor='primary'
+        centered
+      >
+        <NavLink className='navLinkTab' activeClassName='active' exact to='/'>
+          <Tab label='Home' />
+        </NavLink>
+        <NavLink className='navLinkTab' activeClassName='active' to='/entry'>
+          <Tab label='Entry' />
+        </NavLink>
+        <NavLink className='navLinkTab' activeClassName='active' to='/Profile'>
+          <Tab label='Profile' />
+        </NavLink>
+        <NavLink className='navLinkTab' activeClassName='active' to='/detail'>
+          <Tab label='Details' />
+        </NavLink>
+        <NavLink className='navLinkTab' activeClassName='active' to='/feed'>
+          <Tab label='Feed' />
+        </NavLink>
+      </Tabs>
       </div>
     )
   }
 }
-// {<NavLink activeClassName='active' exact to='/'>
-//   HOME
-// </NavLink>
-// <NavLink activeClassName='active' to='/entry'>
-//   Idea Page
-// </NavLink>}
 const mapDispatch = { onClick: goToPage }
 const mapState = ({ location }) => ({ path: location.pathname })
 export default connect(mapState, mapDispatch)(Topbar)
-
-
-// const Topbar = () => (
-//   <div className='topbar'>
-//     <NavLink activeClassName='active' exact to='/'>
-//       HOME
-//     </NavLink>
-//     <NavLink activeClassName='active' to='/entry'>
-//       Idea Page
-//     </NavLink>
-//     <NavLink activeClassName='active' to='/Profile'>
-//       My Profile
-//     </NavLink>
-//     <NavLink activeClassName='active' to='/detail'>
-//       Detail
-//     </NavLink>
-//     <NavLink activeClassName='active' to='/feed'>
-//       Feed
-//     </NavLink>
-//   </div>
-// )

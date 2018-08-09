@@ -1,20 +1,22 @@
 .topbar {
-  position: absolute;
   width: 100%;
-  height: 200px;
-  margin-left: 5px;
   z-index: 2;
+  position: static
 }
 
 .topbar .bannerImg {
   width: 100%;
 }
 
+.topbar .active {
+  color: #0B0B09;
+}
+
 .topbar .topnavbar {
-  margin-left: 25%;
-  border-left: 1px solid gray;
-  border-right: 1px solid gray;
-  border-bottom: 1px solid gray;
-  width: 50%;
-  background-color: white;
+  width: 100%;
+  background-color: #0B0B09;
+}
+
+.topbar .navLinkTab {
+  color: #FFF105;
 }
