@@ -1,10 +1,10 @@
 import React from 'react'
 import InfiniteScroll from 'react-infinite-scroller';
-import ExhibitCard from './feed/ExhibitCard'
 import cardData from '../mockdata/cards.json'
-import {Submit} from "./Submit";
 import {connect} from "react-redux";
 import ExhibitGroup from './feed/ExhibitGroup'
+import Spinner from './Spinner'
+import axios from 'axios'
 
 class Feed extends React.Component {
   constructor(props) {
@@ -12,50 +12,73 @@ class Feed extends React.Component {
     this.state = {
       feedType: this.props.feedType,
       items: [],
-      hasMoreItems: true
+      displayedItems: [],
+      hasMoreItems: true,
+      isLoaded: false
     }
-    console.log(this.state)
+    this.loadExhibits()
   }
 
-  loadItems(page) {
-    const i = this.state.items
-    const newOne = cardData.shift() // remove first element and return it
-    if (newOne === undefined) { // no more
-      this.setState({
-        hasMoreItems: false
-      })
-    } else {
-      i.push(newOne)
-      this.setState({
-        items: i
-      })
+  loadExhibits() {
+    axios.get("/feed/" + this.state.feedType)
+        .then(data => {
+            if (Object.keys(data.data).length === 0) {
+              this.setState({isLoaded: true})
+            } else {
+                this.state.displayedItems.push(data.data[0])
+                this.setState({items: data.data.slice(1), displayedItems: this.state.displayedItems, isLoaded: true})
+            }
+        }).catch(err =>
+        console.log(err))
+  }
+
+  loadMoreDisplayedItems() {
+    if (this.state.items.length === 0) {
+      if (this.state.isLoaded === true) {
+          console.log("here")
+          this.setState({
+            hasMoreItems: false
+        })
+      }
+      return
     }
+    console.log("load more")
+    const newItem = this.state.items.shift()
+    this.state.displayedItems.push(newItem)
+    this.setState({
+      items: this.state.items,
+      displayedItems: this.state.displayedItems
+    })
+
   }
 
   render() {
-    const loading = <div key="uniqueKey" className="loader">Loading ...</div>
+    const loading = <Spinner/>
     const items = []
-    if (this.state.items.length === 0) {
-      items.push(
-        <p key='hi'>There are currently no items</p>
-      )
+    if (this.state.displayedItems.length === 0) {
+      if (this.state.isLoaded) {
+        return <p>No items found</p>
+      }
+    } else {
+      console.log("before forEach")
+      console.log(JSON.stringify(this.state.displayedItems))
+      this.state.displayedItems.forEach((item) => {
+        items.push(
+          <ExhibitGroup
+            title={item.title}
+            picture={item.picture}
+            summary={item.summary}
+            tags={item.tags}
+          />
+        )
+      })
     }
-    this.state.items.map((item, i) => {
-      items.push(
-        <ExhibitGroup
-          title={item.title}
-          picture={item.picture}
-          summary={item.summary}
-          tags={item.tags}
-        />
-      )
-    })
 
     return (
       <div className='feed' style={{overflow:"auto"}}>
         <InfiniteScroll
           pageStart={0}
-          loadMore={this.loadItems.bind(this)}
+          loadMore={this.loadMoreDisplayedItems.bind(this)}
           hasMore={this.state.hasMoreItems}
           loader={loading}>
             {items}

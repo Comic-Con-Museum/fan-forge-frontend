@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { TransitionGroup, Transition } from 'transition-group'
 import universal from 'react-universal-component'
 import isLoading from '../selectors/isLoading'
+import Spinner from './Spinner'
 import '../css/Switcher.css'
 
 const Switcher = ({ page, direction, isLoading }) => (
@@ -23,9 +24,7 @@ const UniversalComponent = universal(props => import(`./${props.page}`), {  // e
   minDelay: 500,
     chunkName: props => props.page, // eslint-disable-line
   loading: () => (
-    <div className='spinner'>
-      <div />
-    </div>
+    <Spinner />
   ),
   error: () => (
     <div className='notFound'>
