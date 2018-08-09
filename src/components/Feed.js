@@ -5,6 +5,7 @@ import cardData from '../mockdata/cards.json'
 import {Submit} from "./Submit";
 import {connect} from "react-redux";
 import ExhibitGroup from './feed/ExhibitGroup'
+import axios from 'axios'
 
 class Feed extends React.Component {
   constructor(props) {
@@ -12,9 +13,20 @@ class Feed extends React.Component {
     this.state = {
       feedType: this.props.feedType,
       items: [],
-      hasMoreItems: true
+      hasMoreItems: true,
+      isLoaded: false
     }
-    console.log(this.state)
+    this.loadExhibits()
+
+  }
+
+  loadExhibits() {
+    axios.get("/exhibit/005b03ea-32dd-4ac0-ac7d-40cb522de089")
+        .then(data => {
+            console.log(data)
+            this.setState({example: data.data.title, isLoaded: true})
+        }).catch(err =>
+        console.log(err))
   }
 
   loadItems(page) {

@@ -1,4 +1,5 @@
 import { NOT_FOUND } from 'redux-first-router'
+let axiosDefaults = require('axios/lib/defaults');
 
 // try dispatching these from the redux devTools
 
@@ -41,7 +42,7 @@ export const url = 'https://yu1pn4u266.execute-api.us-west-2.amazonaws.com/lates
 export const postExhibit = (exhibit) => {
   return (dispatch) => {
     dispatch({type : POST_EXHIBIT});
-    
+
     fetch(url, {
       method: 'POST',
       body: JSON.stringify(exhibit)
@@ -49,9 +50,11 @@ export const postExhibit = (exhibit) => {
       dispatch({type: POST_EXHIBIT_SUCCESS})
     }).catch(err => {
       dispatch({type: POST_EXHIBIT_FAIL})
-    });  
+    });
   };
 }
+
+axiosDefaults.baseURL = 'https://yu1pn4u266.execute-api.us-west-2.amazonaws.com/latest/api';
 
 export const LOCALE_SWITCH = 'LOCALE_SWITCH'
 export const POST_EXHIBIT = 'POST_EXHIBIT'

@@ -19,6 +19,7 @@
   "dependencies": {
     "@material-ui/core": "^1.4.3",
     "@material-ui/icons": "^2.0.1",
+    "axios": "^0.18.0",
     "babel-polyfill": "^6.23.0",
     "bootstrap": "^4.1.1",
     "express": "^4.15.2",
