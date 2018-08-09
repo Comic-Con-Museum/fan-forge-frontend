@@ -1,0 +1,22 @@
+.topbar {
+  width: 100%;
+  z-index: 2;
+  position: static
+}
+
+.topbar .bannerImg {
+  width: 100%;
+}
+
+.topbar .active {
+  color: #0B0B09;
+}
+
+.topbar .topnavbar {
+  width: 100%;
+  background-color: #0B0B09;
+}
+
+.topbar .navLinkTab {
+  color: #FFF105;
+}
