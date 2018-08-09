@@ -10,7 +10,9 @@ import {
   InputLabel
 } from '@material-ui/core'
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever'
+import Dropzone from 'react-dropzone'
 import '../css/Profile.css'
+
 
 const styles = {
   field: {
@@ -21,7 +23,9 @@ const styles = {
 class Profile extends React.Component {
   constructor(props) {
     super(props)
+    // if this.props.profileId
     this.state = {
+      editable: true,
       name: 'Zach Jones',
       club: 'Batman',
       email: 'zachtjones16@gmail.com',
@@ -45,25 +49,41 @@ class Profile extends React.Component {
     })
   }
 
+  onDrop(file) {
+    console.log(file)
+    this.setState({
+      "file": file
+    })
+    console.log('should upload this file')
+  }
+
   handleBioChange = event => {
+    if (!this.state.editable) return
+
     this.setState({
       bio: event.target.value
     })
   }
 
   handleNotificationMentionChange = event => {
+    if (!this.state.editable) return
+
     this.setState({
       notificationMentions: event.target.checked
     })
   }
 
   handleNotificationCommentsChange = event => {
+    if (!this.state.editable) return
+
     this.setState({
       notificationComments: event.target.checked
     })
   }
 
   handleTagRemove = name => {
+    if (!this.state.editable) return
+
     const { tags } = this.state
     const indexRemove = tags.indexOf(name)
     tags.splice(indexRemove, 1) // removes the element, but returns the removed elements
@@ -112,22 +132,39 @@ class Profile extends React.Component {
     return items
   }
 
-  renderTag = tag => (
-    <FormGroup row key={tag}>
-      <FormControlLabel
-        control={
-          <Checkbox
-            checkedIcon={ <DeleteForeverIcon /> }
-            style={styles.field}
-            checked
-            onChange={() => this.handleTagRemove(tag)}
-            value={tag}
+  renderTag = tag => {
+    if (this.state.editable) {
+      return (
+        <FormGroup row key={tag}>
+          <FormControlLabel
+            control={
+              <Checkbox
+                checkedIcon={ <DeleteForeverIcon /> }
+                style={styles.field}
+                checked
+                onChange={() => this.handleTagRemove(tag)}
+                value={tag}
+              />
+            }
+            label={tag}
           />
-        }
-        label={tag}
-      />
-    </FormGroup>
-  )
+        </FormGroup>
+      )
+    } else {
+      return (
+        <div className='tag'>{tag}</div>
+      )
+    }
+
+  }
+
+  renderButton = () => {
+    if (this.state.editable) {
+      return
+    } else {
+      return null
+    }
+  }
 
   render() {
     const {
@@ -137,13 +174,21 @@ class Profile extends React.Component {
     return (
       <div className='profile'>
         <div className='left'>
-          <Button>
+          <div className='image'>
             <img
               alt={`${name}'s profile`}
               src={pic}
-              width='100%'
             />
-          </Button>
+          </div>
+          { this.state.editable && <Dropzone
+            className='dropzone'
+            multiple={false}
+            accept="image/*"
+            onDrop={(file) => this.onDrop(file)}>
+            <div>
+              Click here, or drop image to change
+            </div>
+          </Dropzone> }
 
           <h3>{name}</h3>
           <h6>{email}</h6>
@@ -162,49 +207,57 @@ class Profile extends React.Component {
           <h3>Badges</h3>
           {this.renderBadges()}
 
-          <h3>Tags I follow
-            <InputLabel htmlFor="add tag" style={{marginLeft: 20}}>Add tag</InputLabel>
-            <Select
-              onChange={this.addTag}
-              inputProps={{
-                id: 'add tag'
-              }}
-              value='Add tag'
-            >
-              {this.renderTagChoices()}
-            </Select>
+          <h3>Followed tags
+            {this.state.editable &&
+              <span>
+              <InputLabel htmlFor="add tag" style={{marginLeft: 20}}>Add tag</InputLabel>
+              <Select
+                onChange={this.addTag}
+                inputProps={{
+                  id: 'add tag'
+                }}
+                value='Add tag'
+              >
+                {this.renderTagChoices()}
+              </Select>
+              </span>
+            }
           </h3>
           {tags.map(this.renderTag)}
 
-          <h3>Notification Preferences</h3>
-          <FormGroup row>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  style={styles.field}
-                  checked={notificationMentions}
-                  onChange={this.handleNotificationMentionChange}
+          {this.state.editable &&
+            <div>
+              <h3>Notification Preferences</h3>
+              <FormGroup row>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      style={styles.field}
+                      checked={notificationMentions}
+                      onChange={this.handleNotificationMentionChange}
+                    />
+                  }
+                  label="mentions"
                 />
-              }
-              label="mentions"
-            />
-          </FormGroup>
-          <FormGroup row>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  style={styles.field}
-                  checked={notificationComments}
-                  onChange={this.handleNotificationCommentsChange}
+              </FormGroup>
+              <FormGroup row>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      style={styles.field}
+                      checked={notificationComments}
+                      onChange={this.handleNotificationCommentsChange}
+                    />
+                  }
+                  label='comments on my posts'
                 />
-              }
-              label='comments on my posts'
-            />
-          </FormGroup>
-
-
+              </FormGroup>
+            </div>
+          }
         </div>
-        <Button children='Update my profile' variant='raised' fullWidth />
+        {this.state.editable &&
+          <Button children='Update my profile' variant='raised' fullWidth />
+        }
       </div>
     )
   }
