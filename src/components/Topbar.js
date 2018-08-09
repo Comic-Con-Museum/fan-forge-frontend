@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { Tab, Tabs, TextField } from '@material-ui/core'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import { NavLink } from 'redux-first-router-link'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
-import { goToPage } from '../actions'
+import { userLogin } from '../actions'
 
 import CCMBanner from '../assets/ccm_banner.png'
 
@@ -31,7 +32,7 @@ class Topbar extends Component {
   }
 
   renderProfileButton() {
-    if (this.state.isLoggedIn) {
+    if (this.props.username !== '' && this.props.username !== null) {
       return (
         <NavLink className='navLinkTab' activeClassName='active' to='/Profile'>
           <Tab label='Profile' />
@@ -44,6 +45,7 @@ class Topbar extends Component {
   }
 
   render() {
+    console.log(this.props)
     return (
       <div
         className='topbar'
@@ -80,23 +82,36 @@ class Topbar extends Component {
         >
           <ModalHeader toggle={this.toggle}>Comic-Con Museum Login</ModalHeader>
           <ModalBody>
-          <TextField
-            id="password-input"
-            label="Username"
-            margin="normal"
-            autoFocus
-            onChange={() => this.toggle()}
+            <TextField
+              id='password-input'
+              label='Username'
+              margin='normal'
+              autoFocus
+              onChange={event => this.props.userLogin(event.target.value)}
           />
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={this.toggle}>Login</Button>{' '}
-            <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+            <Button color='primary' onClick={this.toggle}>Login</Button>{' '}
+            <Button color='secondary' onClick={this.toggle}>Cancel</Button>
           </ModalFooter>
         </Modal>
       </div>
     )
   }
 }
-const mapDispatch = { onClick: goToPage }
-const mapState = ({ location }) => ({ path: location.pathname })
-export default connect(mapState, mapDispatch)(Topbar)
+
+function mapDispatchToProps(dispatch) {
+  // Whenever selectBook is called, the result shoudl be passed
+  // to all of our reducers
+  return bindActionCreators({ userLogin }, dispatch)
+}
+
+function mapStateToProps(state) {
+  // Whatever is returned will show up as props
+  // inside of BookList
+  return {
+    username: state.username
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Topbar)
