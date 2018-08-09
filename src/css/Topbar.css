@@ -74,3 +74,21 @@
 .carousel-indicators .active {
   background-color: #FFF105;
 }
+
+.en_flag {
+  background: url(../assets/us_flag.svg) no-repeat;
+}
+
+.es_flag {
+  background: url(../assets/es_flag.svg) no-repeat;
+}
+
+.topbar .select_flag {
+  background-size: contain;
+  position: absolute;
+  top: 50%;
+  right: 0%;
+  display: block;
+  margin: 0;
+  transform: translateY(-50%);
+}

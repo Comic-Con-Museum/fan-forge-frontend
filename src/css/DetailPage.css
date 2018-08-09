@@ -19,6 +19,7 @@ h4 {
 
 .carousel-item > img { 
     width: 100%; 
+    height: 500px
 }
 
 .Collapsible__trigger {
