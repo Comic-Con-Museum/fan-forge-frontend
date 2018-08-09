@@ -88,7 +88,7 @@ class SingleLineGridList extends Component {
                 subtitle={<span>by: {tile.author}</span>}
                 actionIcon={
                   <IconButton>
-                     <InfoIcon onClick={this.handleOnInfoClicked}/>
+                     <InfoIcon style={{color: "white"}} onClick={this.handleOnInfoClicked}/>
                   </IconButton>
                 }
               />
