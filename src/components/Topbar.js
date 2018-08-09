@@ -37,7 +37,7 @@ class Topbar extends Component {
 
   handleLanguageClose = (event, lang) => {
     if (lang) {
-      this.props.changeLocale(lang);
+      this.props.localeSwitch(lang);
     }
     this.setState({ anchorEl: null });
   };
@@ -62,7 +62,6 @@ class Topbar extends Component {
   }
 
   render() {
-    console.log(this.props)
     return (
       <div
         className='topbar'
@@ -132,15 +131,9 @@ class Topbar extends Component {
   }
 }
 
-/*function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ userLogin,  localeSwitch}, dispatch)
+}
 
-  return bindActionCreators({ userLogin }, dispatch)
-}
-*/
-const mapDispatch = (dispatch) => {
-  return({
-    changeLocale: (locale) => {dispatch(localeSwitch(locale))}
-  })
-}
 const mapState = ({ location, locale, username }) => ({ path: location.pathname, locale, username })
-export default connect(mapState, mapDispatch)(Topbar)
+export default connect(mapState, mapDispatchToProps)(Topbar)
