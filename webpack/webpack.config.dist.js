@@ -10,16 +10,6 @@ module.exports = {
     path: path.join(__dirname, outputDirectory),
     filename: "bundle.js"
   },
-  externals: [
-    'react',
-    'react-dom',
-    'react/react-dom',
-    'prop-types',
-    'requirejs',
-    'redux-first-router',
-    'redux',
-    'react-redux'
-  ],
   module: {
     rules: [
       {
