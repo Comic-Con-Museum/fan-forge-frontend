@@ -23,8 +23,12 @@ class Feed extends React.Component {
     axios.get("/feed/" + this.state.feedType)
         .then(data => {
             console.log(data)
-            this.state.displayedItems.push(data.data[0])
-            this.setState({items: data.data.slice(1), displayedItems: this.state.displayedItems, isLoaded: true})
+            if (Object.keys(data.data).length === 0) {
+              this.setState({isLoaded: true})
+            } else {
+                this.state.displayedItems.push(data.data[0])
+                this.setState({items: data.data.slice(1), displayedItems: this.state.displayedItems, isLoaded: true})
+            }
             console.log("post set state")
             console.log(this.state)
         }).catch(err =>
@@ -52,7 +56,11 @@ class Feed extends React.Component {
 
   render() {
     if (this.state.displayedItems.length === 0) {
-      return <Spinner />
+      if (this.state.isLoaded) {
+        return <p>No items found</p>
+      } else {
+          return <Spinner/>
+      }
     } else {
       const items = []
       console.log("before forEach")
