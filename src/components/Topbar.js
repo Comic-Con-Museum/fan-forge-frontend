@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { Tab, Tabs } from '@material-ui/core'
+import { Tab, Tabs, TextField } from '@material-ui/core'
 import { connect } from 'react-redux'
 import { NavLink } from 'redux-first-router-link'
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
 import { goToPage } from '../actions'
 
 import CCMBanner from '../assets/ccm_banner.png'
@@ -16,11 +17,18 @@ class Topbar extends Component {
       isLoggedIn: false
     }
     this.handleChange = this.handleChange.bind(this)
+    this.toggle = this.toggle.bind(this)
   }
 
   handleChange = (event, value) => {
     this.setState({ value })
   };
+
+  toggle() {
+    this.setState({
+      modalShow: !this.state.modalShow
+    })
+  }
 
   renderProfileButton() {
     if (this.state.isLoggedIn) {
@@ -31,7 +39,7 @@ class Topbar extends Component {
       )
     }
     return (
-      <Tab label='Login' onClick={() => this.setState({ modalShow: true })} />
+      <Tab className='navLinkTab' label='Login' onClick={() => this.toggle()} />
     )
   }
 
@@ -61,8 +69,30 @@ class Topbar extends Component {
         <NavLink className='navLinkTab' activeClassName='active' to='/feed'>
           <Tab label='Feed' />
         </NavLink>
-          {renderProfileButton()}
+          {this.renderProfileButton()}
         </Tabs>
+        <Modal
+          isOpen={this.state.modalShow}
+          toggle={this.toggle}
+          className='exhibit-modal'
+          centered
+          size='lg'
+        >
+          <ModalHeader toggle={this.toggle}>Comic-Con Museum Login</ModalHeader>
+          <ModalBody>
+          <TextField
+            id="password-input"
+            label="Username"
+            margin="normal"
+            autoFocus
+            onChange={() => this.toggle()}
+          />
+          </ModalBody>
+          <ModalFooter>
+            <Button color="primary" onClick={this.toggle}>Login</Button>{' '}
+            <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+          </ModalFooter>
+        </Modal>
       </div>
     )
   }
