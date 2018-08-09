@@ -79,9 +79,6 @@ class Profile extends React.Component {
     event.preventDefault()
     // const data = new FormData(event.target);
 
-    // can get the form data through:
-    // console.log(data.get('email'));
-
     // or just use the state
     // console.log(this.state)
     // NOTE: you access formData fields with `data.get(fieldName)`
