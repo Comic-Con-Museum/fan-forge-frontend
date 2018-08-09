@@ -15,14 +15,14 @@ const items = [
   },
   {
     src: CCMBuilding,
-    altText: 'About Comic-Con Museum',
-    header: 'About Comic-Con Museum',
+    altText: 'About the Museum',
+    header: 'About the Museum',
     caption: "Learn more about Comic-Con's year round experience"
   },
   {
     src: CCMSanDiego,
-    header: 'Slide 3',
-    caption: 'Slide 3'
+    header: 'Explore Designs',
+    caption: 'Support your interests'
   }
 ]
 
