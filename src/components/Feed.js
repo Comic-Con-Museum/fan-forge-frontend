@@ -46,7 +46,6 @@ class Feed extends React.Component {
         </li>
       )
     })
-    console.log(items.length)
 
     return (
       <div className='feed' style={{overflow:"auto"}}>
