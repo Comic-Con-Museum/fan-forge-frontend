@@ -1,0 +1,12 @@
+.about h3 {
+  margin-top: 30px;
+  text-align: center;
+}
+.about {
+  margin: 20px;
+}
+.about img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
