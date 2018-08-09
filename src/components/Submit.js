@@ -24,10 +24,13 @@ export class Submit extends Component {
       tellus: '',
       currentStep: 0,
       maxStep: 0,
+      thumbnail: '',
+      additionalFiles: [],
     }
     this.handleTags = this.handleTags.bind(this);
     this.stepBack = this.stepBack.bind(this);
     this.stepNext = this.stepNext.bind(this);
+    this.handleFiles = this.handleFiles.bind(this);
     this.renderButtons = this.renderButtons.bind(this);
   }
 
@@ -39,6 +42,14 @@ export class Submit extends Component {
 
   handleTags(newTags) {
     this.setState({tags: newTags});
+  }
+
+  handleFiles(name, event) {
+    if (event.target && event.target.files) {
+      this.setState({
+        [name]: event.target.files
+      });
+    }
   }
 
   handleFormSubmit(e) {
@@ -99,6 +110,7 @@ export class Submit extends Component {
               onChange={(event) => this.handleChange('exhibit', event)}
               margin="normal"
               fullWidth
+              required
             />
             <TextField
               id="summary"
@@ -112,14 +124,23 @@ export class Submit extends Component {
               multiline
               fullWidth
               rows="4"
+              required
             />
-            <div class="wizard__image-container">
-              <Button variant="outlined" onClick={this.stepBack} disabled={this.state.currentStep == 0}>
-                {strings[this.props.locale].wizard_select_thumbnail}
+            <div className="wizard__image-container">
+              <Button variant="contained" className="wizard__file-button">
+                <input type='file' className='wizard_file-input' required id="thumbnail" onChange={(event) =>this.handleFiles('thumbnail', event)} multiple/>
+                <label className='wizard__file-label' htmlFor="thumbnail">
+                  {this.state.thumbnail != '' ? strings[this.props.locale].wizard_thumbnail
+                  : strings[this.props.locale].wizard_select_thumbnail}  
+                </label>
               </Button>
-              <Button variant="outlined" onClick={this.stepBack} disabled={this.state.currentStep == 0}>
-                {strings[this.props.locale].wizard_additional_images}
-              </Button>
+              <Button variant="contained" className="wizard__file-button"> 
+              <input type='file' className='wizard_file-input' id="additional" onChange={(event) =>this.handleFiles('additionalFiles', event)} multiple/>
+                <label className='wizard__file-label' htmlFor="additional">
+                  {this.state.additionalFiles.length != 0 ? `${this.state.additionalFiles.length} ${strings[this.props.locale].wizard_selectfiles}`
+                  : strings[this.props.locale].wizard_additional_images}  
+                </label>
+              </Button> 
             </div>
             <TextField
               id="inspiration"
@@ -146,6 +167,7 @@ export class Submit extends Component {
               inputProps={{className: 'wizard__input-txt'}}
               onChange={(event) => this.handleChange('description', event)}
               margin="normal"
+              required
               multiline
               fullWidth
               rows="12"
@@ -153,12 +175,13 @@ export class Submit extends Component {
             <TextField
               id="tellus"
               label={strings[this.props.locale].wizard_tellus}
-              value={this.state.inspiration}
+              value={this.state.tellus}
               className="wizard__textfield"
               InputLabelProps={{classes: {root: 'wizard__input wizard__input--medium-label'}}}
               inputProps={{className: 'wizard__input-txt'}}
               onChange={(event) => this.handleChange('tellus', event)}
               margin="normal"
+              required
               multiline
               fullWidth
               rows="12"
@@ -177,7 +200,8 @@ export class Submit extends Component {
               {strings[this.props.locale].preview}
             </Button>
             <Button variant="contained" onClick={this.stepNext} color="primary" >
-              {strings[this.props.locale].next}
+              {this.state.currentStep == maxSteps ? strings[this.props.locale].finish
+              : strings[this.props.locale].next}
             </Button>
           </div>
         </form>

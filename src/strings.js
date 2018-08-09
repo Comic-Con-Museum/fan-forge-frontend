@@ -13,8 +13,11 @@ export default {
     wizard_tellus: 'Tell us the kind of things you want to see in this exhibit.',
     wizard_title3: 'Time to double check',
     wizard_looksgreat: 'Make sure everything look good over in the preview and then click Finish.',
+    wizard_selectfiles: 'files selected',
+    wizard_thumbnail: 'thumbnail selected',
     next: 'Next',
     back: 'Back',
+    finish: 'Finish',
     preview: 'Preview'
   },
   es: {
@@ -31,8 +34,11 @@ export default {
     wizard_tellus: 'Tell us the kind of things you want to see in this exhibit.',
     wizard_title3: 'Time to double check',
     wizard_looksgreat: 'Make sure everything look good over in the preview and then click Finish.',
+    wizard_selectfiles: 'files selected',
+    wizard_thumbnail: 'thumbnail selected',
     next: 'Next',
     back: 'Back',
+    finish: 'Finish',
     preview: 'Preview'
   }
 }

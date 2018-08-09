@@ -28,6 +28,22 @@
 	font-weight: 700;
 }
 
+.wizard__form .wizard__file-button {
+	background-color: #3f51b5;
+	color: white;
+	width: 40%;
+}
+
+.wizard__file-label {
+	width: 100%;
+	margin-bottom: 0;
+}
+
+.wizard_file-input {
+	width: 0;
+	visibility: hidden;
+}
+
 .MuiInputLabel-shrink-8.wizard__input--big-label {
 	transform: translate(0, -40px) scale(0.75);
 }
