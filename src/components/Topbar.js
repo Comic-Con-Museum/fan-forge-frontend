@@ -18,7 +18,7 @@ class Topbar extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange = (event, value) => {
+  handleChange(event, value) {
     this.setState({ value })
   };
 
