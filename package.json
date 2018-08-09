@@ -31,6 +31,7 @@
     "react-scripts": "^1.1.4",
     "react-stonecutter": "^0.3.9",
     "react-swipeable-views": "^0.12.16",
+    "react-tagsinput": "^3.19.0",
     "react-transition-group": "^2.4.0",
     "react-universal-component": "^2.5.0",
     "reactstrap": "^6.3.1",
