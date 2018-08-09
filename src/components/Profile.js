@@ -1,20 +1,11 @@
 import React from 'react'
 import { Checkbox, TextField, Button, FormControlLabel, FormGroup } from '@material-ui/core'
+import CCMBanner from '../assets/Logo-wide.png'
 import '../css/Profile.css'
 
 const styles = {
   field: {
     marginLeft: 15
-  },
-  imageInput: {
-    cursor: 'pointer',
-    position: 'absolute',
-    top: 0,
-    bottom: 0,
-    right: 0,
-    left: 0,
-    width: '100%',
-    opacity: 0
   }
 }
 
@@ -23,6 +14,7 @@ class Profile extends React.Component {
     super(props)
     this.state = {
       name: 'Zach Jones',
+      club: 'Batman',
       email: 'zachtjones16@gmail.com',
       bio:
         "Here's a short bio, containing useful information about me, my passions, and who I am.",
@@ -85,6 +77,12 @@ class Profile extends React.Component {
     });*/
   }
 
+  renderBadges = () => {
+    return (
+      <p style={styles.field}>{"New user"}</p>
+    )
+  }
+
   renderTag = tag => (
     <FormGroup row key={tag}>
       <FormControlLabel
@@ -103,87 +101,69 @@ class Profile extends React.Component {
 
   render() {
     const {
-      name, email, pic, bio, notificationMentions, notificationComments, tags
+      name, email, pic, bio, notificationMentions, notificationComments, tags, club
     } = this.state
-
 
     return (
       <div className='profile'>
-        <h3>
-          {name}
-        </h3>
-        <h3>
-Email:
-        </h3>
-        <TextField
-          style={styles.field}
-          value={email}
-        />
-        <h3>
-Profile image:
-        </h3>
-        <img
-          alt={`${name}'s profile`}
-          src={pic}
-        />
-        <Button
-          children='update image'
-          variant='raised'
-          style={styles.field}
-        >
-          Update image
-          <input
-            type='file'
-            name='file'
-            style={styles.imageInput}
-            id='profileImg'
-          />
-        </Button>
+        <img src={CCMBanner} width='100%'/>
+        <div className='left'>
+          <Button>
+            <img
+              alt={`${name}'s profile`}
+              src={pic}
+              width='100%'
+            />
+          </Button>
 
-        <h3>
-Bio:
-        </h3>
-        <div className='bio'>
-          <TextField
-            value={bio}
-            onChange={this.handleBioChange}
-            multiline
-            fullWidth
-          />
+          <h3>{name}</h3>
+          <h6>{email}</h6>
+          <h6>Fan club: {club}</h6>
         </div>
-        <h3>
-Notification Preferences
-        </h3>
-        <FormGroup row>
-          <FormControlLabel
-            control={
-              <Checkbox
-                style={styles.field}
-                checked={notificationMentions}
-                onChange={this.handleNotificationMentionChange}
-              />
-            }
-            label="mentions"
-          />
-        </FormGroup>
-        <FormGroup row>
-          <FormControlLabel
-            control={
-              <Checkbox
-                style={styles.field}
-                checked={notificationComments}
-                onChange={this.handleNotificationCommentsChange}
-              />
-            }
-            label='comments on my posts'
-          />
-        </FormGroup>
+        <div className='right'>
+          <h3>About myself</h3>
+          <div className='bio'>
+            <TextField
+              value={bio}
+              onChange={this.handleBioChange}
+              multiline
+              fullWidth
+            />
+          </div>
+          <h3>Badges</h3>
+          {this.renderBadges()}
 
-        <h3>
-Tags I follow
-        </h3>
-        {tags.map(this.renderTag)}
+          <h3>Tags I follow</h3>
+          {tags.map(this.renderTag)}
 
+          <h3>Notification Preferences</h3>
+          <FormGroup row>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  style={styles.field}
+                  checked={notificationMentions}
+                  onChange={this.handleNotificationMentionChange}
+                />
+              }
+              label="mentions"
+            />
+          </FormGroup>
+          <FormGroup row>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  style={styles.field}
+                  checked={notificationComments}
+                  onChange={this.handleNotificationCommentsChange}
+                />
+              }
+              label='comments on my posts'
+            />
+          </FormGroup>
+
+
+        </div>
         <Button children='Update my profile' variant='raised' fullWidth />
       </div>
     )

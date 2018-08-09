@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { NavLink } from 'redux-first-router-link'
 import { goToPage } from '../actions'
-import '../css/Sidebar.css'
 
 const Sidebar = () => (
   <div className='sidebar'>
