@@ -9,6 +9,7 @@ import {
   MenuItem,
   InputLabel
 } from '@material-ui/core'
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever'
 import '../css/Profile.css'
 
 const styles = {
@@ -119,6 +120,7 @@ class Profile extends React.Component {
       <FormControlLabel
         control={
           <Checkbox
+            checkedIcon={ <DeleteForeverIcon /> }
             style={styles.field}
             checked
             onChange={() => this.handleTagRemove(tag)}
