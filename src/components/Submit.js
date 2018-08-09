@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { connect } from 'react-redux'
 import Step from './Step';
+import { postExhibit } from '../actions/';
 
 import '../css/Submit.css'
 import 'react-tagsinput/react-tagsinput.css' 
@@ -17,7 +18,7 @@ export class Submit extends Component {
     super(props);
     this.state = {
       tags: [],
-      exhibit: '',
+      title: '',
       summary: '',
       inspiration: '',
       description: '',
@@ -32,6 +33,7 @@ export class Submit extends Component {
     this.stepNext = this.stepNext.bind(this);
     this.handleFiles = this.handleFiles.bind(this);
     this.renderButtons = this.renderButtons.bind(this);
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
 
   handleChange(name, event) {
@@ -54,7 +56,7 @@ export class Submit extends Component {
 
   handleFormSubmit(e) {
     e.preventDefault();
-    //this.props.submitForm(this.state);
+    this.props.dispatch(postExhibit(this.state));
   }
 
   stepBack() {
@@ -93,6 +95,7 @@ export class Submit extends Component {
   render() {
     return (
       <div className='wizard'>
+        {this.props.submitStatus == 'loading' ? <div>LOADING</div> : ''}
         <form className='wizard__form' onSubmit={this.handleFormSubmit} noValidate autoComplete="off">
           <Step key='0' stepNumber='0' className='form__leftPanel' currentStep={this.state.currentStep}>
            <h1 className="wizard__form__title">{strings[this.props.locale].wizard_title}</h1>
@@ -101,13 +104,13 @@ export class Submit extends Component {
           <Step key='1' stepNumber='1' className='form__leftPanel' currentStep={this.state.currentStep}>
             <h1 className="wizard__form__title2">{strings[this.props.locale].wizard_title2}</h1>
             <TextField
-              id="exhibit"
+              id="title"
               label={strings[this.props.locale].wizard_exhibit_name}
-              value={this.state.exhibit}
+              value={this.state.title}
               className="wizard__textfield"
               InputLabelProps={{classes: {root: 'wizard__input'}}}
               inputProps={{className: 'wizard__input-txt'}}
-              onChange={(event) => this.handleChange('exhibit', event)}
+              onChange={(event) => this.handleChange('title', event)}
               margin="normal"
               fullWidth
               required
@@ -199,7 +202,8 @@ export class Submit extends Component {
             <Button className='wizard__preview-btn' variant="contained" onClick={() => 1}>
               {strings[this.props.locale].preview}
             </Button>
-            <Button variant="contained" onClick={this.stepNext} color="primary" >
+            <Button variant="contained" onClick={this.stepNext} color="primary"
+              type={this.state.currentStep == maxSteps ? 'submit' : 'button'} >
               {this.state.currentStep == maxSteps ? strings[this.props.locale].finish
               : strings[this.props.locale].next}
             </Button>
@@ -216,5 +220,5 @@ export class Submit extends Component {
   }
 };
 
-const mapStateToProps = ({ locale }) => ({ locale: locale });
+const mapStateToProps = ({ locale, submit }) => ({ locale: locale, submitStatus: submit });
 export default connect(mapStateToProps)(Submit);
