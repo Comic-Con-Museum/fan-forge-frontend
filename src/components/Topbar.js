@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
 import { Tab, Tabs, TextField } from '@material-ui/core'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 import { NavLink } from 'redux-first-router-link'
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import { localeSwitch } from '../actions/';
+import CCMBanner from '../assets/ccm_banner.png';
+import { bindActionCreators } from 'redux'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
 import { userLogin } from '../actions'
-
-import CCMBanner from '../assets/ccm_banner.png'
-
 import '../css/Topbar.css'
 
 class Topbar extends Component {
@@ -15,14 +16,28 @@ class Topbar extends Component {
     super(props)
     this.state = {
       value: 0,
+      showTabs: false,
+      anchorEl: null,
       isLoggedIn: false
-    }
+    };
+    this.handleChange = this.handleChange.bind(this);
     this.handleChange = this.handleChange.bind(this)
     this.toggle = this.toggle.bind(this)
   }
 
   handleChange(event, value) {
     this.setState({ value })
+  };
+
+  handleLanguageClick = event => {
+    this.setState({ anchorEl: event.currentTarget });
+  };
+
+  handleLanguageClose = (event, lang) => {
+    if (lang) {
+      this.props.localeSwitch(lang);
+    }
+    this.setState({ anchorEl: null });
   };
 
   toggle() {
@@ -45,7 +60,6 @@ class Topbar extends Component {
   }
 
   render() {
-    console.log(this.props)
     return (
       <div
         className='topbar'
@@ -62,16 +76,31 @@ class Topbar extends Component {
         <NavLink className='navLinkTab' activeClassName='active' exact to='/'>
           <Tab label='Home' />
         </NavLink>
+        <NavLink className='navLinkTab' activeClassName='active' to='/feed/hot'>
+          <Tab label='Feed' />
+        </NavLink>
         <NavLink className='navLinkTab' activeClassName='active' to='/entry'>
           <Tab label='Submit' />
         </NavLink>
         <NavLink className='navLinkTab' activeClassName='active' to='/detail'>
           <Tab label='Details' />
         </NavLink>
-        <NavLink className='navLinkTab' activeClassName='active' to='/feed/hot'>
-          <Tab label='Feed' />
-        </NavLink>
-          {this.renderProfileButton()}
+        <Button
+          aria-owns={this.state.anchorEl ? 'simple-menu' : null}
+          aria-haspopup="true"
+          onClick={this.handleLanguageClick}
+          className={`select_flag ${this.props.locale}_flag`}
+        />
+        <Menu
+          id="simple-menu"
+          anchorEl={this.state.anchorEl}
+          open={Boolean(this.state.anchorEl)}
+          onClose={(e) => this.handleLanguageClose(e, undefined)}
+        >
+          <MenuItem onClick={(e) => this.handleLanguageClose(e, "en")}>English</MenuItem>
+          <MenuItem onClick={(e) => this.handleLanguageClose(e, "es")}>Español</MenuItem>
+        </Menu>
+        {this.renderProfileButton()}
         </Tabs>
         <Modal
           isOpen={this.state.modalShow}
@@ -101,17 +130,8 @@ class Topbar extends Component {
 }
 
 function mapDispatchToProps(dispatch) {
-  // Whenever selectBook is called, the result shoudl be passed
-  // to all of our reducers
-  return bindActionCreators({ userLogin }, dispatch)
+  return bindActionCreators({ userLogin,  localeSwitch}, dispatch)
 }
 
-function mapStateToProps(state) {
-  // Whatever is returned will show up as props
-  // inside of BookList
-  return {
-    username: state.username
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Topbar)
+const mapState = ({ location, locale, username }) => ({ path: location.pathname, locale, username })
+export default connect(mapState, mapDispatchToProps)(Topbar)

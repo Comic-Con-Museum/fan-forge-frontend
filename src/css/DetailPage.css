@@ -17,12 +17,9 @@ h4 {
     color: black
 }
 
-.carousel-item > img {
-    height: 500px;
-}
-
-.carousel-inner {
-  text-align: center;
+.carousel-item > img { 
+    width: 100%; 
+    height: 500px
 }
 
 .Collapsible__trigger {
