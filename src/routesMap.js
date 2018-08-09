@@ -1,6 +1,6 @@
 const routesMap = {
   HOME: '/',
-  ENTRY: '/entry',
+  ABOUT: '/About',
   SUBMIT: '/submit',
   PROFILE: '/Profile',
   DETAILPAGE: '/detail',

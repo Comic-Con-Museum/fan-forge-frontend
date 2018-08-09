@@ -1,5 +1,5 @@
 import React from 'react'
-import CCMSketch from '../assets/scc_sketch.jpeg';
+import CCMSketch from '../assets/ccm_sketch.jpeg';
 
 
 class About extends React.Component {
@@ -10,9 +10,10 @@ class About extends React.Component {
 
   render() {
     return (
+      <div>
       <img className='bannerImg' src={CCMSketch} alt='Logo' width="80%" />
 
-      <h3><Why the Museum?</h3>
+      <h3>Why the Museum?</h3>
       Comic-Con is a world wide sensation that only comes around once a year!
       To help combat the long lines we want to create an experience where fans
       can indulge in their favorite comics all year long.
@@ -28,7 +29,7 @@ class About extends React.Component {
       In order to create or support an exhibit idea you must be a Comic-Con Museum member.
       If you are already a member then you are all set!
       If you are not a member you can visit https://www.comic-con.org/optin to sign up!
-
+      </div>
     )
   }
 }

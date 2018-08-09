@@ -5,7 +5,7 @@ export default (state = 'HOME', action = {}) => components[action.type] || state
 const components = {
   HOME: 'Home',
   LIST: 'List',
-  ENTRY: 'Entry',
+  ABOUT: 'About',
   SUBMIT: 'Submit',
   PROFILE: 'Profile',
   DETAILPAGE: 'DetailPage',

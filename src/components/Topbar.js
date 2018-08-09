@@ -79,8 +79,8 @@ class Topbar extends Component {
         <NavLink className='navLinkTab' activeClassName='active' to='/feed/hot'>
           <Tab label='Feed' />
         </NavLink>
-        <NavLink className='navLinkTab' activeClassName='active' to='/entry'>
-          <Tab label='Entry' />
+        <NavLink className='navLinkTab' activeClassName='active' to='/About'>
+          <Tab label='About' />
         </NavLink>
         <NavLink className='navLinkTab' activeClassName='active' to='/detail'>
           <Tab label='Details' />
