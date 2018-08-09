@@ -38,6 +38,7 @@
     "redux-devtools-extension": "^2.13.2",
     "redux-first-router": "^1.9.15",
     "redux-first-router-link": "^1.1.4",
+    "redux-thunk": "^2.3.0",
     "reselect": "^3.0.1",
     "transition-group": "^0.0.2",
     "webpack-dev-server": "^2.11.1",

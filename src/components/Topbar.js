@@ -15,6 +15,7 @@ class Topbar extends Component {
       value: 0,
       showTabs: false
     };
+    this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange = (event, value) => {
