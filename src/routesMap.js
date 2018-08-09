@@ -1,7 +1,7 @@
 const routesMap = {
   HOME: '/',
+  ABOUT: '/About',
   ENTRY: '/entry',
-  SUBMIT: '/submit',
   PROFILE: '/Profile',
   DETAILPAGE: '/detail',
   FEED: '/feed/:type'

@@ -1,6 +1,6 @@
 import React from 'react'
 import Button from '@material-ui/core/Button'
-import {Chip} from '@material-ui/core'
+import { Chip } from '@material-ui/core'
 import Card from '@material-ui/core/Card'
 import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
@@ -16,15 +16,18 @@ const ExhibitGroup = props => {
   const { title } = props
   const { summary } = props
   const { tags } = props
+  const { images } = props
+  const { upvotes } = props
 
   return (
     <div>
       <div className='exhibit-center'>
         <ExhibitCard
-        title={title}
-        picture={picture}
-        summary={summary}
-        tags={tags}
+          title={title}
+          picture={picture}
+          summary={summary}
+          tags={tags}
+          upvotes={upvotes}
         />
       </div>
     </div>
