@@ -164,7 +164,7 @@ export class Submit extends Component {
               id="inspiration"
               label={strings[this.props.locale].wizard_inspiration}
               value={this.state.inspiration}
-              className="wizard__textfield"
+              className="wizard__textfield margin-bottom"
               InputLabelProps={{classes: {root: 'wizard__input'}}}
               inputProps={{className: 'wizard__input-txt'}}
               onChange={(event) => this.handleChange('inspiration', event)}
@@ -180,7 +180,7 @@ export class Submit extends Component {
               id="description"
               label={strings[this.props.locale].wizard_provided}
               value={this.state.description}
-              className="wizard__textfield"
+              className="wizard__textfield translate_up"
               InputLabelProps={{classes: {root: 'wizard__input wizard__input--big-label'}}}
               inputProps={{className: 'wizard__input-txt'}}
               onChange={(event) => this.handleChange('description', event)}
@@ -194,7 +194,7 @@ export class Submit extends Component {
               id="tellus"
               label={strings[this.props.locale].wizard_tellus}
               value={this.state.tellus}
-              className="wizard__textfield"
+              className="wizard__textfield margin-bottom"
               InputLabelProps={{classes: {root: 'wizard__input wizard__input--medium-label'}}}
               inputProps={{className: 'wizard__input-txt'}}
               onChange={(event) => this.handleChange('tellus', event)}
@@ -216,7 +216,7 @@ export class Submit extends Component {
               helperText={strings[this.props.locale].wizard_addTags}
               fullWidth
             />
-            <div className="wizard__form__collab">
+            <div className="wizard__form__collab margin-bottom">
               <h3>{strings[this.props.locale].wizard_inviteFriends}</h3>
               <Button className='yellow-btn' variant="contained" onClick={this.stepNext} color="primary">
                 {strings[this.props.locale].wizard_sendInvite}
