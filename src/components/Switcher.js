@@ -19,15 +19,19 @@ const Switcher = ({ page, direction, isLoading }) => (
   </TransitionGroup>
 )
 
-const UniversalComponent = universal(props => import(`./${props.page}`), {
+const UniversalComponent = universal(props => import(`./${props.page}`), {  // eslint-disable-line
   minDelay: 500,
-  chunkName: props => props.page,
+    chunkName: props => props.page, // eslint-disable-line
   loading: () => (
     <div className='spinner'>
       <div />
     </div>
   ),
-  error: () => <div className='notFound'>PAGE NOT FOUND - 404</div>
+  error: () => (
+    <div className='notFound'>
+PAGE NOT FOUND - 404
+    </div>
+  )
 })
 
 const mapState = ({ page, direction, ...state }) => ({

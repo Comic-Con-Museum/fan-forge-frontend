@@ -7,6 +7,9 @@ const components = {
   LIST: 'List',
   ENTRY: 'Entry',
   SUBMIT: 'Submit',
+  PROFILE: 'Profile',
+  DETAILPAGE: 'DetailPage',
+  FEED: 'Feed',
   [NOT_FOUND]: 'NotFound'
 }
 

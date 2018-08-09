@@ -1,6 +1,9 @@
 body {
   margin: 0;
-  background: rgb(27, 32, 34);
+  font-family: Roboto, sans-serif; /* #686E70  #AEBBBC #0B0B09*/
+  background: #0B0B09; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom, #ffffff, #AEBBBC); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, #ffffff, #AEBBBC); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 html {

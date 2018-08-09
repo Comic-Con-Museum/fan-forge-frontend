@@ -1,12 +1,13 @@
 import React from 'react'
-import Sidebar from './Sidebar'
+
+import Topbar from './Topbar'
 import Switcher from './Switcher'
-// eslint-disable-line
 import '../css/App.css'
 
 export default () => (
   <div>
     <div className='app'>
+      <Topbar />
       <Switcher />
     </div>
   </div>
