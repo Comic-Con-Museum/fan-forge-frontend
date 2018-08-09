@@ -1,0 +1,208 @@
+.wizard {
+	height: 100%;
+}
+
+.wizard__form {
+	float: left;
+	width: 49vw;
+	padding: 70px;
+	position: relative;
+	min-height: 90vh;
+}
+
+.wizard__preview {
+	float: left;
+	width: 49vw;
+	height: 100%;
+}
+
+.wizard__preview img {
+	height: 100%;
+	width: 100%;
+	padding: 50px;
+}
+
+.wizard__form__title, .wizard__form__title2 {
+	font-size: 55px;
+	font-family: 'Roboto';
+	font-weight: 700;
+}
+
+.wizard__form .wizard__file-button {
+	background-color: #3f51b5;
+	color: white;
+	width: 40%;
+}
+
+.wizard__file-label {
+	width: 100%;
+	margin-bottom: 0;
+}
+
+.wizard_file-input {
+	width: 0;
+	visibility: hidden;
+}
+
+.MuiInputLabel-shrink-8.wizard__input--big-label {
+	transform: translate(0, -40px) scale(0.75);
+}
+
+.MuiInputLabel-shrink-8.wizard__input--medium-label {
+	transform: translate(0, -30px) scale(0.75);
+}
+
+.wizard__form__intro {
+	font-size: 28px;
+	margin-top: 50px;
+	font-family: 'Nunito Sans', sans-serif;
+	font-weight: 600;
+}
+
+.wizard__form .wizard__textfield {
+	margin-top: 40px;
+}
+
+.wizard__form .wizard__input {
+	font-size: 22px;
+}
+
+.wizard__form .wizard__input-txt {
+	font-size: 22px;
+}
+
+.wizard__image-container {
+	margin-top: 40px;
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-evenly;
+}
+
+.wizard__controls {
+	position: absolute;
+	bottom: 0;
+	right: 50px;
+}
+
+.wizard__controls button {
+	margin-left: 40px;
+	font-size: 16px;
+	padding: 5px 27px;
+}
+
+.wizard__controls .wizard__preview-btn {
+	display: none;
+}
+
+.wizard__dots {
+	position: absolute;
+	top: 50%;
+	left: 20px;
+	right: auto;
+	-webkit-transform: translateY(-50%);
+	transform: translateY(-50%);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	height: 80%;
+}
+
+.wizard__dots button {
+	cursor: pointer;
+	border: none;
+	position: relative;
+	display: block;
+	padding: 0;
+	margin: 5px 0;
+	width: 16px;
+	height: 16px;
+	border-radius: 50%;
+	background-color: #3f51b5;
+}
+
+.wizard__dots button[disabled] {
+	cursor: none;
+	background-color: #2E3B84;
+}
+
+.wizard__dots button.current {
+	background-color: #DFF3E4;
+}
+
+@media screen and (max-width: 920px) {
+	.wizard__form {
+		width: 100vw;
+		padding: 45px;
+	}
+
+	.wizard__form .wizard__textfield {
+		margin-top: 20px;
+	}
+
+	.wizard__form__title {
+		font-size: 45px;
+	}
+
+	.wizard__form__title2 {
+		font-size: 35px;
+	}
+
+	.wizard__form__intro {
+		font-size: 23px;
+	}
+
+	.wizard__dots {
+		left: 10px;
+	}
+
+	.wizard__form .MuiInputLabel-shrink-8.wizard__input--big-label {
+		font-size: 16px;
+		transform: translate(0, -20px) scale(0.75);
+	}
+	
+	.wizard__form .MuiInputLabel-shrink-8.wizard__input--medium-label {
+		font-size: 16px;
+		transform: translate(0, -10px) scale(0.75);
+	}
+
+	.wizard__form .wizard__input {
+		font-size: 18px;
+	}
+	
+	.wizard__form .wizard__input-txt {
+		font-size: 18px;
+	}
+
+	.wizard__image-container {
+		display: block;
+		margin-top: 30px;
+	}
+
+	.wizard__image-container > button {
+		display: block;
+		margin: 10px auto;
+		width: 100%;
+	}
+
+	.wizard__preview {
+		display: none;
+	}
+
+	.wizard__controls .wizard__preview-btn {
+		display: block;
+	}
+
+	.wizard__controls {
+		width: 100%;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-evenly;
+	}
+
+	.wizard__controls button{
+		margin: 0;
+	}
+}

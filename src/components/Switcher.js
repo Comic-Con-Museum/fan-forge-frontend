@@ -12,7 +12,9 @@ const Switcher = ({ page, direction, isLoading }) => (
     prefix='slide'
   >
     <Transition key={page}>
-      <UniversalComponent page={page} isLoading={isLoading} />
+      <div className='content'>
+        <UniversalComponent page={page} isLoading={isLoading} />
+      </div>
     </Transition>
   </TransitionGroup>
 )
