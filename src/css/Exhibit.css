@@ -1,10 +1,19 @@
 .exhibit-card {
-    height: 400px;
+    height: 20vmax;
     width: auto;
 }
 
 .exhibit-center {
   margin-left: 50px;
-  margin-right: 50px;
+  margin-right: 300px;
   padding: 50px;
+}
+
+.exhibit-card-dark {
+  filter: brightness(95%);
+}
+
+.exhibit-modal {
+  width: 50%;
+  height: 50%;
 }
