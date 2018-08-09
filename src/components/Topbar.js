@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { Tab, Tabs, TextField } from '@material-ui/core'
 import { NavLink } from 'redux-first-router-link'
-import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import { localeSwitch } from '../actions/';
@@ -22,7 +21,6 @@ class Topbar extends Component {
       isLoggedIn: false
     };
     this.handleChange = this.handleChange.bind(this);
-    }
     this.handleChange = this.handleChange.bind(this)
     this.toggle = this.toggle.bind(this)
   }
