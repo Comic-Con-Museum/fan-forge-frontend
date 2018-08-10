@@ -40,7 +40,7 @@ export const userLogin = username => ({
   payload: username
 })
 
-export const url = 'https://yu1pn4u266.execute-api.us-west-2.amazonaws.com/latest/api/exhibits';
+export const url = 'https://yu1pn4u266.execute-api.us-west-2.amazonaws.com/latest/api/exhibit';
 export const postExhibit = (exhibit) => {
   return (dispatch) => {
     dispatch({type : POST_EXHIBIT});
