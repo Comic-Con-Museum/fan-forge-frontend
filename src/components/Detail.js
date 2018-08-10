@@ -64,7 +64,8 @@ class Detail extends Component {
       isArtifactsHidden: this.props.isArtifactsHidden,
       isAuthorCardHidden: this.props.isAuthorCardHidden,
       isSupportButtonHidden: this.props.isSupportButtonHidden,
-      isTabsHidden: this.props.isTabsHidden
+      isTabsHidden: this.props.isTabsHidden,
+      comments: this.props.comments
     }
     this.loadDetails()
   }
@@ -73,7 +74,7 @@ class Detail extends Component {
     axios.get("/exhibit/" + this.state.id)
       .then(data => {
         if (data.data) {
-          this.setState({description: data.data.title, inspiration:data.data.description, image:data.data.images[0], isLoaded: true})
+          this.setState({description: data.data.title, inspiration:data.data.description, image:data.data.images[0], isLoaded: true, comments: data.data.comments})
         } else {
           this.setState({isLoaded: true})
         }
@@ -207,7 +208,7 @@ class Detail extends Component {
                 <TabPane tabId="1">
                   <Row>
                     <Col xs="12">
-                      <CommentsList />
+                      <CommentsList comments={this.state.comments}/>
                     </Col>
                   </Row>
                 </TabPane>

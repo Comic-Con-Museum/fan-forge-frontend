@@ -5,12 +5,42 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar'
 import {Button, Form, FormGroup, Input, Label} from 'reactstrap'
 
-
 class CommentsList extends Component {
 
+    constructor(props) {
+        super(props);
+        console.log(this.props.comments)
+        this.state = {
+            commentContent: ''
+        }
+    }
+
+    handleFormSubmit = e => {
+        console.log("submit!");
+        console.log(this.state.commentContent)
+    }
+
+    handleChange = e => {
+        this.setState({
+            commentContent: e.target.value
+        })
+    }
+
     render() {
+        const comments = []
+        for (const key in this.props.comments) {
+            comments.push(this.props.comments[key])
+        }
         return (
             <div>
+                { this.props.comments && 
+                    <List>
+                        {comments.map((comment, i) => <ListItem>
+                            <Avatar src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQM4UcvSBHwJTkCWxJFZnHBqGCSsnkImMWUMY1DobHYbHAhTw_m'/>
+                            <ListItemText primary={comment.text} secondary= {`by  ${comment.userId}`} />
+                        </ListItem>)}
+                    </List>
+                }
             <List>
               <ListItem>
                 <Avatar src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQM4UcvSBHwJTkCWxJFZnHBqGCSsnkImMWUMY1DobHYbHAhTw_m'/>
@@ -25,12 +55,13 @@ class CommentsList extends Component {
                 <ListItemText primary="This has been very useful for my research. Thanks as well!" secondary="by Elliot Fu" />
               </ListItem>
             </List>
+
             <Form>
                 <FormGroup>
                     <Label for="exampleText">Add Comment</Label>
-                    <Input type="textarea" name="text" id="exampleText" />
+                    <Input type="textarea" name="text" value={this.state.commentContent} onChange={this.handleChange}  />
                 </FormGroup>
-                <Button>Submit</Button>
+                <Button onClick={this.handleFormSubmit}>Submit</Button>
             </Form>
 
           </div>
@@ -39,4 +70,5 @@ class CommentsList extends Component {
 }
 
 export default CommentsList
+// export default connect(null, mapDispatchToProps)(CommentsList)
 
