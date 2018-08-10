@@ -55,7 +55,7 @@ class ExhibitCard extends Component {
             <IconButton aria-label='Add to favorites'>
               <FavoriteIcon />
             </IconButton>
-            <Link to={`/details/` + eid}>
+            <Link to={`/detail/` + eid}>
               <Button size='small' color='primary'>
                   Learn More
               </Button>
