@@ -51,7 +51,10 @@ export const postExhibit = (exhibit) => {
 
     fetch(url, {
       method: 'POST',
-      body: JSON.stringify(exhibit)
+      body: JSON.stringify(exhibit),
+      headers: {
+        "Content-Type": "application/json;",
+      },
     }).then(res => {
       return res.json();
     }).then(resJson => {
