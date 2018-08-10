@@ -79,6 +79,7 @@ export const postArtifact = (exhibit) => {
 }
 
 axiosDefaults.baseURL = 'https://yu1pn4u266.execute-api.us-west-2.amazonaws.com/latest/api';
+axiosDefaults.headers = {'Content-Type': 'application/json'}
 
 export const LOCALE_SWITCH = 'LOCALE_SWITCH'
 export const POST_EXHIBIT = 'POST_EXHIBIT'
