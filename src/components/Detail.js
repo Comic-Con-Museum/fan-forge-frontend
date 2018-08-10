@@ -270,7 +270,7 @@ class Detail extends Component {
                             <TabPane tabId="1">
                                 <Row>
                                     <Col xs="12">
-                                        <CommentsList/>
+                                        <CommentsList />
                                     </Col>
                                 </Row>
                             </TabPane>
