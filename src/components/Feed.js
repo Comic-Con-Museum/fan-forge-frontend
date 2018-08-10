@@ -7,8 +7,6 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
 import { NavLink } from 'redux-first-router-link'
 import Spinner from './Spinner'
 import axios from 'axios'
