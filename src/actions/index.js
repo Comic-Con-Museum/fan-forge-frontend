@@ -62,6 +62,18 @@ export const postExhibit = (exhibit) => {
   };
 }
 
+export const postArtifact = (exhibit) => {
+    return (dispatch) => {
+        fetch(url, {
+            method: 'POST',
+            body: JSON.stringify(exhibit)
+        }).then(res => {
+          console.log(res)
+          return res.json();
+        })
+    };
+}
+
 axiosDefaults.baseURL = 'https://yu1pn4u266.execute-api.us-west-2.amazonaws.com/latest/api';
 
 export const LOCALE_SWITCH = 'LOCALE_SWITCH'

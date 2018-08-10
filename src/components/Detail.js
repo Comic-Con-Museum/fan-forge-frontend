@@ -10,6 +10,7 @@ import {
   NavItem,
   NavLink,
   CardBody,
+  Modal, ModalHeader, ModalBody, ModalFooter,
   Card,
   CardText,
   CardSubtitle,
@@ -18,7 +19,7 @@ import {
   Row,
   Col,
   TabContent,
-  TabPane } from 'reactstrap'
+  TabPane} from 'reactstrap'
 import SingleLineGridList from './SingleLineGridList'
 import { Grid, Button, Avatar, List, ListItem, ListItemText } from '@material-ui/core'
 import '../css/DetailPage.css'
@@ -28,7 +29,9 @@ import Collapsible from 'react-collapsible'
 import axios from "axios/index";
 import {connect} from "react-redux";
 import CommentsList from './CommentsList'
-import ArtifactModal from './SubmitArtifactModal'
+import TextField from '@material-ui/core/TextField';
+import { postArtifact } from "../actions";
+import { bindActionCreators } from 'redux'
 
 const images = [
   {
@@ -65,6 +68,7 @@ class Detail extends Component {
       showArtifactModal: false
     }
     this.loadDetails()
+    this.submitArtifact = this.submitArtifact.bind(this);
   }
 
   loadDetails() {
@@ -79,10 +83,12 @@ class Detail extends Component {
       .catch(err => undefined)
   }
 
-  toggleArtifactModal() {
-      this.setState({
-          showArtifactModal: !this.state.showArtifactModal
-      })
+  toggleArtifactModal = () => {
+    console.log("pressed")
+    console.log(JSON.stringify(this.state))
+    this.setState({
+        showArtifactModal: !this.state.showArtifactModal
+    })
   }
 
   onExiting = () => {
@@ -116,6 +122,20 @@ class Detail extends Component {
         activeTab: tab
       })
     }
+  }
+
+  handleChange(name, event) {
+      this.setState({
+          [name]: event.target.value,
+      });
+  };
+
+  submitArtifact(event) {
+    this.props.postArtifact({
+      title: this.state.title,
+      description: this.state.description
+    })
+    this.setState({ showArtifactModal: false })
   }
 
   render() {
@@ -167,8 +187,35 @@ class Detail extends Component {
           <div className='detail-body'>
             <div>
               <h4>Submitted Artifacts</h4>
-              <Button variant="contained">Submit Your Artifact!</Button>
-              <ArtifactModal toggle={this.toggleArtifactModal} modalShow={this.state.showArtifactModal}/>
+              <Button variant="contained" onClick={this.toggleArtifactModal}>Submit Your Artifact!</Button>
+              <Modal
+                  isOpen={this.state.showArtifactModal}
+                  toggle={this.toggleArtifactModal}
+                  className='exhibit-modal'
+                  centered
+                  size='lg'
+              >
+                <ModalHeader toggle={this.state.toggle}>Add An Artifact</ModalHeader>
+                <ModalBody>
+                    <TextField
+                        label='Title'
+                        margin='normal'
+                        onChange={(event) => this.handleChange('title', event)}
+                        autoFocus
+                        className="title"
+                    />{' '}
+                    <TextField
+                        label='Description'
+                        margin='normal'
+                        onChange={(event) => this.handleChange('description', event)}
+                        autoFocus
+                        className="description"
+                    />
+                </ModalBody>
+                <ModalFooter>
+                    <Button color='primary' onClick={this.submitArtifact}>Submit</Button>
+                </ModalFooter>
+              </Modal>
               <SingleLineGridList />
             </div>
             <Collapsible trigger="Inspiration" open>
@@ -184,7 +231,6 @@ class Detail extends Component {
                 </ListItem>
               </List>
             </Collapsible>
-
             <div>
               <Nav tabs>
                 <NavItem>
@@ -225,4 +271,7 @@ class Detail extends Component {
 }
 
 const mapStateToProps = ({detail}) => ({id:detail});
-export default withStyles(styles)(connect(mapStateToProps)(Detail));
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({postArtifact}, dispatch)
+}
+export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(Detail));
