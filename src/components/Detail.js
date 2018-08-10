@@ -1,29 +1,29 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import React, {Component} from 'react'
 import {
-  Carousel,
-  CarouselItem,
-  CarouselControl,
-  CarouselIndicators,
-  CarouselCaption,
-  Nav,
-  NavItem,
-  NavLink,
-  CardBody,
-  Card,
-  CardText,
-  CardSubtitle,
-  CardTitle,
-  CardLink,
-  Row,
-  Col,
-  TabContent,
-  TabPane } from 'reactstrap'
+    Card,
+    CardBody,
+    CardLink,
+    CardSubtitle,
+    CardText,
+    CardTitle,
+    Carousel,
+    CarouselCaption,
+    CarouselControl,
+    CarouselIndicators,
+    CarouselItem,
+    Col,
+    Nav,
+    NavItem,
+    NavLink,
+    Row,
+    TabContent,
+    TabPane
+} from 'reactstrap'
 import SingleLineGridList from './SingleLineGridList'
-import { Grid, Button, Avatar, List, ListItem, ListItemText } from '@material-ui/core'
+import {Avatar, Button, Grid, List, ListItem, ListItemText} from '@material-ui/core'
 import '../css/DetailPage.css'
 import classnames from 'classnames'
-import { withStyles } from '@material-ui/core/styles'
+import {withStyles} from '@material-ui/core/styles'
 import Collapsible from 'react-collapsible'
 import axios from "axios/index";
 import {connect} from "react-redux";

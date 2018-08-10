@@ -1,14 +1,5 @@
 import React from 'react'
-import {
-  Checkbox,
-  TextField,
-  Button,
-  FormControlLabel,
-  FormGroup,
-  Select,
-  MenuItem,
-  InputLabel
-} from '@material-ui/core'
+import {Button, Checkbox, FormControlLabel, FormGroup, InputLabel, MenuItem, Select, TextField} from '@material-ui/core'
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever'
 import Dropzone from 'react-dropzone'
 import '../css/Profile.css'
