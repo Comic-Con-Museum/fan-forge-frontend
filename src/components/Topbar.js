@@ -83,7 +83,7 @@ class Topbar extends Component {
           <Tab label='About' />
         </NavLink>
         <NavLink className='navLinkTab' activeClassName='active' to='/Entry'>
-          <Tab label='Upload Idea' />
+          <Tab label='Submit Idea' />
         </NavLink>
         <Button
           aria-owns={this.state.anchorEl ? 'simple-menu' : null}
