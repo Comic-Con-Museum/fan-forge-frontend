@@ -93,7 +93,7 @@ export class Submit extends Component {
   }
 
   stepBack() {
-    if (this.state.currentStep == 0) {
+    if (this.state.currentStep === 0) {
       return;
     } else {
       this.setState({currentStep: this.state.currentStep - 1});
@@ -101,7 +101,7 @@ export class Submit extends Component {
   }
 
   stepNext() {
-    if (this.state.currentStep == maxSteps ) {
+    if (this.state.currentStep === maxSteps ) {
       return;
     }
     if (this.state.currentStep < maxSteps) {
@@ -118,7 +118,7 @@ export class Submit extends Component {
     return new Array(4).fill().map((value, idx) => 
       <button 
         key={idx}
-        className={this.state.currentStep == idx ? 'current' : '' }
+        className={this.state.currentStep === idx ? 'current' : '' }
         onClick={() => this.jumpToStep(idx)}
         disabled={this.state.maxStep < idx ? true : false}
         />
@@ -168,7 +168,7 @@ export class Submit extends Component {
         <Button variant="contained" className="wizard__file-button">
           <input type='file' className='wizard_file-input' required id="thumbnail" onChange={(event) =>this.handleFiles('thumbnail', event)} multiple/>
           <label className='wizard__file-label' htmlFor="thumbnail">
-            {this.state.thumbnail != '' ? strings[this.props.locale].wizard_thumbnail
+            {this.state.thumbnail !== '' ? strings[this.props.locale].wizard_thumbnail
             : strings[this.props.locale].wizard_select_thumbnail}  
           </label>
         </Button>
@@ -265,7 +265,7 @@ export class Submit extends Component {
           {this.renderStep2()}
           {this.renderStep3()}
           <div className='wizard__controls'>
-            <Button variant="outlined" onClick={this.stepBack} disabled={this.state.currentStep == 0}>
+            <Button variant="outlined" onClick={this.stepBack} disabled={this.state.currentStep === 0}>
               {strings[this.props.locale].back}
             </Button>
             <Button className='wizard__preview-btn' variant="contained" onClick={() => 1}>
@@ -273,13 +273,13 @@ export class Submit extends Component {
             </Button>
             <Button className='yellow-btn' variant="contained" onClick={this.stepNext} color="primary"
               type='submit'>
-              {this.state.currentStep == maxSteps ? strings[this.props.locale].finish
+              {this.state.currentStep === maxSteps ? strings[this.props.locale].finish
               : strings[this.props.locale].next}
             </Button>
           </div>
         </form>
         <div className='wizard__preview'>
-          <img src='https://placebear.com/1928/1024' />
+          <img src='https://placebear.com/1928/1024' alt='preview' />
         </div>
         <div className='wizard__dots'>
             {this.renderButtons()}

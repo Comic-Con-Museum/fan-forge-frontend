@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import {
   Carousel,
   CarouselItem,
@@ -8,7 +9,6 @@ import {
   Nav,
   NavItem,
   NavLink,
-  CardImg,
   CardBody,
   Card,
   CardText,
@@ -20,7 +20,7 @@ import {
   TabContent,
   TabPane } from 'reactstrap'
 import SingleLineGridList from './SingleLineGridList'
-import { Grid, Button, Avatar } from '@material-ui/core'
+import { Grid, Button, Avatar, List, ListItem, ListItemText } from '@material-ui/core'
 import '../css/DetailPage.css'
 import classnames from 'classnames'
 import { withStyles } from '@material-ui/core/styles'
@@ -59,10 +59,12 @@ class Detail extends Component {
     super(props)
     this.state = { activeIndex: 0, 
       activeTab: '1',
-      description: true,
-      inspiration: true,
       isLoaded: false,
-      id: this.props.id
+      id: this.props.id,
+      isArtifactsHidden: this.props.isArtifactsHidden,
+      isAuthorCardHidden: this.props.isAuthorCardHidden,
+      isSupportButtonHidden: this.props.isSupportButtonHidden,
+      isTabsHidden: this.props.isTabsHidden
     }
     this.loadDetails()
   }
@@ -142,64 +144,83 @@ class Detail extends Component {
                 <CarouselControl direction='next' directionText='Next' onClickHandler={this.next} />
               </Carousel>
             </Grid>
+
             <Grid item sm={3}>
-              <Card>
-                <Avatar className={classnames(classes.avatar, classes.bigAvatar)} src='https://www.thefamouspeople.com/profiles/images/stan-lee-5.jpg'/>
-                <CardBody>
-                  <CardTitle>Stan Lee</CardTitle>
-                  <CardSubtitle>comic-book writer</CardSubtitle>
-                  <CardText>more information goes here</CardText>
-                  <CardLink href='#'>Follow</CardLink>
-                </CardBody>
-              </Card>
-              <div className='buttonWrapper'>
-                <h4>325 people liked this idea!</h4>
-                <Button variant="contained">Like This Idea!</Button>
-              </div>
+              {!this.state.isAuthorCardHidden && 
+                  <Card>
+                    <Avatar className={classnames(classes.avatar, classes.bigAvatar)} src='https://www.thefamouspeople.com/profiles/images/stan-lee-5.jpg'/>
+                    <CardBody>
+                      <CardTitle>Stan Lee</CardTitle>
+                      <CardSubtitle>comic-book writer</CardSubtitle>
+                      <CardText>more information goes here</CardText>
+                      <CardLink href='#'>Follow</CardLink>
+                    </CardBody>
+                  </Card>
+              }
+              {!this.state.isSupportButtonHidden && 
+                  <div className='buttonWrapper'>
+                    <h4>325 people liked this idea!</h4>
+                    <Button variant="contained">Like This Idea!</Button>
+                  </div>
+              }
             </Grid>
           </Grid>
           <div className='detail-body'>
-            <h4>Submitted Artifacts</h4>
-            <Button variant="contained">Submit Your Artifact!</Button>
-            <SingleLineGridList />
-            <Collapsible trigger="Description" open>
-              <p>{description}</p>
-            </Collapsible>
+            {!this.state.isArtifactsHidden && 
+            <div>
+              <h4>Submitted Artifacts</h4>
+              <Button variant="contained">Submit Your Artifact!</Button>
+              <SingleLineGridList />
+            </div>}
             <Collapsible trigger="Inspiration" open>
-              <p>{inspiration}</p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc. Curabitur tortor. Pellentesque nibh. Aenean quam. In scelerisque sem at dolor. Maecenas mattis. Sed convallis tristique sem. Proin ut ligula vel nunc egestas porttitor. Morbi lectus risus, iaculis vel, suscipit quis, luctus non, massa. Fusce ac turpis quis ligula lacinia aliquet. Mauris ipsum. Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh. Quisque volutpat condimentum velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam nec ante. Sed lacinia, urna non tincidunt mattis, tortor neque adipiscing diam, a cursus ipsum ante quis turpis. Nulla facilisi. Ut fringilla. Suspendisse potenti. Nunc feugiat mi a tellus consequat imperdiet. Vestibulum sapien. Proin quam. Etiam ultrices. Suspendisse in justo eu magna luctus suscipit. Sed lectus. Integer euismod lacus luctus magna. Quisque cursus, metus vitae pharetra auctor, sem massa mattis sem, at interdum magna augue eget diam. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Morbi lacinia molestie dui. Praesent blandit dolor. Sed non quam. In vel mi sit amet augue congue elementum. Morbi in ipsum sit amet pede facilisis laoreet. Donec lacus nunc, viverra nec.</p>
             </Collapsible>
-            <Nav tabs>
-              <NavItem>
-                <NavLink
-                  className={classnames({ active: this.state.activeTab === '1' })}
-                  onClick={() => {this.toggle('1')}}>
-                  Comments
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink
-                  className={classnames({ active: this.state.activeTab === '2' })}
-                  onClick={() => {this.toggle('2')}}>
-                  Updates
-                </NavLink>
-              </NavItem>
-            </Nav>
-            <TabContent activeTab={this.state.activeTab}>
-              <TabPane tabId="1">
-                <Row>
-                  <Col xs="12">
-                    <CommentsList />
-                  </Col>
-                </Row>
-              </TabPane>
-              <TabPane tabId="2">
-                <Row>
-                  <Col xs="12">
-                    <h5>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. </h5>
-                  </Col>
-                </Row>
-              </TabPane>
-            </TabContent>
+            <Collapsible trigger="Description">
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc. Curabitur tortor. Pellentesque nibh. Aenean quam. In scelerisque sem at dolor. Maecenas mattis. Sed convallis tristique sem. Proin ut ligula vel nunc egestas porttitor. Morbi lectus risus, iaculis vel, suscipit quis, luctus non, massa. Fusce ac turpis quis ligula lacinia aliquet. Mauris ipsum. Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh. Quisque volutpat condimentum velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam nec ante. Sed lacinia, urna non tincidunt mattis, tortor neque adipiscing diam, a cursus ipsum ante quis turpis. Nulla facilisi. Ut fringilla. Suspendisse potenti. Nunc feugiat mi a tellus consequat imperdiet. Vestibulum sapien. Proin quam. Etiam ultrices. Suspendisse in justo eu magna luctus suscipit. Sed lectus. Integer euismod lacus luctus magna. Quisque cursus, metus vitae pharetra auctor, sem massa mattis sem, at interdum magna augue eget diam. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Morbi lacinia molestie dui. Praesent blandit dolor. Sed non quam. In vel mi sit amet augue congue elementum. Morbi in ipsum sit amet pede facilisis laoreet. Donec lacus nunc, viverra nec.</p>
+            </Collapsible>
+            <Collapsible trigger="Artifacts I want to see">
+              <List>
+                <ListItem>
+                  <ListItemText primary="Batman Cape"/>
+                </ListItem>
+              </List>
+            </Collapsible>
+
+            { !this.state.isTabsHidden &&
+            <div>
+              <Nav tabs>
+                <NavItem>
+                  <NavLink
+                    className={classnames({ active: this.state.activeTab === '1' })}
+                    onClick={() => {this.toggle('1')}}>
+                    Comments
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink
+                    className={classnames({ active: this.state.activeTab === '2' })}
+                    onClick={() => {this.toggle('2')}}>
+                    Updates
+                  </NavLink>
+                </NavItem>
+              </Nav>
+              <TabContent activeTab={this.state.activeTab}>
+                <TabPane tabId="1">
+                  <Row>
+                    <Col xs="12">
+                      <CommentsList />
+                    </Col>
+                  </Row>
+                </TabPane>
+                <TabPane tabId="2">
+                  <Row>
+                    <Col xs="12">
+                      <h5>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. </h5>
+                    </Col>
+                  </Row>
+                </TabPane>
+              </TabContent>
+              </div> }
           </div>
       </div>)
   }

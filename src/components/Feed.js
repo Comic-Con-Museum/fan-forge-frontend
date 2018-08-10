@@ -152,6 +152,7 @@ class Feed extends React.Component {
       }
     } else {
       this.state.displayedItems.forEach(item => {
+        console.log(item)
         items.push(
           <ExhibitCard
             title={item.title}
@@ -160,6 +161,7 @@ class Feed extends React.Component {
             tags={item.tags}
             eid={item.eid}
             upvotes={item.upvotes}
+            author={item.uid || 'unknown user'}
           />
         )
       })
