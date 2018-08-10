@@ -1,3 +1,5 @@
+<img src="https://github.com/Comic-ConMuseum/DC-frontend/blob/prtemplate/museum.jpg" />
+
 # Comic Con Museum Fan Curation Website
 This website was created by Intuit Coop students in Team DC as part of a one-week internal Intuit event (in partnership with Comic Con Museum) called Codechella. A full list of original team members and contributors can be found in the [contributors](CONTRIBUTORS.md) file.
 
