@@ -58,7 +58,9 @@ class Topbar extends Component {
       )
     }
     return (
-      <Tab className='navLinkTab' label='Login/Signup' onClick={() => this.toggle()} />
+      <NavLink className='navLinkTab' activeClassName='active' to={null}>
+        <Tab className='navLinkTab' label='Login/Signup' onClick={() => this.toggle()} />
+      </NavLink>
     )
   }
 
