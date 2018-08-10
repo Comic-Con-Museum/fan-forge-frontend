@@ -20,7 +20,7 @@ class ExhibitCard extends Component {
   }
 
   render() {
-    const { picture, title, summary, tags, upvotes, eid } = this.props
+    const { picture, title, summary, tags, upvotes, eid, author } = this.props
     let tagComponents = null
 
     if(tags){
@@ -59,6 +59,11 @@ class ExhibitCard extends Component {
             <Link to={`/detail/` + eid}>
               <Button size='small' color='primary'>
                   Learn More
+              </Button>
+            </Link>
+            <Link to={`/user/` + author}>
+              <Button size='small' color='primary'>
+                {'by: ' + author}
               </Button>
             </Link>
             {tagComponents}
