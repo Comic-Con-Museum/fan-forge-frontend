@@ -5,11 +5,18 @@ import '../css/DetailPage.css'
 import classnames from 'classnames'
 import {withStyles} from '@material-ui/core/styles'
 import Collapsible from 'react-collapsible'
+import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import { clean, getBase64 } from '../helpers';
+import Select from '@material-ui/core/Select';
 import axios from "axios/index";
 import {connect} from "react-redux";
 import CommentsList from './CommentsList'
 import TextField from '@material-ui/core/TextField';
-import {postArtifact} from "../actions";
+import {postArtifact, postSurvey} from "../actions";
 import {bindActionCreators} from 'redux'
 import {
     Modal,
@@ -93,7 +100,27 @@ class Detail extends Component {
         }
         this.loadDetails()
         this.submitArtifact = this.submitArtifact.bind(this);
+        this.toggleSupport = this.toggleSupport.bind(this);
+        this.submitSurvey = this.submitSurvey.bind(this);
     }
+
+    toggleSupport() {
+      this.setState({
+        modal: !this.state.modal
+      })
+    }
+
+    handleTimeChange = event => {
+      this.setState({ time: event.target.value })
+    };
+
+    handleLikelinessChange = event => {
+      this.setState({ likeliness: event.target.value })
+    };
+
+    handleAmountChange = event => {
+      this.setState({ amount: event.target.value })
+    };
 
     loadDetails() {
         axios.get("/exhibit/" + this.state.id)
@@ -106,9 +133,11 @@ class Detail extends Component {
                         inspiration: data.data.description,
                         image: data.data.images[0],
                         isLoaded: true,
+                        eid: data.data.eid,
                         tags: data.data.tags,
                         images: data.data.images,
                         uid: data.data.uid,
+                        upvoteCount: Object.keys(data.data.upvotes).length,
                         upvotes: data.data.upvotes
                     })
                 } else {
@@ -124,17 +153,28 @@ class Detail extends Component {
         });
     };
 
+    submitSurvey(e) {
+      e.preventDefault()
+      const stateCopy = Object.assign({}, this.state);
+      delete stateCopy['modal']
+      delete stateCopy['timeout']
+      clean(stateCopy)
+      this.props.postSurvey(stateCopy);
+      this.setState({ upvoteCount: this.state.upvoteCount + 1 })
+      this.toggleSupport()
+    }
+
     submitArtifact(event) {
         this.props.postArtifact({
             title: this.state.title,
             description: this.state.description
         })
-        this.setState({showArtifactModal: false})
+        this.setState({ showArtifactModal: false })
     }
 
     render() {
         console.log(this.state)
-        const {activeIndex, description, inspiration, upvotes, uid, image, tags, title, images} = this.state
+        const {activeIndex, description, inspiration, upvotes, upvoteCount, uid, image, tags, title, images} = this.state
         const {classes} = this.props;
         if(!this.state.upvotes) return <p> loading </p>
         const slides = images.map(curimg => (
@@ -184,8 +224,8 @@ class Detail extends Component {
                                 <CardLink href={`/profile/${uid}`}>Follow</CardLink>
                             </CardBody>
                         </Card>
-                        <div className='buttonWrapper'>
-                            <h4>{Object.keys(upvotes).length} people support this idea!</h4>
+                        <div onClick={this.toggleSupport} className='buttonWrapper'>
+                            <h4>{upvoteCount} people support this idea!</h4>
                             <Button variant="contained">Support this idea!</Button>
                         </div>
                     </Grid>
@@ -284,6 +324,77 @@ class Detail extends Component {
                             </TabPane>
                         </TabContent>
                     </div>
+                  <Modal
+                  backdrop='static'
+                  isOpen={this.state.modal}
+                  toggle={this.toggleSupport}
+                  className='exhibit-modal'
+                  centered
+                  size='lg'>
+                    <ModalHeader>Support Survey</ModalHeader>
+                    <ModalBody>
+                      <h5>What part of day do you see yourself coming to the exhibit?</h5>
+                      <FormControl fullWidth={1}>
+                        <InputLabel>Time</InputLabel>
+                        <Select
+                          value={this.state.time}
+                          onChange={this.handleTimeChange}
+                          input={<Input name="Time" />}
+                        >
+                          <MenuItem value="">
+                            <em>None</em>
+                          </MenuItem>
+                          <MenuItem value='Morning'>Morning</MenuItem>
+                          <MenuItem value='Noon'>Noon</MenuItem>
+                          <MenuItem value='Evening'>Evening</MenuItem>
+                          <MenuItem value='Night'>Night</MenuItem>
+                          <MenuItem value='Late Night'>Late Night</MenuItem>
+                        </Select>
+                      </FormControl>
+                      <h5 style={{marginTop: 30}}>If this exhibit gets built, how likely are you to visit?</h5>
+                      <FormControl fullWidth={1}>
+                        <InputLabel>Likeliness</InputLabel>
+                        <Select
+                          value={this.state.likeliness}
+                          onChange={this.handleLikelinessChange}
+                          input={<Input name="" />}
+                        >
+                          <MenuItem value="">
+                            <em>None</em>
+                          </MenuItem>
+                          <MenuItem value='I will not'>I will not</MenuItem>
+                          <MenuItem value='Not Very'>Not very likely</MenuItem>
+                          <MenuItem value='Maybe'>Maybe</MenuItem>
+                          <MenuItem value='Most Likely'>Most Likely</MenuItem>
+                          <MenuItem value='Definitely'>Definitely</MenuItem>
+
+                        </Select>
+                      </FormControl>
+                      <h5 style={{marginTop: 30}}>How much would you spend to see this exhibit?</h5>
+                      <FormControl fullWidth={1}>
+                        <InputLabel>Amount</InputLabel>
+                        <Select
+                          value={this.state.amount}
+                          onChange={this.handleAmountChange}
+                          input={<Input name="Amount" />}
+                        >
+                          <MenuItem value="">
+                            <em>None</em>
+                          </MenuItem>
+                          <MenuItem value='10'>$5 to $10</MenuItem>
+                          <MenuItem value='25'>$10 to $25</MenuItem>
+                          <MenuItem value='50'>$25 to $50</MenuItem>
+                          <MenuItem value='75'>$50 to $75</MenuItem>
+                          <MenuItem value='More'>$75+</MenuItem>
+
+                        </Select>
+                      </FormControl>
+                    </ModalBody>
+                    <ModalFooter>
+                      <Button color="primary" onClick={this.submitSurvey}>Support this idea!</Button>{' '}
+                      <Button color="secondary" onClick={this.toggleSupport}>Cancel</Button>
+                    </ModalFooter>
+                  </Modal>
                 </div>
             </div>)
     }
@@ -291,6 +402,6 @@ class Detail extends Component {
 
 const mapStateToProps = ({detail}) => ({id: detail});
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({postArtifact}, dispatch)
+    return bindActionCreators({postArtifact, postSurvey}, dispatch)
 }
 export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(Detail));
