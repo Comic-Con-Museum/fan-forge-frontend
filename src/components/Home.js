@@ -14,7 +14,7 @@ const items = [
   },
   {
     src: CCMSanDiego,
-    header: <a href={`/feed`}>Explore Ideas</a>,
+    header: <a href={`/feed/hot`}>Explore Ideas</a>,
     caption: 'Support your interests'
   },
   {
