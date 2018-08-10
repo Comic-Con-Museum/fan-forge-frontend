@@ -1,4 +1,8 @@
-
 .tag-search-container {
   margin-left: 20px;
+}
+
+.sticked_to_top {
+    position: fixed;
+    top: 0;
 }

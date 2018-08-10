@@ -6,31 +6,21 @@ import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import CardMedia from '@material-ui/core/CardMedia'
 import IconButton from '@material-ui/core/IconButton'
+import Link from 'redux-first-router-link'
 import FavoriteIcon from '@material-ui/icons/Favorite'
 import Typography from '@material-ui/core/Typography'
-import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
-import '../../css/Exhibit.css'
+import '../css/Exhibit.css'
 
 class ExhibitCard extends Component {
   constructor(props) {
     super(props)
     this.state = {
       isHoveredOver: false,
-      modal: false
     }
-
-    this.toggle = this.toggle.bind(this);
-  }
-
-  toggle() {
-    this.setState({
-      modal: !this.state.modal
-    });
-    console.log('you clicked')
   }
 
   render() {
-    const { picture, title, summary, tags, upvotes } = this.props
+    const { picture, title, summary, tags, upvotes, eid, author } = this.props
     let tagComponents = null
 
     if(tags){
@@ -46,12 +36,11 @@ class ExhibitCard extends Component {
     const cardClassType = this.state.isHoveredOver ? 'exhibit-card-dark' : ''
 
     return (
-      <div>
+      <div className='exhibit-center'>
         <Card
         className={cardClassType}
         onMouseOut={() => this.setState({isHoveredOver: false})}
         onMouseOver={() => this.setState({isHoveredOver: true})}
-        onClick={() => this.toggle()}
         raised>
           <CardMedia className='exhibit-card' image={picture} />
           <CardContent>
@@ -67,35 +56,19 @@ class ExhibitCard extends Component {
             <IconButton aria-label='Add to favorites'>
               <FavoriteIcon />
             </IconButton>
-            <Button size='small' color='primary'>
-                Learn More
-            </Button>
+            <Link to={`/detail/` + eid}>
+              <Button size='small' color='primary'>
+                  Learn More
+              </Button>
+            </Link>
+            <Link to={`/user/` + author}>
+              <Button size='small' color='primary'>
+                {'by: ' + author}
+              </Button>
+            </Link>
             {tagComponents}
           </CardActions>
         </Card>
-        <Modal
-        isOpen={this.state.modal}
-        toggle={this.toggle}
-        className='exhibit-modal'
-        centered
-        size='lg'>
-          <ModalHeader toggle={this.toggle}>Modal title</ModalHeader>
-          <ModalBody>
-            <h1> Ya Yeet </h1>
-            <p> adfasfads </p>
-            <button />
-            <h1> Ya Yeet </h1>
-            <p> adfasfads </p>
-            <button />
-            <h1> Ya Yeet </h1>
-            <p> adfasfads </p>
-            <button />
-          </ModalBody>
-          <ModalFooter>
-            <Button color="primary" onClick={this.toggle}>Do Something</Button>{' '}
-            <Button color="secondary" onClick={this.toggle}>Cancel</Button>
-          </ModalFooter>
-        </Modal>
       </div>
     )
   }
