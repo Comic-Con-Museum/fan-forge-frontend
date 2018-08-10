@@ -9,7 +9,10 @@ import CCMBanner from '../assets/ccm_banner.png';
 import { bindActionCreators } from 'redux'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
 import { userLogin } from '../actions'
+
 import '../css/Topbar.css'
+
+let user = '';
 
 class Topbar extends Component {
   constructor(props) {
@@ -55,8 +58,17 @@ class Topbar extends Component {
       )
     }
     return (
-      <Tab className='navLinkTab' label='Login' onClick={() => this.toggle()} />
+      <Tab className='navLinkTab' label='Login/Signup' onClick={() => this.toggle()} />
     )
+  }
+
+  setUser = (event) => {
+    user = event.target.value
+  }
+
+  handleLogin = () => {
+    this.props.userLogin(user);
+    this.toggle()
   }
 
   render() {
@@ -69,7 +81,7 @@ class Topbar extends Component {
           className='topnavbar'
           value={this.state.value}
           onChange={this.handleChange}
-          indicatorColor=''
+          indicatorColor='primary'
           textColor='primary'
           centered
         >
@@ -113,14 +125,14 @@ class Topbar extends Component {
           <ModalBody>
             <TextField
               id='password-input'
-              label='Username'
+              label='Enter your name'
               margin='normal'
               autoFocus
-              onChange={event => this.props.userLogin(event.target.value)}
+              onChange={event => this.setUser(event)}
           />
           </ModalBody>
           <ModalFooter>
-            <Button color='primary' onClick={this.toggle}>Login</Button>{' '}
+            <Button color='primary' onClick={this.handleLogin}>Login</Button>{' '}
             <Button color='secondary' onClick={this.toggle}>Cancel</Button>
           </ModalFooter>
         </Modal>
