@@ -66,12 +66,12 @@ export const postExhibit = (exhibit) => {
   };
 }
 
-export const apiurl = 'https://yu1pn4u266.execute-api.us-west-2.amazonaws.com/latest/api/exhibit/96de5523-fd49-4246-8b43-c87fe6bd2339/upvote?userId=multiojuice';
-
 export const postSurvey = (survey) => {
+  console.log(survey)
+  const surveyurl = `https://yu1pn4u266.execute-api.us-west-2.amazonaws.com/latest/api/exhibit/${survey.eid}/upvote?userId=multiojuice`;
   return (dispatch) => {
     dispatch({type : POST_SURVEY});
-    fetch(apiurl, {
+    fetch(surveyurl, {
       method: 'POST',
       body: JSON.stringify(survey),
       headers: {

@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import Button from '@material-ui/core/Button'
 import {Chip} from '@material-ui/core'
 import Card from '@material-ui/core/Card'
@@ -26,9 +26,12 @@ import '../css/Exhibit.css'
 class ExhibitCard extends Component {
   constructor(props) {
     super(props)
+    console.log(props)
     this.state = {
       modal: false,
-      timeout: 0
+      timeout: 0,
+      eid: this.props.eid,
+      upvoteCount: Object.keys(this.props.upvotes).length
     }
     this.toggle = this.toggle.bind(this)
     this.submitSurvey = this.submitSurvey.bind(this)
@@ -58,8 +61,8 @@ class ExhibitCard extends Component {
     delete stateCopy['modal']
     delete stateCopy['timeout']
     clean(stateCopy)
-    console.log(this.props)
     this.props.postSurvey(stateCopy);
+    this.setState({ upvoteCount: this.state.upvoteCount + 1 })
     this.toggle()
   }
 
@@ -77,14 +80,13 @@ class ExhibitCard extends Component {
         />
       )
     }
-    console.log(this.state)
 
     return (
       <div className='exhibit-center'>
         <Card
         className='exhibit-card-dark'
         raised>
-          <NavLink activeClassName='active' to='/entry'>
+          <NavLink activeClassName='active' to={`/detail/${eid}`}>
             <CardMedia className='exhibit-card' image={picture} />
             <CardContent>
               <Typography gutterBottom variant='headline' component='h2'>
@@ -96,7 +98,7 @@ class ExhibitCard extends Component {
             </CardContent>
           </NavLink>
           <CardActions>
-            <p>{`${Object.keys(upvotes).length} supporters`}</p>
+            <p>{`${this.state.upvoteCount} supporters`}</p>
             <IconButton onClick={() => this.toggle()} aria-label='Add to favorites'>
               <FavoriteIcon />
             </IconButton>
