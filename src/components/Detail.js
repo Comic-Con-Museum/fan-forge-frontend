@@ -78,8 +78,7 @@ class Detail extends Component {
           this.setState({isLoaded: true})
         }
       })
-      .catch(err =>
-      )
+      .catch(err => undefined)
   }
 
   onExiting = () => {
