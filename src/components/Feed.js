@@ -44,14 +44,12 @@ class Feed extends React.Component {
   loadMoreDisplayedItems() {
     if (this.state.items.length === 0) {
       if (this.state.isLoaded === true) {
-          console.log("here")
           this.setState({
             hasMoreItems: false
         })
       }
       return
     }
-    console.log("load more")
     const newItem = this.state.items.shift()
     this.state.displayedItems.push(newItem)
     this.setState({
@@ -75,9 +73,6 @@ class Feed extends React.Component {
             <NavLink className='navLinkTab' activeClassName='active' to='/feed/curated'>
               <Button color='primary'> Curator Picks </Button>
             </NavLink>
-            <NavLink className='navLinkTab' activeClassName='active' to='/feed/approved'>
-              <Button color='primary'> Approved exhibits </Button>
-            </NavLink>
           </div>
         )
       case 'approved':
@@ -92,9 +87,6 @@ class Feed extends React.Component {
             <NavLink className='navLinkTab' activeClassName='active' to='/feed/curated'>
               <Button color='primary'> Curator Picks </Button>
             </NavLink>
-            <NavLink className='navLinkTab' activeClassName='active' to='/feed/approved'>
-              <Button color='secondary'> Approved exhibits </Button>
-            </NavLink>
           </div>
         )
       case 'curated':
@@ -108,9 +100,6 @@ class Feed extends React.Component {
             </NavLink>
             <NavLink className='navLinkTab' activeClassName='active' to='/feed/curated'>
               <Button color='secondary'> Curator Picks </Button>
-            </NavLink>
-            <NavLink className='navLinkTab' activeClassName='active' to='/feed/approved'>
-              <Button color='primary'> Approved exhibits </Button>
             </NavLink>
           </div>
         )
@@ -127,9 +116,6 @@ class Feed extends React.Component {
             <NavLink className='navLinkTab' activeClassName='active' to='/feed/curated'>
               <Button color='primary'> Curator Picks </Button>
             </NavLink>
-            <NavLink className='navLinkTab' activeClassName='active' to='/feed/approved'>
-              <Button color='primary'> Approved exhibits </Button>
-            </NavLink>
           </div>
         )
     }
@@ -143,15 +129,14 @@ class Feed extends React.Component {
         return <p>No items found</p>
       }
     } else {
-      console.log("before forEach")
-      console.log(JSON.stringify(this.state.displayedItems))
-      this.state.displayedItems.forEach((item) => {
+      this.state.displayedItems.forEach(item => {
         items.push(
           <ExhibitGroup
             title={item.title}
-            picture={item.picture}
+            picture={item.images[0]}
             summary={item.summary}
             tags={item.tags}
+            upvotes={item.upvotes}
           />
         )
       })
@@ -182,7 +167,7 @@ class Feed extends React.Component {
             className='tag-search'
             id="password-input"
             label="Search by tag"
-            type="password"
+            type="text"
             autoComplete="current-password"
             margin="normal"
           />
