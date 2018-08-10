@@ -13,6 +13,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { NavLink } from 'redux-first-router-link'
 import Spinner from './Spinner'
 import axios from 'axios'
+import '../css/Feed.css'
 
 
 class Feed extends React.Component {
@@ -23,13 +24,15 @@ class Feed extends React.Component {
       items: [],
       displayedItems: [],
       hasMoreItems: true,
-      isLoaded: false
+      isLoaded: false,
+      searchString: ''
     }
     this.loadExhibits()
   }
 
   loadExhibits() {
-    axios.get("/feed/" + this.state.feedType)
+    const apiEndpoint = this.state.feedType.slice(0,7) ==='tagged-' ? `feed/tagged/${this.state.feedType.slice(7)}` : `feed/${this.state.feedType}`
+    axios.get(apiEndpoint)
         .then(data => {
             if (Object.keys(data.data).length === 0) {
               this.setState({isLoaded: true})
@@ -56,7 +59,10 @@ class Feed extends React.Component {
       items: this.state.items,
       displayedItems: this.state.displayedItems
     })
+  }
 
+  reloadOnReroute() {
+    window.location.reload()
   }
 
   renderFilterButtons() {
@@ -65,13 +71,13 @@ class Feed extends React.Component {
         return (
           <div className='filter-container'>
             <NavLink className='navLinkTab' activeClassName='active' to='/feed/hot'>
-              <Button color='primary'> Hot </Button>
+              <Button color='primary' onClick={() => this.reloadOnReroute()}> Hot </Button>
             </NavLink>
             <NavLink className='navLinkTab' activeClassName='active' to='/feed/new'>
-              <Button color='secondary'> New </Button>
+              <Button color='secondary' onClick={() => this.reloadOnReroute()}> New </Button>
             </NavLink>
             <NavLink className='navLinkTab' activeClassName='active' to='/feed/curated'>
-              <Button color='primary'> Curator Picks </Button>
+              <Button color='primary' onClick={() => this.reloadOnReroute()}> Curator Picks </Button>
             </NavLink>
           </div>
         )
@@ -79,13 +85,13 @@ class Feed extends React.Component {
         return (
           <div className='filter-container'>
             <NavLink className='navLinkTab' activeClassName='active' to='/feed/hot'>
-              <Button color='primary'> Hot </Button>
+              <Button color='primary' onClick={() => this.reloadOnReroute()}> Hot </Button>
             </NavLink>
             <NavLink className='navLinkTab' activeClassName='active' to='/feed/new'>
-              <Button color='primary'> New </Button>
+              <Button color='primary' onClick={() => this.reloadOnReroute()}> New </Button>
             </NavLink>
             <NavLink className='navLinkTab' activeClassName='active' to='/feed/curated'>
-              <Button color='primary'> Curator Picks </Button>
+              <Button color='primary' onClick={() => this.reloadOnReroute()}> Curator Picks </Button>
             </NavLink>
           </div>
         )
@@ -93,13 +99,13 @@ class Feed extends React.Component {
         return (
           <div className='filter-container'>
             <NavLink className='navLinkTab' activeClassName='active' to='/feed/hot'>
-              <Button color='primary'> Hot </Button>
+              <Button color='primary' onClick={() => this.reloadOnReroute()}> Hot </Button>
             </NavLink>
             <NavLink className='navLinkTab' activeClassName='active' to='/feed/new'>
-              <Button color='primary'> New </Button>
+              <Button color='primary' onClick={() => this.reloadOnReroute()}> New </Button>
             </NavLink>
             <NavLink className='navLinkTab' activeClassName='active' to='/feed/curated'>
-              <Button color='secondary'> Curator Picks </Button>
+              <Button color='secondary' onClick={() => this.reloadOnReroute()}> Curator Picks </Button>
             </NavLink>
           </div>
         )
@@ -108,13 +114,13 @@ class Feed extends React.Component {
         return (
           <div className='filter-container'>
             <NavLink className='navLinkTab' activeClassName='active' to='/feed/hot'>
-              <Button color='secondary'> Hot </Button>
+              <Button color='secondary' onClick={() => this.reloadOnReroute()}> Hot </Button>
             </NavLink>
-            <NavLink className='navLinkTab' activeClassName='active' to='/feed/new'>
-              <Button color='primary'> New </Button>
+            <NavLink className='navLinkTab' activeClassName='active' refresh='true' to='/feed/new'>
+              <Button color='primary' onClick={() => this.reloadOnReroute()}> New </Button>
             </NavLink>
             <NavLink className='navLinkTab' activeClassName='active' to='/feed/curated'>
-              <Button color='primary'> Curator Picks </Button>
+              <Button color='primary' onClick={() => this.reloadOnReroute()}> Curator Picks </Button>
             </NavLink>
           </div>
         )
@@ -163,14 +169,19 @@ class Feed extends React.Component {
             </CardActions>
           </Card>
           {this.renderFilterButtons()}
-          <TextField
-            className='tag-search'
-            id="password-input"
-            label="Search by tag"
-            type="password"
-            autoComplete="current-password"
-            margin="normal"
-          />
+          <div className='tag-search-container'>
+            <TextField
+              className='tag-search'
+              id="password-input"
+              label="Search by tag"
+              autoComplete="Batman"
+              margin="normal"
+              onChange={event => this.setState({ searchString: event.target.value })}
+            />
+            <NavLink className='navLinkTab' activeClassName='active' to={`/feed/tagged-${this.state.searchString}`}>
+              <Button color='primary' onClick={() => this.reloadOnReroute()}> Search </Button>
+            </NavLink>
+          </div>
         </div>
         <InfiniteScroll
           pageStart={0}
