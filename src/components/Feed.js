@@ -180,9 +180,6 @@ class Feed extends React.Component {
                 <h1>
                   Submit your own exhibit!
                 </h1>
-                <p>
-                  Here you can share your ideas for Comic-Con Museum exhibits and concepts, vote to support your favorite ideas to get them into reality!
-                </p>
               </CardContent>
             </Card>
           </NavLink>
