@@ -2,10 +2,13 @@ import React, { Component } from 'react'
 import ChipInput from 'material-ui-chip-input'
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import Drawer from '@material-ui/core/Drawer';
+import Link from 'redux-first-router-link'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux';
 import Step from './Step';
-import { postExhibit } from '../actions/';
-
+import { clean, getBase64 } from '../helpers';
+import { postExhibit, removeSubmitId } from '../actions/';
 import '../css/Submit.css'
 import 'react-tagsinput/react-tagsinput.css' 
 
@@ -26,7 +29,7 @@ export class Submit extends Component {
       currentStep: 0,
       maxStep: 0,
       thumbnail: '',
-      additionalFiles: [],
+      imagesFile: [],
     }
     this.addTag = this.addTag.bind(this);
     this.deleteTag = this.deleteTag.bind(this);
@@ -35,6 +38,10 @@ export class Submit extends Component {
     this.handleFiles = this.handleFiles.bind(this);
     this.renderButtons = this.renderButtons.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
+  }
+
+  componentWillUnmount() {
+    this.props.removeSubmitId();
   }
 
   handleChange(name, event) {
@@ -70,8 +77,18 @@ export class Submit extends Component {
 
   handleFormSubmit(e) {
     e.preventDefault();
-    if (this.state.currentStep === maxSteps && this.state.tags.length !== 0) {
-      this.props.dispatch(postExhibit(this.state));
+    if (this.state.currentStep == maxSteps && this.state.tags.length != 0) {
+      const stateCopy = Object.assign({}, this.state);
+      delete stateCopy["currentStep"];
+      delete stateCopy["maxStep"]; 
+      stateCopy.images = []
+      // for (var i = 0; i < stateCopy.imagesFile.length; i++) {
+      //   console.log()
+      //   stateCopy.images[i] = getBase64(stateCopy.imagesFile[i]).then()
+      // }
+      delete stateCopy["imagesFile"]; 
+      clean(stateCopy);
+      this.props.postExhibit(stateCopy);
     }
   }
 
@@ -87,10 +104,10 @@ export class Submit extends Component {
     if (this.state.currentStep === maxSteps ) {
       return;
     }
-    if (this.state.maxStep === this.state.currentStep) {
+    if (this.state.currentStep < maxSteps) {
       this.setState({maxStep: this.state.maxStep + 1});
+      this.setState({currentStep: this.state.currentStep + 1});
     }
-    this.setState({currentStep: this.state.currentStep + 1});
   }
 
   jumpToStep(step) {
@@ -156,9 +173,9 @@ export class Submit extends Component {
           </label>
         </Button>
         <Button variant="contained" className="wizard__file-button"> 
-        <input type='file' className='wizard_file-input' id="additional" onChange={(event) =>this.handleFiles('additionalFiles', event)} multiple/>
+        <input type='file' className='wizard_file-input' id="additional" onChange={(event) =>this.handleFiles('imagesFile', event)} multiple/>
           <label className='wizard__file-label' htmlFor="additional">
-            {this.state.additionalFiles.length !== 0 ? `${this.state.additionalFiles.length} ${strings[this.props.locale].wizard_selectfiles}`
+            {this.state.imagesFile && this.state.imagesFile.length != 0 ? `${this.state.imagesFile.length} ${strings[this.props.locale].wizard_selectfiles}`
             : strings[this.props.locale].wizard_additional_images}  
           </label>
         </Button> 
@@ -231,7 +248,7 @@ export class Submit extends Component {
         />
         <div className="wizard__form__collab margin-bottom">
           <h3>{strings[this.props.locale].wizard_inviteFriends}</h3>
-          <Button className='yellow-btn' variant="contained" onClick={this.stepNext} color="primary">
+          <Button className='yellow-btn' variant="contained" onClick={() => undefined} color="primary">
             {strings[this.props.locale].wizard_sendInvite}
           </Button>
         </div>
@@ -264,13 +281,31 @@ export class Submit extends Component {
         <div className='wizard__preview'>
           <img src='https://placebear.com/1928/1024' alt='preview' />
         </div>
-          <div className='wizard__dots'>
-              {this.renderButtons()}
+        <div className='wizard__dots'>
+            {this.renderButtons()}
+        </div>
+        <Drawer
+          anchor="bottom"
+          open={this.props.submitStatus == 'success' }
+        >
+          <div className='wizard__modal'>
+            <h2> Your exhibit has generated ! </h2>
+            <Link to={`/detail/` + this.props.submitId}>
+              <Button size='small' color='primary'>
+                Check it out!
+              </Button>
+            </Link>
           </div>
+        </Drawer>
       </div>
     );
   }
 };
 
-const mapStateToProps = ({ locale, submit }) => ({ locale: locale, submitStatus: submit });
-export default connect(mapStateToProps)(Submit);
+const mapStateToProps = ({ locale, submit, submitId }) => ({ locale: locale, submitStatus: submit, submitId });
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({ removeSubmitId, postExhibit }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Submit);

@@ -51,11 +51,9 @@ class Profile extends React.Component {
   }
 
   onDrop(file) {
-    console.log(file)
     this.setState({
       "file": file
     })
-    console.log('should upload this file')
   }
 
   handleBioChange = event => {

@@ -7,13 +7,6 @@ import CCMSanDiego from '../assets/ccm_sanDiego.jpeg'
 
 const items = [
   {
-    src: CCMSketch,
-    altText: 'Submit a Design',
-    header: 'Submit a design',
-    caption:
-      'Fan curated designs can make their way into the museum with enough support!'
-  },
-  {
     src: CCMBuilding,
     altText: 'About the Museum',
     header: 'About the Museum',
@@ -23,6 +16,13 @@ const items = [
     src: CCMSanDiego,
     header: 'Explore Designs',
     caption: 'Support your interests'
+  },
+  {
+    src: CCMSketch,
+    altText: 'Submit a Design',
+    header: 'Submit a design',
+    caption:
+    'Fan curated designs can make their way into the museum with enough support!'
   }
 ]
 
