@@ -49,12 +49,12 @@ export const url = 'https://yu1pn4u266.execute-api.us-west-2.amazonaws.com/lates
 export const postExhibit = (exhibit) => {
   return (dispatch) => {
     dispatch({type : POST_EXHIBIT});
-
     fetch(url, {
       method: 'POST',
       body: JSON.stringify(exhibit),
       headers: {
-        "Content-Type": "application/json;",
+	'Accept': 'application/json',
+        'Content-Type': 'application/json; charset=utf-8',
       },
     }).then(res => {
       return res.json();
