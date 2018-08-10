@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
-import { withStyles } from '@material-ui/core/styles'
-import { GridList, GridListTile, GridListTileBar, IconButton } from '@material-ui/core/'
+import React, {Component} from 'react'
+import {withStyles} from '@material-ui/core/styles'
+import {GridList, GridListTile, GridListTileBar, IconButton} from '@material-ui/core/'
 import InfoIcon from '@material-ui/icons/Info'
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
+import {Button, Modal, ModalBody, ModalFooter, ModalHeader} from 'reactstrap'
 
 const tileData = [
   {

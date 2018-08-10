@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux';
-import { Tab, Tabs, TextField } from '@material-ui/core'
-import { NavLink } from 'redux-first-router-link'
+import React, {Component} from 'react'
+import {connect} from 'react-redux';
+import {Tab, Tabs, TextField} from '@material-ui/core'
+import {NavLink} from 'redux-first-router-link'
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import { localeSwitch } from '../actions/';
+import {localeSwitch} from '../actions/';
 import CCMBanner from '../assets/ccm_banner.png';
 import { bindActionCreators } from 'redux'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
@@ -95,7 +95,7 @@ class Topbar extends Component {
           <Tab label='About' />
         </NavLink>
         <NavLink className='navLinkTab' activeClassName='active' to='/Entry'>
-          <Tab label='Upload Idea' />
+          <Tab label='Submit Idea' />
         </NavLink>
         <Button
           aria-owns={this.state.anchorEl ? 'simple-menu' : null}

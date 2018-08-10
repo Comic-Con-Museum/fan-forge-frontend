@@ -3,14 +3,13 @@ import InfiniteScroll from 'react-infinite-scroller';
 import {connect} from "react-redux";
 import ExhibitCard from './ExhibitCard'
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import { NavLink } from 'redux-first-router-link'
+import {NavLink} from 'redux-first-router-link'
 import Spinner from './Spinner'
 import axios from 'axios'
-import { elementInViewport } from '../helpers';
+import {elementInViewport} from '../helpers';
 
 import '../css/Feed.css'
 

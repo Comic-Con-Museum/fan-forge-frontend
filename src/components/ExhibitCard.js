@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import Button from '@material-ui/core/Button'
 import {Chip} from '@material-ui/core'
 import Card from '@material-ui/core/Card'

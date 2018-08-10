@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar'
-import { Form, FormGroup, Label, Input, Button } from 'reactstrap'
+import {Button, Form, FormGroup, Input, Label} from 'reactstrap'
 
 
 class CommentsList extends Component {

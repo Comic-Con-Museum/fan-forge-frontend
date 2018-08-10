@@ -10,6 +10,7 @@ import {
   MenuItem,
   InputLabel
 } from '@material-ui/core'
+
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever'
 import Dropzone from 'react-dropzone'
 import { connect } from 'react-redux';
