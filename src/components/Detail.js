@@ -14,7 +14,11 @@ import {
   CardText,
   CardSubtitle,
   CardTitle,
-  CardLink } from 'reactstrap'
+  CardLink,
+  Row,
+  Col,
+  TabContent,
+  TabPane } from 'reactstrap'
 import SingleLineGridList from './SingleLineGridList'
 import { Grid, Button, Avatar } from '@material-ui/core'
 import '../css/DetailPage.css'
@@ -23,7 +27,7 @@ import { withStyles } from '@material-ui/core/styles'
 import Collapsible from 'react-collapsible'
 import axios from "axios/index";
 import {connect} from "react-redux";
-
+import CommentsList from './CommentsList'
 
 const images = [
   {
@@ -133,8 +137,7 @@ class Detail extends Component {
                 activeIndex={activeIndex}
                 next={this.next}
                 previous={this.previous}
-                pause='hover'
-              >
+                pause='hover'>
                 <CarouselIndicators items={images} activeIndex={activeIndex} onClickHandler={this.goToIndex} />
                 {slides}
                 <CarouselControl direction='prev' directionText='Previous' onClickHandler={this.previous} />
@@ -142,11 +145,6 @@ class Detail extends Component {
               </Carousel>
             </Grid>
             <Grid item sm={3}>
-              <div className='buttonWrapper'>
-                <Button variant="contained">Like This Idea!
-                </Button>
-              </div>
-              <h4>325 people liked this idea!</h4>
               <Card>
                 <Avatar className={classnames(classes.avatar, classes.bigAvatar)} src='https://www.thefamouspeople.com/profiles/images/stan-lee-5.jpg'/>
                 <CardBody>
@@ -156,6 +154,10 @@ class Detail extends Component {
                   <CardLink href='#'>Follow</CardLink>
                 </CardBody>
               </Card>
+              <div className='buttonWrapper'>
+                <h4>325 people liked this idea!</h4>
+                <Button variant="contained">Like This Idea!</Button>
+              </div>
             </Grid>
           </Grid>
           <div className='detail-body'>
@@ -184,6 +186,22 @@ class Detail extends Component {
                 </NavLink>
               </NavItem>
             </Nav>
+            <TabContent activeTab={this.state.activeTab}>
+              <TabPane tabId="1">
+                <Row>
+                  <Col xs="12">
+                    <CommentsList />
+                  </Col>
+                </Row>
+              </TabPane>
+              <TabPane tabId="2">
+                <Row>
+                  <Col xs="12">
+                    <h5>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. </h5>
+                  </Col>
+                </Row>
+              </TabPane>
+            </TabContent>
           </div>
       </div>)
   }
