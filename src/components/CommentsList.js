@@ -1,23 +1,50 @@
 import React, {Component} from 'react'
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemText from '@material-ui/core/ListItemText'
 import Avatar from '@material-ui/core/Avatar'
 import {Button, Form, FormGroup, Input, Label} from 'reactstrap'
+import axios from "axios/index"
+import {connect} from "react-redux";
 
 class CommentsList extends Component {
 
     constructor(props) {
-        super(props);
-        console.log(this.props.comments)
+        super(props)
         this.state = {
-            commentContent: ''
+            commentContent: '',
+            comments: null,
+            loading: true,
         }
     }
 
+    componentDidMount() {
+        this.loadComments()
+    }
+
+    loadComments = () => {
+        axios.get("/exhibit/" + this.props.id)
+            .then(data => {
+                if (data.data) {
+                    console.log(data.data.comments);
+                    this.setState({
+                        comments: data.data.comments,
+                        loading: false
+                    })
+                }
+            })
+            .catch(err => undefined)
+    }
+
     handleFormSubmit = e => {
-        console.log("submit!");
-        console.log(this.state.commentContent)
+        const req = {};
+        req.text = this.state.commentContent;
+        req.type = 'NORMAL';
+        req.userID = this.props.username || "batman";
+        const url = "/exhibit/" + this.props.id + "/comment"
+        axios.post(url, req)
+            .then(res => {this.setState({commentContent: "", loading: true}, this.loadComments);})
+            .catch(err => {console.log("err" + err)});
     }
 
     handleChange = e => {
@@ -27,35 +54,20 @@ class CommentsList extends Component {
     }
 
     render() {
-        const comments = []
-        for (const key in this.props.comments) {
-            comments.push(this.props.comments[key])
+        const comments = [];
+        for (const key in this.state.comments) {
+            comments.push(this.state.comments[key]);
         }
         return (
-            <div>
-                { this.props.comments && 
-                    <List>
-                        {comments.map((comment, i) => <ListItem>
-                            <Avatar src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQM4UcvSBHwJTkCWxJFZnHBqGCSsnkImMWUMY1DobHYbHAhTw_m'/>
-                            <ListItemText primary={comment.text} secondary= {`by  ${comment.userId}`} />
-                        </ListItem>)}
-                    </List>
+            <div> 
+                {!this.state.loading && 
+                <List>
+                    {comments.map((comment, i) => <ListItem key={i}>
+                        <Avatar src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQM4UcvSBHwJTkCWxJFZnHBqGCSsnkImMWUMY1DobHYbHAhTw_m'/>
+                        <ListItemText primary={comment.text} secondary= {`by  ${comment.userID}`} />
+                    </ListItem>)}
+                </List>
                 }
-            <List>
-              <ListItem>
-                <Avatar src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQM4UcvSBHwJTkCWxJFZnHBqGCSsnkImMWUMY1DobHYbHAhTw_m'/>
-                <ListItemText primary="Dude, this is awesome. Thanks so much" secondary="by Joe Henderson" />
-              </ListItem>
-              <ListItem>
-                <Avatar src='https://banner2.kisspng.com/20180127/wie/kisspng-iron-man-cartoon-avatar-superhero-icon-superhero-phone-icon-5a6c4a2f1ef1c3.9201138415170463191268.jpg'/>
-                <ListItemText primary="How artistic!" secondary="by Jenny Hess" />
-              </ListItem>
-              <ListItem>
-                <Avatar src='https://avatarfiles.alphacoders.com/103/thumb-103092.jpg'/>
-                <ListItemText primary="This has been very useful for my research. Thanks as well!" secondary="by Elliot Fu" />
-              </ListItem>
-            </List>
-
             <Form>
                 <FormGroup>
                     <Label for="exampleText">Add Comment</Label>
@@ -63,12 +75,10 @@ class CommentsList extends Component {
                 </FormGroup>
                 <Button onClick={this.handleFormSubmit}>Submit</Button>
             </Form>
-
           </div>
         )
     }
 }
 
-export default CommentsList
-// export default connect(null, mapDispatchToProps)(CommentsList)
-
+const mapStateToProps = ({detail}) => ({id: detail});
+export default connect(mapStateToProps)(CommentsList)

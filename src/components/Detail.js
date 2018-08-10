@@ -118,7 +118,6 @@ class Detail extends Component {
                         description: data.data.title,
                         inspiration: data.data.description,
                         image: data.data.images[0],
-                        comments: data.data.comments,
                         isLoaded: true
                     })
                 } else {
@@ -300,7 +299,7 @@ class Detail extends Component {
                             <TabPane tabId="1">
                                 <Row>
                                     <Col xs="12">
-                                        <CommentsList comments={this.state.comments}/>
+                                        <CommentsList />
                                     </Col>
                                 </Row>
                             </TabPane>
