@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { UncontrolledCarousel } from 'reactstrap'
+import {UncontrolledCarousel} from 'reactstrap'
 import '../css/Home.css'
 import CCMSketch from '../assets/ccm_sketch.jpeg'
 import CCMBuilding from '../assets/ccm_building.jpeg'
