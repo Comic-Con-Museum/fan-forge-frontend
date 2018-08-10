@@ -24,9 +24,9 @@ import '../css/DetailPage.css'
 import classnames from 'classnames'
 import { withStyles } from '@material-ui/core/styles'
 import Collapsible from 'react-collapsible'
+import axios from "axios/index";
+import {connect} from "react-redux";
 import CommentsList from './CommentsList'
-
-
 
 const images = [
   {
@@ -53,14 +53,33 @@ const styles = {
   },
 };
 
-class DetailPage extends Component {
-  constructor() {
-    super()
+class Detail extends Component {
+  constructor(props) {
+    console.log(props)
+    super(props)
     this.state = { activeIndex: 0, 
       activeTab: '1',
+      description: true,
       inspiration: true,
-      description: false,
-      artifacts: false }
+      artifacts: false,
+      isLoaded: false,
+      id: this.props.id
+    }
+    this.loadDetails()
+  }
+
+  loadDetails() {
+    axios.get("/exhibit/" + this.state.id)
+      .then(data => {
+        if (data.data) {
+          this.setState({description: data.data.title, inspiration:data.data.description, image:data.data.images[0], isLoaded: true})
+        } else {
+          this.setState({isLoaded: true})
+        }
+      })
+      .catch(err =>
+        console.log(err)
+      )
   }
 
   onExiting = () => {
@@ -97,7 +116,7 @@ class DetailPage extends Component {
   }
 
   render() {
-    const { activeIndex } = this.state
+    const { activeIndex, description, inspiration } = this.state
     const { classes } = this.props;
     const slides = images.map(img => (
       <CarouselItem
@@ -195,4 +214,5 @@ class DetailPage extends Component {
   }
 }
 
-export default withStyles(styles)(DetailPage)
+const mapStateToProps = ({detail}) => ({id:detail});
+export default withStyles(styles)(connect(mapStateToProps)(Detail));
