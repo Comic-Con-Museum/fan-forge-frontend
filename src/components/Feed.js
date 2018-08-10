@@ -151,7 +151,6 @@ class Feed extends React.Component {
       }
     } else {
       this.state.displayedItems.forEach(item => {
-        console.log(item)
         items.push(
           <ExhibitCard
             title={item.title}
