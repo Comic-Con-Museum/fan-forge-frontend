@@ -30,7 +30,8 @@ class ExhibitCard extends Component {
     this.state = {
       modal: false,
       timeout: 0,
-      eid: this.props.eid
+      eid: this.props.eid,
+      upvoteCount: Object.keys(this.props.upvotes).length
     }
     this.toggle = this.toggle.bind(this)
     this.submitSurvey = this.submitSurvey.bind(this)
@@ -61,6 +62,7 @@ class ExhibitCard extends Component {
     delete stateCopy['timeout']
     clean(stateCopy)
     this.props.postSurvey(stateCopy);
+    this.setState({ upvoteCount: this.state.upvoteCount + 1 })
     this.toggle()
   }
 
@@ -84,7 +86,7 @@ class ExhibitCard extends Component {
         <Card
         className='exhibit-card-dark'
         raised>
-          <NavLink activeClassName='active' to={`/details/${eid}`}>
+          <NavLink activeClassName='active' to={`/detail/${eid}`}>
             <CardMedia className='exhibit-card' image={picture} />
             <CardContent>
               <Typography gutterBottom variant='headline' component='h2'>
@@ -96,7 +98,7 @@ class ExhibitCard extends Component {
             </CardContent>
           </NavLink>
           <CardActions>
-            <p>{`${Object.keys(upvotes).length} supporters`}</p>
+            <p>{`${this.state.upvoteCount} supporters`}</p>
             <IconButton onClick={() => this.toggle()} aria-label='Add to favorites'>
               <FavoriteIcon />
             </IconButton>
