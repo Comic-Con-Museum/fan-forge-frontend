@@ -1,4 +1,5 @@
-import { NOT_FOUND } from 'redux-first-router'
+import {NOT_FOUND} from 'redux-first-router'
+
 let axiosDefaults = require('axios/lib/defaults');
 
 // try dispatching these from the redux devTools
