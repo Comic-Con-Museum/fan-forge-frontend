@@ -1,6 +1,6 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { TransitionGroup, Transition } from 'transition-group'
+import {connect} from 'react-redux'
+import {Transition, TransitionGroup} from 'transition-group'
 import universal from 'react-universal-component'
 import isLoading from '../selectors/isLoading'
 import Spinner from './Spinner'

@@ -12,17 +12,18 @@
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
+
 }
 
 .spinner > div {
-    position: absolute;
+    content: url('../assets/batarang.svg');
+    position: relative;
     top: 0px;
     left: 0px;
     width: 100%;
     height: 100%;
 
-    background: #141414;
-    border: 1px solid rgb(30,30,30);
+    background-image: url('../assets/batarang.svg');
     box-sizing: border-box;
 
     font-size: 10px;
@@ -30,38 +31,11 @@
     text-indent: -9999em;
     width: 11em;
     height: 11em;
-    border-radius: 50%;
-    background: #373737;
-    background: -webkit-linear-gradient(left, #373737 10%, rgba(55,55,55,0) 42%);
-    background: linear-gradient(to right, rgb(67, 170, 217) 10%, rgba(55,55,55,0) 42%);
     position: relative;
     -webkit-animation: load3 1.4s infinite linear;
     animation: load3 1.4s infinite linear;
     -webkit-transform: translateZ(0);
     transform: translateZ(0);
-}
-.spinner > div:before {
-    width: 50%;
-    height: 50%;
-    background: rgb(67, 170, 217);
-    border-radius: 100% 0 0 0;
-    position: absolute;
-    top: 0;
-    left: 0;
-    content: '';
-}
-.spinner > div:after {
-    background: rgb(49, 71, 79);
-    width: 75%;
-    height: 75%;
-    border-radius: 50%;
-    content: '';
-    margin: auto;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
 }
 @-webkit-keyframes load3 {
     0% {

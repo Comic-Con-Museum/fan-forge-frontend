@@ -2,11 +2,10 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Provider } from 'react-redux'
+import {Provider} from 'react-redux'
 import createHistory from 'history/createBrowserHistory'
 import App from './components/App'
 import configureStore from './configureStore'
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 const history = createHistory()
 const store = configureStore(history)

@@ -1,4 +1,4 @@
-import { POST_EXHIBIT_SUCCESS, REMOVE_SUBMIT_ID } from '../actions'
+import {POST_EXHIBIT_SUCCESS, REMOVE_SUBMIT_ID} from '../actions'
 
 export default (state = '', action = {}) => {
   switch (action.type) {

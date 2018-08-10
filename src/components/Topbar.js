@@ -1,14 +1,14 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux';
-import { Tab, Tabs, TextField } from '@material-ui/core'
-import { NavLink } from 'redux-first-router-link'
+import React, {Component} from 'react'
+import {connect} from 'react-redux';
+import {Tab, Tabs, TextField} from '@material-ui/core'
+import {NavLink} from 'redux-first-router-link'
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import { localeSwitch } from '../actions/';
+import {localeSwitch} from '../actions/';
 import CCMBanner from '../assets/ccm_banner.png';
-import { bindActionCreators } from 'redux'
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
-import { userLogin } from '../actions'
+import {bindActionCreators} from 'redux'
+import {Button, Modal, ModalBody, ModalFooter, ModalHeader} from 'reactstrap'
+import {userLogin} from '../actions'
 import '../css/Topbar.css'
 
 class Topbar extends Component {
