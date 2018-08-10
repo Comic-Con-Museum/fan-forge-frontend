@@ -24,7 +24,7 @@ export default {
     preview: 'Preview'
   },
   es: {
-    wizard_title: 'Holla',
+    wizard_title: 'Hola',
     wizard_intro: '¡Eso es genial! Le mostraremos una vista previa en vivo de su publicación a la derecha mientras lo guiamos a través del proceso a la izquierda.',
     wizard_title2: 'Vayamos a lo básico',
     wizard_exhibit_name: 'Nombre de la exposición',
@@ -39,9 +39,9 @@ export default {
     wizard_looksgreat: 'Asegúrese de que todo se vea bien en la vista previa y luego haga clic en Finalizar.',
     wizard_selectfiles: 'archivos seleccionados',
     wizard_thumbnail: 'miniatura seleccionada',
-    wizard_addTags: 'Add tags to your exhibit*',
-    wizard_inviteFriends: 'Collaborate with your friends!',
-    wizard_sendInvite: 'Send invite',
+    wizard_addTags: 'Agrega etiquetas a tu exhibición *',
+    wizard_inviteFriends: 'Colabora con tus amigos!',
+    wizard_sendInvite: 'Enviar invitación',
     next: 'Siguiente',
     back: 'Espalda',
     finish: 'Finalizar',
