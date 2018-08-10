@@ -13,7 +13,9 @@ import { withStyles } from '@material-ui/core/styles';
 import { NavLink } from 'redux-first-router-link'
 import Spinner from './Spinner'
 import axios from 'axios'
+import { elementInViewport } from '../helpers';
 
+import '../css/Feed.css'
 
 class Feed extends React.Component {
   constructor(props) {
@@ -26,6 +28,27 @@ class Feed extends React.Component {
       isLoaded: false
     }
     this.loadExhibits()
+    this.menuRef = undefined
+    this.topbarImgRef = undefined
+    this.makeNavbarFixed = this.makeNavbarFixed.bind(this);
+  }
+
+  componentDidMount() {
+    this.topbarImgRef = document.querySelector('.bannerImg');
+    this.menuRef = document.querySelector('.topnavbar');
+    window.addEventListener("scroll", this.makeNavbarFixed.bind(this));
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.makeNavbarFixed.bind(this));
+  }
+
+  makeNavbarFixed() {
+    if(elementInViewport(this.topbarImgRef)) {
+      this.menuRef.classList.add('sticked_to_top');
+    } else {
+      this.menuRef.classList.remove('sticked_to_top');
+    }
   }
 
   loadExhibits() {
