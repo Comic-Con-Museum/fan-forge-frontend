@@ -1,3 +1,4 @@
-.feed {
-    background: #141414;
+.sticked_to_top {
+    position: fixed;
+    top: 0;
 }
