@@ -1,7 +1,21 @@
 import React from 'react'
-import {Button, Checkbox, FormControlLabel, FormGroup, InputLabel, MenuItem, Select, TextField} from '@material-ui/core'
+import {
+  Avatar,
+  Checkbox,
+  TextField,
+  Button,
+  FormControlLabel,
+  FormGroup,
+  Select,
+  MenuItem,
+  InputLabel
+} from '@material-ui/core'
+
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever'
 import Dropzone from 'react-dropzone'
+import { connect } from 'react-redux';
+import axios from "axios/index";
+
 import '../css/Profile.css'
 
 
@@ -14,22 +28,62 @@ const styles = {
 class Profile extends React.Component {
   constructor(props) {
     super(props)
-    // if this.props.profileId
     this.state = {
       editable: true,
-      name: 'Zach Jones',
       club: 'Batman',
-      email: 'zachtjones16@gmail.com',
-      bio:
-        "Here's a short bio, containing useful information about me, my passions, and who I am.",
-      pic: 'https://graph.facebook.com/321231654995187/picture?type=large',
-      tags: ['Batman', 'Superman', 'Wonder Woman'],
-      notificationMentions: true,
-      notificationComments: true,
-      allTags: ['Batman', 'Spiderman', 'Superman', 'Thanos', 'Wonder Woman']
+      tags: [],
+      allTags: ['Batman', 'Spiderman', 'Superman', 'Thanos', 'Wonder Woman'],
     }
 
+    // load the current user
+    axios.get("/user/" + this.props.username)
+      .then(data => {
+        // no user, api returns {}
+        if (data.data && Object.keys(data.data).length !== 0) {
+          this.setState ({
+            email: data.data.email,
+            bio: data.data.bio,
+            pic: data.data.photo,
+            tags: data.data.tags || [],
+            notificationMentions: data.data.notificationMentions,
+            notificationComments: data.data.notificationComments,
+            shouldPut: true
+          })
+          console.log(JSON.stringify(data.data));
+        } else {
+          this.setState({
+            shouldPut: false
+          })
+        }
+      })
+      .catch(err => undefined)
+
     this.handleTagRemove = this.handleTagRemove.bind(this)
+  }
+
+  refresh = () => {
+    // load the current user
+    axios.get("/user/" + this.props.username)
+      .then(data => {
+        // no user, api returns {}
+        if (data.data && Object.keys(data.data).length !== 0) {
+          this.setState ({
+            email: data.data.email,
+            bio: data.data.bio,
+            pic: data.data.photo,
+            tags: data.data.tags || [],
+            notificationMentions: data.data.notificationMentions,
+            notificationComments: data.data.notificationComments,
+            shouldPut: true
+          })
+          console.log(JSON.stringify(data.data));
+        } else {
+          this.setState({
+            shouldPut: false
+          })
+        }
+      })
+      .catch(err => undefined)
   }
 
   addTag = (event) => {
@@ -43,6 +97,14 @@ class Profile extends React.Component {
   onDrop(file) {
     this.setState({
       "file": file
+    })
+  }
+
+  handleEmailChange = event => {
+    if (!this.state.editable) return
+
+    this.setState({
+      email: event.target.value
     })
   }
 
@@ -84,21 +146,54 @@ class Profile extends React.Component {
     }
   }
 
-  handleSubmit = event => {
-    event.preventDefault()
-    // const data = new FormData(event.target);
-
-    // or just use the state
-    // console.log(this.state)
-    // NOTE: you access formData fields with `data.get(fieldName)`
-    // const [month, day, year] = data.get('birthdate').split('/');
-    // const serverDate = `${year}-${month}-${day}`;
-    // data.set('birthdate', serverDate);
-    // data.set('username', data.get('username').toUpperCase());
-    /* fetch('/api/form-submit-url', {
-      method: 'POST',
-      body: data,
-    });*/
+  handleSubmit = () => {
+    const username = this.props.username;
+    const { email, bio, tags, notificationMentions, notificationComments } = this.state;
+    if (this.state.file) {
+      var reader = new FileReader();
+      reader.readAsDataURL(this.state.file)
+      reader.onload = () => {
+        let data = reader.result;
+        data = data.substr(data.indexOf(',')+1) // replace data:image/png;base64, with ''
+        const req = {
+          email, bio, tags, notificationComments, notificationMentions
+        }
+        req.photo = data
+        if (this.state.shouldPut) {
+          req.uid = username
+          req.name = username
+          axios.put("/user/" + username, req)
+            .then((response) => {this.refresh()})
+            .catch((error) => {console.log(error)})
+        } else {
+          req.name = username
+          axios.post("/user", req)
+            .then((response) => {this.refresh()})
+            .catch((error) => {console.log(error)})
+        }
+      };
+      reader.onerror = function (error) {
+        console.log('Error: ', error);
+      };
+    } else {
+      // post without the image
+      const req = {
+        email, bio, tags, notificationComments, notificationMentions
+      }
+      if (this.state.shouldPut) {
+        req.uid = username
+        req.name = username
+        req.photo = this.state.pic
+        axios.put("/user/" + username, req)
+          .then((response) => {this.refresh()})
+          .catch((error) => {console.log(error)})
+      } else {
+        req.name = username
+        axios.post("/user", req)
+          .then((response) => {this.refresh()})
+          .catch((error) => {console.log(error)})
+      }
+    }
   }
 
   renderBadges = () => {
@@ -147,14 +242,6 @@ class Profile extends React.Component {
 
   }
 
-  renderButton = () => {
-    if (this.state.editable) {
-      return
-    } else {
-      return null
-    }
-  }
-
   render() {
     const {
       name, email, pic, bio, notificationMentions, notificationComments, tags, club
@@ -163,24 +250,28 @@ class Profile extends React.Component {
     return (
       <div className='profile'>
         <div className='left'>
-          <div className='image'>
-            <img
-              alt={`${name}'s profile`}
-              src={pic}
-            />
-          </div>
+          <Avatar
+            className='avatar'
+            src={pic}
+            alt={`${name}'s profile`}
+          />
           { this.state.editable && <Dropzone
             className='dropzone'
             multiple={false}
             accept="image/*"
-            onDrop={(file) => this.onDrop(file)}>
+            onDrop={(files) => this.onDrop(files[0])}>
             <div>
               Click here, or drop image to change
             </div>
           </Dropzone> }
-
-          <h3>{name}</h3>
-          <h6>{email}</h6>
+          <h3>{this.props.username}</h3>
+          <TextField
+            value={this.state.email}
+            onChange={this.handleEmailChange}
+            fullWidth
+            helperText="Email"
+            margin="normal"
+          />
           <h6>Fan club: {club}</h6>
         </div>
         <div className='right'>
@@ -245,11 +336,20 @@ class Profile extends React.Component {
           }
         </div>
         {this.state.editable &&
-          <Button children='Update my profile' variant='raised' fullWidth />
+          <Button
+            className='yellow-btn'
+            variant='contained'
+            children='Update my profile'
+            variant='raised'
+            fullWidth
+            onClick={this.handleSubmit}
+          />
         }
       </div>
     )
   }
 }
 
-export default Profile
+const mapState = ({ username }) => ({ username })
+export default connect(mapState)(Profile)
+//export default Profile

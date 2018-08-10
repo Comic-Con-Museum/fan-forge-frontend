@@ -156,7 +156,6 @@ class Feed extends React.Component {
       }
     } else {
       this.state.displayedItems.forEach(item => {
-        console.log(item)
         items.push(
           <ExhibitCard
             title={item.title}
@@ -174,7 +173,7 @@ class Feed extends React.Component {
     return (
       <div className='feed' style={{overflow:"auto"}}>
         <div className='exhibit-right'>
-          <NavLink className='submit-exhibit-card-nav' activeClassName='active' to='/entry'>
+          <NavLink className='submit-exhibit-card-nav' activeClassName='active' to='/details'>
             <Card className='submit-exhibit-card'>
               <CardContent>
                 <h1>

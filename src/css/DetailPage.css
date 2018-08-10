@@ -47,3 +47,9 @@ h4 {
 .Collapsible__trigger.is-open:after {
     transform: rotateZ(180deg);
 }
+
+.title, .description {
+    font-size: 55px;
+    font-family: 'Roboto';
+    font-weight: 700;
+}
