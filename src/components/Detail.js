@@ -12,28 +12,11 @@ import TextField from '@material-ui/core/TextField';
 import {postArtifact} from "../actions";
 import {bindActionCreators} from 'redux'
 import {
-    Carousel,
-    CarouselItem,
-    CarouselControl,
-    CarouselIndicators,
-    CarouselCaption,
-    Nav,
-    NavItem,
-    NavLink,
-    CardBody,
     Modal,
     ModalHeader,
     ModalBody,
     ModalFooter,
     Card,
-    CardText,
-    CardSubtitle,
-    CardTitle,
-    CardLink,
-    Row,
-    Col,
-    TabContent,
-    TabPane
     CardBody,
     CardLink,
     CardSubtitle,
