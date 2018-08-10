@@ -1,16 +1,16 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import ChipInput from 'material-ui-chip-input'
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Drawer from '@material-ui/core/Drawer';
 import Link from 'redux-first-router-link'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux';
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux';
 import Step from './Step';
-import { clean, getBase64 } from '../helpers';
-import { postExhibit, removeSubmitId } from '../actions/';
+import {clean} from '../helpers';
+import {postExhibit, removeSubmitId} from '../actions/';
 import '../css/Submit.css'
-import 'react-tagsinput/react-tagsinput.css' 
+import 'react-tagsinput/react-tagsinput.css'
 
 import strings from '../strings';
 
