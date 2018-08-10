@@ -7,8 +7,6 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
 import { NavLink } from 'redux-first-router-link'
 import Spinner from './Spinner'
 import axios from 'axios'
@@ -36,11 +34,12 @@ class Feed extends React.Component {
   componentDidMount() {
     this.topbarImgRef = document.querySelector('.bannerImg');
     this.menuRef = document.querySelector('.topnavbar');
-    window.addEventListener("scroll", this.makeNavbarFixed.bind(this));
+    window.addEventListener("scroll", this.makeNavbarFixed);
   }
 
   componentWillUnmount() {
-    window.removeEventListener("scroll", this.makeNavbarFixed.bind(this));
+    this.menuRef.classList.remove('sticked_to_top');
+    window.removeEventListener("scroll", this.makeNavbarFixed);
   }
 
   makeNavbarFixed() {

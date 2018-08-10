@@ -171,6 +171,10 @@
 	transform: translate(0, -15.5px) scale(0.75);
 }
 
+.wizard__modal {
+	text-align: center;
+}
+
 @media screen and (max-width: 920px) {
 	.wizard__form {
 		width: 100vw;
@@ -244,7 +248,7 @@
     justify-content: space-evenly;
 	}
 
-	.wizard__controls button{
+	.wizard__controls button {
 		margin: 0;
 	}
 }
