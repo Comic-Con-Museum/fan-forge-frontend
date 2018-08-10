@@ -9,7 +9,6 @@ export default (state = 'next', action = {}) => {
   const list = ["HOME", "FEED", "ABOUT", "ENTRY", "DETAILPAGE"];
   const lastIndex = list.indexOf(prevType);
   const newIndex = list.indexOf(type);
-  console.log(prevType);
   if (type === prevType) {
     return 'state'
   } else {

@@ -35,6 +35,10 @@ export const localeSwitch = locale => ({
   payload: locale
 })
 
+export const removeSubmitId = () => ({
+  type: REMOVE_SUBMIT_ID,
+})
+
 export const userLogin = username => ({
   type: 'USER_LOGGED_IN',
   payload: username
@@ -49,7 +53,9 @@ export const postExhibit = (exhibit) => {
       method: 'POST',
       body: JSON.stringify(exhibit)
     }).then(res => {
-      dispatch({type: POST_EXHIBIT_SUCCESS})
+      return res.json();
+    }).then(resJson => {
+      dispatch({type: POST_EXHIBIT_SUCCESS, 'payload': resJson})
     }).catch(err => {
       dispatch({type: POST_EXHIBIT_FAIL})
     });
@@ -62,3 +68,4 @@ export const LOCALE_SWITCH = 'LOCALE_SWITCH'
 export const POST_EXHIBIT = 'POST_EXHIBIT'
 export const POST_EXHIBIT_SUCCESS = 'POST_EXHIBIT_SUCCESS'
 export const POST_EXHIBIT_FAIL = 'POST_EXHIBIT_FAIL'
+export const REMOVE_SUBMIT_ID = 'REMOVE_SUBMIT_ID'

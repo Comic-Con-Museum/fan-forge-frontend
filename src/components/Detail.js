@@ -56,7 +56,6 @@ const styles = {
 
 class Detail extends Component {
   constructor(props) {
-    console.log(props)
     super(props)
     this.state = { activeIndex: 0, 
       activeTab: '1',
@@ -80,7 +79,6 @@ class Detail extends Component {
         }
       })
       .catch(err =>
-        console.log(err)
       )
   }
 
