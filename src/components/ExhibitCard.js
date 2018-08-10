@@ -123,7 +123,7 @@ class ExhibitCard extends Component {
           <ModalHeader>Support Survey</ModalHeader>
           <ModalBody>
             <h5>What part of day do you see yourself coming to the exhibit?</h5>
-            <FormControl>
+            <FormControl fullWidth={1}>
               <InputLabel>Time</InputLabel>
               <Select
                 value={this.state.time}
@@ -140,8 +140,8 @@ class ExhibitCard extends Component {
                 <MenuItem value='Late Night'>Late Night</MenuItem>
               </Select>
             </FormControl>
-            <h5>If this exhibit gets built, how likely are you to visit?</h5>
-            <FormControl>
+            <h5 style={{marginTop: 30}}>If this exhibit gets built, how likely are you to visit?</h5>
+            <FormControl fullWidth={1}>
               <InputLabel>Likeliness</InputLabel>
               <Select
                 value={this.state.likeliness}
@@ -159,8 +159,8 @@ class ExhibitCard extends Component {
 
               </Select>
             </FormControl>
-            <h5>How much would you spend to see this exhibit?</h5>
-            <FormControl>
+            <h5 style={{marginTop: 30}}>How much would you spend to see this exhibit?</h5>
+            <FormControl fullWidth={1}>
               <InputLabel>Amount</InputLabel>
               <Select
                 value={this.state.amount}
