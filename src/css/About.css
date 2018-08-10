@@ -16,3 +16,7 @@
   margin-left: 15%;
   margin-right: 15%;
 }
+.about a {
+  color: #FFF105;
+  text-shadow: 0 0 5px black;
+}
