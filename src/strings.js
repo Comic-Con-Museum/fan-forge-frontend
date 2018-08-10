@@ -24,7 +24,7 @@ export default {
     preview: 'Preview'
   },
   es: {
-    wizard_title: 'Hola',
+    wizard_title: '¿Tienes una idea tuya?',
     wizard_intro: '¡Eso es genial! Le mostraremos una vista previa en vivo de su publicación a la derecha mientras lo guiamos a través del proceso a la izquierda.',
     wizard_title2: 'Vayamos a lo básico',
     wizard_exhibit_name: 'Nombre de la exposición',
