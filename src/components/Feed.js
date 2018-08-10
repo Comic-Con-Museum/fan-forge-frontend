@@ -167,7 +167,7 @@ class Feed extends React.Component {
             className='tag-search'
             id="password-input"
             label="Search by tag"
-            type="password"
+            type="text"
             autoComplete="current-password"
             margin="normal"
           />
