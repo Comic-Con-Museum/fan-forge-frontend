@@ -8,19 +8,19 @@ import CCMSanDiego from '../assets/ccm_sanDiego.jpeg'
 const items = [
   {
     src: CCMBuilding,
-    altText: 'About the Museum',
-    header: 'About the Museum',
+    altText: <a href={`/About`}>About the Museum</a>,
+    header: <a href={`/About`}>About the Museum</a>,
     caption: "Learn more about Comic-Con's year round experience"
   },
   {
     src: CCMSanDiego,
-    header: 'Explore Ideas',
+    header: <a href={`/feed/hot`}>Explore Ideas</a>,
     caption: 'Support your interests'
   },
   {
     src: CCMSketch,
-    altText: 'Submit Your Ideas',
-    header: 'Submit Your Ideas',
+    altText: <a href={`/Entry`}>Submit Your Ideas</a>,
+    header: <a href={`/Entry`}>Submit Your Ideas</a>,
     caption:
     'Fan curated exhibits can make their way into the museum with enough support!'
   }

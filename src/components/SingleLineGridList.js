@@ -4,34 +4,7 @@ import {GridList, GridListTile, GridListTileBar, IconButton} from '@material-ui/
 import InfoIcon from '@material-ui/icons/Info'
 import {Button, Modal, ModalBody, ModalFooter, ModalHeader} from 'reactstrap'
 
-const tileData = [
-  {
-    img: 'https://img.etsystatic.com/il/7ae4a6/714259788/il_fullxfull.714259788_qa6m.jpg?version=0',
-    title: 'Image',
-    author: 'author',
-    info: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nib.'
-  },
-  {
-    img: 'https://i0.wp.com/www.partyowlmanila.com/wp-content/uploads/2017/09/batmankids.jpg?fit=540%2C540&w=640',
-    title: 'Image',
-    author: 'author',
-    info: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nib.'
-  },
-  {
-    img: 'https://c1.staticflickr.com/8/7333/27122863934_c86f2af42c_b.jpg',
-    title: 'Image',
-    author: 'author',
-    info: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nib.'
-  },
-  {
-    img: 'http://www.blastoffcomics.com/wp-content/uploads/2017/09/Untitled-design156.png',
-    title: 'Image',
-    author: 'author',
-    info: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nib.'
-  }
-]
-
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -80,12 +53,12 @@ class SingleLineGridList extends Component {
     return (
       <div className={classes.root}>
         <GridList className={classes.gridList} cols={2.5}>
-          {tileData.map(tile => (
-            <GridListTile key={tile.img}>
-              <img src={tile.img} alt={tile.title} />
+          {this.props.tileData.map(tile => (
+            <GridListTile key={tile}>
+              <img src={tile} alt='blah' />
               <GridListTileBar
-                title={tile.title}
-                subtitle={<span>by: {tile.author}</span>}
+                title='blah'
+                subtitle={<span>by: 'author'</span>}
                 actionIcon={
                   <IconButton>
                      <InfoIcon style={{color: "white"}} onClick={this.handleOnInfoClicked}/>
