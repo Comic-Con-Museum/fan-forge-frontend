@@ -173,7 +173,7 @@ class Feed extends React.Component {
     return (
       <div className='feed' style={{overflow:"auto"}}>
         <div className='exhibit-right'>
-          <NavLink className='submit-exhibit-card-nav' activeClassName='active' to='/details'>
+          <NavLink className='submit-exhibit-card-nav' activeClassName='active' to='/Entry'>
             <Card className='submit-exhibit-card'>
               <CardContent>
                 <h1>
