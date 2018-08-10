@@ -20,7 +20,7 @@ class ExhibitCard extends Component {
   }
 
   render() {
-    const { picture, title, summary, tags, eid } = this.props
+    const { picture, title, summary, tags, upvotes, eid } = this.props
     let tagComponents = null
 
     if(tags){
@@ -52,6 +52,7 @@ class ExhibitCard extends Component {
             </Typography>
           </CardContent>
           <CardActions>
+            <p>{`${Object.keys(upvotes).length} supporters`}</p>
             <IconButton aria-label='Add to favorites'>
               <FavoriteIcon />
             </IconButton>

@@ -8,17 +8,17 @@ export const goToPage = (type, category) => ({
   payload: category && { category }
 })
 
-export const goSubmit = () => ({
-  type: 'SUBMIT'
-})
-
 export const goHome = () => ({
   type: 'HOME'
 })
 
 export const goDetail = id => ({
-  type: 'DETAIL',
-  payload: id
+    type: 'DETAIL',
+    payload: id
+})
+
+export const goAbout = () => ({
+  type: 'ABOUT'
 })
 
 export const goFeed = type => ({

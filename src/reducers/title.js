@@ -6,6 +6,10 @@ export default (state = 'RFR Demo', action = {}) => {
       return 'Submit Form'
     case 'DETAIL':
       return 'Detail'
+    case 'ABOUT':
+      return 'About'
+    case 'ENTRY':
+      return 'Entry'
     case 'FEED':
       return 'Feed'
     default:
