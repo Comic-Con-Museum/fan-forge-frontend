@@ -66,7 +66,30 @@ export const postExhibit = (exhibit) => {
   };
 }
 
-export const postArtifact = (exhibit) => {
+export const apiurl = 'https://yu1pn4u266.execute-api.us-west-2.amazonaws.com/latest/api/exhibit/96de5523-fd49-4246-8b43-c87fe6bd2339/upvote?userId=multiojuice';
+
+export const postSurvey = (survey) => {
+  return (dispatch) => {
+    dispatch({type : POST_SURVEY});
+    fetch(apiurl, {
+      method: 'POST',
+      body: JSON.stringify(survey),
+      headers: {
+	'Accept': 'application/json',
+        'Content-Type': 'application/json; charset=utf-8',
+      },
+    }).then(res => {
+      return res.json();
+    }).then(resJson => {
+      dispatch({type: POST_SURVEY_SUCCESS, 'payload': resJson})
+    }).catch(err => {
+      dispatch({type: POST_SURVEY_FAIL})
+    });
+  };
+}
+
+
+  export const postArtifact = (exhibit) => {
     return (dispatch) => {
         fetch(url, {
             method: 'POST',
@@ -76,13 +99,17 @@ export const postArtifact = (exhibit) => {
           return res.json();
         })
     };
-}
+  }
+
 
 axiosDefaults.baseURL = 'https://yu1pn4u266.execute-api.us-west-2.amazonaws.com/latest/api';
 axiosDefaults.headers = {'Content-Type': 'application/json'}
 
 export const LOCALE_SWITCH = 'LOCALE_SWITCH'
 export const POST_EXHIBIT = 'POST_EXHIBIT'
+export const POST_SURVEY = 'POST_SURVEY'
 export const POST_EXHIBIT_SUCCESS = 'POST_EXHIBIT_SUCCESS'
 export const POST_EXHIBIT_FAIL = 'POST_EXHIBIT_FAIL'
+export const POST_SURVEY_SUCCESS = 'POST_SURVEY_SUCCESS'
+export const POST_SURVEY_FAIL = 'POST_SURVEY_FAIL'
 export const REMOVE_SUBMIT_ID = 'REMOVE_SUBMIT_ID'
