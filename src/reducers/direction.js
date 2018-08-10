@@ -6,15 +6,19 @@ export default (state = 'next', action = {}) => {
   const { type } = action
   const prevType = action.meta.location.prev.type
 
+  const list = ["HOME", "FEED", "ABOUT", "ENTRY", "DETAILPAGE"];
+  const lastIndex = list.indexOf(prevType);
+  const newIndex = list.indexOf(type);
+  console.log(prevType);
   if (type === prevType) {
     return 'state'
+  } else {
+    if (newIndex > lastIndex) {
+      return 'next'
+    } else {
+      return 'back'
+    }
   }
-  if (type === 'HOME') {
-    return 'back'
-  } if (type === 'ENTRY' || type === 'SUBMIT' || type === 'HOME' || type === 'FEED' || type === 'USER_LOGGED_IN') {
-    return 'next'
-  }
-  return state
 }
 
 // this is an example of some fun stuff you can do easily trigger animations
