@@ -70,13 +70,13 @@ export class Submit extends Component {
 
   handleFormSubmit(e) {
     e.preventDefault();
-    if (this.state.currentStep == maxSteps && this.state.tags.length != 0) {
+    if (this.state.currentStep === maxSteps && this.state.tags.length !== 0) {
       this.props.dispatch(postExhibit(this.state));
     }
   }
 
   stepBack() {
-    if (this.state.currentStep == 0) {
+    if (this.state.currentStep === 0) {
       return;
     } else {
       this.setState({currentStep: this.state.currentStep - 1});
@@ -84,10 +84,10 @@ export class Submit extends Component {
   }
 
   stepNext() {
-    if (this.state.currentStep == maxSteps ) {
+    if (this.state.currentStep === maxSteps ) {
       return;
     }
-    if (this.state.maxStep == this.state.currentStep) {
+    if (this.state.maxStep === this.state.currentStep) {
       this.setState({maxStep: this.state.maxStep + 1});
     }
     this.setState({currentStep: this.state.currentStep + 1});
@@ -101,7 +101,7 @@ export class Submit extends Component {
     return new Array(4).fill().map((value, idx) => 
       <button 
         key={idx}
-        className={this.state.currentStep == idx ? 'current' : '' }
+        className={this.state.currentStep === idx ? 'current' : '' }
         onClick={() => this.jumpToStep(idx)}
         disabled={this.state.maxStep < idx ? true : false}
         />
@@ -148,14 +148,14 @@ export class Submit extends Component {
               <Button variant="contained" className="wizard__file-button">
                 <input type='file' className='wizard_file-input' required id="thumbnail" onChange={(event) =>this.handleFiles('thumbnail', event)} multiple/>
                 <label className='wizard__file-label' htmlFor="thumbnail">
-                  {this.state.thumbnail != '' ? strings[this.props.locale].wizard_thumbnail
+                  {this.state.thumbnail !== '' ? strings[this.props.locale].wizard_thumbnail
                   : strings[this.props.locale].wizard_select_thumbnail}  
                 </label>
               </Button>
               <Button variant="contained" className="wizard__file-button"> 
               <input type='file' className='wizard_file-input' id="additional" onChange={(event) =>this.handleFiles('additionalFiles', event)} multiple/>
                 <label className='wizard__file-label' htmlFor="additional">
-                  {this.state.additionalFiles.length != 0 ? `${this.state.additionalFiles.length} ${strings[this.props.locale].wizard_selectfiles}`
+                  {this.state.additionalFiles.length !== 0 ? `${this.state.additionalFiles.length} ${strings[this.props.locale].wizard_selectfiles}`
                   : strings[this.props.locale].wizard_additional_images}  
                 </label>
               </Button> 
@@ -225,7 +225,7 @@ export class Submit extends Component {
           </Step>
 
           <div className='wizard__controls'>
-            <Button variant="outlined" onClick={this.stepBack} disabled={this.state.currentStep == 0}>
+            <Button variant="outlined" onClick={this.stepBack} disabled={this.state.currentStep === 0}>
               {strings[this.props.locale].back}
             </Button>
             <Button className='wizard__preview-btn' variant="contained" onClick={() => 1}>
@@ -233,13 +233,13 @@ export class Submit extends Component {
             </Button>
             <Button className='yellow-btn' variant="contained" onClick={this.stepNext} color="primary"
               type='submit'>
-              {this.state.currentStep == maxSteps ? strings[this.props.locale].finish
+              {this.state.currentStep === maxSteps ? strings[this.props.locale].finish
               : strings[this.props.locale].next}
             </Button>
           </div>
         </form>
         <div className='wizard__preview'>
-          <img src='https://placebear.com/1928/1024' />
+          <img src='https://placebear.com/1928/1024' alt='preview' />
         </div>
           <div className='wizard__dots'>
               {this.renderButtons()}
