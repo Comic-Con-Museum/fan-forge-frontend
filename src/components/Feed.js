@@ -1,8 +1,7 @@
 import React from 'react'
 import InfiniteScroll from 'react-infinite-scroller';
-import cardData from '../mockdata/cards.json'
 import {connect} from "react-redux";
-import ExhibitGroup from './feed/ExhibitGroup'
+import ExhibitCard from './ExhibitCard'
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -22,6 +21,7 @@ class Feed extends React.Component {
     super(props);
     this.state = {
       feedType: this.props.feedType,
+      eid: this.props.eid,
       items: [],
       displayedItems: [],
       hasMoreItems: true,
@@ -154,11 +154,12 @@ class Feed extends React.Component {
     } else {
       this.state.displayedItems.forEach(item => {
         items.push(
-          <ExhibitGroup
+          <ExhibitCard
             title={item.title}
             picture={item.images[0]}
             summary={item.summary}
             tags={item.tags}
+            eid={item.eid}
             upvotes={item.upvotes}
           />
         )

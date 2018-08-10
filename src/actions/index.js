@@ -12,12 +12,13 @@ export const goHome = () => ({
   type: 'HOME'
 })
 
-export const goAbout = () => ({
-  type: 'ABOUT'
+export const goDetail = id => ({
+    type: 'DETAIL',
+    payload: id
 })
 
-export const goDetailPage = () => ({
-  type: 'DETAILPAGE'
+export const goAbout = () => ({
+  type: 'ABOUT'
 })
 
 export const goFeed = type => ({

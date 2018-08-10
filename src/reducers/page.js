@@ -5,10 +5,11 @@ export default (state = 'HOME', action = {}) => components[action.type] || state
 const components = {
   HOME: 'Home',
   LIST: 'List',
+  SUBMIT: 'Submit',
   ABOUT: 'About',
   ENTRY: 'Entry',
   PROFILE: 'Profile',
-  DETAILPAGE: 'DetailPage',
+  DETAIL: 'Detail',
   FEED: 'Feed',
   [NOT_FOUND]: 'NotFound'
 }
