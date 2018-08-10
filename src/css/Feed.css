@@ -5,6 +5,7 @@
 .sticked_to_top {
     position: fixed;
     top: 0;
+    z-index: 999;
 }
 
 .submit-exhibit-card-nav {
@@ -12,7 +13,8 @@
 }
 
 .submit-exhibit-card:hover {
-  filter: brightness(95%);}
+  filter: brightness(95%);
+}
 
 .submit-exhibit-card-nav:hover {
   color: black;
