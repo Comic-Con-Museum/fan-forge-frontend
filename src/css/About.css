@@ -9,4 +9,10 @@
   display: block;
   margin-left: auto;
   margin-right: auto;
+  box-shadow: 2px 0 15px #666;
+  border: 1px solid #888;
+}
+.about p {
+  margin-left: 15%;
+  margin-right: 15%;
 }
