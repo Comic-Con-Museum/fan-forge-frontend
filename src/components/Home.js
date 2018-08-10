@@ -14,15 +14,15 @@ const items = [
   },
   {
     src: CCMSanDiego,
-    header: 'Explore Designs',
+    header: 'Explore Ideas',
     caption: 'Support your interests'
   },
   {
     src: CCMSketch,
-    altText: 'Submit a Design',
-    header: 'Submit a design',
+    altText: 'Submit Your Ideas',
+    header: 'Submit Your Ideas',
     caption:
-    'Fan curated designs can make their way into the museum with enough support!'
+    'Fan curated exhibits can make their way into the museum with enough support!'
   }
 ]
 
