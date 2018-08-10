@@ -1,5 +1,22 @@
+.tag-search-container {
+  margin-left: 20px;
+}
+
 .sticked_to_top {
     position: fixed;
     top: 0;
     z-index: 999;
+}
+
+.submit-exhibit-card-nav {
+  color: black;
+}
+
+.submit-exhibit-card:hover {
+  filter: brightness(95%);
+}
+
+.submit-exhibit-card-nav:hover {
+  color: black;
+  text-decoration: none;
 }

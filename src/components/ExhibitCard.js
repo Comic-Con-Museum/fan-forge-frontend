@@ -28,7 +28,7 @@ class ExhibitCard extends Component {
         <Chip
           label={tag}
           component="a"
-          href={`/feed/search/${tag}`}
+          href={`/feed/tagged-${tag}`}
           clickable
         />
       )
