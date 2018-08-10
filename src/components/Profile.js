@@ -1,5 +1,6 @@
 import React from 'react'
 import {
+  Avatar,
   Checkbox,
   TextField,
   Button,
@@ -174,12 +175,11 @@ class Profile extends React.Component {
     return (
       <div className='profile'>
         <div className='left'>
-          <div className='image'>
-            <img
-              alt={`${name}'s profile`}
-              src={pic}
-            />
-          </div>
+          <Avatar
+            className='avatar'
+            src={pic}
+            alt={`${name}'s profile`}
+          />
           { this.state.editable && <Dropzone
             className='dropzone'
             multiple={false}
@@ -256,7 +256,13 @@ class Profile extends React.Component {
           }
         </div>
         {this.state.editable &&
-          <Button children='Update my profile' variant='raised' fullWidth />
+          <Button
+            className='yellow-btn'
+            variant='contained'
+            children='Update my profile'
+            variant='raised'
+            fullWidth
+          />
         }
       </div>
     )
