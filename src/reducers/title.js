@@ -1,11 +1,11 @@
 export default (state = 'RFR Demo', action = {}) => {
   switch (action.type) {
     case 'HOME':
-      return 'RFR Demo'
+      return 'Home'
     case 'SUBMIT':
       return 'Submit Form'
     case 'DETAIL':
-      return 'Detail'
+      return 'Details'
     case 'ABOUT':
       return 'About'
     case 'ENTRY':

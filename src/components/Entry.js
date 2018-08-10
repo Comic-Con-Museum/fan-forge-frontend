@@ -9,6 +9,7 @@ import {bindActionCreators} from 'redux';
 import Step from './Step';
 import {clean} from '../helpers';
 import {postExhibit, removeSubmitId} from '../actions/';
+import blankPreview from '../assets/blankDetail.jpg'
 import '../css/Submit.css'
 import 'react-tagsinput/react-tagsinput.css'
 
@@ -80,13 +81,13 @@ export class Submit extends Component {
     if (this.state.currentStep == maxSteps && this.state.tags.length != 0) {
       const stateCopy = Object.assign({}, this.state);
       delete stateCopy["currentStep"];
-      delete stateCopy["maxStep"]; 
+      delete stateCopy["maxStep"];
       stateCopy.images = []
       // for (var i = 0; i < stateCopy.imagesFile.length; i++) {
       //   console.log()
       //   stateCopy.images[i] = getBase64(stateCopy.imagesFile[i]).then()
       // }
-      delete stateCopy["imagesFile"]; 
+      delete stateCopy["imagesFile"];
       clean(stateCopy);
       this.props.postExhibit(stateCopy);
     }
@@ -115,8 +116,8 @@ export class Submit extends Component {
   }
 
   renderButtons() {
-    return new Array(4).fill().map((value, idx) => 
-      <button 
+    return new Array(4).fill().map((value, idx) =>
+      <button
         key={idx}
         className={this.state.currentStep === idx ? 'current' : '' }
         onClick={() => this.jumpToStep(idx)}
@@ -169,16 +170,16 @@ export class Submit extends Component {
           <input type='file' className='wizard_file-input' required id="thumbnail" onChange={(event) =>this.handleFiles('thumbnail', event)} multiple/>
           <label className='wizard__file-label' htmlFor="thumbnail">
             {this.state.thumbnail !== '' ? strings[this.props.locale].wizard_thumbnail
-            : strings[this.props.locale].wizard_select_thumbnail}  
+            : strings[this.props.locale].wizard_select_thumbnail}
           </label>
         </Button>
-        <Button variant="contained" className="wizard__file-button"> 
+        <Button variant="contained" className="wizard__file-button">
         <input type='file' className='wizard_file-input' id="additional" onChange={(event) =>this.handleFiles('imagesFile', event)} multiple/>
           <label className='wizard__file-label' htmlFor="additional">
             {this.state.imagesFile && this.state.imagesFile.length != 0 ? `${this.state.imagesFile.length} ${strings[this.props.locale].wizard_selectfiles}`
-            : strings[this.props.locale].wizard_additional_images}  
+            : strings[this.props.locale].wizard_additional_images}
           </label>
-        </Button> 
+        </Button>
       </div>
       <TextField
         id="inspiration"
@@ -279,7 +280,7 @@ export class Submit extends Component {
           </div>
         </form>
         <div className='wizard__preview'>
-          <img src='https://placebear.com/1928/1024' alt='preview' />
+          <img src={blankPreview} alt='preview' />
         </div>
         <div className='wizard__dots'>
             {this.renderButtons()}
