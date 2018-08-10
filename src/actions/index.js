@@ -12,12 +12,13 @@ export const goHome = () => ({
   type: 'HOME'
 })
 
-export const goAbout = () => ({
-  type: 'ABOUT'
+export const goDetail = id => ({
+    type: 'DETAIL',
+    payload: id
 })
 
-export const goDetailPage = () => ({
-  type: 'DETAILPAGE'
+export const goAbout = () => ({
+  type: 'ABOUT'
 })
 
 export const goFeed = type => ({
@@ -39,7 +40,7 @@ export const userLogin = username => ({
   payload: username
 })
 
-export const url = 'https://yu1pn4u266.execute-api.us-west-2.amazonaws.com/latest/api/exhibits';
+export const url = 'https://yu1pn4u266.execute-api.us-west-2.amazonaws.com/latest/api/exhibit';
 export const postExhibit = (exhibit) => {
   return (dispatch) => {
     dispatch({type : POST_EXHIBIT});

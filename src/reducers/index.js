@@ -1,6 +1,7 @@
 export { default as page } from './page'
 export { default as direction } from './direction'
 export { default as title } from './title'
+export { default as detail } from './detail'
 export { default as actions } from './actions'
 export { default as submit } from './submit'
 export { default as feed } from './feedType'

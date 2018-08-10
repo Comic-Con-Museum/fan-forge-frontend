@@ -1,8 +1,7 @@
 import React from 'react'
 import InfiniteScroll from 'react-infinite-scroller';
-import cardData from '../mockdata/cards.json'
 import {connect} from "react-redux";
-import ExhibitGroup from './feed/ExhibitGroup'
+import ExhibitCard from './ExhibitCard'
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -13,19 +12,43 @@ import { withStyles } from '@material-ui/core/styles';
 import { NavLink } from 'redux-first-router-link'
 import Spinner from './Spinner'
 import axios from 'axios'
+import { elementInViewport } from '../helpers';
 
+import '../css/Feed.css'
 
 class Feed extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       feedType: this.props.feedType,
+      eid: this.props.eid,
       items: [],
       displayedItems: [],
       hasMoreItems: true,
       isLoaded: false
     }
     this.loadExhibits()
+    this.menuRef = undefined
+    this.topbarImgRef = undefined
+    this.makeNavbarFixed = this.makeNavbarFixed.bind(this);
+  }
+
+  componentDidMount() {
+    this.topbarImgRef = document.querySelector('.bannerImg');
+    this.menuRef = document.querySelector('.topnavbar');
+    window.addEventListener("scroll", this.makeNavbarFixed.bind(this));
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.makeNavbarFixed.bind(this));
+  }
+
+  makeNavbarFixed() {
+    if(elementInViewport(this.topbarImgRef)) {
+      this.menuRef.classList.add('sticked_to_top');
+    } else {
+      this.menuRef.classList.remove('sticked_to_top');
+    }
   }
 
   loadExhibits() {
@@ -131,11 +154,12 @@ class Feed extends React.Component {
     } else {
       this.state.displayedItems.forEach(item => {
         items.push(
-          <ExhibitGroup
+          <ExhibitCard
             title={item.title}
             picture={item.images[0]}
             summary={item.summary}
             tags={item.tags}
+            eid={item.eid}
             upvotes={item.upvotes}
           />
         )
