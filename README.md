@@ -5,13 +5,17 @@ This website was created by Intuit Coop students in Team DC as part of a one-wee
 
 https://tranquil-river-63736.herokuapp.com/
 
-## Development setup
+## Front End Development setup
 
 These are the instructions to set up a local version of the website for development. Simply follow the commands below:
 ```sh
 npm install
 npm start
 ```
+
+## Back End Development setup
+
+For back end development, please see the [back end repository](https://github.com/Comic-ConMuseum/fan-curation-backend).
 
 ## Contributing Guidelines
 
