@@ -174,23 +174,18 @@ class Feed extends React.Component {
     return (
       <div className='feed' style={{overflow:"auto"}}>
         <div className='exhibit-right'>
-          <Card>
-            <CardContent>
-              <h1>
-                Submit your own exhibit!
-              </h1>
-              <p>
-                Here you can share your ideas for Comic-Con Museum exhibits and concepts, vote to support your favorite ideas to get them into reality!
-              </p>
-            </CardContent>
-            <CardActions>
-              <NavLink className='navLinkTab' activeClassName='active' to='/submit'>
-                <Button size='small'>
-                  Learn More
-                </Button>
-              </NavLink>
-            </CardActions>
-          </Card>
+          <NavLink className='submit-exhibit-card-nav' activeClassName='active' to='/entry'>
+            <Card className='submit-exhibit-card'>
+              <CardContent>
+                <h1>
+                  Submit your own exhibit!
+                </h1>
+                <p>
+                  Here you can share your ideas for Comic-Con Museum exhibits and concepts, vote to support your favorite ideas to get them into reality!
+                </p>
+              </CardContent>
+            </Card>
+          </NavLink>
           {this.renderFilterButtons()}
           <div className='tag-search-container'>
             <TextField
