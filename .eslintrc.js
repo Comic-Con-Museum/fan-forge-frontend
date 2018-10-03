@@ -71,7 +71,7 @@ module.exports = {
     'no-console': 1,
     'jsx-a11y/no-static-element-interactions': 1,
     'no-case-declarations': 1,
-    semi: [2, 'never'],
+    semi: [0, 'never'],
     'flowtype/semi': [2, 'never'],
     'jsx-quotes': [2, 'prefer-single'],
     'react/jsx-filename-extension': [2, { extensions: ['.jsx', '.js'] }],
@@ -108,7 +108,7 @@ module.exports = {
     'max-len': [
       'error',
       {
-        code: 80,
+        code: 120,
         tabWidth: 2,
         ignoreUrls: true,
         ignoreComments: true,
@@ -135,6 +135,8 @@ module.exports = {
         ]
       }
     ],
-    'linebreak-style': 0
+    'linebreak-style': 0,
+    'object-shorthand': 0,
+    'react/destructuring-assignment': 0,
   }
-}
+};

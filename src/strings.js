@@ -1,4 +1,5 @@
-export default {
+
+const data = {
   en: {
     wizard_title: 'Have an idea of your own? ',
     wizard_intro: 'That\'s awesome! We will show you a live preview of your post on the right as we walk you through the process on the left.',
@@ -47,4 +48,27 @@ export default {
     finish: 'Finalizar',
     preview: 'Avance'
   }
-}
+};
+
+let lang = 'en';
+let appRender;
+
+module.exports = {
+  // holds the application to force refresh on language change
+  setApp: function(app) {
+    appRender = app;
+  },
+  // sets the language used, refreshing UI
+  setLang: function (language) {
+    lang = language;
+    if (appRender) {
+      appRender.forceUpdate(); // refresh the UI
+    }
+  },
+  getLang: function() {
+    return lang;
+  },
+  getString: function (title) {
+    return data[lang][title];
+  }
+};

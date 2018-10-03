@@ -1,42 +1,22 @@
 import React from 'react'
-import {connect} from 'react-redux'
-import {Transition, TransitionGroup} from 'transition-group'
-import universal from 'react-universal-component'
-import isLoading from '../selectors/isLoading'
-import Spinner from './Spinner'
+import { Route } from 'react-router-dom'
+
+import About from './About'
+import Detail from './Detail'
+import Entry from './Entry'
+import Feed from './Feed'
+import Home from './Home'
+
 import '../css/Switcher.css'
 
-const Switcher = ({ page, direction, isLoading }) => (
-  <TransitionGroup
-    className={`switcher ${direction}`}
-    duration={500}
-    prefix='slide'
-  >
-    <Transition key={page}>
-      <div className='content'>
-        <UniversalComponent page={page} isLoading={isLoading} />
-      </div>
-    </Transition>
-  </TransitionGroup>
-)
+const Switcher = () => (
+  <div>
+    <Route exact path='/' component={Home} />
+    <Route exact path='/about' component={About} />
+    <Route exact path='/detail/:id' component={Detail} />
+    <Route exact path='/submit' component={Entry} />
+    <Route exact path='/feed' component={Feed} />
+  </div>
+);
 
-const UniversalComponent = universal(props => import(`./${props.page}`), {  // eslint-disable-line
-  minDelay: 500,
-    chunkName: props => props.page, // eslint-disable-line
-  loading: () => (
-    <Spinner />
-  ),
-  error: () => (
-    <div className='notFound'>
-PAGE NOT FOUND - 404
-    </div>
-  )
-})
-
-const mapState = ({ page, direction, ...state }) => ({
-  page,
-  direction,
-  isLoading: isLoading(state)
-})
-
-export default connect(mapState)(Switcher)
+export default Switcher
