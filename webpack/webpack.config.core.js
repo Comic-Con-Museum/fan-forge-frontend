@@ -1,8 +1,15 @@
-const webpack = require('webpack')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
-const path = require('path')
+const webpack = require('webpack');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const path = require('path');
 
 module.exports = {
+  devServer: {
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
+      'Access-Control-Allow-Headers': 'X-Requested-With, content-type, Authorization'
+    }
+  },
   devtool: 'source-map',
   entry: ['./src/index.js'],
   output: {
@@ -60,4 +67,4 @@ module.exports = {
       }
     ]
   }
-}
+};

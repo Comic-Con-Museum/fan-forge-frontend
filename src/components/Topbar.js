@@ -1,36 +1,30 @@
-import React, {Component} from 'react'
-import {connect} from 'react-redux';
-import {Tab, Tabs, TextField} from '@material-ui/core'
-import {NavLink} from 'redux-first-router-link'
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import {localeSwitch} from '../actions/';
-import CCMBanner from '../assets/ccm_banner.png';
-import { bindActionCreators } from 'redux'
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
-import { userLogin } from '../actions'
+import React, { Component } from 'react'
+import { Button } from 'reactstrap'
+import { Link } from 'react-router-dom'
+
+import { Tab, Tabs } from '@material-ui/core'
+import Menu from '@material-ui/core/Menu'
+import MenuItem from '@material-ui/core/MenuItem'
+import strings from '../strings';
+
+import CCMBanner from '../assets/ccm_banner.png'
 
 import '../css/Topbar.css'
 
-let user = '';
-
 class Topbar extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       value: 0,
-      showTabs: false,
-      anchorEl: null,
-      isLoggedIn: false
+      anchorEl: null
     };
     this.handleChange = this.handleChange.bind(this);
-    this.handleChange = this.handleChange.bind(this)
     this.toggle = this.toggle.bind(this)
   }
 
   handleChange(event, value) {
     this.setState({ value })
-  };
+  }
 
   handleLanguageClick = event => {
     this.setState({ anchorEl: event.currentTarget });
@@ -38,39 +32,15 @@ class Topbar extends Component {
 
   handleLanguageClose = (event, lang) => {
     if (lang) {
-      this.props.localeSwitch(lang);
+      strings.setLang(lang);
     }
     this.setState({ anchorEl: null });
   };
 
   toggle() {
-    this.setState({
-      modalShow: !this.state.modalShow
-    })
-  }
-
-  renderProfileButton() {
-    if (this.props.username !== '' && this.props.username !== null) {
-      return (
-        <NavLink className='navLinkTab' activeClassName='active' to='/Profile'>
-          <Tab label='Profile' />
-        </NavLink>
-      )
-    }
-    return (
-      <NavLink className='navLinkTab' activeClassName='active' to={null}>
-        <Tab className='navLinkTab' label='Login/Signup' onClick={() => this.toggle()} />
-      </NavLink>
-    )
-  }
-
-  setUser = (event) => {
-    user = event.target.value
-  }
-
-  handleLogin = () => {
-    this.props.userLogin(user);
-    this.toggle()
+    this.setState(state => ({
+      modalShow: !state.modalShow
+    }));
   }
 
   render() {
@@ -87,65 +57,37 @@ class Topbar extends Component {
           textColor='primary'
           centered
         >
-        <NavLink className='navLinkTab' activeClassName='active' exact to='/'>
-          <Tab label='Home' />
-        </NavLink>
-        <NavLink className='navLinkTab' activeClassName='active' to='/feed/hot'>
-          <Tab label='Feed' />
-        </NavLink>
-        <NavLink className='navLinkTab' activeClassName='active' to='/About'>
-          <Tab label='About' />
-        </NavLink>
-        <NavLink className='navLinkTab' activeClassName='active' to='/Entry'>
-          <Tab label='Submit Idea' />
-        </NavLink>
-        <Button
-          aria-owns={this.state.anchorEl ? 'simple-menu' : null}
-          aria-haspopup="true"
-          onClick={this.handleLanguageClick}
-          className={`select_flag ${this.props.locale}_flag`}
-        />
-        <Menu
-          id="simple-menu"
-          anchorEl={this.state.anchorEl}
-          open={Boolean(this.state.anchorEl)}
-          onClose={(e) => this.handleLanguageClose(e, undefined)}
-        >
-          <MenuItem onClick={(e) => this.handleLanguageClose(e, "en")}>English</MenuItem>
-          <MenuItem onClick={(e) => this.handleLanguageClose(e, "es")}>Español</MenuItem>
-        </Menu>
-        {this.renderProfileButton()}
-        </Tabs>
-        <Modal
-          isOpen={this.state.modalShow}
-          toggle={this.toggle}
-          className='exhibit-modal'
-          centered
-          size='lg'
-        >
-          <ModalHeader toggle={this.toggle}>Comic-Con Museum Login</ModalHeader>
-          <ModalBody>
-            <TextField
-              id='password-input'
-              label='Enter your name'
-              margin='normal'
-              autoFocus
-              onChange={event => this.setUser(event)}
+          <Link className='navLinkTab' to='/'>
+            <Tab label='Home' />
+          </Link>
+          <Link className='navLinkTab' to='/feed'>
+            <Tab label='Feed' />
+          </Link>
+          <Link className='navLinkTab' to='/about'>
+            <Tab label='About' />
+          </Link>
+          <Link className='navLinkTab' to='/submit'>
+            <Tab label='Submit Idea' />
+          </Link>
+          <Button
+            aria-owns={this.state.anchorEl ? 'simple-menu' : null}
+            aria-haspopup='true'
+            onClick={this.handleLanguageClick}
+            className={`select_flag ${strings.getLang()}_flag`}
           />
-          </ModalBody>
-          <ModalFooter>
-            <Button color='primary' onClick={this.handleLogin}>Login</Button>{' '}
-            <Button color='secondary' onClick={this.toggle}>Cancel</Button>
-          </ModalFooter>
-        </Modal>
+          <Menu
+            id='simple-menu'
+            anchorEl={this.state.anchorEl}
+            open={Boolean(this.state.anchorEl)}
+            onClose={e => this.handleLanguageClose(e, undefined)}
+          >
+            <MenuItem onClick={e => this.handleLanguageClose(e, 'en')}>English</MenuItem>
+            <MenuItem onClick={e => this.handleLanguageClose(e, 'es')}>Español</MenuItem>
+          </Menu>
+        </Tabs>
       </div>
     )
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ userLogin,  localeSwitch}, dispatch)
-}
-
-const mapState = ({ location, locale, username }) => ({ path: location.pathname, locale, username })
-export default connect(mapState, mapDispatchToProps)(Topbar)
+export default Topbar

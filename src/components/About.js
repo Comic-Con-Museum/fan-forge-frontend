@@ -25,7 +25,7 @@ class About extends React.Component {
         <p>This website is a place for our fans to have their own take on what
         exhibits will be shown at our Museum!
         With the
-        <a href="/Entry"> Create an Exhibit Idea </a>
+        <a href="/submit"> Create an Exhibit Idea </a>
         feature, you will be able create your
         own exhibit idea where your peers will be able to support your idea.
         The more support you get the more chance you have to get the exhibit built!</p>

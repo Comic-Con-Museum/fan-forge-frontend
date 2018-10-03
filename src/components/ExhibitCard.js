@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import Button from '@material-ui/core/Button'
-import {Chip} from '@material-ui/core'
+import { Chip } from '@material-ui/core'
 import Card from '@material-ui/core/Card'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
 import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import CardMedia from '@material-ui/core/CardMedia'
@@ -11,30 +9,28 @@ import IconButton from '@material-ui/core/IconButton'
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
-import { postSurvey } from '../actions/';
 import Select from '@material-ui/core/Select';
-import Link from 'redux-first-router-link'
 import FavoriteIcon from '@material-ui/icons/Favorite'
-import { NavLink } from 'redux-first-router-link'
+import { Link } from 'react-router-dom'
 import Typography from '@material-ui/core/Typography'
-import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
-import { clean, getBase64 } from '../helpers';
+import {
+  Modal, ModalHeader, ModalBody, ModalFooter
+} from 'reactstrap'
+import { clean } from '../helpers';
 import '../css/Exhibit.css'
 
 class ExhibitCard extends Component {
   constructor(props) {
-    super(props)
-    console.log(props)
+    super(props);
     this.state = {
       modal: false,
       timeout: 0,
       eid: this.props.eid,
-      upvoteCount: Object.keys(this.props.upvotes).length
-    }
-    this.toggle = this.toggle.bind(this)
-    this.submitSurvey = this.submitSurvey.bind(this)
+      upvoteCount: this.props.upvotes
+    };
+    this.toggle = this.toggle.bind(this);
+    this.submitSurvey = this.submitSurvey.bind(this);
   }
 
   handleTimeChange = event => {
@@ -50,43 +46,45 @@ class ExhibitCard extends Component {
   };
 
   toggle() {
-    this.setState({
-      modal: !this.state.modal
-    })
+    this.setState(state => ({ modal: !state.modal }));
   }
 
   submitSurvey(e) {
-    e.preventDefault()
+    e.preventDefault();
     const stateCopy = Object.assign({}, this.state);
-    delete stateCopy['modal']
-    delete stateCopy['timeout']
-    clean(stateCopy)
+    // TODO fix this code so we don't use delete, or need a clean helper function
+    delete stateCopy.modal;
+    delete stateCopy.timeout;
+    clean(stateCopy);
     this.props.postSurvey(stateCopy);
-    this.setState({ upvoteCount: this.state.upvoteCount + 1 })
+    this.setState(state => ({ upvoteCount: state.upvoteCount + 1 }));
     this.toggle()
   }
 
   render() {
-    const { picture, title, summary, tags, upvotes, eid, author } = this.props
-    let tagComponents = null
+    const {
+      picture, title, summary, tags, eid, author
+    } = this.props;
+    let tagComponents = null;
 
-    if(tags){
-      tagComponents = tags.map(tag =>
+    if (tags) {
+      tagComponents = tags.map(tag => (
         <Chip
           label={tag}
-          component="a"
+          component='a'
           href={`/feed/tagged-${tag}`}
           clickable
         />
-      )
+      ))
     }
 
     return (
       <div className='exhibit-center'>
         <Card
-        className='exhibit-card-dark'
-        raised>
-          <NavLink activeClassName='active' to={`/detail/${eid}`}>
+          className='exhibit-card-dark'
+          raised
+        >
+          <Link activeClassName='active' to={`/detail/${eid}`}>
             <CardMedia className='exhibit-card' image={picture} />
             <CardContent>
               <Typography gutterBottom variant='headline' component='h2'>
@@ -96,32 +94,31 @@ class ExhibitCard extends Component {
                 {summary}
               </Typography>
             </CardContent>
-          </NavLink>
+          </Link>
           <CardActions>
             <p>{`${this.state.upvoteCount} supporters`}</p>
             <IconButton onClick={() => this.toggle()} aria-label='Add to favorites'>
               <FavoriteIcon />
             </IconButton>
-            <Link to={`/detail/` + eid}>
+            <Link to={`/detail/${eid}`}>
               <Button size='small' color='primary'>
                   Learn More
               </Button>
             </Link>
-            <Link to={`/user/` + author}>
-              <Button size='small' color='primary'>
-                {'by: ' + author}
-              </Button>
-            </Link>
+            <Button size='small' color='primary'>
+              {`by: ${author}`}
+            </Button>
             {tagComponents}
           </CardActions>
         </Card>
         <Modal
-        backdrop='static'
-        isOpen={this.state.modal}
-        toggle={this.toggle}
-        className='exhibit-modal'
-        centered
-        size='lg'>
+          backdrop='static'
+          isOpen={this.state.modal}
+          toggle={this.toggle}
+          className='exhibit-modal'
+          centered
+          size='lg'
+        >
           <ModalHeader>Support Survey</ModalHeader>
           <ModalBody>
             <h5>What part of day do you see yourself coming to the exhibit?</h5>
@@ -130,9 +127,9 @@ class ExhibitCard extends Component {
               <Select
                 value={this.state.time}
                 onChange={this.handleTimeChange}
-                input={<Input name="Time" />}
+                input={<Input name='Time' />}
               >
-                <MenuItem value="">
+                <MenuItem value=''>
                   <em>None</em>
                 </MenuItem>
                 <MenuItem value='Morning'>Morning</MenuItem>
@@ -142,15 +139,15 @@ class ExhibitCard extends Component {
                 <MenuItem value='Late Night'>Late Night</MenuItem>
               </Select>
             </FormControl>
-            <h5 style={{marginTop: 30}}>If this exhibit gets built, how likely are you to visit?</h5>
+            <h5 style={{ marginTop: 30 }}>If this exhibit gets built, how likely are you to visit?</h5>
             <FormControl fullWidth={1}>
               <InputLabel>Likeliness</InputLabel>
               <Select
                 value={this.state.likeliness}
                 onChange={this.handleLikelinessChange}
-                input={<Input name="" />}
+                input={<Input name='' />}
               >
-                <MenuItem value="">
+                <MenuItem value=''>
                   <em>None</em>
                 </MenuItem>
                 <MenuItem value='I will not'>I will not</MenuItem>
@@ -161,15 +158,15 @@ class ExhibitCard extends Component {
 
               </Select>
             </FormControl>
-            <h5 style={{marginTop: 30}}>How much would you spend to see this exhibit?</h5>
+            <h5 style={{ marginTop: 30 }}>How much would you spend to see this exhibit?</h5>
             <FormControl fullWidth={1}>
               <InputLabel>Amount</InputLabel>
               <Select
                 value={this.state.amount}
                 onChange={this.handleAmountChange}
-                input={<Input name="Amount" />}
+                input={<Input name='Amount' />}
               >
-                <MenuItem value="">
+                <MenuItem value=''>
                   <em>None</em>
                 </MenuItem>
                 <MenuItem value='10'>$5 to $10</MenuItem>
@@ -182,8 +179,9 @@ class ExhibitCard extends Component {
             </FormControl>
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={this.submitSurvey}>Support this idea!</Button>{' '}
-            <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+            <Button color='primary' onClick={this.submitSurvey}>Support this idea!</Button>
+            {' '}
+            <Button color='secondary' onClick={this.toggle}>Cancel</Button>
           </ModalFooter>
         </Modal>
       </div>
@@ -191,8 +189,4 @@ class ExhibitCard extends Component {
   }
 }
 
-const mapStateToProps = ({ locale }) => ({ locale })
-
-const mapDispatchToProps = dispatch => bindActionCreators({ postSurvey }, dispatch)
-
-export default connect(mapStateToProps, mapDispatchToProps)(ExhibitCard)
+export default ExhibitCard

@@ -2,19 +2,15 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {Provider} from 'react-redux'
-import createHistory from 'history/createBrowserHistory'
-import App from './components/App'
-import configureStore from './configureStore'
+import { BrowserRouter } from 'react-router-dom'
 
-const history = createHistory()
-const store = configureStore(history)
+import App from './components/App'
 
 const render = App => ReactDOM.render(
-  <Provider store={store}>
+  <BrowserRouter>
     <App />
-  </Provider>,
+  </BrowserRouter>,
   document.getElementById('root')
-)
+);
 
-render(App)
+render(App);
