@@ -5,7 +5,7 @@ import {
   Title
 } from './StyledComponents';
 
-class Feed extends Component {
+class Submit extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -15,10 +15,10 @@ class Feed extends Component {
     return (
       <PageWrapper>
         <Title>Hey There</Title>
-        <Title>This is a sample page: FEED</Title>
+        <Title>This is a sample page: SUBMIT</Title>
       </PageWrapper>
     );
   }
 }
 
-export default Feed;
+export default Submit;
