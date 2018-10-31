@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 
 import {
   PageWrapper,
-  Title
+  Title,
+  ControlCard,
+  ContentContainer,
+  SearchInput
 } from './StyledComponents';
 
 class Feed extends Component {
@@ -14,8 +17,13 @@ class Feed extends Component {
   render() {
     return (
       <PageWrapper>
-        <Title>Hey There</Title>
-        <Title>This is a sample page: FEED</Title>
+        <Title>Explore exhibit ideas</Title>
+        <ContentContainer>
+          <ControlCard>
+            <SearchInput placeholder="Search exhibits..."/>
+          </ControlCard>
+          <ControlCard />
+        </ContentContainer>
       </PageWrapper>
     );
   }
