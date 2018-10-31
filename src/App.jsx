@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
- import { Switch, Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
+import NavBar from './NavBar';
 import {
   Feed,
   Submit
@@ -9,10 +10,13 @@ import {
 class App extends Component {
   render() {
     return (
-      <Switch>
-        <Route exact path='/' component={Feed}/>
-        <Route exact path='/submit' component={Submit}/>
-      </Switch>
+      <div>
+        <NavBar />
+        <Switch>
+          <Route exact path='/' component={Feed}/>
+          <Route exact path='/submit' component={Submit}/>
+        </Switch>
+      </div>
     );
   }
 }
