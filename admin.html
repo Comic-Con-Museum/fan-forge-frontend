@@ -4,8 +4,31 @@
     <title>Admin panel</title>
 </head>
 <body>
+<form>
+    <fieldset>
+        <legend>Sort by:</legend>
+        <div>
+            <input type="radio" id="popularity" name="sort" checked />
+            <label for="popularity">Popularity</label>
+        </div>
+
+        <div>
+            <input type="radio" id="dateAdded" name="sort" />
+            <label for="dateAdded">Date Created</label>
+        </div>
+    </fieldset>
+</form>
+<h1>TODO: sort the actual elements once we have an API</h1>
+<h1>TODO: get all the details, once the api is in place, including surveys</h1>
+<div>
+    <input id="search" />
+    <button onlick="searchFor();">Search</button>
+</div>
 <div id="content"></div>
 
+<!-- TODO - these api calls use the feed api.
+    When backend adds an admin api, we can swap that out.
+-->
 <script>
 
   var exhibits = [];
@@ -46,10 +69,10 @@
     for (let i = 0; i < exhibits.length; i++) {
       let ex = document.createElement("div");
       ex.style = "border: 1px solid black;";
-      ex.innerHTML += `<p>Supporters: ${exhibits[i].supporterCount}</p>`;
-      ex.innerHTML += `<p>Description: ${exhibits[i].description}</p>`;
       ex.innerHTML += `<p>Title: ${exhibits[i].title}</p>`;
-      ex.innerHTML += `<p>You supported it: ${exhibits[i].supported}</p>`;
+      ex.innerHTML += '<p>Date created: Today (backend needs to add this to the admin api)</p>';
+      ex.innerHTML += `<p>Supporters: ${exhibits[i].supporterCount}</p>`;
+      ex.innerHTML += '<p>Number of comments: (backend needs to add this to the admin api)</p>';
       ex.innerHTML += `<button onclick='deleteExhibit(${exhibits[i].id});'>Click to delete</button>`;
       div.appendChild(ex);
     }
@@ -79,6 +102,11 @@
   }
 
   getAllExhibits(draw);
+
+  function searchFor() {
+      const item = document.getElementById("search").value;
+      alert("Should search for: " + item + " once backend API in place.");
+  }
 </script>
 </body>
 </html>
