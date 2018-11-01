@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin panel</title>
+</head>
+<body>
+<div id="content"></div>
+
+<script>
+
+  var exhibits = [];
+  var request = new XMLHttpRequest();
+
+
+  function getAllExhibits(completionHandler) {
+    var startIdx = 0;
+    var total;
+
+    request.onreadystatechange = function() {
+      if (this.readyState === 4 && this.status === 200) {
+        let json = JSON.parse(this.responseText);
+        total = json.count;
+        startIdx += json.pageSize;
+
+        for (let i = 0; i < json.exhibits.length; i++) {
+          exhibits.push(json.exhibits[i]);
+        }
+
+        if (startIdx < total) {
+          request.open('GET', 'http://localhost:8080/feed/new?startIdx=' + startIdx, true);
+          request.send();
+        } else {
+          completionHandler();
+        }
+      }
+    };
+
+    // start the first one
+    request.open('GET', 'http://localhost:8080/feed/new?startIdx=0', true);
+    request.send();
+  }
+
+  var draw = function() {
+    let div = document.getElementById("content");
+    div.innerHTML = "";
+    for (let i = 0; i < exhibits.length; i++) {
+      let ex = document.createElement("div");
+      ex.style = "border: 1px solid black;";
+      ex.innerHTML += `<p>Supporters: ${exhibits[i].supporterCount}</p>`;
+      ex.innerHTML += `<p>Description: ${exhibits[i].description}</p>`;
+      ex.innerHTML += `<p>Title: ${exhibits[i].title}</p>`;
+      ex.innerHTML += `<p>You supported it: ${exhibits[i].supported}</p>`;
+      ex.innerHTML += `<p onclick='deleteExhibit(${exhibits[i].id});'>Click to delete</p>`;
+      div.appendChild(ex);
+    }
+  };
+
+  function deleteExhibit(id) {
+    // TODO add user confirmation
+
+    let deleteReq = new XMLHttpRequest();
+    deleteReq.onreadystatechange = function() {
+      if (this.readyState === 4) {
+        if (!this.status === 204) {
+          alert("deleting exhibit failed. Please try again later");
+        } else {
+          // success remove from the list
+          for (let i = 0; i < exhibits.length; i++) {
+            if (exhibits[i].id === id) {
+              exhibits.splice(i, 1);
+            }
+          }
+          draw();
+        }
+      }
+    };
+    deleteReq.open('DELETE', `http://localhost:8080/exhibit/${id}`, true);
+    deleteReq.send();
+  }
+
+  getAllExhibits(draw);
+</script>
+</body>
+</html>

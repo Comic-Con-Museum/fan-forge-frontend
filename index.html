@@ -4,7 +4,93 @@
     <title>CCM Fan Curation</title>
 </head>
 <body>
-<div id="root"></div>
-<script src="./src/index.js"></script>
+
+<!-- Holds the exhibits -->
+<div id="content"></div>
+
+<button id="loadMore" onclick="getNextExhibits();">Load more</button>
+
+<div id="noMoreContent"></div>
+
+<!-- The detail view for the exhibit -->
+<div id="popup" style="position: absolute; z-index:1; top: 0; left: 0; bottom: 0; right: 0; background-color: grey; display: none;">
+    <button onclick="hidePopup();">Click to close this modal</button>
+    <div id="popupContent">
+        <h1>Loading...</h1>
+    </div>
+</div>
+
+<script>
+  var exhibits = []; // json array of exhibit objects
+  var request = new XMLHttpRequest();
+  var startIdx = 0; // the current index loading from
+  var total = 1; // total # of exhibits
+
+  function getNextExhibits() {
+
+
+    request.onreadystatechange = function() {
+      if (this.readyState === 4 && this.status === 200) {
+        let json = JSON.parse(this.responseText);
+        total = json.count;
+        startIdx += json.pageSize;
+
+        for (let i = 0; i < json.exhibits.length; i++) {
+          exhibits.push(json.exhibits[i]);
+          addExhibitToDom(json.exhibits[i]);
+        }
+
+        if (startIdx >= total) {
+          document.getElementById("loadMore").disabled = true;
+          document.getElementById("noMoreContent").innerHTML = "There is no more exhibits to load at the time.";
+        }
+      }
+    };
+
+    if (startIdx < total) {
+      // start the first one
+      request.open('GET', `http://localhost:8080/feed/new?startIdx=${startIdx}`, true);
+      request.send();
+    }
+  }
+
+  function addExhibitToDom(exhibit) {
+    let div = document.getElementById("content");
+    let ex = document.createElement("div");
+    ex.style = "border: 1px solid black;";
+    ex.innerHTML += `<p>Supporters: ${exhibit.supporterCount}</p>`;
+    ex.innerHTML += `<p>Description: ${exhibit.description}</p>`;
+    ex.innerHTML += `<p>Title: ${exhibit.title}</p>`;
+    ex.innerHTML += `<p>You supported it: ${exhibit.supported}</p>`;
+    ex.innerHTML += `<button onClick = "showPopup(${exhibit.id});">Show detail</button>`;
+    div.appendChild(ex);
+
+  }
+  getNextExhibits();
+
+  function hidePopup() {
+      document.getElementById("popup").style.display = "none";
+      document.getElementById("popupContent").innerHTML = "<h1>Loading...</h1>";
+  }
+
+  function showPopup(id) {
+      document.getElementById("popup").style.display = "block";
+
+      const detailRequest = new XMLHttpRequest();
+      detailRequest.onreadystatechange = function() {
+          if (this.readyState === 4 && this.status === 200) {
+              let json = JSON.parse(this.responseText);
+              document.getElementById("popupContent").innerHTML = JSON.stringify(json);
+          }
+      };
+
+      // start the first one
+      detailRequest.open('GET', `http://localhost:8080/exhibit/${id}`, true);
+      detailRequest.send();
+
+  }
+</script>
+<noscript>This app requires JavaScript to be enabled to view/post content.</noscript>
+
 </body>
 </html>
