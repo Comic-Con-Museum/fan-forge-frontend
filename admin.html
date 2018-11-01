@@ -50,7 +50,7 @@
       ex.innerHTML += `<p>Description: ${exhibits[i].description}</p>`;
       ex.innerHTML += `<p>Title: ${exhibits[i].title}</p>`;
       ex.innerHTML += `<p>You supported it: ${exhibits[i].supported}</p>`;
-      ex.innerHTML += `<p onclick='deleteExhibit(${exhibits[i].id});'>Click to delete</p>`;
+      ex.innerHTML += `<button onclick='deleteExhibit(${exhibits[i].id});'>Click to delete</button>`;
       div.appendChild(ex);
     }
   };
