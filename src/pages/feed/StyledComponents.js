@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+  import styled from 'styled-components';
 
 export const PageWrapper = styled.div`
   display: flex;
@@ -44,4 +44,53 @@ export const SearchInput = styled.input`
   margin: 10px 20px;
   color: #b4b8c5;
   outline: none;
+`;
+
+export const ExhibitContainer = styled.div`
+  width: 600px;
+  height: 500px;
+  box-shadow: 5px 8px 6px rgba(0, 0, 0, 0.16);
+  background-color: #ffffff;
+  margin-bottom: 40px;
+`;
+
+export const ExhibitTitle = styled.h1`
+  color: #0072bc;
+  font-family: Oswald;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 0.74px
+  margin: 10px 0 0 10px;
+`;
+
+export const ExhibitDescriptionDiv = styled.div`
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between
+  width: 100%;
+  height: 40%;
+  background-color: grey;
+  padding: 10px;
+`;
+
+export const ExhibitDescriptionText = styled.p`
+  color: #4d4d4d;
+  font-family: "Helvetica Neue";
+  font-size: 18px;
+  font-weight: 300;
+  letter-spacing: 0.18px;
+`;
+
+export const Tag = styled.div`
+  padding: 5px;
+  margin: 0 5px;
+  border: 1px solid #b4b8c5;
+  background-color: #f7f7f7;
+  color: #0072bc;
+  font-family: Oswald;
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: 0.21px;
+  text-transform: uppercase;
 `;
