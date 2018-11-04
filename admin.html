@@ -60,6 +60,7 @@
 
     // start the first one
     request.open('GET', 'http://localhost:8080/feed/new?startIdx=0', true);
+    request.setRequestHeader("Authorization", "Bearer zjones");
     request.send();
   }
 
@@ -71,7 +72,7 @@
       ex.style = "border: 1px solid black;";
       ex.innerHTML += `<p>Title: ${exhibits[i].title}</p>`;
       ex.innerHTML += '<p>Date created: Today (backend needs to add this to the admin api)</p>';
-      ex.innerHTML += `<p>Supporters: ${exhibits[i].supporterCount}</p>`;
+      ex.innerHTML += `<p>Supporters: ${exhibits[i].supporters}</p>`;
       ex.innerHTML += '<p>Number of comments: (backend needs to add this to the admin api)</p>';
       ex.innerHTML += `<button onclick='deleteExhibit(${exhibits[i].id});'>Click to delete</button>`;
       div.appendChild(ex);
@@ -98,6 +99,7 @@
       }
     };
     deleteReq.open('DELETE', `http://localhost:8080/exhibit/${id}`, true);
+    deleteReq.setRequestHeader("Authorization", "Bearer zjones");
     deleteReq.send();
   }
 

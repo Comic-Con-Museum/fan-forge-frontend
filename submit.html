@@ -57,7 +57,7 @@
             // these 3 fields are all that backend supports on the branch
             const description = document.getElementById("description").value;
             const title = document.getElementById("title").value;
-            const author = "zjones";
+            const tags = [];
 
             if (!description || !title) {
                 alert("Description and title must be filled in.");
@@ -67,7 +67,7 @@
             const postRequest = new XMLHttpRequest();
             postRequest.onreadystatechange = function() {
                 if (this.readyState === 4) {
-                    if (this.status == 200) {
+                    if (this.status === 200) {
                         alert("Exhibit posted successfully.");
                     } else {
                         alert("Could not post exhibit. Please try again later.");
@@ -78,8 +78,9 @@
             // post it
             postRequest.open('POST', 'http://localhost:8080/exhibit/', true);
             postRequest.setRequestHeader("Content-Type", "application/json");
+            postRequest.setRequestHeader("Authorization", "Bearer zjones");
             postRequest.send(JSON.stringify({
-                description, title, author
+                description, title, tags
             }));
         }
     </script>

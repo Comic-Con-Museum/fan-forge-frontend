@@ -53,6 +53,8 @@
     if (startIdx < total) {
       // start the first one
       request.open('GET', `http://localhost:8080/feed/new?startIdx=${startIdx}`, true);
+      request.setRequestHeader("Content-Type", "application/json");
+      request.setRequestHeader("Authorization", "Bearer zjones");
       request.send();
     }
   }
@@ -61,7 +63,7 @@
     let div = document.getElementById("content");
     let ex = document.createElement("div");
     ex.style = "border: 1px solid black;";
-    ex.innerHTML += `<p>Supporters: ${exhibit.supporterCount}</p>`;
+    ex.innerHTML += `<p>Supporters: ${exhibit.supporters}</p>`;
     ex.innerHTML += `<p>Description: ${exhibit.description}</p>`;
     ex.innerHTML += `<p>Title: ${exhibit.title}</p>`;
     ex.innerHTML += `<p>You supported it: ${exhibit.supported}</p>`;
@@ -89,6 +91,8 @@
 
       // start the first one
       detailRequest.open('GET', `http://localhost:8080/exhibit/${id}`, true);
+      detailRequest.setRequestHeader("Content-Type", "application/json");
+      detailRequest.setRequestHeader("Authorization", "Bearer zjones");
       detailRequest.send();
 
   }
