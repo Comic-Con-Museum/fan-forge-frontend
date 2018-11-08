@@ -1,7 +1,7 @@
 
 # Fan Curation Front-end Repo
 
-These are stand-alone web pages, which can be viewed by opening them in a browser.
+This is a react app, run `npm start` to run the dev server, and go to the URL given in the output
 
 In order to have the pages work as intended, you have to run the backend on localhost for now.
 
