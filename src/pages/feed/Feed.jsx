@@ -13,11 +13,7 @@ class Feed extends Component {
     this.state = { items: [], startIdx: 0, done: false };
     this.getNextExhibits = this.getNextExhibits.bind(this);
   }
-
-  componentDidMount() {
-      //this.getNextExhibits();
-  }
-
+  
   getNextExhibits() {
       if (this.state.done) {
           alert("There are no more exhibits at the time.");
