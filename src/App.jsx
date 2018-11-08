@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 
 import {
   Feed,
-  Submit
+  Submit,
+  AdminPage
 } from './pages';
 
 class App extends Component {
@@ -12,6 +13,7 @@ class App extends Component {
       <Switch>
         <Route exact path='/' component={Feed}/>
         <Route exact path='/submit' component={Submit}/>
+        <Route exact path='/admin' component={AdminPage}/>
       </Switch>
     );
   }
