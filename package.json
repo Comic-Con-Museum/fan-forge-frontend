@@ -1,0 +1,40 @@
+{
+  "name": "ccm-fan-curation",
+  "version": "0.0.0",
+  "description": "The frontend react web app that will be used to submit and review fan curated exhibits for comic-con museum",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel index.html",
+    "test": "test",
+    "build": "parcel build index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Comic-ConMuseum/DC-frontend.git"
+  },
+  "keywords": [
+    "comic-con",
+    "museum",
+    "fan",
+    "curation"
+  ],
+  "author": "Owen Sullivan, Drg, Zach Jones",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Comic-ConMuseum/DC-frontend/issues"
+  },
+  "homepage": "https://github.com/Comic-ConMuseum/DC-frontend#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
+    "react-router-dom": "^4.3.1",
+    "styled-components": "^3.4.10"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "parcel-bundler": "^1.10.2"
+  }
+}
