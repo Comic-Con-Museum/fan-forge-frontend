@@ -37,6 +37,7 @@ class Feed extends Component {
           </ControlCard>
           <ExhibitList>
             <ExhibitCard {...sampleData}/>
+            <ExhibitCard {...sampleData}/>
           </ExhibitList>
         </ContentContainer>
       </PageWrapper>

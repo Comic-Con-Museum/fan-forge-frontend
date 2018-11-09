@@ -47,6 +47,9 @@ export const SearchInput = styled.input`
 `;
 
 export const ExhibitContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   width: 600px;
   height: 500px;
   box-shadow: 5px 8px 6px rgba(0, 0, 0, 0.16);
@@ -70,7 +73,6 @@ export const ExhibitDescriptionDiv = styled.div`
   justify-content: space-between
   width: 100%;
   height: 40%;
-  background-color: grey;
   padding: 10px;
 `;
 
