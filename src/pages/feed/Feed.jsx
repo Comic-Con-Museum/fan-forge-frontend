@@ -3,8 +3,6 @@ import React, { Component } from 'react';
 import ExhibitCard from './ExhibitCard';
 import {
   PageWrapper,
-  Title,
-  ContentContainer,
   ExhibitList
 } from './StyledComponents';
 
@@ -19,6 +17,19 @@ const sampleData = {
   imageUrl: 'adf'
 }
 
+const dataArr = [
+  sampleData,
+  sampleData,
+  sampleData,
+  sampleData,
+  sampleData,
+  sampleData,
+  sampleData,
+  sampleData,
+  sampleData,
+  sampleData
+]
+
 class Feed extends Component {
   constructor(props) {
     super(props);
@@ -28,13 +39,9 @@ class Feed extends Component {
   render() {
     return (
       <PageWrapper>
-        <Title>Explore exhibit ideas</Title>
-        <ContentContainer>
           <ExhibitList>
-            <ExhibitCard {...sampleData}/>
-            <ExhibitCard {...sampleData}/>
+            {dataArr.map((item) => <ExhibitCard {...item} />)}
           </ExhibitList>
-        </ContentContainer>
       </PageWrapper>
     );
   }
