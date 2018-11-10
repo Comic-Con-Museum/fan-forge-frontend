@@ -4,9 +4,7 @@ import ExhibitCard from './ExhibitCard';
 import {
   PageWrapper,
   Title,
-  ControlCard,
   ContentContainer,
-  SearchInput,
   ExhibitList
 } from './StyledComponents';
 
@@ -32,9 +30,6 @@ class Feed extends Component {
       <PageWrapper>
         <Title>Explore exhibit ideas</Title>
         <ContentContainer>
-          <ControlCard>
-            <SearchInput placeholder="Search exhibits..."/>
-          </ControlCard>
           <ExhibitList>
             <ExhibitCard {...sampleData}/>
             <ExhibitCard {...sampleData}/>
