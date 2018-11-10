@@ -32,14 +32,16 @@ class ExhibitCard extends Component {
         <ImgContainer>
           <ExhibitImg open={open} src={imageUrl}/>
         </ImgContainer>
-        <ExhibitTitle>{title}</ExhibitTitle>
-        <ButtonContainer>
-          <p>Supporters: 889</p>
-          <p>{open ? 'V' : '>'}</p>
-        </ButtonContainer>
-        <Description>
-          {description}
-        </Description>
+        <div style={{padding: '0 20px 0 10px'}}>
+          <ExhibitTitle>{title}</ExhibitTitle>
+          <ButtonContainer>
+            <p>Supporters: 889</p>
+            <p>{open ? 'V' : '>'}</p>
+          </ButtonContainer>
+          <Description>
+            {description}
+          </Description>
+        </div>
       </ExhibitContainer>
     );
   }

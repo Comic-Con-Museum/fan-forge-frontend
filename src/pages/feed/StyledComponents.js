@@ -10,7 +10,9 @@ export const PageWrapper = styled.div`
 export const ExhibitList = styled.div`
   display: flex;
   flex-flow: row wrap;
+  justify-content: center;
   align-items: flex-start;
+  align-content: flex-start;
   box-sizing: border-box;
   width: 100%;
   padding: 50px;
@@ -21,11 +23,9 @@ export const ExhibitContainer = styled.div`
   width: 325px;
   height: ${({open}) => (open ? '400px' : '300px')};
   box-shadow: 5px 8px 6px rgba(0, 0, 0, 0.16);
-  background-color: #ffffff;
+  background-color: ${({open}) => (open ? 'yellow' : '#ffffff')};
   border-radius: 5px;
   overflow: hidden;
-  align-content: flex-start;
-  align-items: flex-start;
   transition: height .5s;
 
   :hover {
@@ -54,4 +54,30 @@ export const ButtonContainer = styled.div`
   justify-content: space-between;
 `;
 
-export const Description = styled.p``;
+export const Description = styled.p`
+  overflow: hidden;
+  position: relative;
+  line-height: 1.2em;
+  max-height: 3.6em;
+  text-align: justify;
+  margin-right: -1em;
+  padding-right: 1em;
+
+  // this is to truncate the additional text
+  :before {
+    content: '...';
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+  // this too
+  :after {
+    content: '';
+    position: absolute;
+    right: 0;
+    width: 1em;
+    height: 1em;
+    margin-top: 0.2em;
+    background: yellow;
+  }
+`;
