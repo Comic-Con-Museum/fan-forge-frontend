@@ -14,7 +14,7 @@ const sampleData = {
     'superhero'
   ],
   likeCount: 988,
-  imageUrl: 'adf'
+  imageUrl: 'https://cdn-static.denofgeek.com/sites/denofgeek/files/styles/main_wide/public/marvel-spider-man-season-2-animated-series.jpg?itok=2b4vodb7'
 }
 
 const dataArr = [

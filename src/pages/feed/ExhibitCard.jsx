@@ -1,14 +1,48 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
   ExhibitContainer,
+  ExhibitImg,
+  ExhibitTitle,
+  ImgContainer,
+  ButtonContainer,
+  Description
 } from './StyledComponents';
 
-const ExhibitCard = ({title, description, tags}) => {
-  return (
-    <ExhibitContainer>
+class ExhibitCard extends Component {
+  constructor(props) {
+    super(props);
 
-    </ExhibitContainer>
-  );
+    this.state = {
+      open: false
+    };
+
+    this.toggleOpen = this.toggleOpen.bind(this);
+  }
+
+  toggleOpen() {
+    const open = !this.state.open;
+    this.setState({open});
+  }
+
+  render() {
+    const {imageUrl, title, description} = this.props;
+    const {open} = this.state;
+    return (
+      <ExhibitContainer onClick={this.toggleOpen} open={open}>
+        <ImgContainer>
+          <ExhibitImg open={open} src={imageUrl}/>
+        </ImgContainer>
+        <ExhibitTitle>{title}</ExhibitTitle>
+        <ButtonContainer>
+          <p>Supporters: 889</p>
+          <p>{open ? 'V' : '>'}</p>
+        </ButtonContainer>
+        <Description>
+          {description}
+        </Description>
+      </ExhibitContainer>
+    );
+  }
 }
 
 export default ExhibitCard;
