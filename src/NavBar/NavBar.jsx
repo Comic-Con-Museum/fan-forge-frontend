@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import {
@@ -29,29 +29,31 @@ const activeStyle = {
   textTransform: 'uppercase',
 }
 
-const NavBar = () => {
-  return (
-    <NavBarContainer>
-      <LogoImg src="https://www.balboapark.org/sites/default/files/2018-07/CCIM-OrgPageAd-275x350.jpg"/>
-      <ActionContainer>
-        <LinkContainer>
-          <NavLink to='/' exact activeStyle={activeStyle} style={linkStyle}>
-            FEED
-          </NavLink>
-          <NavLink to='/submit' activeStyle={activeStyle} style={linkStyle}>
-            SUBMIT
-          </NavLink>
-          <NavLink to='/about' activeStyle={activeStyle} style={linkStyle}>
-            ABOUT
-          </NavLink>
-        </LinkContainer>
-        <SubmitLoginContainer>
-          <SubmitButton>SUBMIT AN IDEA</SubmitButton>
-          <LoginButton>LOG IN</LoginButton>
-        </SubmitLoginContainer>
-      </ActionContainer>
-    </NavBarContainer>
-  )
+class NavBar extends PureComponent {
+  render() {
+    return (
+      <NavBarContainer>
+        <LogoImg src="https://www.balboapark.org/sites/default/files/2018-07/CCIM-OrgPageAd-275x350.jpg"/>
+        <ActionContainer>
+          <LinkContainer>
+            <NavLink to='/' exact activeStyle={activeStyle} style={linkStyle}>
+              FEED
+            </NavLink>
+            <NavLink to='/submit' activeStyle={activeStyle} style={linkStyle}>
+              SUBMIT
+            </NavLink>
+            <NavLink to='/about' activeStyle={activeStyle} style={linkStyle}>
+              ABOUT
+            </NavLink>
+          </LinkContainer>
+          <SubmitLoginContainer>
+            <SubmitButton>SUBMIT AN IDEA</SubmitButton>
+            <LoginButton>LOG IN</LoginButton>
+          </SubmitLoginContainer>
+        </ActionContainer>
+      </NavBarContainer>
+    );
+  }
 }
 
 export default NavBar;

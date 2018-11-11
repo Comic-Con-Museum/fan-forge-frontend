@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
 import ExhibitCard from './ExhibitCard';
 import {
@@ -30,7 +30,7 @@ const dataArr = [
   sampleData
 ]
 
-class Feed extends Component {
+class Feed extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {};

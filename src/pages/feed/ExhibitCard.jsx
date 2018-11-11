@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { PropTypes } from 'prop-types';
 import {
   ExhibitContainer,
@@ -9,7 +9,7 @@ import {
   Description
 } from './StyledComponents';
 
-class ExhibitCard extends Component {
+class ExhibitCard extends PureComponent {
   constructor(props) {
     super(props);
 
