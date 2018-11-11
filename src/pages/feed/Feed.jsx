@@ -40,7 +40,7 @@ class Feed extends Component {
     return (
       <PageWrapper>
           <ExhibitList>
-            {dataArr.map((item) => <ExhibitCard {...item} />)}
+            {dataArr.map((item, index) => <ExhibitCard key={index} {...item} />)}
           </ExhibitList>
       </PageWrapper>
     );

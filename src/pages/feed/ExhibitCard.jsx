@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { PropTypes } from 'prop-types';
 import {
   ExhibitContainer,
   ExhibitImg,
@@ -15,11 +16,9 @@ class ExhibitCard extends Component {
     this.state = {
       open: false
     };
-
-    this.toggleOpen = this.toggleOpen.bind(this);
   }
 
-  toggleOpen() {
+  toggleOpen = () => {
     const open = !this.state.open;
     this.setState({open});
   }
@@ -46,5 +45,11 @@ class ExhibitCard extends Component {
     );
   }
 }
+
+ExhibitCard.propTypes = {
+  imageUrl: PropTypes.string,
+  title: PropTypes.string,
+  description: PropTypes.string
+};
 
 export default ExhibitCard;
