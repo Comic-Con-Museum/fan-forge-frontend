@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
 import {
   PageWrapper,
   Title
 } from './StyledComponents';
 
-class Submit extends Component {
+class Submit extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {};
