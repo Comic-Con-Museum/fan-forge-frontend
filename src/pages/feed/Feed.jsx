@@ -29,7 +29,6 @@ const dataArr = [
   sampleData,
   sampleData
 ]
-
 class Feed extends PureComponent {
   constructor(props) {
     super(props);

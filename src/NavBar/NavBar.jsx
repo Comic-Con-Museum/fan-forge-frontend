@@ -28,7 +28,6 @@ const activeStyle = {
   fontWeight: 500,
   textTransform: 'uppercase',
 }
-
 class NavBar extends PureComponent {
   render() {
     return (

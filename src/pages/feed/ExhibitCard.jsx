@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { PropTypes } from 'prop-types';
+
 import {
   ExhibitContainer,
   ExhibitImg,
@@ -8,7 +9,6 @@ import {
   ButtonContainer,
   Description
 } from './StyledComponents';
-
 class ExhibitCard extends PureComponent {
   constructor(props) {
     super(props);
