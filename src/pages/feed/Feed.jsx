@@ -33,7 +33,10 @@ class Feed extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      content: null
+      content: null,
+      error: false,
+      index: 0,
+      onLastPage: false
     };
   }
 
@@ -42,20 +45,28 @@ class Feed extends PureComponent {
   }
 
   getExhibits() {
+    const {index} = this.state;
     const headers = {
       "Content-Type": "application/json",
       "Authorization": "Bearer zjones"
     }
 
-    axios.get(`https://fan-forge-dev.herokuapp.com/feed/new?startIdx=1`, { headers: headers })
-    .then(res => {
-        console.warn('data', res);
+    axios.get(`https://fan-forge-dev.herokuapp.com/feed/new?startIdx=${index}`, { headers: headers })
+    .then(({data}) => {
+        console.warn('data', data);
+        this.setState({
+          index: index + data.pageSize,
+          content: data.exhibits,
+          onLastPage: index > data.count
+        })
     })
-    .catch(() => { alert("Unable to load the feed, please try again later."); });
+    .catch(() => { this.setState({error: true}) });
   }
 
   render() {
-    const {content} = this.state;
+    const {content, error} = this.state;
+    if (error) return <div>Sorry, but there was an error on our side. Try refreshing.</div>
+
     if (!content) {
       return <div>Loading</div>
     }
@@ -63,7 +74,7 @@ class Feed extends PureComponent {
     return (
       <PageWrapper>
           <ExhibitList>
-            {dataArr.map((item, index) => <ExhibitCard key={index} {...item} />)}
+            {content.map((item, index) => <ExhibitCard key={index} {...item} />)}
           </ExhibitList>
       </PageWrapper>
     );
