@@ -53,12 +53,8 @@ class Feed extends PureComponent {
       "Authorization": "Bearer zjones"
     }
 
-    console.warn('state', this.state)
-    console.warn('for', forward)
-
     axios.get(`https://fan-forge-dev.herokuapp.com/feed/new?startIdx=${forward ? index : index - pageSize}`, { headers: headers })
     .then(({data}) => {
-        console.warn('data', data);
         this.setState({
           index: forward ? index + data.pageSize : index - data.pageSize,
           content: data.exhibits,
@@ -70,7 +66,6 @@ class Feed extends PureComponent {
   }
 
   changePage = (event) => {
-    console.log('changePage', event.target.id)
     this.getExhibits(event.target.id === 'NEXT');
   }
 
