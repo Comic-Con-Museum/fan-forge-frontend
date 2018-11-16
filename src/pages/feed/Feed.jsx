@@ -1,9 +1,10 @@
 import React, { PureComponent } from 'react';
-
+import axios from 'axios';
 import ExhibitCard from './ExhibitCard';
 import {
   PageWrapper,
-  ExhibitList
+  ExhibitList,
+  PageChanger
 } from './StyledComponents';
 
 const sampleData = {
@@ -32,14 +33,61 @@ const dataArr = [
 class Feed extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      content: null,
+      error: false,
+      index: 0,
+      onLastPage: false,
+      pageSize: 10
+    };
+  }
+
+  componentDidMount() {
+    this.getExhibits();
+  }
+
+  getExhibits(forward = true) {
+    const {index, pageSize} = this.state;
+    const headers = {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer zjones"
+    }
+
+    console.warn('state', this.state)
+    console.warn('for', forward)
+
+    axios.get(`https://fan-forge-dev.herokuapp.com/feed/new?startIdx=${forward ? index : index - pageSize}`, { headers: headers })
+    .then(({data}) => {
+        console.warn('data', data);
+        this.setState({
+          index: forward ? index + data.pageSize : index - data.pageSize,
+          content: data.exhibits,
+          onLastPage: index > data.count,
+          pageSize: data.pageSize
+        })
+    })
+    .catch(() => { this.setState({error: true}) });
+  }
+
+  changePage = (event) => {
+    console.log('changePage', event.target.id)
+    this.getExhibits(event.target.id === 'NEXT');
   }
 
   render() {
+    const {content, error} = this.state;
+    if (error) return <div>Sorry, but there was an error on our side. Try refreshing.</div>
+
+    if (!content) {
+      return <div>Loading</div>
+    }
+
     return (
       <PageWrapper>
+          <PageChanger id="NEXT" onClick={this.changePage} next/>
+          <PageChanger id="BACK" onClick={this.changePage} />
           <ExhibitList>
-            {dataArr.map((item, index) => <ExhibitCard key={index} {...item} />)}
+            {content.map((item, index) => <ExhibitCard key={index} {...item} />)}
           </ExhibitList>
       </PageWrapper>
     );
