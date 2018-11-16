@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-
+import axios from 'axios';
 import ExhibitCard from './ExhibitCard';
 import {
   PageWrapper,
@@ -32,10 +32,34 @@ const dataArr = [
 class Feed extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      content: null
+    };
+  }
+
+  componentDidMount() {
+    this.getExhibits();
+  }
+
+  getExhibits() {
+    const headers = {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer zjones"
+    }
+
+    axios.get(`https://fan-forge-dev.herokuapp.com/feed/new?startIdx=1`, { headers: headers })
+    .then(res => {
+        console.warn('data', res);
+    })
+    .catch(() => { alert("Unable to load the feed, please try again later."); });
   }
 
   render() {
+    const {content} = this.state;
+    if (!content) {
+      return <div>Loading</div>
+    }
+
     return (
       <PageWrapper>
           <ExhibitList>
