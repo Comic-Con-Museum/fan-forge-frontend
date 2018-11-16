@@ -3,7 +3,8 @@ import axios from 'axios';
 import ExhibitCard from './ExhibitCard';
 import {
   PageWrapper,
-  ExhibitList
+  ExhibitList,
+  PageChanger
 } from './StyledComponents';
 
 const sampleData = {
@@ -36,7 +37,8 @@ class Feed extends PureComponent {
       content: null,
       error: false,
       index: 0,
-      onLastPage: false
+      onLastPage: false,
+      pageSize: 10
     };
   }
 
@@ -44,23 +46,32 @@ class Feed extends PureComponent {
     this.getExhibits();
   }
 
-  getExhibits() {
-    const {index} = this.state;
+  getExhibits(forward = true) {
+    const {index, pageSize} = this.state;
     const headers = {
       "Content-Type": "application/json",
       "Authorization": "Bearer zjones"
     }
 
-    axios.get(`https://fan-forge-dev.herokuapp.com/feed/new?startIdx=${index}`, { headers: headers })
+    console.warn('state', this.state)
+    console.warn('for', forward)
+
+    axios.get(`https://fan-forge-dev.herokuapp.com/feed/new?startIdx=${forward ? index : index - pageSize}`, { headers: headers })
     .then(({data}) => {
         console.warn('data', data);
         this.setState({
-          index: index + data.pageSize,
+          index: forward ? index + data.pageSize : index - data.pageSize,
           content: data.exhibits,
-          onLastPage: index > data.count
+          onLastPage: index > data.count,
+          pageSize: data.pageSize
         })
     })
     .catch(() => { this.setState({error: true}) });
+  }
+
+  changePage = (event) => {
+    console.log('changePage', event.target.id)
+    this.getExhibits(event.target.id === 'NEXT');
   }
 
   render() {
@@ -73,6 +84,8 @@ class Feed extends PureComponent {
 
     return (
       <PageWrapper>
+          <PageChanger id="NEXT" onClick={this.changePage} next/>
+          <PageChanger id="BACK" onClick={this.changePage} />
           <ExhibitList>
             {content.map((item, index) => <ExhibitCard key={index} {...item} />)}
           </ExhibitList>
