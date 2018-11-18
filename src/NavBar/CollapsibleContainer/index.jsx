@@ -31,7 +31,7 @@ function createControlledCollapsibleComponent(WrappedComponent, containerStyles 
     render() {
       return (
         <CollapsibleContainer isCollapsed={this.props.isCollapsed} id={this.props.id} innerRef={node => this.containerRef = node}>
-          <WrappedComponent {...this.props} />
+          <WrappedComponent tabIndex={this.props.isCollapsed ? "0" : "-1"} {...this.props} />
         </CollapsibleContainer>
       )
     }

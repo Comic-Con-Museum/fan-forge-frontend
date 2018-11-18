@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { NavLink } from 'react-router-dom';
 import { keyCodes } from '../constants';
-import { CollapsibleFilteringOptions } from './FilteringOptions';
+import { CollapsibleFilteringOptions } from './FilteringOptions/';
 
 import {
   NavBarContainer,
