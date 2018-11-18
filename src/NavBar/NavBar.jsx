@@ -1,8 +1,11 @@
 import React, { PureComponent } from 'react';
 import { NavLink } from 'react-router-dom';
+import { keyCodes } from '../constants';
+import { CollapsibleFilteringOptions } from './FilteringOptions';
 
 import {
   NavBarContainer,
+  NavController,
   LogoImg,
   LinkContainer,
   SubmitLoginContainer,
@@ -28,13 +31,46 @@ const activeStyle = {
   fontWeight: 500,
   textTransform: 'uppercase',
 }
+
 class NavBar extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showFiltering: false,
+    };
+  }
+  toggleFiltering = () => this.setState(prevState => ({ showFiltering: !prevState.showFiltering }));
+
+  toggleFilteringOnKeyPress = (event) => {
+    if (event.keyCode == keyCodes.enter || event.keyCode == keyCodes.space) {
+      event.preventDefault();
+      this.toggleFiltering()
+    }
+  }
+
   render() {
     return (
       <NavBarContainer>
-        <LogoImg src="https://www.balboapark.org/sites/default/files/2018-07/CCIM-OrgPageAd-275x350.jpg"/>
+        <LogoImg src="https://www.balboapark.org/sites/default/files/2018-07/CCIM-OrgPageAd-275x350.jpg" />
         <ActionContainer>
           <LinkContainer>
+            <NavController
+              id="nav__filterController"
+              controleeId="nav__filterContainer"
+              isControleeActive={this.state.showFiltering}
+              onClick={this.toggleFiltering}
+              onKeyDown={this.toggleFilteringOnKeyPress}
+            > Search </NavController>
+            <CollapsibleFilteringOptions
+              id="nav__filterContainer"
+              controllerId="nav__filterController"
+              isCollapsed={this.state.showFiltering}
+              collapseContainer={this.toggleFiltering}
+              tagValue={this.props.filterTag}
+              sortValue={this.props.sortOption}
+              setFilterTag={this.props.setFilterTag}
+              setSortOption={this.props.setSortOption}
+            />
             <NavLink to='/' exact activeStyle={activeStyle} style={linkStyle}>
               FEED
             </NavLink>
@@ -50,6 +86,7 @@ class NavBar extends PureComponent {
             <LoginButton>LOG IN</LoginButton>
           </SubmitLoginContainer>
         </ActionContainer>
+
       </NavBarContainer>
     );
   }
