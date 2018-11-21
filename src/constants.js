@@ -1,15 +1,17 @@
-export const sortOptions = [
-  {
+export const sortOptions = {
+  RECENT: {
     value: 'recent',
-    label: 'Most Recent'
+    label: 'Most recent'
   },
-  {
+  POPULAR: {
     value: 'popular',
-    label: 'Most Popular'
+    label: 'Most popular'
   }
-];
+};
 
 export const keyCodes = {
   'enter': 13,
   'space': 32
 };
+
+export const appURL = process.env.APP_URL;

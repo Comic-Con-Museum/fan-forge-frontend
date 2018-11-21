@@ -36,7 +36,6 @@ class Feed extends PureComponent {
     this.state = {
       content: null,
       error: false,
-      index: 0,
       onLastPage: false,
       pageSize: 10
     };
