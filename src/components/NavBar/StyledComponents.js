@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { PropTypes } from 'prop-types';
-import { colors, media } from './../theme';
+import { colors, media } from '../../theme';
 
 export const NavBarContainer = styled.div`
   display: flex;

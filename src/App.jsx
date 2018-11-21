@@ -1,32 +1,36 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import axios from 'axios';
 import { Switch, Route } from 'react-router-dom';
-import { sortOptions, appURL } from './constants';
-import NavBar from './NavBar';
+import { sortOptions, appURL, defaultTag } from './constants';
+import NavBar from './components/NavBar';
+import Feed from './components/Feed';
 import { ThemeProvider } from 'styled-components';
-
-import {
-  Feed,
-  Submit
-} from './pages';
 
 export class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      filterTag: sortOptions.RECENT,
-      sortOption: sortOptions.RECENT,
+      tags: [],
+      exhibits: [],
+      loading: true,
+      error: undefined,
       feedPageIndex: 0,
       onLastPage: false,
-      loading: true,
-      error: undefined
+      activeTag: defaultTag,
+      sortOption: sortOptions.RECENT
     };
   }
   
   fetchFeed = async () => {
-    const  {feedPageIndex, sortOption } = this.state;
+    const  {feedPageIndex, sortOption, activeTag } = this.state;
     try {
-      const feed = await axios.get(`${appURL}/feed/${sortOption.value}?startIdx=${feedPageIndex}`);
+      const feed = await axios.get(`${appURL}/feed/${sortOption.value}`, {
+        params: {
+          startIdx: feedPageIndex,
+          tag: activeTag.value !== defaultTag.value ? activeTag.value : undefined,
+        },
+      });
+
       return feed.data;
     } catch (err) {
         // TODO: implement error handling
@@ -35,26 +39,38 @@ export class App extends Component {
   }
   
   fetchTags = async () => {
-    return 1;
+    try {
+      const tags = await axios.get(`${appURL}/tags`);
+      return tags.data;
+    } catch (err) {
+      // TODO: implement error handling
+      console.log(err)
+    }
   }
 
   async componentDidMount () {
     const feedFetcher = this.fetchFeed();
-    const tagFetcher = this.fetchTags();
+    const tags = await this.fetchTags();
 
     // TODO: implement error handling
     const {exhibits, count, pageSize} =  await feedFetcher;
+    const labeledTags = tags.map(tag => ({
+      label: tag,
+      value: tag
+    }));
+    
+    labeledTags.unshift(defaultTag);
 
     this.setState((prevState) => ({
-      content: exhibits,
+      exhibits: exhibits,
       onLastPage: prevState.feedPageIndex > count,
-      tags: tagFetcher,
+      tags: labeledTags,
       loading: false
     }));
   }
 
   shouldUpdateFeed = prevState => prevState.sortOption.value !== this.state.sortOption.value 
-    || prevState.filterTag.value !== this.state.filterTag.value
+    || prevState.activeTag.value !== this.state.activeTag.value
     || prevState.feedPageIndex !== this.state.feedPageIndex;
 
   updateFeed = async () => {
@@ -67,14 +83,13 @@ export class App extends Component {
     const {exhibits, count, pageSize} =  await feedFetcher;
 
     this.setState((prevState) => ({
-      content: exhibits,
+      exhibits: exhibits,
       onLastPage: prevState.feedPageIndex > count,
       loading: false
     }));
   }
 
   async componentDidUpdate(prevProps, prevState) {
-    console.log(this.state);
     if (this.shouldUpdateFeed(prevState)) {
       this.updateFeed();
     }
@@ -86,19 +101,21 @@ export class App extends Component {
     this.setState(newStateField);
   }
 
-  setFilterTag = this.createSetter('filterTag');
+  setActiveTag = this.createSetter('activeTag');
   setSortOption = this.createSetter('sortOption');
 
   render() {
-    const {filterTag, sortOption} = this.state;
+    const {activeTag, sortOption} = this.state;
     return (
-      <div>
+      <Fragment>
         <NavBar 
-          filterTag={filterTag} 
+          activeTag={activeTag} 
           sortOption={sortOption}
-          setFilterTag={this.setFilterTag}
+          tagOptions={this.state.tags}
+          setActiveTag={this.setActiveTag}
           setSortOption={this.setSortOption} />
-      </div>
+          <Feed content={this.state.exhibits} />
+      </Fragment>
     );
   }
 }

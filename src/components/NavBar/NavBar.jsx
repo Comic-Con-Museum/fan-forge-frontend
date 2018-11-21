@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { NavLink } from 'react-router-dom';
-import { keyCodes } from '../constants';
-import { CollapsibleFilteringOptions } from './FilteringOptions/';
+import { keyCodes } from '../../constants';
+import { CollapsibleFilteringOptions } from '../FilteringOptions/';
 
 import {
   NavBarContainer,
@@ -39,6 +39,7 @@ class NavBar extends PureComponent {
       showFiltering: false,
     };
   }
+  
   toggleFiltering = () => this.setState(prevState => ({ showFiltering: !prevState.showFiltering }));
 
   toggleFilteringOnKeyPress = (event) => {
@@ -66,9 +67,10 @@ class NavBar extends PureComponent {
               controllerId="nav__filterController"
               isCollapsed={this.state.showFiltering}
               collapseContainer={this.toggleFiltering}
-              tagValue={this.props.filterTag}
+              tagValue={this.props.activeTag}
               sortValue={this.props.sortOption}
-              setFilterTag={this.props.setFilterTag}
+              tagOptions={this.props.tagOptions}
+              setFilterTag={this.props.setActiveTag}
               setSortOption={this.props.setSortOption}
             />
             <NavLink to='/' exact activeStyle={activeStyle} style={linkStyle}>

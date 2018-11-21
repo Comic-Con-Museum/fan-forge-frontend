@@ -50,7 +50,7 @@ FilteringOptions.propTypes = {
 
 FilteringOptions.defaultProps = {
     sortOptions: Object.values(sortOptions),
-    tagOptions: Object.values(sortOptions),
+    tagOptions: [],
     tabIndex: "0"
 };
 
