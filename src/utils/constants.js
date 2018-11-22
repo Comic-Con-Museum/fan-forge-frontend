@@ -9,7 +9,7 @@ export const sortOptions = {
   }
 };
 
-export const defaultTag = {value: 'default', label: 'All exhibits'}
+export const defaultTag = { value: 'default', label: 'All exhibits' }
 
 export const keyCodes = {
   'enter': 13,

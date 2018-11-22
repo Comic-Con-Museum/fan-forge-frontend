@@ -1,10 +1,10 @@
 import { css } from 'styled-components';
 
 export const colors = {
-    yellow_1: 'yellow',
-    yellow_2: 'orange',
-    black: 'black',
-    gray_1: 'gray'
+  yellow_1: 'yellow',
+  yellow_2: 'orange',
+  black: 'black',
+  gray_1: 'gray'
 }
 
 export const deviceSizes = {

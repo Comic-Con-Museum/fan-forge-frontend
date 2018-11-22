@@ -1,11 +1,13 @@
 import Select from 'react-select';
 import { PropTypes } from 'prop-types';
-import { sortOptions } from '../../constants';
-import { collapsibleContainerStyles, Label, FilterOptionContainer, selectStyle, selectTheme } from './Styled';
+import { sortOptions } from '../../utils/constants';
 import React, { PureComponent, Fragment } from 'react';
 import createControlledCollapsibleComponent from '../CollapsibleContainer/';
+import { collapsibleContainerStyles, Label, FilterOptionContainer, selectStyle, 
+    selectTheme } from './Styled';
 
 class FilteringOptions extends PureComponent {
+    
     render() {
         return (
             <Fragment>

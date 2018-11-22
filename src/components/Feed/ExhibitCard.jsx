@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import { Link } from 'react-router-dom';
 import { PropTypes } from 'prop-types';
 
 import {
@@ -36,7 +35,6 @@ class ExhibitCard extends PureComponent {
           <ExhibitTitle>{title}</ExhibitTitle>
           <ButtonContainer>
             <p>Supporters: {supporters}</p>
-            <Link to={`/exhibit/${id}`}>Go to exhibit page</Link>
             <p>{open ? 'V' : '>'}</p>
           </ButtonContainer>
           <Description>

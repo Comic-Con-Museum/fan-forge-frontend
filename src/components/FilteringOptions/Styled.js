@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colors, deviceSizes, media } from './../../theme';
+import { colors, deviceSizes, media } from './../../style/theme';
 
 export const collapsibleContainerStyles = `
     width: calc(90% - 79px);
