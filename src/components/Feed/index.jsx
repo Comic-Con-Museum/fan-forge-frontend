@@ -1,10 +1,10 @@
 import React, { PureComponent } from 'react';
-import ExhibitCard from './ExhibitCard';
+import ExhibitCard from '../ExhibitCard';
 import {
   PageWrapper,
   ExhibitList,
   PageChanger
-} from './StyledComponents';
+} from './Styled';
 
 class Feed extends PureComponent {
   render() {

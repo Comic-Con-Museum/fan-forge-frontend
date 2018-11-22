@@ -8,7 +8,8 @@ import {
   ImgContainer,
   ButtonContainer,
   Description
-} from './StyledComponents';
+} from './Styled';
+
 class ExhibitCard extends PureComponent {
   constructor(props) {
     super(props);
