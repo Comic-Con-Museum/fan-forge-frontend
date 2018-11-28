@@ -1,6 +1,6 @@
 import { sortOptions, defaultTag } from './utils/constants';
-import { Feed, Submit, Navigation } from './components';
-import { LanguageProvider } from './utils/Language';  
+import { Feed, Submit, Navigation, Exhibit } from './components';
+import { LanguageProvider } from './utils/Language';
 import { ThemeProvider } from 'styled-components';
 import { Switch, Route } from 'react-router-dom';
 import React, { Component, Fragment } from 'react';
@@ -40,9 +40,9 @@ export class App extends Component {
     return (
     <ThemeProvider theme={colors}>
       <Fragment>
-        <Navigation 
+        <Navigation
           tags={tags}
-          filterTag={filterTag} 
+          filterTag={filterTag}
           sortOption={sortOption}
           setTags={this.setters.tags}
           setErrors={this.setters.errors}
@@ -62,7 +62,8 @@ export class App extends Component {
               feed={feed}
             />
           )} />
-          <Route exact path='/submit' component={Submit}/>	
+          <Route exact path='/submit' component={Submit}/>
+          <Route path='/exhibit/:id' component={Exhibit} />
         </Switch>
         </Fragment>
       </ThemeProvider>

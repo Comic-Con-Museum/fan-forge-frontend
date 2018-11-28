@@ -12,8 +12,11 @@ const fetchFeed = (page, sortOption, tag) => axios.get(`${appURL}/feed/${sortOpt
 })
 
 const fetchTags = () => axios.get(`${appURL}/tags`)
- 
+
+const fetchExhibit = (id) => axios.get(`${appURL}/exhibit/${id}`)
+
 export {
   fetchFeed,
-  fetchTags
+  fetchTags,
+  fetchExhibit
 }
