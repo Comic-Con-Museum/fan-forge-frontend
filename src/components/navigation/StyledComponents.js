@@ -1,10 +1,9 @@
 import styled from 'styled-components';
 import { PropTypes } from 'prop-types';
+import { colors, media } from '../../style/theme';
 
 export const NavBarContainer = styled.div`
   display: flex;
-  justify-content: space-between;
-  position: relative;
 `;
 
 export const Controller = styled.a.attrs({
@@ -25,17 +24,23 @@ Controller.propTypes = {
 export const NavController = styled(Controller)`
   color: yellow;
   font-family: Helvetica Neue;
-  font-size: 28px;
   font-weight: 500;
   text-transform: uppercase;
   margin: 0 20px;
   text-decoration: none;
+  ${media.mobile`
+    background-color: ${colors.gray_1}
+    color: red;
+    height: 100%;
+    margin: 0;
+  `};
 `;
 
 export const LogoImg = styled.img`
   height: 100px;
   width: auto;
   margin-right: 10px;
+  ${media.mobile`display:none;`};
 `;
 
 export const ActionContainer = styled.div`
@@ -51,6 +56,13 @@ export const LinkContainer = styled.div`
   width: 90%;
   background-color: black;
   height: 100px;
+  font-size: 28px;
+  ${media.mobile`
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: flex-start;
+  `};
 `;
 
 export const SubmitLoginContainer = styled.div`
