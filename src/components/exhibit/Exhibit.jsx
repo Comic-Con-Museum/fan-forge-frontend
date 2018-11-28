@@ -8,7 +8,9 @@ import {
   CarouselDiv,
   InformationDiv,
   DescriptionColumns,
-  CommentsAndTagsDiv
+  CommentsAndTagsDiv,
+  CommentsWrapper,
+  CommentDiv
 } from './StyledComponents';
 
 class Exhibit extends PureComponent {
@@ -25,8 +27,20 @@ class Exhibit extends PureComponent {
 
   render() {
     console.warn(this.state);
-    const {title, description} = this.state;
+    const {title, description, comments} = this.state;
     if (!title) return <PageWrapper>Loading</PageWrapper>
+
+    const commentComponents = comments.map(item =>
+      <CommentDiv>
+        <p>
+          {item.text}
+        </p>
+        <p>
+          {item.author}
+        </p>
+      </CommentDiv>
+    );
+
     return (
       <PageWrapper>
         <Card>
@@ -34,7 +48,11 @@ class Exhibit extends PureComponent {
           <InformationDiv>
             <Title>{title}</Title>
             <DescriptionColumns>{description}</DescriptionColumns>
-            <CommentsAndTagsDiv />
+            <CommentsAndTagsDiv>
+              <CommentsWrapper>
+                {commentComponents}
+              </CommentsWrapper>
+            </CommentsAndTagsDiv>
           </InformationDiv>
         </Card>
       </PageWrapper>

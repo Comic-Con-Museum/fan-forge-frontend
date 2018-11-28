@@ -43,4 +43,23 @@ export const DescriptionColumns = styled.div`
 export const CommentsAndTagsDiv = styled.div`
   width: 30%;
   background-color: grey;
+  padding-bottom: 30px;
+`;
+
+export const CommentsWrapper = styled.div`
+  height: 200px;
+  overflow: auto;
+  padding-right: 20px;
+  border-right: yellow solid 2px;
+  background-color: whitesmoke;
+`;
+
+export const CommentDiv = styled.div`
+  padding: 5px;
+  background-color: lightgrey;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  p {
+    margin: 0;
+  }
 `;
