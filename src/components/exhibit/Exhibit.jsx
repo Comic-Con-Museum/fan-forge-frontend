@@ -6,7 +6,9 @@ import {
   Card,
   Title,
   CarouselDiv,
-  InformationDiv
+  InformationDiv,
+  DescriptionColumns,
+  CommentsAndTagsDiv
 } from './StyledComponents';
 
 class Exhibit extends PureComponent {
@@ -23,7 +25,7 @@ class Exhibit extends PureComponent {
 
   render() {
     console.warn(this.state);
-    const {title} = this.state;
+    const {title, description} = this.state;
     if (!title) return <PageWrapper>Loading</PageWrapper>
     return (
       <PageWrapper>
@@ -31,6 +33,8 @@ class Exhibit extends PureComponent {
           <CarouselDiv />
           <InformationDiv>
             <Title>{title}</Title>
+            <DescriptionColumns>{description}</DescriptionColumns>
+            <CommentsAndTagsDiv />
           </InformationDiv>
         </Card>
       </PageWrapper>

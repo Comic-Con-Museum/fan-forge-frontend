@@ -23,12 +23,24 @@ export const CarouselDiv = styled.div`
 
 export const InformationDiv = styled.div`
   display: flex;
-
+  padding: 25px 20px;
+  justify-content: space-between;
 `;
 
 export const Title = styled.div`
   font-size: 32px;
   font-weight: bold;
-  width: 20%;
-  padding: 25px 20px;
+  width: 25%;
+`;
+
+export const DescriptionColumns = styled.div`
+  width: 40%;
+  -webkit-column-count: 2; /* Chrome, Safari, Opera */
+  -moz-column-count: 2; /* Firefox */
+  column-count: 2;
+`;
+
+export const CommentsAndTagsDiv = styled.div`
+  width: 30%;
+  background-color: grey;
 `;
