@@ -1,7 +1,7 @@
 import { defaultTag } from '../../utils/constants';
-import React, { PureComponent } from 'react';
+import React, { Fragment, PureComponent } from 'react';
 import { fetchFeed } from '../../utils/api';
-import ExhibitCard from './ExhibitCard';
+import ExhibitCard from '../exhibitCard/index';
 import {
   PageWrapper,
   ExhibitList,
@@ -47,14 +47,16 @@ import {
   }
 
   render() {
+    console.log(ExhibitCard)
     const { feed } = this.props
     return (
-      <PageWrapper>
-          <ExhibitList>
-            {feed.map((item, index) => <ExhibitCard key={index} {...item} />)}
-          </ExhibitList>
-      </PageWrapper>
-    );
+      <Fragment>
+        <ExhibitList>
+          {feed.map((item, index) => <ExhibitCard key={index} {...item} />)}
+          {feed.map((item, index) => <ExhibitCard key={index} {...item} />)}
+        </ExhibitList>
+      </Fragment>
+    )
   }
 }
  export default Feed; 

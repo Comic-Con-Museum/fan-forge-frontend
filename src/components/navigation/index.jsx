@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { NavLink } from 'react-router-dom';
 import { fetchTags } from '../../utils/api';
 import { keyCodes, defaultTag } from '../../utils/constants';
-import { CollapsibleFilteringOptions } from './FilteringOptions/';
+import { FilteringOptions } from './FilteringOptions/';
 
 import {  
   NavBarContainer,
@@ -73,42 +73,21 @@ export class Navigation extends PureComponent {
     return (
       <NavBarContainer>
         <LogoImg src="https://www.balboapark.org/sites/default/files/2018-07/CCIM-OrgPageAd-275x350.jpg" />
-        <ActionContainer>
-          <LinkContainer>
-            <NavController
-              id="nav__filterController"
-              controleeId="nav__filterContainer"
-              isControleeActive={this.state.showFiltering}
-              onClick={this.toggleFiltering}
-              onKeyDown={this.toggleFilteringOnKeyPress}
-            > Search </NavController>
-            <CollapsibleFilteringOptions
-              id="nav__filterContainer"
-              controllerId="nav__filterController"
-              collapseContainer={this.toggleFiltering}
-              setSortOption={this.props.setSortOption}
-              setFilterTag={this.props.setFilterTag}
-              isCollapsed={this.state.showFiltering}
-              sortValue={this.props.sortOption}
-              tagValue={this.props.filterTag}
-              tagOptions={this.props.tags}
-            />
-            <NavLink to='/' exact activeStyle={activeStyle} style={linkStyle}>
-              FEED
-            </NavLink>
-            <NavLink to='/submit' activeStyle={activeStyle} style={linkStyle}>
-              SUBMIT
-            </NavLink>  
-            <NavLink to='/about' activeStyle={activeStyle} style={linkStyle}>
-              ABOUT
-            </NavLink>
-          </LinkContainer>
-          <SubmitLoginContainer>
-            <SubmitButton>SUBMIT AN IDEA</SubmitButton>
-            <LoginButton>LOG IN</LoginButton>
-          </SubmitLoginContainer>
-        </ActionContainer>
-
+        <FilteringOptions
+          id="nav__filterContainer"
+          controllerId="nav__filterController"
+          collapseContainer={this.toggleFiltering}
+          setSortOption={this.props.setSortOption}
+          setFilterTag={this.props.setFilterTag}
+          isCollapsed={this.state.showFiltering}
+          sortValue={this.props.sortOption}
+          tagValue={this.props.filterTag}
+          tagOptions={this.props.tags}
+        />
+        <SubmitLoginContainer>
+          <SubmitButton>SUBMIT AN IDEA</SubmitButton>
+          <LoginButton>LOG IN</LoginButton>
+        </SubmitLoginContainer>
       </NavBarContainer>
     );
   }

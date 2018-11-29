@@ -1,9 +1,10 @@
 import { sortOptions, defaultTag } from './utils/constants';
-import { Feed, Submit, Navigation } from './components';
+import { Feed, Submit, Navigation, Title } from './components';
 import { LanguageProvider } from './utils/Language';  
 import { ThemeProvider } from 'styled-components';
 import { Switch, Route } from 'react-router-dom';
 import React, { Component, Fragment } from 'react';
+import { Main } from './style/AppStyle';
 import { colors } from './style/theme';
 import axios from 'axios';
 
@@ -50,20 +51,24 @@ export class App extends Component {
           setSortOption={this.setters.sortOption}
           setActiveCalls={this.setters.activeCalls}
         />
-        <Switch>
-          <Route exact path='/' render={props => (
-            <Feed
-              setActiveCalls={this.setters.activeCalls}
-              setErrors={this.setters.errors}
-              setFeed={this.setters.feed}
-              feedPageIndex={feedPageIndex}
-              sortOption={sortOption.value}
-              filterTag={filterTag.value}
-              feed={feed}
-            />
-          )} />
-          <Route exact path='/submit' component={Submit}/>	
-        </Switch>
+        <Main>
+          <Title/>
+          <Switch>
+            <Route exact path='/' render={props => (
+              <Feed
+                setActiveCalls={this.setters.activeCalls}
+                setErrors={this.setters.errors}
+                setFeed={this.setters.feed}
+                feedPageIndex={feedPageIndex}
+                sortOption={sortOption.value}
+                filterTag={filterTag.value}
+                feed={feed}
+              />
+            )} />
+            <Route exact path='/submit' component={Submit}/>	
+          </Switch>
+          <Title flipped />
+        </Main>
         </Fragment>
       </ThemeProvider>
     )
