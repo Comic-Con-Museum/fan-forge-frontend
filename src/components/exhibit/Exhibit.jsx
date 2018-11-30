@@ -39,6 +39,9 @@ class Exhibit extends PureComponent {
         <p>
           {item.author}
         </p>
+        <p>
+          {item.created}
+        </p>
       </CommentDiv>
     );
 
@@ -52,7 +55,7 @@ class Exhibit extends PureComponent {
             <CommentsButton onClick={() => this.setState({commentsOpen: !commentsOpen})}>View comments</CommentsButton>
           </InformationDiv>
         </Card>
-        {commentsOpen ? <div>HI THERERERERERERERERER</div>: null}
+        {commentsOpen ? <CommentsWrapper>{commentComponents}</CommentsWrapper>: null}
       </PageWrapper>
     );
   }

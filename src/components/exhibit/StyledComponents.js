@@ -47,15 +47,24 @@ export const CommentsAndTagsDiv = styled.div`
 `;
 
 export const CommentsButton = styled.button`
-
+  outline: none;
+  border: none;
+  background-color: yellow;
+  color: black;
+  padding: 10px 20px;
+  height: 40px;
+  border-radius: 5px;
 `;
 
 export const CommentsWrapper = styled.div`
-  height: 200px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 300px;
+  background-color: rgba(255,255,0,.95);
+  height: 100%;
+  padding: 20px;
   overflow: auto;
-  padding-right: 20px;
-  border-right: yellow solid 2px;
-  background-color: whitesmoke;
 `;
 
 export const CommentDiv = styled.div`
