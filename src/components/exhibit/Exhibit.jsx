@@ -10,7 +10,8 @@ import {
   DescriptionColumns,
   CommentsAndTagsDiv,
   CommentsWrapper,
-  CommentDiv
+  CommentDiv,
+  CommentsButton
 } from './StyledComponents';
 
 class Exhibit extends PureComponent {
@@ -27,7 +28,7 @@ class Exhibit extends PureComponent {
 
   render() {
     console.warn(this.state);
-    const {title, description, comments} = this.state;
+    const {title, description, comments, commentsOpen} = this.state;
     if (!title) return <PageWrapper>Loading</PageWrapper>
 
     const commentComponents = comments.map(item =>
@@ -48,13 +49,10 @@ class Exhibit extends PureComponent {
           <InformationDiv>
             <Title>{title}</Title>
             <DescriptionColumns>{description}</DescriptionColumns>
-            <CommentsAndTagsDiv>
-              <CommentsWrapper>
-                {commentComponents}
-              </CommentsWrapper>
-            </CommentsAndTagsDiv>
+            <CommentsButton onClick={() => this.setState({commentsOpen: !commentsOpen})}>View comments</CommentsButton>
           </InformationDiv>
         </Card>
+        {commentsOpen ? <div>HI THERERERERERERERERER</div>: null}
       </PageWrapper>
     );
   }

@@ -46,6 +46,10 @@ export const CommentsAndTagsDiv = styled.div`
   padding-bottom: 30px;
 `;
 
+export const CommentsButton = styled.button`
+
+`;
+
 export const CommentsWrapper = styled.div`
   height: 200px;
   overflow: auto;
