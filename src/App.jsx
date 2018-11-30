@@ -4,7 +4,8 @@ import { LanguageProvider } from './utils/Language';
 import { ThemeProvider } from 'styled-components';
 import { Switch, Route } from 'react-router-dom';
 import React, { Component, Fragment } from 'react';
-import { Main } from './style/AppStyle';
+import { Main, LogoImg, SideContainer, MobileNav } from './style/AppStyle';
+import MediaQuery from 'react-responsive';
 import { colors } from './style/theme';
 import axios from 'axios';
 
@@ -40,19 +41,12 @@ export class App extends Component {
     const {tags, filterTag, sortOption, feed, feedPageIndex } = this.state
     return (
     <ThemeProvider theme={colors}>
-      <Fragment>
-        <Navigation 
-          tags={tags}
-          filterTag={filterTag} 
-          sortOption={sortOption}
-          setTags={this.setters.tags}
-          setErrors={this.setters.errors}
-          setFilterTag={this.setters.filterTag}
-          setSortOption={this.setters.sortOption}
-          setActiveCalls={this.setters.activeCalls}
-        />
-        <Main>
-          <Title/>
+      <Main>
+        <MediaQuery minWidth={768}>
+          <SideContainer>
+            <LogoImg src="https://www.balboapark.org/sites/default/files/2018-07/CCIM-OrgPageAd-275x350.jpg" />
+            <Title/>
+          </SideContainer>
           <Switch>
             <Route exact path='/' render={props => (
               <Feed
@@ -67,10 +61,37 @@ export class App extends Component {
             )} />
             <Route exact path='/submit' component={Submit}/>	
           </Switch>
-          <Title flipped />
-        </Main>
-        </Fragment>
-      </ThemeProvider>
+          <SideContainer>
+            <Navigation 
+              tags={tags}
+              filterTag={filterTag} 
+              sortOption={sortOption}
+              setTags={this.setters.tags}
+              setErrors={this.setters.errors}
+              setFilterTag={this.setters.filterTag}
+              setSortOption={this.setters.sortOption}
+              setActiveCalls={this.setters.activeCalls}
+            />
+            <Title flipped />
+          </SideContainer>
+        </MediaQuery>
+        <MediaQuery maxWidth={768}>
+          <MobileNav>
+            <Navigation 
+              tags={tags}
+              direction="row"
+              filterTag={filterTag} 
+              sortOption={sortOption}
+              setTags={this.setters.tags}
+              setErrors={this.setters.errors}
+              setFilterTag={this.setters.filterTag}
+              setSortOption={this.setters.sortOption}
+              setActiveCalls={this.setters.activeCalls}
+            />
+          </MobileNav>
+        </MediaQuery>
+      </Main>
+    </ThemeProvider>
     )
   }
 }

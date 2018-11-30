@@ -10,7 +10,7 @@ class Title extends PureComponent {
     return (
       <Container {...this.props}>
         <TitleText {...this.props}>Fan Forge</TitleText>
-        <TitleText {...this.props}>FanForge</TitleText>
+        <TitleText {...this.props}>Fan Forge</TitleText>
       </Container>
     )
   }

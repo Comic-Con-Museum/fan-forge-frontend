@@ -2,18 +2,8 @@ import React, { PureComponent } from 'react';
 import { NavLink } from 'react-router-dom';
 import { fetchTags } from '../../utils/api';
 import { keyCodes, defaultTag } from '../../utils/constants';
-import { FilteringOptions } from './FilteringOptions/';
-
-import {  
-  NavBarContainer,
-  NavController,
-  LogoImg,
-  LinkContainer,
-  SubmitLoginContainer,
-  SubmitButton,
-  ActionContainer,
-  LoginButton
-} from './StyledComponents';
+import { CollapsibleFilteringOptions } from './FilteringOptions/';
+import { NavBarContainer, NavButtonController, NavButton } from './Styled';
 
 const linkStyle = {
   color: 'yellow',
@@ -44,7 +34,7 @@ export class Navigation extends PureComponent {
     if (event.keyCode == keyCodes.enter || event.keyCode == keyCodes.space) {
       event.preventDefault()
       this.toggleFiltering()
-    }
+    } 
   }
 
   componentDidMount() {
@@ -71,9 +61,15 @@ export class Navigation extends PureComponent {
 
   render() {
     return (
-      <NavBarContainer>
-        <LogoImg src="https://www.balboapark.org/sites/default/files/2018-07/CCIM-OrgPageAd-275x350.jpg" />
-        <FilteringOptions
+      <NavBarContainer direction={this.props.direction}>
+        <NavButtonController
+          id="nav__filterController"
+          controleeId="nav__filterContainer"
+          isControleeActive={this.state.showFiltering}
+          onClick={this.toggleFiltering}
+          onKeyDown={this.toggleFilteringOnKeyPress}
+        > FILTER FEED </NavButtonController>
+        <CollapsibleFilteringOptions
           id="nav__filterContainer"
           controllerId="nav__filterController"
           collapseContainer={this.toggleFiltering}
@@ -84,13 +80,15 @@ export class Navigation extends PureComponent {
           tagValue={this.props.filterTag}
           tagOptions={this.props.tags}
         />
-        <SubmitLoginContainer>
-          <SubmitButton>SUBMIT AN IDEA</SubmitButton>
-          <LoginButton>LOG IN</LoginButton>
-        </SubmitLoginContainer>
+        <NavButton yellow>SUBMIT AN IDEA</NavButton>
+        <NavButton>LOG IN</NavButton>
       </NavBarContainer>
     );
   }
+}
+
+Navigation.defaultProps = {
+  direction: 'column'
 }
 
 export default Navigation;

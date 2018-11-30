@@ -8,7 +8,8 @@ export const colors = {
 }
 
 export const deviceSizes = {
-   mobile: "37.5em" //600 px
+   mobile: "37.5em",
+   tablet: "768px"
 }
 
 export const media = Object.keys(deviceSizes).reduce((accumulator, label) => {

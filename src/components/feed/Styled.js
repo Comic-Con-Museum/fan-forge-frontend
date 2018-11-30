@@ -15,7 +15,7 @@ export const PageChanger = styled.a`
 
 export const ExhibitList = styled.div`
   flex: 1;
-  padding: 10px;
+  padding: 0px 10px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;

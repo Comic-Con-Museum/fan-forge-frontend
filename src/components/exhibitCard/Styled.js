@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const ExhibitContainer = styled.div`
-  margin: 15px 0;
+  margin: 0 0 15px;
   width: 325px;
   height: ${({open}) => (open ? '400px' : '300px')};
   box-shadow: 5px 8px 6px rgba(0, 0, 0, 0.16);
@@ -27,7 +27,7 @@ export const ImgContainer = styled.div`
   height: 200px;
 `
 
-export const ExhibitTitle = styled.h3`
+export const ExhibitTitle = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

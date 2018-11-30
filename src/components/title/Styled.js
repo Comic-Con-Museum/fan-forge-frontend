@@ -7,9 +7,9 @@ export const Container = styled.div`
   min-height: 1000px;
   align-items:  ${props => props.flipped ? 'flex-end' : 'flex-start'};
   justify-content: space-around;
-  flex-basis: 77px;
   flex-grow: 0;
   flex-shrink: 0;
+  flex: 1;
 `
 
 export const TitleText = styled.p`

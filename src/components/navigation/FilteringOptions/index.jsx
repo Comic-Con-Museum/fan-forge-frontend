@@ -3,7 +3,7 @@ import { PropTypes } from 'prop-types';
 import { sortOptions } from '../../../utils/constants'
 import { collapsibleContainerStyles, Label, FilterOptionContainer, selectStyle, selectTheme } from './Styled';
 import React, { PureComponent, Fragment } from 'react';
-import createControlledCollapsibleComponent from '../CollapsibleContainer/';
+import createControlledCollapsibleComponent from '../../collapsible/';
 
 class FilteringOptions extends PureComponent {
     render() {

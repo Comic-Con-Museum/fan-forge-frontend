@@ -19,9 +19,7 @@ class ExhibitCard extends PureComponent {
         <ImgContainer>
           <ExhibitImg open={open} src={`https://fan-forge-dev.herokuapp.com/image/${cover ? cover.image : ''}`}/>
         </ImgContainer>
-        <div style={{padding: '0 20px 0 10px'}}>
-          <ExhibitTitle>{title}</ExhibitTitle>
-        </div>
+        <ExhibitTitle>{title}</ExhibitTitle>
       </ExhibitContainer>
     )
   }
@@ -29,7 +27,7 @@ class ExhibitCard extends PureComponent {
 
 ExhibitCard.propTypes = {
   description: PropTypes.string,
-  imageUrl: PropTypes.string,
+  imageUrl: PropTypes.string, 
   title: PropTypes.string,
 }
 
