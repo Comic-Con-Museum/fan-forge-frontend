@@ -68,6 +68,7 @@ export class Navigation extends PureComponent {
           isControleeActive={this.state.showFiltering}
           onClick={this.toggleFiltering}
           onKeyDown={this.toggleFilteringOnKeyPress}
+          black={this.state.showFiltering}
         > FILTER FEED </NavButtonController>
         <CollapsibleFilteringOptions
           id="nav__filterContainer"

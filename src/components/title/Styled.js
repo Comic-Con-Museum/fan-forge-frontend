@@ -17,6 +17,7 @@ export const TitleText = styled.p`
   font-weight: bold;
   text-transform: uppercase;
   writing-mode: vertical-rl;
-  transform: ${props => props.flipped ? '' : 'rotate(180deg)'};
   color: ${colors.yellow_1};
+  font-family: 'Roboto Condensed', sans-serif;
+  transform: ${props => props.flipped ? '' : 'rotate(180deg)'};
 `

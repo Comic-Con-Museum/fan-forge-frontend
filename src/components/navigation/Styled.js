@@ -3,7 +3,9 @@ import styled, { css } from 'styled-components'
 import { colors, media } from '../../style/theme'
 import { Controller } from '../collapsible/Styled'
 
-export const NavBarContainer = styled.div`
+export const NavBarContainer = styled.div.attrs({
+  'tabIndex': "1",
+})`
   display: flex;
   flex-direction: ${props => props.direction};
   width: 100%;
@@ -25,7 +27,19 @@ export const NavButton = styled.a`
   ${buttonStyle}
 `
 
-export const NavButtonController =  styled(Controller)`
+export const NavButtonController =  styled(Controller).attrs({
+  'tabIndex': "1"
+})`
   flex: 1;
   ${buttonStyle}
+  transition: all 0.3s ease;
+  color: ${props => props.black ? 'white': 'black'};
+  background-color: ${props => props.black ? 'black' : 'white'};
+`
+
+export const MobileNav = styled.div`
+  position: absolute;
+  width: 100vw;
+  bottom: 0;
+  left: 0;
 `

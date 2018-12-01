@@ -10,18 +10,6 @@ class FilteringOptions extends PureComponent {
         return (
             <Fragment>
                 <FilterOptionContainer>
-                    <Label htmlFor="filtering__sortBy">Sort By</Label>
-                    <Select
-                        id="filtering__sortBy"
-                        theme={selectTheme}
-                        styles={selectStyle}
-                        value={this.props.sortValue}
-                        tabIndex={this.props.tabIndex}
-                        options={this.props.sortOptions}
-                        onChange={this.props.setSortOption}
-                    />
-                </FilterOptionContainer>
-                <FilterOptionContainer>
                     <Label htmlFor="filtering__byTag">Showing exhibits tagged as</Label>
                     <Select
                         id="filter__byTag"
@@ -33,6 +21,19 @@ class FilteringOptions extends PureComponent {
                         onChange={this.props.setFilterTag}
                     />
                 </FilterOptionContainer>
+
+                <FilterOptionContainer>
+                    <Label htmlFor="filtering__sortBy">Sort By</Label>
+                    <Select
+                        id="filtering__sortBy"
+                        theme={selectTheme}
+                        styles={selectStyle}
+                        value={this.props.sortValue}
+                        tabIndex={this.props.tabIndex}
+                        options={this.props.sortOptions}
+                        onChange={this.props.setSortOption}
+                    />
+                </FilterOptionContainer>             
             </Fragment>
         );
     }

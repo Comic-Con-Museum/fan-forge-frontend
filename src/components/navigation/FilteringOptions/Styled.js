@@ -4,9 +4,9 @@ import { colors, deviceSizes, media } from '../../../style/theme';
 export const collapsibleContainerStyles = `
     position: absolute; 
     z-index: 100;
-    right: 100px;
+    right: 109px;
 
-    height: 144px;
+    height: 186px;
     width: 400px;
     
     opacity: .9;
@@ -26,12 +26,15 @@ export const FilterOptionContainer = styled.div`
     display: flex;
     padding: 10px 25px;
     align-items: center;
-    justify-content: space-between; 
+    justify-content: space-between;
+    text-transform: uppercase;
+    font-weight: 500;
 `;
 
 export const Label = styled.span`
     margin-right: 10px;
-    `;
+    max-width: 45%;
+`;
 
 export const selectStyle = {
     container: () => ({

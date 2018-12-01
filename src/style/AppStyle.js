@@ -18,3 +18,10 @@ export const LogoImg = styled.img`
   margin-right: 10px;
   ${media.mobile`display:none;`};
 `;
+
+export const MobileNav = styled.div`
+  position: absolute;
+  width: 100vw;
+  bottom: 0;
+  left: 0;
+`

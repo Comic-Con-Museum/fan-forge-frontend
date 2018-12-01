@@ -1,8 +1,11 @@
 import styled from 'styled-components';
 
-export const ExhibitContainer = styled.div`
+export const ExhibitContainer = styled.div.attrs({
+  'tabIndex': "2",
+})`
   margin: 0 0 15px;
   width: 325px;
+  order: 1;
   height: ${({open}) => (open ? '400px' : '300px')};
   box-shadow: 5px 8px 6px rgba(0, 0, 0, 0.16);
   background-color: ${({open}) => (open ? 'yellow' : '#ffffff')};
@@ -16,47 +19,27 @@ export const ExhibitContainer = styled.div`
 `
 
 export const ExhibitImg = styled.img`
-  max-height: 100%;
+  height: 200px;
   width: 100%;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
 `
 
-
-export const ImgContainer = styled.div`
-  height: 200px;
-`
-
 export const ExhibitTitle = styled.div`
+  padding: 5px;
+  font-size: 24px;
+  font-weight: bold;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  height: 50px;
 `
 
-export const Description = styled.p`
-  overflow: hidden;
-  position: relative;
-  line-height: 1.2em;
-  max-height: 3.6em;
-  text-align: justify;
-  margin-right: -1em;
-  padding-right: 1em;
+export const Supporters = styled.div`
+  float: left;
+  padding: 10px;
+`
 
-  // this is to truncate the additional text
-  :before {
-    content: '...';
-    position: absolute;
-    right: 0;
-    bottom: 0;
-  }
-  // this too
-  :after {
-    content: '';
-    position: absolute;
-    right: 0;
-    width: 1em;
-    height: 1em;
-    margin-top: 0.2em;
-    background: yellow;
-  }
+export const Featured = styled.div`
+  float: right;
+  padding: 10px;
 `
