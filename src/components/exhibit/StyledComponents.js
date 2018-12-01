@@ -14,6 +14,7 @@ export const Card = styled.div`
   height: calc(100vh - 160px);
   width: calc(100% - 60px);
   background: white;
+  position: relative;
 `;
 
 export const CarouselDiv = styled.div`
@@ -34,16 +35,10 @@ export const Title = styled.div`
 `;
 
 export const DescriptionColumns = styled.div`
-  width: 40%;
-  -webkit-column-count: 2; /* Chrome, Safari, Opera */
-  -moz-column-count: 2; /* Firefox */
-  column-count: 2;
-`;
-
-export const CommentsAndTagsDiv = styled.div`
-  width: 30%;
-  background-color: grey;
-  padding-bottom: 30px;
+  width: 70%;
+  -webkit-column-count: 3; /* Chrome, Safari, Opera */
+  -moz-column-count: 3; /* Firefox */
+  column-count: 3;
 `;
 
 export const CommentsButton = styled.button`
@@ -75,4 +70,30 @@ export const CommentDiv = styled.div`
   p {
     margin: 0;
   }
+`;
+
+export const ExtrasDiv = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+`;
+
+export const TagsDiv = styled.div`
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  font-size: 14px;
+`;
+
+export const Tag = styled.button`
+  background-color: yellow;
+  margin-left: 10px;
+  border: none;
+  font-weight: 500;
+  font-size: 14px;
+`;
+
+export const LikesDiv = styled.div`
+  margin-left: 20px;
 `;
