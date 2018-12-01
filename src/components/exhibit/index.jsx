@@ -4,7 +4,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 import { fetchExhibit } from '../../utils/api';
 import {
-  PageWrapper,
+  ComponentWrapper,
   Card,
   Title,
   CarouselDiv,
@@ -18,7 +18,7 @@ import {
   ExtrasDiv,
   Tag,
   CommentsCloseButton
-} from './StyledComponents';
+} from './Styled';
 
 class Exhibit extends PureComponent {
   constructor(props) {
@@ -44,7 +44,7 @@ class Exhibit extends PureComponent {
 
   renderArtifacts = () => {
     return this.state.artifacts.map(item => (
-      <div style={{backgroundColor:'red', border: 'green solid 2px', height: 'inherit', width: '100%'}}>
+      <div style={{backgroundColor:'red', border: 'green solid 2px', height: 'calc(65vh - 120px)', width: '100%'}}>
         <h1>
           {item.id}
           {item.description}
@@ -56,7 +56,7 @@ class Exhibit extends PureComponent {
   render = () => {
     console.warn(this.state);
     const {title, description, comments, commentsOpen, artifacts, supporters} = this.state;
-    if (!title) return <PageWrapper>Loading</PageWrapper>
+    if (!title) return <Card>Loading</Card>
 
     const commentComponents = comments.map(item =>
       <CommentDiv>
@@ -73,7 +73,7 @@ class Exhibit extends PureComponent {
     );
 
     return (
-      <PageWrapper>
+      <ComponentWrapper>
         <Card>
           <CarouselDiv>
             <Carousel
@@ -86,20 +86,22 @@ class Exhibit extends PureComponent {
               {this.renderArtifacts()}
             </Carousel>
           </CarouselDiv>
-          <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-between',     height: '35%'}}>
+          <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-between',     height: 'calc(35vh - 120px)'}}>
             <InformationDiv>
               <Title>{title}</Title>
-              <DescriptionColumns>{description}</DescriptionColumns>
+              <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: 'calc(35vh - 120px)'}}>
+                <DescriptionColumns>{description}</DescriptionColumns>
+                <ExtrasDiv>
+                  <LikesDiv>
+                    <span>{supporters} supporters</span>
+                  </LikesDiv>
+                  <TagsDiv>
+                    TAGS {this.renderTags()}
+                  </TagsDiv>
+                  <CommentsButton onClick={this.toggleComments}>READ {comments.length} COMMENTS</CommentsButton>
+                </ExtrasDiv>
+              </div>
             </InformationDiv>
-            <ExtrasDiv>
-              <LikesDiv>
-                <span>{supporters} supporters</span>
-              </LikesDiv>
-              <TagsDiv>
-                TAGS {this.renderTags()}
-              </TagsDiv>
-              <CommentsButton onClick={this.toggleComments}>View comments</CommentsButton>
-            </ExtrasDiv>
             </div>
         </Card>
 
@@ -110,7 +112,7 @@ class Exhibit extends PureComponent {
             {commentComponents}
           </CommentsWrapper>
         ) : null}
-      </PageWrapper>
+      </ComponentWrapper>
     );
   }
 }

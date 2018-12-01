@@ -1,12 +1,10 @@
 import styled from 'styled-components';
 
-export const PageWrapper = styled.div`
+export const ComponentWrapper = styled.div`
+  width: 100%;
   display: flex;
-  flex-flow: column nowrap;
-  align-items: center;
   justify-content: center;
-  background-color: #f7f7f7;
-  min-height: calc(100vh - 100px);
+  align-items: center;
 `;
 
 export const Card = styled.div`
@@ -48,7 +46,7 @@ export const CommentsButton = styled.button`
   color: black;
   padding: 10px 20px;
   height: 40px;
-  border-radius: 5px;
+  font-weight: 500;
 `;
 
 export const CommentsWrapper = styled.div`
