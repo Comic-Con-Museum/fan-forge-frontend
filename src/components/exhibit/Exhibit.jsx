@@ -16,7 +16,8 @@ import {
   CommentDiv,
   CommentsButton,
   ExtrasDiv,
-  Tag
+  Tag,
+  CommentsCloseButton
 } from './StyledComponents';
 
 class Exhibit extends PureComponent {
@@ -27,17 +28,21 @@ class Exhibit extends PureComponent {
     };
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     fetchExhibit(this.props.match.params.id).then(({data}) => this.setState(data));
   }
 
-  renderTags() {
+  toggleComments = () => {
+    this.setState({commentsOpen: !this.state.commentsOpen})
+  }
+
+  renderTags = () => {
     return this.state.tags.map(item => (
       <Tag>{item}</Tag>
     ))
   }
 
-  renderArtifacts() {
+  renderArtifacts = () => {
     return this.state.artifacts.map(item => (
       <div style={{backgroundColor:'red', border: 'green solid 2px', height: 'inherit', width: '100%'}}>
         <h1>
@@ -48,7 +53,7 @@ class Exhibit extends PureComponent {
     ));
   }
 
-  render() {
+  render = () => {
     console.warn(this.state);
     const {title, description, comments, commentsOpen, artifacts, supporters} = this.state;
     if (!title) return <PageWrapper>Loading</PageWrapper>
@@ -93,13 +98,14 @@ class Exhibit extends PureComponent {
               <TagsDiv>
                 TAGS {this.renderTags()}
               </TagsDiv>
-              <CommentsButton onClick={() => this.setState({commentsOpen: !commentsOpen})}>View comments</CommentsButton>
+              <CommentsButton onClick={this.toggleComments}>View comments</CommentsButton>
             </ExtrasDiv>
             </div>
         </Card>
 
         {commentsOpen ? (
           <CommentsWrapper>
+            <CommentsCloseButton onClick={this.toggleComments}>X</CommentsCloseButton>
             <h3>Comment section</h3>
             {commentComponents}
           </CommentsWrapper>

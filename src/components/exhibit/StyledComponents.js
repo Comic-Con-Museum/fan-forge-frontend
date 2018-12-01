@@ -35,7 +35,7 @@ export const Title = styled.div`
 `;
 
 export const DescriptionColumns = styled.div`
-  width: 70%;
+  width: 7g0%;
   -webkit-column-count: 3; /* Chrome, Safari, Opera */
   -moz-column-count: 3; /* Firefox */
   column-count: 3;
@@ -96,4 +96,13 @@ export const Tag = styled.button`
 
 export const LikesDiv = styled.div`
   margin-left: 20px;
+`;
+
+export const CommentsCloseButton = styled.button`
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  position: fixed;
+  top: 10;
+  right: 15px;
 `;
