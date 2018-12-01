@@ -4,25 +4,23 @@ export const ComponentWrapper = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
 `;
 
 export const Card = styled.div`
   box-shadow: 5px 8px 6px rgba(0, 0, 0, 0.16);
-  height: calc(100vh - 160px);
+  height: calc(90vh);
   width: calc(100% - 60px);
   background: white;
   position: relative;
 `;
 
 export const CarouselDiv = styled.div`
-  height: 65%;
+  height: 50vh;
   background-color: black;
 `;
 
 export const InformationDiv = styled.div`
   display: flex;
-  padding: 25px 20px;
   justify-content: space-between;
 `;
 
@@ -30,6 +28,14 @@ export const Title = styled.div`
   font-size: 32px;
   font-weight: bold;
   width: 25%;
+`;
+
+export const DescriptionAndExtrasDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 40vh;
+  width: 100%;
 `;
 
 export const DescriptionColumns = styled.div`

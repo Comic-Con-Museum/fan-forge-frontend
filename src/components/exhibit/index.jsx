@@ -17,7 +17,8 @@ import {
   CommentsButton,
   ExtrasDiv,
   Tag,
-  CommentsCloseButton
+  CommentsCloseButton,
+  DescriptionAndExtrasDiv
 } from './Styled';
 
 class Exhibit extends PureComponent {
@@ -44,7 +45,7 @@ class Exhibit extends PureComponent {
 
   renderArtifacts = () => {
     return this.state.artifacts.map(item => (
-      <div style={{backgroundColor:'red', border: 'green solid 2px', height: 'calc(65vh - 120px)', width: '100%'}}>
+      <div style={{backgroundColor:'red', border: 'green solid 2px', height: '50vh', width: '100%'}}>
         <h1>
           {item.id}
           {item.description}
@@ -86,23 +87,21 @@ class Exhibit extends PureComponent {
               {this.renderArtifacts()}
             </Carousel>
           </CarouselDiv>
-          <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-between',     height: 'calc(35vh - 120px)'}}>
-            <InformationDiv>
-              <Title>{title}</Title>
-              <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: 'calc(35vh - 120px)'}}>
-                <DescriptionColumns>{description}</DescriptionColumns>
-                <ExtrasDiv>
-                  <LikesDiv>
-                    <span>{supporters} supporters</span>
-                  </LikesDiv>
-                  <TagsDiv>
-                    TAGS {this.renderTags()}
-                  </TagsDiv>
-                  <CommentsButton onClick={this.toggleComments}>READ {comments.length} COMMENTS</CommentsButton>
-                </ExtrasDiv>
-              </div>
-            </InformationDiv>
-            </div>
+          <InformationDiv>
+            <Title>{title}</Title>
+            <DescriptionAndExtrasDiv>
+              <DescriptionColumns>{description}</DescriptionColumns>
+              <ExtrasDiv>
+                <LikesDiv>
+                  <span>{supporters} supporters</span>
+                </LikesDiv>
+                <TagsDiv>
+                  TAGS {this.renderTags()}
+                </TagsDiv>
+                <CommentsButton onClick={this.toggleComments}>READ {comments.length} COMMENTS</CommentsButton>
+              </ExtrasDiv>
+            </DescriptionAndExtrasDiv>
+          </InformationDiv>
         </Card>
 
         {commentsOpen ? (
