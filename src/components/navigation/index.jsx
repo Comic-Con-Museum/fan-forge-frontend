@@ -3,17 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { fetchTags } from '../../utils/api';
 import { keyCodes, defaultTag } from '../../utils/constants';
 import { CollapsibleFilteringOptions } from './FilteringOptions/';
-
-import {  
-  NavBarContainer,
-  NavController,
-  LogoImg,
-  LinkContainer,
-  SubmitLoginContainer,
-  SubmitButton,
-  ActionContainer,
-  LoginButton
-} from './StyledComponents';
+import { NavBarContainer, NavButtonController, NavButton } from './Styled';
 
 const linkStyle = {
   color: 'yellow',
@@ -44,7 +34,7 @@ export class Navigation extends PureComponent {
     if (event.keyCode == keyCodes.enter || event.keyCode == keyCodes.space) {
       event.preventDefault()
       this.toggleFiltering()
-    }
+    } 
   }
 
   componentDidMount() {
@@ -58,7 +48,6 @@ export class Navigation extends PureComponent {
           value: tag
         })));
         
-        console.log(tagData)
         setTags(tagData)
         setActiveCalls({'navigation': false})
       }).catch(error => {
@@ -71,47 +60,35 @@ export class Navigation extends PureComponent {
 
   render() {
     return (
-      <NavBarContainer>
-        <LogoImg src="https://www.balboapark.org/sites/default/files/2018-07/CCIM-OrgPageAd-275x350.jpg" />
-        <ActionContainer>
-          <LinkContainer>
-            <NavController
-              id="nav__filterController"
-              controleeId="nav__filterContainer"
-              isControleeActive={this.state.showFiltering}
-              onClick={this.toggleFiltering}
-              onKeyDown={this.toggleFilteringOnKeyPress}
-            > Search </NavController>
-            <CollapsibleFilteringOptions
-              id="nav__filterContainer"
-              controllerId="nav__filterController"
-              collapseContainer={this.toggleFiltering}
-              setSortOption={this.props.setSortOption}
-              setFilterTag={this.props.setFilterTag}
-              isCollapsed={this.state.showFiltering}
-              sortValue={this.props.sortOption}
-              tagValue={this.props.filterTag}
-              tagOptions={this.props.tags}
-            />
-            <NavLink to='/' exact activeStyle={activeStyle} style={linkStyle}>
-              FEED
-            </NavLink>
-            <NavLink to='/submit' activeStyle={activeStyle} style={linkStyle}>
-              SUBMIT
-            </NavLink>  
-            <NavLink to='/about' activeStyle={activeStyle} style={linkStyle}>
-              ABOUT
-            </NavLink>
-          </LinkContainer>
-          <SubmitLoginContainer>
-            <SubmitButton>SUBMIT AN IDEA</SubmitButton>
-            <LoginButton>LOG IN</LoginButton>
-          </SubmitLoginContainer>
-        </ActionContainer>
-
+      <NavBarContainer direction={this.props.direction}>
+        <NavButtonController
+          id="nav__filterController"
+          controleeId="nav__filterContainer"
+          isControleeActive={this.state.showFiltering}
+          onClick={this.toggleFiltering}
+          onKeyDown={this.toggleFilteringOnKeyPress}
+          black={this.state.showFiltering}
+        > FILTER FEED </NavButtonController>
+        <CollapsibleFilteringOptions
+          id="nav__filterContainer"
+          controllerId="nav__filterController"
+          collapseContainer={this.toggleFiltering}
+          setSortOption={this.props.setSortOption}
+          setFilterTag={this.props.setFilterTag}
+          isCollapsed={this.state.showFiltering}
+          sortValue={this.props.sortOption}
+          tagValue={this.props.filterTag}
+          tagOptions={this.props.tags}
+        />
+        <NavButton yellow>SUBMIT AN IDEA</NavButton>
+        <NavButton>LOG IN</NavButton>
       </NavBarContainer>
     );
   }
+}
+
+Navigation.defaultProps = {
+  direction: 'column'
 }
 
 export default Navigation;

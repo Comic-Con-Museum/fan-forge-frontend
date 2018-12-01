@@ -1,7 +1,12 @@
+@import 'reset';
+
 *:focus {
     outline: 4px auto yellow;
 }
 
 body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background-color: #b0c0c9;
+    padding: 15px;
     margin: 0;
 }

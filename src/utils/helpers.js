@@ -1,3 +1,8 @@
+import MoveTo from 'moveTo'
+
+export const moveTo = new MoveTo()
+
+
 export function isObject(item) {
   return (item && typeof item === 'object' && !Array.isArray(item));
 }
