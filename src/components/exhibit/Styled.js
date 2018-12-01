@@ -56,6 +56,7 @@ export const CommentsButton = styled.button`
   padding: 10px 20px;
   height: 60px;
   font-weight: 700;
+  border-top-left-radius: 5px;
 `;
 
 export const CommentsWrapper = styled.div`
@@ -89,6 +90,7 @@ export const ExtrasDiv = styled.div`
 export const TagsDiv = styled.div`
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   font-weight: 500;
   font-size: 14px;
 `;
@@ -111,6 +113,8 @@ export const LikesDiv = styled.div`
 export const LikesImg = styled.img`
   height: 30px;
   width: auto;
+  cursor: pointer;
+  margin-left: 5px;
 `;
 
 export const CommentsCloseButton = styled.button`

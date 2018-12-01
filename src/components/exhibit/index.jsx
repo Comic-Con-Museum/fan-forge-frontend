@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
-import { fetchExhibit } from '../../utils/api';
+import { fetchExhibit, supportExhibit } from '../../utils/api';
 import LikesImgSrc from '../../assets/LIKE.svg';
 import {
   ComponentWrapper,
@@ -58,7 +58,7 @@ class Exhibit extends PureComponent {
 
   render = () => {
     console.warn(this.state);
-    const {title, description, comments, commentsOpen, artifacts, supporters} = this.state;
+    const {title, description, comments, commentsOpen, artifacts, supporters, id} = this.state;
     if (!title) return <Card>Loading</Card>
 
     const commentComponents = comments.map(item =>
@@ -95,8 +95,8 @@ class Exhibit extends PureComponent {
               <DescriptionColumns>{description}</DescriptionColumns>
               <ExtrasDiv>
                 <LikesDiv>
-                  <LikesImg src={LikesImgSrc}/>
-                  <span>{supporters} supporters</span>
+                  <LikesImg onClick={() => supportExhibit(id)} src={LikesImgSrc}/>
+                  <span>{supporters} likes</span>
                 </LikesDiv>
                 <TagsDiv>
                   TAGS {this.renderTags()}
