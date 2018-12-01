@@ -16,7 +16,7 @@ export class App extends Component {
     filterTag: defaultTag,
     sortOption: sortOptions.RECENT,
     onLastPage: false,
-    feedPageIndex: 0,
+    feedIndex: 0,
     errors: {},
     activeCalls: {}
   }
@@ -37,8 +37,22 @@ export class App extends Component {
     return acc;
   }, {})
 
+  setTag = (tag) => {
+    this.setState({
+      filterTag: tag,
+      feedIndex: 0
+    })
+  }
+
+  setSort = (sortOption) => {
+    this.setState({
+      sortOption: sortOption,
+      feedIndex: 0
+    })
+  }
+
   render() {
-    const {tags, filterTag, sortOption, feed, feedPageIndex } = this.state
+    const {tags, filterTag, sortOption, feed, feedIndex } = this.state
     return (
     <ThemeProvider theme={colors}>
       <Main>
@@ -51,9 +65,10 @@ export class App extends Component {
             <Route exact path='/' render={props => (
               <Feed
                 setActiveCalls={this.setters.activeCalls}
+                setIndex={this.setters.feedIndex}
                 setErrors={this.setters.errors}
                 setFeed={this.setters.feed}
-                feedPageIndex={feedPageIndex}
+                feedIndex={feedIndex}
                 sortOption={sortOption.value}
                 filterTag={filterTag.value}
                 feed={feed}
@@ -68,8 +83,8 @@ export class App extends Component {
               sortOption={sortOption}
               setTags={this.setters.tags}
               setErrors={this.setters.errors}
-              setFilterTag={this.setters.filterTag}
-              setSortOption={this.setters.sortOption}
+              setFilterTag={this.setTag}
+              setSortOption={this.setSort}
               setActiveCalls={this.setters.activeCalls}
             />
             <Title flipped />
@@ -84,7 +99,7 @@ export class App extends Component {
               sortOption={sortOption}
               setTags={this.setters.tags}
               setErrors={this.setters.errors}
-              setFilterTag={this.setters.filterTag}
+              setFilterTag={this.setTag}
               setSortOption={this.setters.sortOption}
               setActiveCalls={this.setters.activeCalls}
             />

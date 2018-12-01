@@ -26,8 +26,9 @@
   "homepage": "https://github.com/Comic-ConMuseum/DC-frontend#readme",
   "dependencies": {
     "axios": "^0.18.0",
+    "moveto": "^1.7.4",
     "prop-types": "^15.6.2",
-    "react": "^16.6.0",
+    "react": "^16.6.3",
     "react-dom": "^16.6.0",
     "react-responsive": "^6.0.1",
     "react-router-dom": "^4.3.1",

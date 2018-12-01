@@ -48,7 +48,6 @@ export class Navigation extends PureComponent {
           value: tag
         })));
         
-        console.log(tagData)
         setTags(tagData)
         setActiveCalls({'navigation': false})
       }).catch(error => {
