@@ -28,6 +28,8 @@ export const Title = styled.div`
   font-size: 32px;
   font-weight: bold;
   width: 25%;
+  padding: 20px 0 20px 20px;
+  line-height: 1.2em;
 `;
 
 export const DescriptionAndExtrasDiv = styled.div`
@@ -39,10 +41,11 @@ export const DescriptionAndExtrasDiv = styled.div`
 `;
 
 export const DescriptionColumns = styled.div`
-  width: 7g0%;
   -webkit-column-count: 3; /* Chrome, Safari, Opera */
   -moz-column-count: 3; /* Firefox */
   column-count: 3;
+  padding: 30px;
+  line-height: 1.2em;
 `;
 
 export const CommentsButton = styled.button`
@@ -51,8 +54,8 @@ export const CommentsButton = styled.button`
   background-color: yellow;
   color: black;
   padding: 10px 20px;
-  height: 40px;
-  font-weight: 500;
+  height: 60px;
+  font-weight: 700;
 `;
 
 export const CommentsWrapper = styled.div`
@@ -94,12 +97,20 @@ export const Tag = styled.button`
   background-color: yellow;
   margin-left: 10px;
   border: none;
-  font-weight: 500;
+  font-weight: 700;
   font-size: 14px;
 `;
 
 export const LikesDiv = styled.div`
+  display: flex;
   margin-left: 20px;
+  align-items: center;
+  font-weight: 700;
+`;
+
+export const LikesImg = styled.img`
+  height: 30px;
+  width: auto;
 `;
 
 export const CommentsCloseButton = styled.button`

@@ -3,6 +3,7 @@ import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 import { fetchExhibit } from '../../utils/api';
+import LikesImgSrc from '../../assets/LIKE.svg';
 import {
   ComponentWrapper,
   Card,
@@ -11,6 +12,7 @@ import {
   InformationDiv,
   DescriptionColumns,
   LikesDiv,
+  LikesImg,
   TagsDiv,
   CommentsWrapper,
   CommentDiv,
@@ -45,7 +47,7 @@ class Exhibit extends PureComponent {
 
   renderArtifacts = () => {
     return this.state.artifacts.map(item => (
-      <div style={{backgroundColor:'red', border: 'green solid 2px', height: '50vh', width: '100%'}}>
+      <div style={{backgroundColor:'yellow', height: '50vh', width: '100%'}}>
         <h1>
           {item.id}
           {item.description}
@@ -93,6 +95,7 @@ class Exhibit extends PureComponent {
               <DescriptionColumns>{description}</DescriptionColumns>
               <ExtrasDiv>
                 <LikesDiv>
+                  <LikesImg src={LikesImgSrc}/>
                   <span>{supporters} supporters</span>
                 </LikesDiv>
                 <TagsDiv>
