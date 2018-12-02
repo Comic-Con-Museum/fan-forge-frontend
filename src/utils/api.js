@@ -15,9 +15,16 @@ const fetchFeed = (startIndex, sortOption, tag) => axios.get(`${appURL}/feed/${s
 })
 
 const fetchTags = () => axios.get(`${appURL}/tags`)
- 
+
+const fetchExhibit = (id) => axios.get(`${appURL}/exhibit/${id}`)
+
+// TODO: Still need to add request body as survey
+const supportExhibit = (id) => axios.put(`${appURL}/support/exhibit/${id}`);
+
 export {
   fetchFeed,
   fetchTags,
-  pageSize
+  fetchExhibit,
+  pageSize,
+  supportExhibit
 }
