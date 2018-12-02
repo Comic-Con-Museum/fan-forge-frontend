@@ -19,6 +19,18 @@ export const CarouselDiv = styled.div`
   background-color: black;
 `;
 
+export const ArtifactImg = styled.img`
+  height: 100%;
+  max-width: 100%;
+  width: auto;
+`;
+
+export const ArtifactDiv = styled.div`
+  height: 50vh;
+  width: 100%;
+  overflow: hidden;
+`;
+
 export const InformationDiv = styled.div`
   display: flex;
   justify-content: space-between;

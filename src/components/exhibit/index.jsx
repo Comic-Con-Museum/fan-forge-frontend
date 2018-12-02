@@ -3,12 +3,15 @@ import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 import { fetchExhibit, supportExhibit } from '../../utils/api';
+import { appURL } from '../../utils/constants';
 import LikesImgSrc from '../../assets/LIKE.svg';
 import {
   ComponentWrapper,
   Card,
   Title,
   CarouselDiv,
+  ArtifactDiv,
+  ArtifactImg,
   InformationDiv,
   DescriptionColumns,
   LikesDiv,
@@ -27,12 +30,14 @@ class Exhibit extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      data: null
+      data: null,
+      loaded: false,
+      commentsOpen: false
     };
   }
 
   componentDidMount = () => {
-    fetchExhibit(this.props.match.params.id).then(({data}) => this.setState(data));
+    fetchExhibit(this.props.match.params.id).then(({data}) => this.setState({...data, loaded: true}));
   }
 
   toggleComments = () => {
@@ -47,31 +52,21 @@ class Exhibit extends PureComponent {
 
   renderArtifacts = () => {
     return this.state.artifacts.map(item => (
-      <div style={{backgroundColor:'yellow', height: '50vh', width: '100%'}}>
-        <h1>
-          {item.id}
-          {item.description}
-        </h1>
-      </div>
+      <ArtifactDiv >
+        <ArtifactImg src={`${appURL}/image/${item.id}`} style={{width: 'auto'}}/>
+      </ArtifactDiv>
     ));
   }
 
   render = () => {
-    console.warn(this.state);
-    const {title, description, comments, commentsOpen, artifacts, supporters, id} = this.state;
-    if (!title) return <Card>Loading</Card>
+    const {title, description, comments, commentsOpen, loaded, supporters, id} = this.state;
+    if (!loaded) return <Card>Loading</Card>
 
     const commentComponents = comments.map(item =>
       <CommentDiv>
-        <p>
-          {item.text}
-        </p>
-        <p>
-          {item.author}
-        </p>
-        <p>
-          {item.created}
-        </p>
+        <p>{item.text}</p>
+        <p>{item.author}</p>
+        <p>{item.created}</p>
       </CommentDiv>
     );
 
@@ -96,7 +91,7 @@ class Exhibit extends PureComponent {
               <ExtrasDiv>
                 <LikesDiv>
                   <LikesImg onClick={() => supportExhibit(id)} src={LikesImgSrc}/>
-                  <span>{supporters} likes</span>
+                  {supporters} likes
                 </LikesDiv>
                 <TagsDiv>
                   TAGS {this.renderTags()}
