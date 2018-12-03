@@ -138,7 +138,7 @@ class Exhibit extends PureComponent {
         </Card>
         {showModal ? (
             <Survey
-              exhibitId={this.props.match.params.id}
+              exhibitId={id}
               alreadySupported={supported}
               title={title}
               parentRef={this}
