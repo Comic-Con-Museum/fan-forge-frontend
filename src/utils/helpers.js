@@ -2,6 +2,7 @@ import MoveTo from 'moveTo'
 
 export const moveTo = new MoveTo()
 
+export const randomInt = (min, max) => parseInt((max - min) * Math.random() + min)
 
 export function isObject(item) {
   return (item && typeof item === 'object' && !Array.isArray(item));

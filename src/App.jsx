@@ -4,7 +4,7 @@ import { LanguageProvider } from './utils/Language';
 import { ThemeProvider } from 'styled-components';
 import { Switch, Route } from 'react-router-dom';
 import React, { Component, Fragment } from 'react';
-import { Main, LogoImg, SideContainer, MobileNav } from './style/AppStyle';
+import { Main, LogoImg, SideContainer, MobileNav, CenterContainer } from './style/AppStyle';
 import MediaQuery from 'react-responsive';
 import { colors } from './style/theme';
 import axios from 'axios';
@@ -13,6 +13,9 @@ export class App extends Component {
   state = {
     feed: [],
     tags: [],
+    activeExhibit: {
+      artifacts: []
+    },
     filterTag: defaultTag,
     sortOption: sortOptions.RECENT,
     onLastPage: false,
@@ -52,7 +55,8 @@ export class App extends Component {
   }
 
   render() {
-    const {tags, filterTag, sortOption, feed, feedIndex } = this.state
+    const {tags, filterTag, activeExhibit, sortOption, feed, feedIndex } = this.state
+      
     return (
     <ThemeProvider theme={colors}>
       <Main>
@@ -61,22 +65,28 @@ export class App extends Component {
             <LogoImg src="https://www.balboapark.org/sites/default/files/2018-07/CCIM-OrgPageAd-275x350.jpg" />
             <Title/>
           </SideContainer>
-          <Switch>
-            <Route exact path='/' render={props => (
-              <Feed
-                setActiveCalls={this.setters.activeCalls}
-                setIndex={this.setters.feedIndex}
-                setErrors={this.setters.errors}
-                setFeed={this.setters.feed}
-                feedIndex={feedIndex}
-                sortOption={sortOption.value}
-                filterTag={filterTag.value}
-                feed={feed}
+          <CenterContainer>
+            <Switch>
+              <Route exact path='/submit' component={Submit}/>
+              <Route path='/exhibit/:id'
+                render={props => (
+                  <Exhibit {...props} 
+                    setActiveExhibit={this.setters.activeExhibit} 
+                    activeExhibit={activeExhibit}/>
+                )} 
               />
-            )} />
-            <Route exact path='/submit' component={Submit}/>
-            <Route path='/exhibit/:id' component={Exhibit} />
-          </Switch>
+            </Switch>
+            <Feed
+              setActiveCalls={this.setters.activeCalls}
+              setIndex={this.setters.feedIndex}
+              setErrors={this.setters.errors}
+              setFeed={this.setters.feed}
+              feedIndex={feedIndex}
+              sortOption={sortOption.value}
+              filterTag={filterTag.value}
+              feed={feed}
+            />
+          </CenterContainer>
           <SideContainer>
             <Navigation
               tags={tags}

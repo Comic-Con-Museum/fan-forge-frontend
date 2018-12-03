@@ -15,13 +15,15 @@ class ExhibitCard extends PureComponent {
   render() {
     const {id, title, description, supporters, featured, cover} = this.props
 
-    return (
-      <ExhibitContainer>
-        <ExhibitImg open={open} src={`https://fan-forge-dev.herokuapp.com/image/${cover ? cover.image : ''}`}/>
-        <ExhibitTitle>{title}</ExhibitTitle>
-        <Supporters>{supporters}</Supporters>
-        {featured ? <Featured /> : ''}
-      </ExhibitContainer>
+    return (  
+      <Link to={`/exhibit/${this.props.id}`}>
+        <ExhibitContainer onClick={this.navigateToExhibit}>
+          <ExhibitImg open={open} src={`https://fan-forge-dev.herokuapp.com/image/${cover ? cover.image : ''}`}/>
+          <ExhibitTitle>{title}</ExhibitTitle>
+          <Supporters>{supporters}</Supporters>
+          {featured ? <Featured /> : ''}
+        </ExhibitContainer>
+      </Link>
     )
   }
 }

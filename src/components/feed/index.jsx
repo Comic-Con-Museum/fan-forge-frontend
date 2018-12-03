@@ -71,7 +71,6 @@ import {
 
   render() {
     const { feed, feedIndex } = this.props
-
     return (
       <FeedContainer>
         <ExhibitList>

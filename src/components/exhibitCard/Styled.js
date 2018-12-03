@@ -12,7 +12,9 @@ export const ExhibitContainer = styled.div.attrs({
   border-radius: 5px;
   overflow: hidden;
   transition: height .5s;
-
+  text-decoration: none;
+  color: black;
+  
   :hover {
     background-color: yellow;
   }

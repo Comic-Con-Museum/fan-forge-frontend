@@ -5,6 +5,10 @@ export const Main = styled.main`
   display: flex;
 `;
 
+export const CenterContainer = styled.div`
+  padding: 0px 10px;
+`;
+
 export const SideContainer = styled.div`
   display: flex;
   align-items: center;
