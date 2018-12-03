@@ -6,6 +6,7 @@ import { appURL } from '../../utils/constants';
 import LikesImgSrc from '../../assets/LIKE.svg';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
+import { Comments } from '../comments/';
 import {
   ComponentWrapper,
   Card,
@@ -23,16 +24,11 @@ import {
   CommentsButton,
   ExtrasDiv,
   Tag,
-  CommentsCloseButton,
   DescriptionAndExtrasDiv,
   InformationPlaceholder,
   ArtifactPlaceholder,
   SentencePlaceholder,
   TitlePlaceholder,
-  CommentTitle,
-  CommentInfo,
-  CommentAuthor,
-  CommentDate,
   Close
 } from './Styled';
 import './styles.scss';
@@ -71,29 +67,24 @@ class Exhibit extends PureComponent {
       this.props.setActiveExhibit(data)
       this.setState({loading: false})
     })
-
   }
 
   toggleComments = () => {
     this.setState((prevState) => ({commentsOpen: !prevState.commentsOpen}))
   }
-
-  renderTags = (tags = []) => {
-    return (
-      <TagsDiv>
-         <p>TAGS</p> {tags.map((item, key) => (<Tag key={key}>{item}</Tag>))}
-      </TagsDiv>
-    )
-  }
     
   renderArtifacts = (loading, artifacts) => {
+    let artifactSlides;
+
     if (loading || artifacts.length == 0) { //TOOD: remove .length after we remove mock data from db
-      return <ArtifactPlaceholder />
+      artifactSlides = <ArtifactPlaceholder />
     } else {
-      return artifacts.map((item, key) => 
+      artifactSlides = artifacts.map((item, key) => 
         <ArtifactImg key={key} src={`${appURL}/image/${item.id}`} />
       )
     }
+
+    return  <Carousel showThumbs={false} showStatus={false} useKeyboardArrows>{artifactSlides}</Carousel>;
   }
 
   handleCloseButton = () => {
@@ -113,26 +104,12 @@ class Exhibit extends PureComponent {
   render = () => {
     const { loading, commentsOpen } = this.state;
     const {title, artifacts, tags, description, comments, supporters, id} = this.props.activeExhibit;
-    const commentComponents = comments.map(item =>
-      <CommentDiv>
-        <p>{item.text}</p>
-        <CommentInfo>
-          <p>{item.author}</p>
-          <p>{new Date(item.created).toLocaleDateString("en-US")}</p>
-        </CommentInfo>
-      </CommentDiv>
-    );
+
     return (
       <Fragment>
         <Card onAnimationEnd={this.handleClosing} close={this.state.close}>
             <Close onClick={this.handleCloseButton} blackTheme={commentsOpen}> X </Close>
-            <Carousel
-              showThumbs={false}
-              showStatus={false}
-              useKeyboardArrows
-            >
-              {this.renderArtifacts(loading, artifacts)}
-            </Carousel>
+            {this.renderArtifacts(loading, artifacts)}
             <InformationDiv>  
               <Title> {loading ? <TitlePlaceholder /> : title}</Title>
               <DescriptionAndExtrasDiv>
@@ -143,19 +120,16 @@ class Exhibit extends PureComponent {
                       <LikesImg onClick={() => supportExhibit(id)} src={LikesImgSrc}/>  
                       {supporters} likes
                     </LikesDiv>
-                    {this.renderTags(tags)}
+                    {tags && <TagsDiv>
+                        <p>TAGS</p> {tags.map((item, key) => (<Tag key={key}>{item}</Tag>))}
+                    </TagsDiv>}
                     <CommentsButton onClick={this.toggleComments}> READ {comments && comments.length || "..."} COMMENTS</CommentsButton>
                   </ExtrasDiv>
                 }
               </DescriptionAndExtrasDiv>
             </InformationDiv>
-            <CommentsWrapper show={commentsOpen}>
-              <CommentTitle>Comment section</CommentTitle>
-              {commentComponents}
-            </CommentsWrapper>
+            <Comments exhibit={id} show={commentsOpen} comments={comments} />
         </Card>
-  
-        
       </Fragment>
     );
   }

@@ -71,7 +71,6 @@ import {
 
   render() {
     const { feed, feedIndex, activeId, location } = this.props
-    console.log(location);
     return (
       <FeedContainer>
         <ExhibitList>

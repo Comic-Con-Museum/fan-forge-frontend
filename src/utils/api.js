@@ -18,6 +18,11 @@ const fetchTags = () => axios.get(`${appURL}/tags`)
 
 const fetchExhibit = (id) => axios.get(`${appURL}/exhibit/${id}`)
 
+const postComment = (text, id) => axios.post(`${appURL}/comment/`, {
+  text: text,
+  parent: parseInt(id)  
+});
+
 // TODO: Still need to add request body as survey
 const supportExhibit = (id) => axios.put(`${appURL}/support/exhibit/${id}`);
 
@@ -25,6 +30,7 @@ export {
   fetchFeed,
   fetchTags,
   fetchExhibit,
+  postComment,
   pageSize,
   supportExhibit
 }

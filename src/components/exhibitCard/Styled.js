@@ -12,7 +12,7 @@ export const ExhibitContainer = styled.div.attrs({
   background-color: #fff;
   border-radius: 5px;
   overflow: hidden;
-  transition: all .5s;
+  transition: all 0.75s ease;
   text-decoration: none;
   color: black;
   

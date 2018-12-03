@@ -145,40 +145,6 @@ export const CommentsButton = styled.button`
   }
 `;
 
-export const CommentsWrapper = styled.div`
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 400px;
-  background-color: rgb(255,255,0);
-  height: 100%;
-  overflow: auto;
-  z-index: 50;
-
-  transform-origin: right;
-  transition: transform 0.3s ease-out;
-  transform: ${props => props.show ? 'scaleX(1)' : 'scaleX(0)'}};
-`;
-
-export const CommentDiv = styled.div`
-  padding: 15px 25px;
-  font-size: 17px;
-`;
-
-export const CommentTitle = styled.p`
-  font-weight: 800;
-  padding: 25px;
-  font-size: 20px;
-`
-
-export const CommentInfo = styled.div`
-  display: flex;
-  margin-top: 5px;
-  font-size: 14px;
-  font-weight: 500;
-  justify-content: space-between;
-`
-
 export const ExtrasDiv = styled.div`
   display: flex;
   justify-content: flex-end;
