@@ -57,10 +57,10 @@ export class App extends Component {
     <ThemeProvider theme={colors}>
       <Main>
         <MediaQuery minWidth={768}>
-          {false ? <SideContainer>
+          {<SideContainer>
             <LogoImg src="https://www.balboapark.org/sites/default/files/2018-07/CCIM-OrgPageAd-275x350.jpg" />
             <Title/>
-          </SideContainer> : null }
+          </SideContainer>}
           <Switch>
             <Route exact path='/' render={props => (
               <Feed
@@ -76,9 +76,14 @@ export class App extends Component {
             )} />
             <Route exact path='/submit' component={Submit}/>
             <Route path='/exhibit/:id' component={Exhibit} />
-            <Route path='/admin' component={AdminPanel} />
+            <Route path='/admin' render={() =>
+              <AdminPanel
+                feed={feed}
+                setFeed={this.setters.feed}
+              />}
+            />
           </Switch>
-          {false ? <SideContainer>
+          {<SideContainer>
             <Navigation
               tags={tags}
               filterTag={filterTag}
@@ -90,7 +95,7 @@ export class App extends Component {
               setActiveCalls={this.setters.activeCalls}
             />
             <Title flipped />
-          </SideContainer> : null}
+          </SideContainer>}
         </MediaQuery>
         <MediaQuery maxWidth={768}>
           <MobileNav>
