@@ -2,6 +2,8 @@ import React, { PureComponent } from 'react';
 import AriaModal from 'react-aria-modal';
 import { PropTypes } from 'prop-types';
 import Slider from 'react-rangeslider';
+import { supportExhibit } from '../../utils/api';
+
 // default styles
 import 'react-rangeslider/lib/index.css'
 
@@ -47,20 +49,23 @@ class Survey extends PureComponent {
   };
 
   submit = () => {
-    alert(JSON.stringify(this.state));
-/*
-{
-  visits: integer // [1-10] How many times the respondent would visit this exhibit
-  rating: integer // [0-10] Rating given by the user, for NPS calculation
-  populations: { // Which populations the respondent thinks would like this
-    // for each of these: `true` means the population would support it
-    male: boolean
-    female: boolean
-    kids: boolean
-    teenagers: boolean
-    adults: boolean
-  }
-}*/
+    const { visits, rating, male, female, kids, teenagers, adults } = this.state;
+    const data = {
+      visits,
+      rating,
+      populations: {
+        male, female, kids, teenagers, adults
+      }
+    };
+    alert(JSON.stringify(data));
+    
+    // do callback after the exhibit post returns
+    supportExhibit(this.props.exhibitId, data, () => {
+      this.deactivateModal();
+      // refresh parent page, showing the updated count
+      this.props.parentRef.componentDidMount();
+    });
+
   }
 
   handleTimesChange = value => {

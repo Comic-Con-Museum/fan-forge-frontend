@@ -3,7 +3,7 @@ import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import Survey from '../survey/index';
 
-import { fetchExhibit, supportExhibit } from '../../utils/api';
+import { fetchExhibit } from '../../utils/api';
 import { appURL } from '../../utils/constants';
 import LikesImgSrc from '../../assets/LIKE.svg';
 import {
