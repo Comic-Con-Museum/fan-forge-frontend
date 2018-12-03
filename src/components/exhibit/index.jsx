@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import Survey from '../survey/index';
 
 import { fetchExhibit, supportExhibit } from '../../utils/api';
 import { appURL } from '../../utils/constants';
@@ -32,12 +33,17 @@ class Exhibit extends PureComponent {
     this.state = {
       data: null,
       loaded: false,
-      commentsOpen: false
+      commentsOpen: false,
+      showModal: false
     };
   }
 
   componentDidMount = () => {
-    fetchExhibit(this.props.match.params.id).then(({data}) => this.setState({...data, loaded: true}));
+    fetchExhibit(this.props.match.params.id).then(({data}) => this.setState({...data, loaded: true }));
+  }
+
+  showSupportModal = () => {
+    this.setState({ showModal: true });
   }
 
   toggleComments = () => {
@@ -52,14 +58,14 @@ class Exhibit extends PureComponent {
 
   renderArtifacts = () => {
     return this.state.artifacts.map(item => (
-      <ArtifactDiv >
+      <ArtifactDiv key={item.id}>
         <ArtifactImg src={`${appURL}/image/${item.id}`} style={{width: 'auto'}}/>
       </ArtifactDiv>
     ));
   }
 
   render = () => {
-    const {title, description, comments, commentsOpen, loaded, supporters, id} = this.state;
+    const {title, description, comments, commentsOpen, loaded, supporters, id, showModal} = this.state;
     if (!loaded) return <Card>Loading</Card>
 
     const commentComponents = comments.map(item =>
@@ -90,7 +96,7 @@ class Exhibit extends PureComponent {
               <DescriptionColumns>{description}</DescriptionColumns>
               <ExtrasDiv>
                 <LikesDiv>
-                  <LikesImg onClick={() => supportExhibit(id)} src={LikesImgSrc}/>
+                  <LikesImg onClick={this.showSupportModal} src={LikesImgSrc}/>
                   {supporters} likes
                 </LikesDiv>
                 <TagsDiv>
@@ -109,6 +115,15 @@ class Exhibit extends PureComponent {
             {commentComponents}
           </CommentsWrapper>
         ) : null}
+        {showModal ? (
+            <Survey
+              exhibitId={this.props.match.params.id}
+              alreadySupported={true}
+              title={title}
+              parentRef={this}
+            />
+        ) : null}
+
       </ComponentWrapper>
     );
   }
