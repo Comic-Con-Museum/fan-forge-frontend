@@ -3,3 +3,4 @@ export { default as Submit} from './submit';
 export { default as Navigation} from './Navigation';
 export {default as Exhibit } from './exhibit/index.jsx';
 export { default as Title } from './title';
+export {default as AdminPanel} from './adminPanel/index.jsx'

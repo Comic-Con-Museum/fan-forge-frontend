@@ -1,5 +1,5 @@
 import { sortOptions, defaultTag } from './utils/constants';
-import { Feed, Submit, Navigation, Title, Exhibit } from './components';
+import { Feed, Submit, Navigation, Title, Exhibit, AdminPanel } from './components';
 import { LanguageProvider } from './utils/Language';
 import { ThemeProvider } from 'styled-components';
 import { Switch, Route } from 'react-router-dom';
@@ -57,10 +57,10 @@ export class App extends Component {
     <ThemeProvider theme={colors}>
       <Main>
         <MediaQuery minWidth={768}>
-          <SideContainer>
+          {false ? <SideContainer>
             <LogoImg src="https://www.balboapark.org/sites/default/files/2018-07/CCIM-OrgPageAd-275x350.jpg" />
             <Title/>
-          </SideContainer>
+          </SideContainer> : null }
           <Switch>
             <Route exact path='/' render={props => (
               <Feed
@@ -76,8 +76,9 @@ export class App extends Component {
             )} />
             <Route exact path='/submit' component={Submit}/>
             <Route path='/exhibit/:id' component={Exhibit} />
+            <Route path='/admin' component={AdminPanel} />
           </Switch>
-          <SideContainer>
+          {false ? <SideContainer>
             <Navigation
               tags={tags}
               filterTag={filterTag}
@@ -89,7 +90,7 @@ export class App extends Component {
               setActiveCalls={this.setters.activeCalls}
             />
             <Title flipped />
-          </SideContainer>
+          </SideContainer> : null}
         </MediaQuery>
         <MediaQuery maxWidth={768}>
           <MobileNav>
