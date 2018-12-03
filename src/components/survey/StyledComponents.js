@@ -32,3 +32,7 @@ export const CheckboxRow = styled.div`
    display: flex;
    justify-content: space-between;
 `;
+
+export const AlreadySupported = styled.p`
+  color: red;
+`;

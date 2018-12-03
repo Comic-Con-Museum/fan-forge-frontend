@@ -65,7 +65,7 @@ class Exhibit extends PureComponent {
   }
 
   render = () => {
-    const {title, description, comments, commentsOpen, loaded, supporters, id, showModal} = this.state;
+    const {title, description, comments, commentsOpen, loaded, supporters, supported, id, showModal} = this.state;
     if (!loaded) return <Card>Loading</Card>
 
     const commentComponents = comments.map(item =>
@@ -118,7 +118,7 @@ class Exhibit extends PureComponent {
         {showModal ? (
             <Survey
               exhibitId={this.props.match.params.id}
-              alreadySupported={true}
+              alreadySupported={supported}
               title={title}
               parentRef={this}
             />

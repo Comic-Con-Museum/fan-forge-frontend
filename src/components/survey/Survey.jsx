@@ -9,6 +9,7 @@ import 'react-rangeslider/lib/index.css'
 
 
 import {
+  AlreadySupported,
   CheckboxRow,
   FieldGroup,
   LabelRow,
@@ -57,8 +58,6 @@ class Survey extends PureComponent {
         male, female, kids, teenagers, adults
       }
     };
-    alert(JSON.stringify(data));
-    
     // do callback after the exhibit post returns
     supportExhibit(this.props.exhibitId, data, () => {
       this.deactivateModal();
@@ -106,6 +105,11 @@ class Survey extends PureComponent {
             Before you add your support for this idea, we'd like to as you
             a couple of questions.
           </p>
+          { this.props.alreadySupported ?
+              <AlreadySupported>
+                You already supported this exhibit. Changes will not be made.
+              </AlreadySupported> : null
+          }
           <FieldGroup>
             <div>How many times would you visit this exhibit?</div>
             <Slider
