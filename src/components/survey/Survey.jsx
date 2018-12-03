@@ -72,33 +72,9 @@ class Survey extends PureComponent {
     });
   }
 
-  handleMaleChange = event => {
+  handleCheckChange = event => {
     this.setState({
-      male: event.target.value
-    });
-  }
-
-  handleFemaleChange = event => {
-    this.setState({
-      female: event.target.value
-    });
-  }
-
-  handleKidsChange = event => {
-    this.setState({
-      kids: event.target.value
-    })
-  }
-
-  handleTeenagersChange = event => {
-    this.setState({
-      teenagers: event.target.value
-    });
-  }
-
-  handleAdultsChange = event => {
-    this.setState({
-      adults: event.target.value
+      [event.target.name]: event.target.checked
     });
   }
 
@@ -138,33 +114,38 @@ class Survey extends PureComponent {
             <div>Groups of people you feel would view this exhibit (check all that apply)</div>
             <label>Male
               <input
+                name="male"
                 type="checkbox"
                 value={this.state.male}
-                onChange={this.handleMaleChange} />
+                onChange={this.handleCheckChange} />
             </label>
             <label>Female
               <input
+                name="female"
                 type="checkbox"
                 value={this.state.female}
-                onChange={this.handleFemaleChange} />
+                onChange={this.handleCheckChange} />
             </label>
             <label>Kids
               <input
+                name="kids"
                 type="checkbox"
                 value={this.state.kids}
-                onChange={this.handleKidsChange} />
+                onChange={this.handleCheckChange} />
             </label>
             <label>Teenagers
               <input
+                name="teenagers"
                 type="checkbox"
                 value={this.state.teenagers}
-                onChange={this.handleTeenagersChange} />
+                onChange={this.handleCheckChange} />
             </label>
             <label>Adults
               <input
+                name="adults"
                 type="checkbox"
                 value={this.state.adults}
-                onChange={this.handleAdultsChange} />
+                onChange={this.handleCheckChange} />
             </label>
           </FieldGroup>
           <FieldGroup>
