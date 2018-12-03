@@ -24,7 +24,12 @@ const postComment = (text, id) => axios.post(`${appURL}/comment/`, {
 });
 
 // TODO: Still need to add request body as survey
-const supportExhibit = (id) => axios.put(`${appURL}/support/exhibit/${id}`);
+const supportExhibit = (id, body, onComplete) => axios.request({
+    method: 'put',
+    url: `${appURL}/support/exhibit/${id}`,
+    data: JSON.stringify(body),
+    headers: {'Content-Type': 'application/json'}
+}).then( () => onComplete() );
 
 export {
   fetchFeed,

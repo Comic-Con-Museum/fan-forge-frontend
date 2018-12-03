@@ -2,6 +2,7 @@ import React, { Fragment, PureComponent } from 'react';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { moveTo, randomInt } from '../../utils/helpers';
 import { fetchExhibit, supportExhibit } from '../../utils/api';
+import Survey from '../survey/index';
 import { appURL } from '../../utils/constants';
 import LikesImgSrc from '../../assets/LIKE.svg';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -44,7 +45,8 @@ const DescriptionPlaceholder = props => {
 class Exhibit extends PureComponent {
   state = {
     loading: true,
-    commentsOpen: false
+    commentsOpen: false,
+    showModal: false
   }
 
   componentDidMount = () => {
@@ -67,6 +69,10 @@ class Exhibit extends PureComponent {
       this.props.setActiveExhibit(data)
       this.setState({loading: false})
     })
+  }
+  
+  showSupportModal = () => {
+    this.setState({ showModal: true });
   }
 
   toggleComments = () => {
@@ -102,7 +108,7 @@ class Exhibit extends PureComponent {
   }
 
   render = () => {
-    const { loading, commentsOpen } = this.state;
+    const { loading, commentsOpen, showModal, supported } = this.state;
     const {title, artifacts, tags, description, comments, supporters, id} = this.props.activeExhibit;
 
     return (
@@ -117,7 +123,7 @@ class Exhibit extends PureComponent {
                 {loading ? '': 
                   <ExtrasDiv> 
                     <LikesDiv>
-                      <LikesImg onClick={() => supportExhibit(id)} src={LikesImgSrc}/>  
+                      <LikesImg onClick={this.showSupportModal} src={LikesImgSrc}/>  
                       {supporters} likes
                     </LikesDiv>
                     {tags && <TagsDiv>
@@ -130,6 +136,14 @@ class Exhibit extends PureComponent {
             </InformationDiv>
             <Comments exhibit={id} show={commentsOpen} comments={comments} />
         </Card>
+        {showModal ? (
+            <Survey
+              exhibitId={this.props.match.params.id}
+              alreadySupported={supported}
+              title={title}
+              parentRef={this}
+            />
+        ) : null}
       </Fragment>
     );
   }
