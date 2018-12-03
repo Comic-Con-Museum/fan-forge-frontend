@@ -15,7 +15,7 @@ import {
   CarouselDiv,
   ArtifactDiv,
   ArtifactImg,
-  InformationDiv,
+  InformationDiv, 
   DescriptionColumns,
   LikesDiv,
   LikesImg,

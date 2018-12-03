@@ -101,10 +101,10 @@ class Survey extends PureComponent {
       >
         <SubmitForm id="demo-one-modal">
           <Title>Support the Exhibit, {this.props.title}</Title>
-          <p>
+          <LabelRow>
             Before you add your support for this idea, we'd like to as you
             a couple of questions.
-          </p>
+          </LabelRow>
           { this.props.alreadySupported ?
               <AlreadySupported>
                 You already supported this exhibit. Changes will not be made.
@@ -166,7 +166,7 @@ class Survey extends PureComponent {
           <FieldGroup>
             <div>How likely would you be to recommend this exhibit to a friend?</div>
             <Slider
-              labels={{0: 'Not at all', 10: 'Definitely'}}
+              labels={{0: 'Not likely', 10: 'Definitely'}}
               format={value => `${value * 10}%`}
               min={0}
               max={10}
