@@ -49,10 +49,10 @@ class Exhibit extends PureComponent {
   state = {
     loading: true,
     commentsOpen: false
-  };
+  }
 
   componentDidMount = () => {
-    if (this.props.activeExhibit.id == undefined) {
+    if (this.props.activeExhibit.id != this.props.match.params.id) {
       this.fetchExhibits()
     } else {
       this.setState({loading: false})
@@ -67,15 +67,11 @@ class Exhibit extends PureComponent {
 
   fetchExhibits = () => {
     this.setState({loading: true})
-    moveTo.move(document.body, {
-      callback: () => {
-        //TODO: Look into moving this outside the callback and making sure the scroll top animation is good
-        fetchExhibit(this.props.match.params.id).then(({data}) => {
-          this.props.setActiveExhibit(data)
-          this.setState({loading: false})
-        })
-      }
+    fetchExhibit(this.props.match.params.id).then(({data}) => {
+      this.props.setActiveExhibit(data)
+      this.setState({loading: false})
     })
+
   }
 
   toggleComments = () => {

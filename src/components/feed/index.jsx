@@ -70,11 +70,12 @@ import {
   }
 
   render() {
-    const { feed, feedIndex } = this.props
+    const { feed, feedIndex, activeId, location } = this.props
+    console.log(location);
     return (
       <FeedContainer>
         <ExhibitList>
-          {feed.map((item, index) => <ExhibitCard key={index} {...item} />)}
+          {feed.map((item, index) => <ExhibitCard active={location && location.pathname.includes('exhibit') && activeId == item.id} key={index} {...item} />)}
         </ExhibitList>
         <Pagination hidden={feedIndex + pageSize > this.state.feedSize && feedIndex == 0}>
           <PageNavigate label="Previous page" hidden={feedIndex == 0} onClick={this.navigatePage("backwards")}>{"<"}</PageNavigate> 

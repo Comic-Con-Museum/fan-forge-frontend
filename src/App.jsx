@@ -78,16 +78,20 @@ export class App extends Component {
                 )} 
               />
             </Switch>
-            <Feed
-              setActiveCalls={this.setters.activeCalls}
-              setIndex={this.setters.feedIndex}
-              setErrors={this.setters.errors}
-              setFeed={this.setters.feed}
-              feedIndex={feedIndex}
-              sortOption={sortOption.value}
-              filterTag={filterTag.value}
-              feed={feed}
-            />
+            <Route render={({location}) => (
+              <Feed
+                setActiveCalls={this.setters.activeCalls}
+                setIndex={this.setters.feedIndex}
+                setErrors={this.setters.errors}
+                setFeed={this.setters.feed}
+                activeId={activeExhibit.id}
+                feedIndex={feedIndex}
+                sortOption={sortOption.value}
+                filterTag={filterTag.value}
+                location={location}
+                feed={feed}
+              />
+            )}/>
           </CenterContainer>
           <SideContainer>
             <Navigation
