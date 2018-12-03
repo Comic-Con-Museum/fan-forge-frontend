@@ -15,6 +15,20 @@ export const Title = styled.h2`
 
 export const FieldGroup = styled.div`
   width: 400px;
-  margin: 10px;
+  margin: 5px;
   padding: 10px;
+`;
+
+export const SubmitButton = styled.button`
+  width: 100px;
+  margin: 10px;
+`;
+
+export const LabelRow = styled.div`
+   margin-bottom: 12px;
+`;
+
+export const CheckboxRow = styled.div`
+   display: flex;
+   justify-content: space-between;
 `;

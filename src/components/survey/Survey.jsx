@@ -3,11 +3,14 @@ import AriaModal from 'react-aria-modal';
 import { PropTypes } from 'prop-types';
 import Slider from 'react-rangeslider';
 // default styles
-//import 'react-rangeslider/lib/index.css'
+import 'react-rangeslider/lib/index.css'
 
 
 import {
+  CheckboxRow,
   FieldGroup,
+  LabelRow,
+  SubmitButton,
   SubmitForm,
   Title
 } from './StyledComponents';
@@ -72,6 +75,7 @@ class Survey extends PureComponent {
     });
   }
 
+
   handleCheckChange = event => {
     this.setState({
       [event.target.name]: event.target.checked
@@ -98,7 +102,6 @@ class Survey extends PureComponent {
             a couple of questions.
           </p>
           <FieldGroup>
-            <div>First question: </div>
             <div>How many times would you visit this exhibit?</div>
             <Slider
               labels={{1: 'Once', 10: 'Every time'}}
@@ -110,46 +113,48 @@ class Survey extends PureComponent {
             />
           </FieldGroup>
           <FieldGroup>
-            <div>Second question: </div>
-            <div>Groups of people you feel would view this exhibit (check all that apply)</div>
-            <label>Male
-              <input
-                name="male"
-                type="checkbox"
-                value={this.state.male}
-                onChange={this.handleCheckChange} />
-            </label>
-            <label>Female
-              <input
-                name="female"
-                type="checkbox"
-                value={this.state.female}
-                onChange={this.handleCheckChange} />
-            </label>
-            <label>Kids
-              <input
-                name="kids"
-                type="checkbox"
-                value={this.state.kids}
-                onChange={this.handleCheckChange} />
-            </label>
-            <label>Teenagers
-              <input
-                name="teenagers"
-                type="checkbox"
-                value={this.state.teenagers}
-                onChange={this.handleCheckChange} />
-            </label>
-            <label>Adults
-              <input
-                name="adults"
-                type="checkbox"
-                value={this.state.adults}
-                onChange={this.handleCheckChange} />
-            </label>
+            <LabelRow>
+              Groups of people you feel would view this exhibit (check all that apply)
+            </LabelRow>
+            <CheckboxRow>
+              <label>Male
+                <input
+                  name="male"
+                  type="checkbox"
+                  value={this.state.male}
+                  onChange={this.handleCheckChange} />
+              </label>
+              <label>Female
+                <input
+                  name="female"
+                  type="checkbox"
+                  value={this.state.female}
+                  onChange={this.handleCheckChange} />
+              </label>
+              <label>Kids
+                <input
+                  name="kids"
+                  type="checkbox"
+                  value={this.state.kids}
+                  onChange={this.handleCheckChange} />
+              </label>
+              <label>Teenagers
+                <input
+                  name="teenagers"
+                  type="checkbox"
+                  value={this.state.teenagers}
+                  onChange={this.handleCheckChange} />
+              </label>
+              <label>Adults
+                <input
+                  name="adults"
+                  type="checkbox"
+                  value={this.state.adults}
+                  onChange={this.handleCheckChange} />
+              </label>
+          </CheckboxRow>
           </FieldGroup>
           <FieldGroup>
-            <div>Third question: </div>
             <div>How likely would you be to recommend this exhibit to a friend?</div>
             <Slider
               labels={{0: 'Not at all', 10: 'Definitely'}}
@@ -160,9 +165,7 @@ class Survey extends PureComponent {
               onChange={this.handleRatingChange}
             />
           </FieldGroup>
-          <div>
-            <button onClick={this.submit}>Submit</button>
-          </div>
+          <SubmitButton onClick={this.submit}>Submit</SubmitButton>
         </SubmitForm>
       </AriaModal>
     );
