@@ -10,3 +10,23 @@ body {
     padding: 15px;
     margin: 0;
 }
+
+.fade-enter {
+    transform-origin: top;
+    transform: scaleY(0);
+    min-height: 0;
+    transition: all 500ms ease-in;
+}
+  
+.fade-enter-done {
+    min-height: 800px;
+    transform: scaleY(1);
+    transition: all 500ms ease-in;
+}
+
+.fade-exit-active {
+    background-color:red;
+    min-height: 0px;
+    transform: scaleY(0);
+    transition: all 500ms ease-in;
+}   

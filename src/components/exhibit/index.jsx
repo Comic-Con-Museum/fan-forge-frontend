@@ -29,6 +29,10 @@ import {
   ArtifactPlaceholder,
   SentencePlaceholder,
   TitlePlaceholder,
+  CommentTitle,
+  CommentInfo,
+  CommentAuthor,
+  CommentDate,
   Close
 } from './Styled';
 import './styles.scss';
@@ -36,19 +40,16 @@ import './styles.scss';
 const DescriptionPlaceholder = props => {
   return (
     <Fragment>
-      {Array.from(Array(randomInt(8,30))).map(index => <SentencePlaceholder key={index} />)}
+      {[1,2,3,4,5,6,7].map(index => <SentencePlaceholder key={index} />)}
     </Fragment>
   )
 } 
 
 class Exhibit extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      loading: true,
-      commentsOpen: false
-    };
-  }
+  state = {
+    loading: true,
+    commentsOpen: false
+  };
 
   componentDidMount = () => {
     if (this.props.activeExhibit.id == undefined) {
@@ -59,7 +60,6 @@ class Exhibit extends PureComponent {
   }
 
   componentDidUpdate = (prevProps) => {
-    console.log(prevProps)
     if (prevProps.match.params.id !== this.props.match.params.id) {
      this.fetchExhibits() 
     }
@@ -79,13 +79,15 @@ class Exhibit extends PureComponent {
   }
 
   toggleComments = () => {
-    this.setState({commentsOpen: !this.state.commentsOpen})
+    this.setState((prevState) => ({commentsOpen: !prevState.commentsOpen}))
   }
 
-  renderTags = () => {
-    return this.state.tags.map(item => (
-      <Tag>{item}</Tag>
-    ))
+  renderTags = (tags = []) => {
+    return (
+      <TagsDiv>
+         <p>TAGS</p> {tags.map((item, key) => (<Tag key={key}>{item}</Tag>))}
+      </TagsDiv>
+    )
   }
     
   renderArtifacts = (loading, artifacts) => {
@@ -98,21 +100,36 @@ class Exhibit extends PureComponent {
     }
   }
 
-  render = () => {  
-    const { loading } = this.state;
-    const {title, artifacts, description, comments, commentsOpen, supporters, id} = this.props.activeExhibit;
-    console.log(this.props)
-    // const commentComponents = comments.map(item =>
-    //   <CommentDiv>
-    //     <p>{item.text}</p>
-    //     <p>{item.author}</p>
-    //     <p>{item.created}</p>
-    //   </CommentDiv>
-    // );
+  handleCloseButton = () => {
+    if (this.state.commentsOpen) {
+      this.setState((prevState) => ({commentsOpen: false}))
+    } else {
+      this.setState({close: true})
+    }
+  }
+
+  handleClosing = () => {
+    if (this.state.close) {
+      this.props.history.push('/')
+    }
+  }
+
+  render = () => {
+    const { loading, commentsOpen } = this.state;
+    const {title, artifacts, tags, description, comments, supporters, id} = this.props.activeExhibit;
+    const commentComponents = comments.map(item =>
+      <CommentDiv>
+        <p>{item.text}</p>
+        <CommentInfo>
+          <p>{item.author}</p>
+          <p>{new Date(item.created).toLocaleDateString("en-US")}</p>
+        </CommentInfo>
+      </CommentDiv>
+    );
     return (
       <Fragment>
-        <Card>
-            <Close onClick={() => this.props.history.push('/')}> X </Close>
+        <Card onAnimationEnd={this.handleClosing} close={this.state.close}>
+            <Close onClick={this.handleCloseButton} blackTheme={commentsOpen}> X </Close>
             <Carousel
               showThumbs={false}
               showStatus={false}
@@ -124,27 +141,25 @@ class Exhibit extends PureComponent {
               <Title> {loading ? <TitlePlaceholder /> : title}</Title>
               <DescriptionAndExtrasDiv>
                 <DescriptionColumns>{loading ? <DescriptionPlaceholder /> : description}</DescriptionColumns>
-                <ExtrasDiv>
-                  <LikesDiv>
-                    <LikesImg onClick={() => supportExhibit(id)} src={LikesImgSrc}/>  
-                    {supporters} likes
-                  </LikesDiv>
-                  <TagsDiv>
-                    {/* TAGS {this.renderTags()} */}
-                  </TagsDiv>
-                  {/* <CommentsButton onClick={this.toggleComments}>READ {comments.length} COMMENTS</CommentsButton> */}
-                </ExtrasDiv>
+                {loading ? '': 
+                  <ExtrasDiv> 
+                    <LikesDiv>
+                      <LikesImg onClick={() => supportExhibit(id)} src={LikesImgSrc}/>  
+                      {supporters} likes
+                    </LikesDiv>
+                    {this.renderTags(tags)}
+                    <CommentsButton onClick={this.toggleComments}> READ {comments && comments.length || "..."} COMMENTS</CommentsButton>
+                  </ExtrasDiv>
+                }
               </DescriptionAndExtrasDiv>
             </InformationDiv>
+            <CommentsWrapper show={commentsOpen}>
+              <CommentTitle>Comment section</CommentTitle>
+              {commentComponents}
+            </CommentsWrapper>
         </Card>
   
-        {/* {commentsOpen ? (
-          <CommentsWrapper>
-            <CommentsCloseButton onClick={this.toggleComments}>X</CommentsCloseButton>
-            <h3>Comment section</h3>
-            {commentComponents}
-          </CommentsWrapper>
-        ) : null} */}
+        
       </Fragment>
     );
   }

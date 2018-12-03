@@ -2,6 +2,7 @@ import { sortOptions, defaultTag } from './utils/constants';
 import { Feed, Submit, Navigation, Title, Exhibit } from './components';
 import { LanguageProvider } from './utils/Language';
 import { ThemeProvider } from 'styled-components';
+import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { Switch, Route } from 'react-router-dom';
 import React, { Component, Fragment } from 'react';
 import { Main, LogoImg, SideContainer, MobileNav, CenterContainer } from './style/AppStyle';
@@ -14,7 +15,8 @@ export class App extends Component {
     feed: [],
     tags: [],
     activeExhibit: {
-      artifacts: []
+      artifacts: [],
+      comments: []
     },
     filterTag: defaultTag,
     sortOption: sortOptions.RECENT,
@@ -70,9 +72,9 @@ export class App extends Component {
               <Route exact path='/submit' component={Submit}/>
               <Route path='/exhibit/:id'
                 render={props => (
-                  <Exhibit {...props} 
-                    setActiveExhibit={this.setters.activeExhibit} 
-                    activeExhibit={activeExhibit}/>
+                      <Exhibit {...props} 
+                        setActiveExhibit={this.setters.activeExhibit} 
+                        activeExhibit={activeExhibit}/>
                 )} 
               />
             </Switch>

@@ -7,19 +7,28 @@ export const ComponentWrapper = styled.div`
   justify-content: center;
 `;
 
-export const expandOut = keyframes`
+export const shrink = keyframes`
   0% {
-    transform-origin: top;
-    transform: scaleY(0);
-    min-height: 0;
-  }
-
-  50% {
-    min-height: 100px;
-    transform: scaleY(0);
+    transform-origin: bottom;
+    transform: scaleY(1);
+    max-height: 800px;
   }
 
   100% {
+    max-height: 0px;
+    transform: scaleY(0);
+  }
+`
+
+export const expand = keyframes`
+  0% {
+    transform-origin: top;
+    transform: scaleY(0);
+    max-height: 0;
+  }
+
+  100% {
+    max-height: 800px;
     transform: scaleY(1);
   }
 `
@@ -34,17 +43,18 @@ export const Close = styled.div`
   position: absolute;
   top: 10px;
   right: 15px;
-  text-shadow: 0px 0px 3px rgba(0,0,0,1);
+  text-shadow: 0px 0px 3px rgba(${props => props.blackTheme ? '255,255,255' : '0,0,0'}, 0.9);
   display: inline;
-  z-index: 9999;
-  color: white; 
+  z-index: 100;
+  color: ${props => props.blackTheme ? 'black' : 'white'}; 
   font-size: 40px;
   box-shadow: 5px;
   cursor: pointer;
   transition: color 0.3s ease;
 
   &:hover {
-    color: black;
+    color: ${props => props.blackTheme ? 'white' : 'black'};
+    text-shadow: 0px 0px 3px rgba(${props => props.blackTheme ? '0,0,0' : '255,255,255'}, 0.9);
   }
 `
 
@@ -54,7 +64,8 @@ export const Card = styled.div`
   background: white;
   position: relative;
   margin-bottom: 15px;
-  animation: ${expandOut} 0.75s ease-in-out forwards;
+  transition: all 0.40s;
+  animation: ${props => props.close ? shrink : expand} 0.40s ease forwards;
 `
 
 export const TitlePlaceholder = styled.div`
@@ -92,7 +103,7 @@ export const InformationDiv = styled.div`
 export const Title = styled.div`
   font-size: 32px;
   font-weight: bold;
-  width: 25%;
+  width: 20%;
   padding: 20px 0 20px 20px;
   line-height: 1.2em;
 `;
@@ -103,13 +114,10 @@ export const DescriptionAndExtrasDiv = styled.div`
   flex-direction: column;
   justify-content: space-between;
   max-height: 500px;
-  padding: 25px 25px 15px;
+  padding: 25px 25px 15px 5px;
 `;
 
 export const DescriptionColumns = styled.div`
-  -webkit-column-c  ount: 3; /* Chrome, Safari, Opera */
-  -moz-column-count: 3; /* Firefox */
-  column-count: 3;
   min-height: 100px;
   line-height: 1.2em;
 `;
@@ -120,60 +128,97 @@ export const CommentsButton = styled.button`
   background-color: yellow;
   color: black;
   padding: 10px 20px;
-  height: 60px;
   font-weight: 700;
   border-top-left-radius: 5px;
-`;
+  font-size: 14px;
+  box-shadow: 0 2px 13px rgba(0,0,0,0.15);
+  transition: all 0.15s ease-in-out;
+  cursor: pointer;
+  
+  &:hover {
+    color: #3e3e3e;
+  }
 
-export const CommentsWrapper = styled.div`
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 300px;
-  background-color: rgba(255,255,0,.95);
-  height: 100%;
-  padding: 20px;
-  overflow: auto;
-`;
-
-export const CommentDiv = styled.div`
-  padding: 5px;
-  background-color: lightgrey;
-  border-radius: 8px;
-  margin-bottom: 20px;
-  p {
-    margin: 0;
+  &:active {
+    color: #3e3e3e;
+    box-shadow: 0 2px 13px rgba(0,0,0,0.05);
   }
 `;
 
+export const CommentsWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 400px;
+  background-color: rgb(255,255,0);
+  height: 100%;
+  overflow: auto;
+  z-index: 50;
+
+  transform-origin: right;
+  transition: transform 0.3s ease-out;
+  transform: ${props => props.show ? 'scaleX(1)' : 'scaleX(0)'}};
+`;
+
+export const CommentDiv = styled.div`
+  padding: 15px 25px;
+  font-size: 17px;
+`;
+
+export const CommentTitle = styled.p`
+  font-weight: 800;
+  padding: 25px;
+  font-size: 20px;
+`
+
+export const CommentInfo = styled.div`
+  display: flex;
+  margin-top: 5px;
+  font-size: 14px;
+  font-weight: 500;
+  justify-content: space-between;
+`
+
 export const ExtrasDiv = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   width: 100%;
   align-items: center;
+  position: relative;
 `;
 
 export const TagsDiv = styled.div`
+  margin-right: 50px;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   font-weight: 500;
-  font-size: 14px;
+  font-size: 16px;
+  text-transform: uppercase;
 `;
 
 export const Tag = styled.button`
   background-color: yellow;
   margin-left: 10px;
   border: none;
+  text-transform: uppercase;
   font-weight: 700;
   font-size: 14px;
+  padding: 10px 10px;
+  font-weight: 700;
+  border-top-left-radius: 5px;
+  box-shadow: 0 2px 13px rgba(0,0,0,0.15);
+  -webkit-transition: all 0.15s ease-in-out;
+  transition: all 0.15s ease-in-out;
+  cursor: pointer;
 `;
 
 export const LikesDiv = styled.div`
   display: flex;
-  margin-left: 20px;
   align-items: center;
   font-weight: 700;
+  position: absolute;
+  left: 0;
 `;
 
 export const LikesImg = styled.img`
@@ -181,13 +226,4 @@ export const LikesImg = styled.img`
   width: auto;
   cursor: pointer;
   margin-left: 5px;
-`;
-
-export const CommentsCloseButton = styled.button`
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
-  position: fixed;
-  top: 10;
-  right: 15px;
 `;
