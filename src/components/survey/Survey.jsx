@@ -102,7 +102,7 @@ class Survey extends PureComponent {
         <SubmitForm id="demo-one-modal">
           <Title>Support the Exhibit, {this.props.title}</Title>
           <LabelRow>
-            Before you add your support for this idea, we'd like to as you
+            Before you can add your support for this idea, we'd like to ask you
             a couple of questions.
           </LabelRow>
           { this.props.alreadySupported ?
