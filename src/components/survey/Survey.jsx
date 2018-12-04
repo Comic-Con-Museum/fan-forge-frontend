@@ -64,7 +64,6 @@ class Survey extends PureComponent {
       // refresh parent page, showing the updated count
       this.props.parentRef.componentDidMount();
     });
-
   }
 
   handleTimesChange = value => {

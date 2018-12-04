@@ -4,7 +4,7 @@ import { moveTo, randomInt } from '../../utils/helpers';
 import { fetchExhibit, supportExhibit } from '../../utils/api';
 import Survey from '../survey/index';
 import { appURL } from '../../utils/constants';
-import LikesImgSrc from '../../assets/LIKE.svg';
+import LikesImgSrc from '../../assets/like.svg';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 import { Comments } from '../comments/';
@@ -124,7 +124,7 @@ class Exhibit extends PureComponent {
                   <ExtrasDiv> 
                     <LikesDiv>
                       <LikesImg onClick={this.showSupportModal} src={LikesImgSrc}/>  
-                      {supporters} likes
+                      {supporters} SUPPORTERS
                     </LikesDiv>
                     {tags && <TagsDiv>
                         <p>TAGS</p> {tags.map((item, key) => (<Tag key={key}>{item}</Tag>))}

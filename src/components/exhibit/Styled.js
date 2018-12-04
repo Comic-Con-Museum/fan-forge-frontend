@@ -105,6 +105,7 @@ export const Title = styled.div`
   font-weight: bold;
   width: 20%;
   padding: 20px 0 20px 20px;
+  text-transform: uppercase;
   line-height: 1.2em;
 `;
 
@@ -191,5 +192,4 @@ export const LikesImg = styled.img`
   height: 30px;
   width: auto;
   cursor: pointer;
-  margin-left: 5px;
 `;
