@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import { fetchFeed, pageSize } from '../../utils/api';
 import AdminFeed from './AdminFeed';
 import { fetchFormattedSurveyData, fetchRawSurveyData} from './adminApi';
+import ExhibitDataModels from './ExhibitDataModels';
 import {
   AdminPanelWrapper,
   Title
@@ -12,7 +13,8 @@ class AdminPanel extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      feed: this.props.feed
+      feed: this.props.feed,
+      surveyData: null
     }
   }
 
@@ -26,19 +28,20 @@ class AdminPanel extends Component {
     }
   }
 
-  changeContentSelection(id) {
-    console.warn("ahh", id);
-    fetchFormattedSurveyData(id).then(console.warn)
-    fetchRawSurveyData(id).then(console.warn)
+  changeContentSelection = (id) => {
+    fetchFormattedSurveyData(id)
+    .then(({data}) => this.setState({surveyData: data}));
   }
 
   render() {
     const {feed} = this.props;
+    const {surveyData} = this.state;
     console.warn(feed);
     return (
       <AdminPanelWrapper>
         <Title>Welcome to the Admin Panel</Title>
         { feed ? <AdminFeed changeContentSelection={this.changeContentSelection} feed={feed}/> : null }
+        { surveyData ? <ExhibitDataModels {...surveyData}/> : null }
       </AdminPanelWrapper>
     )
   }

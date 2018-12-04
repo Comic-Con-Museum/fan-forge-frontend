@@ -2,7 +2,7 @@ import { appURL } from './constants';
 import axios from 'axios';
 
 axios.defaults.headers.common['Content-Type'] = 'application/json'
-axios.defaults.headers.common['Authorization'] = 'Bearer zjones'
+axios.defaults.headers.common['Authorization'] = 'Bearer admin'
 
 const pageSize = 10;
 

@@ -7,7 +7,7 @@ import App from './App';
 import './style/style';
 
 axios.defaults.headers.common['Content-Type'] = 'application/json'
-axios.defaults.headers.common['Authorization'] = 'Bearer zjones'
+axios.defaults.headers.common['Authorization'] = 'Bearer admin'
 
 const Root = document.getElementById('root');
 
