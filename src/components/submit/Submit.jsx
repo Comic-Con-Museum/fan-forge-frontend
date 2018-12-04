@@ -44,6 +44,13 @@ class Submit extends PureComponent {
     });
   }
 
+  removeArtifact = (index) => {
+    this.setState({
+      images: this.state.images.filter((_, i) => i !== index),
+      files: this.state.files.filter((_, i) => i !== index)
+    });
+  }
+
   submit = () => {
     alert("submit clicked");
 
@@ -55,7 +62,7 @@ class Submit extends PureComponent {
       <Artifact
         key={index}
       >
-        <RemoveArtifact>
+        <RemoveArtifact onClick={() => this.removeArtifact(index)}>
           X
         </RemoveArtifact>
         <ArtifactImg src={data} />
