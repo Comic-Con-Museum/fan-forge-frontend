@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
 
+import Exhibit from '../exhibit';
 import {
   Wrapper,
   Row,
   Header,
-  Data
+  Data,
+  Controller
 } from './Styled';
 
 const tableCharacteristics = [
@@ -25,6 +27,9 @@ const tableCharacteristics = [
 class AdminFeed extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      exploring: true
+    }
   }
 
   renderLegendElements() {
@@ -34,7 +39,7 @@ class AdminFeed extends Component {
   renderFeedAsRows() {
     const {feed, changeContentSelection} = this.props;
     return this.props.feed.map(item =>
-      <Row onClick={() => changeContentSelection(item.id)}>
+      <Row onClick={() => {this.setState({exploring: false, id: item.id}); changeContentSelection(item.id)}}>
         {tableCharacteristics.map(({value}) => {
           return <Data>{item[value]}</Data>
         })}
@@ -44,13 +49,18 @@ class AdminFeed extends Component {
 
   render() {
     if (!this.props.feed) return <div>Loading</div>
+    const {exploring, id} = this.state;
     return (
-      <Wrapper>
-        <Row>
-          {this.renderLegendElements()}
-        </Row>
-        {this.renderFeedAsRows()}
-      </Wrapper>
+      <Controller>
+        {exploring ?
+        <Wrapper>
+          <Row>
+            {this.renderLegendElements()}
+          </Row>
+          {this.renderFeedAsRows()}
+        </Wrapper>
+        : <Exhibit match={{params:{id}}}/> }
+      </Controller>
     );
   }
 }

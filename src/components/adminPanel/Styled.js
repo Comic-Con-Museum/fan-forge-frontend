@@ -13,19 +13,18 @@ export const Title = styled.h1`
 // ADMIN FEED ELEMENTS
 export const Wrapper = styled.table`
   background-color: white;
-  border: 2px solid black;
   border-collapse: collapse;
   width: 50%;
+  margin: 10px;
 `;
 
 export const Row = styled.tr`
-  &:nth-child(even) {
-    background-color: #dddddd;
-  }
+  border-bottom: lightblue solid 1px;
+  margin: 10px;
 `;
 
 export const Header = styled.th`
-  border: 1px solid #dddddd;
+  border-bottom: 1px solid yellow;
   text-align: left;
   padding: 8px;
 `;
@@ -33,6 +32,18 @@ export const Header = styled.th`
 export const Data = styled.td`
   border: 1px solid #red;
   text-align: left;
-  padding: 8px;
+  padding: 16px 24px;
 `;
 
+export const DataModelWrapper = styled.div`
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: centerl
+`;
+
+export const Controller = styled.div`
+  padding: 0 20px;
+  background-color: white;
+  width: min-content;
+`;
