@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import { fetchFeed, pageSize } from '../../utils/api';
 
+import { fetchFeed, pageSize } from '../../utils/api';
+import AdminFeed from './AdminFeed';
 import {
   AdminPanelWrapper,
   Title
@@ -25,10 +26,12 @@ class AdminPanel extends Component {
   }
 
   render() {
-    console.warn(this.props.feed);
+    const {feed} = this.props;
+    console.warn(feed);
     return (
       <AdminPanelWrapper>
         <Title>Welcome to the Admin Panel</Title>
+        { feed ? <AdminFeed feed={feed}/> : null }
       </AdminPanelWrapper>
     )
   }
