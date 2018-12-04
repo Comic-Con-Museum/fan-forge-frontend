@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Link } from 'react-router-dom';
 import { PropTypes } from 'prop-types';
+import { moveTo, randomInt } from '../../utils/helpers';
 
 import {
   ExhibitContainer,
@@ -12,16 +13,23 @@ import {
 } from './Styled';
 
 class ExhibitCard extends PureComponent {
-  render() {
-    const {id, title, description, supporters, featured, cover} = this.props
+  navigateToExhibit = () => {
+    //TODO: Look into moving rewriting this, sometimes the scroll is not performed
+    moveTo.move(document.head)
+  }
 
-    return (
-      <ExhibitContainer>
-        <ExhibitImg open={open} src={`https://fan-forge-dev.herokuapp.com/image/${cover ? cover.image : ''}`}/>
-        <ExhibitTitle>{title}</ExhibitTitle>
-        <Supporters>{supporters}</Supporters>
-        {featured ? <Featured /> : ''}
-      </ExhibitContainer>
+  render() {
+    const {id, title, description, supporters, featured, cover, active} = this.props
+
+    return (  
+      <Link onClick={this.navigateToExhibit} to={`/exhibit/${this.props.id}`}>
+        <ExhibitContainer active={active}>
+          <ExhibitImg open={open} src={`https://fan-forge-dev.herokuapp.com/image/${cover ? cover.image : ''}`}/>
+          <ExhibitTitle>{title}</ExhibitTitle>
+          <Supporters>{supporters}</Supporters>
+          {featured ? <Featured /> : ''}
+        </ExhibitContainer>
+      </Link>
     )
   }
 }

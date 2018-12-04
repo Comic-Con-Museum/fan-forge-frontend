@@ -1,5 +1,6 @@
 import { fetchFeed, pageSize } from '../../utils/api';
 import ExhibitCard from '../exhibitCard/index';
+import Footer from '../footer/index';
 import { moveTo } from '../../utils/helpers';
 import { defaultTag } from '../../utils/constants';
 import React, { Fragment, PureComponent } from 'react';
@@ -70,12 +71,11 @@ import {
   }
 
   render() {
-    const { feed, feedIndex } = this.props
-
+    const { feed, feedIndex, activeId, location } = this.props
     return (
       <FeedContainer>
         <ExhibitList>
-          {feed.map((item, index) => <ExhibitCard key={index} {...item} />)}
+          {feed.map((item, index) => <ExhibitCard active={location && location.pathname.includes('exhibit') && activeId == item.id} key={index} {...item} />)}
         </ExhibitList>
         <Pagination hidden={feedIndex + pageSize > this.state.feedSize && feedIndex == 0}>
           <PageNavigate label="Previous page" hidden={feedIndex == 0} onClick={this.navigatePage("backwards")}>{"<"}</PageNavigate> 
