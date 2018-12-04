@@ -24,7 +24,9 @@ class Submit extends PureComponent {
 
         // options for the dropdown
         options: [{ label: 'Loading', value: '' }],
-        tags: []
+        tags: [],
+        title: '',
+        description: ''
     };
   }
 
@@ -71,6 +73,12 @@ class Submit extends PureComponent {
   handleTitleChange = (event) => {
     this.setState({
       title: event.target.value
+    });
+  }
+
+  handleDescriptionChange = (event) => {
+    this.setState({
+      description: event.target.value
     });
   }
 
@@ -133,12 +141,23 @@ class Submit extends PureComponent {
               onChange={this.handleTitleChange} />
           </label>
 
-          <CreatableSelect
-            isMulti
-            options={this.state.options}
-            onChange={this.handleTagsChange}
-          />
+          <label>Description
+            <textarea
+              name="Description"
+              value={this.state.description}
+              placeholder="Why this is the best idea ever"
+              onChange={this.handleDescriptionChange} />
+          </label>
 
+          <div>
+            Select some tags to help identify your exhibit,
+            or type to create your own.
+            <CreatableSelect
+              isMulti
+              options={this.state.options}
+              onChange={this.handleTagsChange}
+            />
+          </div>
           <SubmitButton onClick={this.submit}>Submit</SubmitButton>
         </SubmitForm>
       </AriaModal>
