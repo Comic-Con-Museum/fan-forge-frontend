@@ -4,15 +4,18 @@ export const ExhibitContainer = styled.div.attrs({
   'tabIndex': "2",
 })`
   margin: 0 0 15px;
-  width: 325px;
+  width: ${props => props.active ? '0px' :'325px'};
+  transform: ${props => props.active ? 'scaleX(0)' : 'scaleX(1)'};
   order: 1;
-  height: ${({open}) => (open ? '400px' : '300px')};
+  height: 300px;
   box-shadow: 5px 8px 6px rgba(0, 0, 0, 0.16);
-  background-color: ${({open}) => (open ? 'yellow' : '#ffffff')};
+  background-color: #fff;
   border-radius: 5px;
   overflow: hidden;
-  transition: height .5s;
-
+  transition: all 0.75s ease;
+  text-decoration: none;
+  color: black;
+  
   :hover {
     background-color: yellow;
   }

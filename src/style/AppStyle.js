@@ -5,6 +5,11 @@ export const Main = styled.main`
   display: flex;
 `;
 
+export const CenterContainer = styled.div`
+  padding: 0px 10px;
+  width: calc(100vw - 177px);
+`;
+
 export const FullPage = styled.main`
   display: flex;
   flex-direction: column;

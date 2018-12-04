@@ -2,9 +2,10 @@ import { sortOptions, defaultTag } from './utils/constants';
 import { Feed, Submit, Navigation, Title, Exhibit, Footer } from './components';
 import { LanguageProvider } from './utils/Language';
 import { ThemeProvider } from 'styled-components';
+import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { Switch, Route } from 'react-router-dom';
 import React, { Component, Fragment } from 'react';
-import { Main, FullPage, LogoImg, SideContainer, MobileNav } from './style/AppStyle';
+import { Main, FullPage, LogoImg, SideContainer, MobileNav, CenterContainer } from './style/AppStyle';
 import MediaQuery from 'react-responsive';
 import { colors } from './style/theme';
 import axios from 'axios';
@@ -13,6 +14,10 @@ export class App extends Component {
   state = {
     feed: [],
     tags: [],
+    activeExhibit: {
+      artifacts: [],
+      comments: []
+    },
     filterTag: defaultTag,
     sortOption: sortOptions.RECENT,
     onLastPage: false,
@@ -52,32 +57,43 @@ export class App extends Component {
   }
 
   render() {
-    const {tags, filterTag, sortOption, feed, feedIndex } = this.state;
+    const {tags, filterTag, activeExhibit, sortOption, feed, feedIndex } = this.state
+      
     return (
-    <ThemeProvider theme={colors}>
-      <FullPage>
+      <ThemeProvider theme={colors}>
+      <Fragment>
         <Main>
           <MediaQuery minWidth={768}>
             <SideContainer>
               <LogoImg src="https://www.balboapark.org/sites/default/files/2018-07/CCIM-OrgPageAd-275x350.jpg" />
               <Title/>
             </SideContainer>
-            <Switch>
-              <Route exact path='/' render={props => (
+            <CenterContainer>
+              <Switch>
+                <Route exact path='/submit' component={Submit}/>
+                <Route path='/exhibit/:id'
+                  render={props => (
+                        <Exhibit {...props} 
+                          setActiveExhibit={this.setters.activeExhibit} 
+                          activeExhibit={activeExhibit}/>
+                  )} 
+                />
+              </Switch>
+              <Route render={({location}) => (
                 <Feed
                   setActiveCalls={this.setters.activeCalls}
                   setIndex={this.setters.feedIndex}
                   setErrors={this.setters.errors}
                   setFeed={this.setters.feed}
+                  activeId={activeExhibit.id}
                   feedIndex={feedIndex}
                   sortOption={sortOption.value}
                   filterTag={filterTag.value}
+                  location={location}
                   feed={feed}
                 />
-              )} />
-              <Route exact path='/submit' component={Submit}/>
-              <Route path='/exhibit/:id' component={Exhibit} />
-            </Switch>
+              )}/>
+            </CenterContainer>
             <SideContainer>
               <Navigation
                 tags={tags}
@@ -109,7 +125,7 @@ export class App extends Component {
           </MediaQuery>
         </Main>
         <Footer/>
-      </FullPage>
+      </Fragment>
     </ThemeProvider>
     )
   }

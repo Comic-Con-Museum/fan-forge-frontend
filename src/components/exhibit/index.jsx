@@ -1,10 +1,13 @@
-import React, { PureComponent } from 'react';
-import { Carousel } from 'react-responsive-carousel';
+import React, { Fragment, PureComponent } from 'react';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-
+import { moveTo, randomInt } from '../../utils/helpers';
 import { fetchExhibit, supportExhibit } from '../../utils/api';
+import Survey from '../survey/index';
 import { appURL } from '../../utils/constants';
 import LikesImgSrc from '../../assets/LIKE.svg';
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from 'react-responsive-carousel';
+import { Comments } from '../comments/';
 import {
   ComponentWrapper,
   Card,
@@ -12,7 +15,7 @@ import {
   CarouselDiv,
   ArtifactDiv,
   ArtifactImg,
-  InformationDiv,
+  InformationDiv, 
   DescriptionColumns,
   LikesDiv,
   LikesImg,
@@ -22,94 +25,126 @@ import {
   CommentsButton,
   ExtrasDiv,
   Tag,
-  CommentsCloseButton,
-  DescriptionAndExtrasDiv
+  DescriptionAndExtrasDiv,
+  InformationPlaceholder,
+  ArtifactPlaceholder,
+  SentencePlaceholder,
+  TitlePlaceholder,
+  Close
 } from './Styled';
+import './styles.scss';
+
+const DescriptionPlaceholder = props => {
+  return (
+    <Fragment>
+      {[1,2,3,4,5,6,7].map(index => <SentencePlaceholder key={index} />)}
+    </Fragment>
+  )
+} 
 
 class Exhibit extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: null,
-      loaded: false,
-      commentsOpen: false
-    };
+  state = {
+    loading: true,
+    commentsOpen: false,
+    showModal: false
   }
 
   componentDidMount = () => {
-    fetchExhibit(this.props.match.params.id).then(({data}) => this.setState({...data, loaded: true}));
+    if (this.props.activeExhibit.id != this.props.match.params.id) {
+      this.fetchExhibits()
+    } else {
+      this.setState({loading: false})
+    }
+  }
+
+  componentDidUpdate = (prevProps) => {
+    if (prevProps.match.params.id !== this.props.match.params.id) {
+     this.fetchExhibits() 
+    }
+  }
+
+  fetchExhibits = () => {
+    this.setState({loading: true})
+    fetchExhibit(this.props.match.params.id).then(({data}) => {
+      this.props.setActiveExhibit(data)
+      this.setState({loading: false})
+    })
+  }
+  
+  showSupportModal = () => {
+    this.setState({ showModal: true });
   }
 
   toggleComments = () => {
-    this.setState({commentsOpen: !this.state.commentsOpen})
+    this.setState((prevState) => ({commentsOpen: !prevState.commentsOpen}))
+  }
+    
+  renderArtifacts = (loading, artifacts) => {
+    let artifactSlides;
+
+    if (loading || artifacts.length == 0) { //TOOD: remove .length after we remove mock data from db
+      artifactSlides = <ArtifactPlaceholder />
+    } else {
+      artifactSlides = artifacts.map((item, key) => 
+        <ArtifactImg key={key} src={`${appURL}/image/${item.id}`} />
+      )
+    }
+
+    return  <Carousel showThumbs={false} showStatus={false} useKeyboardArrows>{artifactSlides}</Carousel>;
   }
 
-  renderTags = () => {
-    return this.state.tags.map(item => (
-      <Tag>{item}</Tag>
-    ))
+  handleCloseButton = () => {
+    if (this.state.commentsOpen) {
+      this.setState((prevState) => ({commentsOpen: false}))
+    } else {
+      this.setState({close: true})
+    }
   }
 
-  renderArtifacts = () => {
-    return this.state.artifacts.map(item => (
-      <ArtifactDiv >
-        <ArtifactImg src={`${appURL}/image/${item.id}`} style={{width: 'auto'}}/>
-      </ArtifactDiv>
-    ));
+  handleClosing = () => {
+    if (this.state.close) {
+      this.props.history.push('/')
+    }
   }
 
   render = () => {
-    const {title, description, comments, commentsOpen, loaded, supporters, id} = this.state;
-    if (!loaded) return <Card>Loading</Card>
-
-    const commentComponents = comments.map(item =>
-      <CommentDiv>
-        <p>{item.text}</p>
-        <p>{item.author}</p>
-        <p>{item.created}</p>
-      </CommentDiv>
-    );
+    const { loading, commentsOpen, showModal, supported } = this.state;
+    const {title, artifacts, tags, description, comments, supporters, id} = this.props.activeExhibit;
 
     return (
-      <ComponentWrapper>
-        <Card>
-          <CarouselDiv>
-            <Carousel
-              showThumbs={false}
-              showStatus={false}
-              useKeyboardArrows
-              height="400px"
-              className="presentation-mode"
-            >
-              {this.renderArtifacts()}
-            </Carousel>
-          </CarouselDiv>
-          <InformationDiv>
-            <Title>{title}</Title>
-            <DescriptionAndExtrasDiv>
-              <DescriptionColumns>{description}</DescriptionColumns>
-              <ExtrasDiv>
-                <LikesDiv>
-                  <LikesImg onClick={() => supportExhibit(id)} src={LikesImgSrc}/>
-                  {supporters} likes
-                </LikesDiv>
-                <TagsDiv>
-                  TAGS {this.renderTags()}
-                </TagsDiv>
-                <CommentsButton onClick={this.toggleComments}>READ {comments.length} COMMENTS</CommentsButton>
-              </ExtrasDiv>
-            </DescriptionAndExtrasDiv>
-          </InformationDiv>
+      <Fragment>
+        <Card onAnimationEnd={this.handleClosing} close={this.state.close}>
+            <Close onClick={this.handleCloseButton} blackTheme={commentsOpen}> X </Close>
+            {this.renderArtifacts(loading, artifacts)}
+            <InformationDiv>  
+              <Title> {loading ? <TitlePlaceholder /> : title}</Title>
+              <DescriptionAndExtrasDiv>
+                <DescriptionColumns>{loading ? <DescriptionPlaceholder /> : description}</DescriptionColumns>
+                {loading ? '': 
+                  <ExtrasDiv> 
+                    <LikesDiv>
+                      <LikesImg onClick={this.showSupportModal} src={LikesImgSrc}/>  
+                      {supporters} likes
+                    </LikesDiv>
+                    {tags && <TagsDiv>
+                        <p>TAGS</p> {tags.map((item, key) => (<Tag key={key}>{item}</Tag>))}
+                    </TagsDiv>}
+                    <CommentsButton onClick={this.toggleComments}> READ {comments && comments.length || "..."} COMMENTS</CommentsButton>
+                  </ExtrasDiv>
+                }
+              </DescriptionAndExtrasDiv>
+            </InformationDiv>
+            <Comments exhibit={id} show={commentsOpen} comments={comments} />
         </Card>
-
-        {commentsOpen ? (
-          <CommentsWrapper>
-            <CommentsCloseButton onClick={this.toggleComments}>X</CommentsCloseButton>
-            <h3>Comment section</h3>
-            {commentComponents}
-          </CommentsWrapper>
+        {showModal ? (
+            <Survey
+              exhibitId={id}
+              alreadySupported={supported}
+              title={title}
+              parentRef={this}
+            />
         ) : null}
-      </ComponentWrapper>
+      </Fragment>
     );
   }
 }

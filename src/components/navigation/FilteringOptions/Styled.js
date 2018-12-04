@@ -4,7 +4,7 @@ import { colors, deviceSizes, media } from '../../../style/theme';
 export const collapsibleContainerStyles = `
     position: absolute; 
     z-index: 100;
-    right: 109px;
+    right: 113px;
 
     height: 186px;
     width: 400px;
