@@ -4,9 +4,11 @@ import { PropTypes } from 'prop-types';
 import Slider from 'react-rangeslider';
 import { supportExhibit } from '../../utils/api';
 
-// default styles
-import 'react-rangeslider/lib/index.css'
+// make the slider yellow & center the button
+import './fixSlider.css';
 
+// default styles
+import 'react-rangeslider/lib/index.css';
 
 import {
   AlreadySupported,
@@ -100,7 +102,7 @@ class Survey extends PureComponent {
         underlayStyle={{ paddingTop: '2em' }}
       >
         <SubmitForm id="demo-one-modal">
-          <Title>Support the Exhibit, {this.props.title}</Title>
+          <Title>Support {this.props.title}</Title>
           <LabelRow>
             Before you can add your support for this idea, we'd like to ask you
             a couple of questions.
