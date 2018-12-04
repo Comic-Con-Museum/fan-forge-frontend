@@ -1,6 +1,9 @@
 import React, { PureComponent } from 'react';
 import AriaModal from 'react-aria-modal';
 import Dropzone from 'react-dropzone'
+import CreatableSelect from 'react-select/lib/Creatable';
+import { fetchTags } from '../../utils/api';
+
 
 import {
   Artifact,
@@ -17,8 +20,22 @@ class Submit extends PureComponent {
     super(props);
     this.state = {
         images: [], // base64 data array to show
-        files: [] // references to the file objects
+        files: [], // references to the file objects
+
+        // options for the dropdown
+        options: [{ label: 'Loading', value: '' }],
+        tags: []
     };
+  }
+
+  componentDidMount() {
+    fetchTags().then(result => {
+      const tagData = [].concat(result.data.map(tag => ({
+        label: tag,
+        value: tag
+      })));
+      this.setState({ options: tagData });
+    });
   }
 
   getApplicationNode = () => {
@@ -51,6 +68,18 @@ class Submit extends PureComponent {
     });
   }
 
+  handleTitleChange = (event) => {
+    this.setState({
+      title: event.target.value
+    });
+  }
+
+  handleTagsChange = (newValues) => {
+      const tags = [];
+      newValues.map(tag => tags.push(tag.value));
+      this.setState({ tags });
+  };
+
   submit = () => {
     alert("submit clicked");
 
@@ -75,11 +104,11 @@ class Submit extends PureComponent {
       <AriaModal
         titleText={`Supporting exhibit: ${this.props.title}`}
         onExit={this.props.deactivateModal}
-        initialFocus="#demo-one-modal"
+        initialFocus="#dropzone-images"
         getApplicationNode={this.getApplicationNode}
         underlayStyle={{ paddingTop: '2em' }}
       >
-        <SubmitForm id="demo-one-modal">
+        <SubmitForm>
           <div>
             Add some images to show off your exhibit,
             the first one will be the cover
@@ -95,6 +124,20 @@ class Submit extends PureComponent {
               Drag and drop some files here, or click to add them
             </Dropzone>
           </HorizontalSection>
+          <label>Title
+            <input
+              name="Title"
+              type="text"
+              value={this.state.title}
+              placeholder="My Cool Exhibit"
+              onChange={this.handleTitleChange} />
+          </label>
+
+          <CreatableSelect
+            isMulti
+            options={this.state.options}
+            onChange={this.handleTagsChange}
+          />
 
           <SubmitButton onClick={this.submit}>Submit</SubmitButton>
         </SubmitForm>
