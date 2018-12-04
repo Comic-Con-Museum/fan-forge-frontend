@@ -5,6 +5,12 @@ export const Main = styled.main`
   display: flex;
 `;
 
+export const FullPage = styled.main`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
 export const SideContainer = styled.div`
   display: flex;
   align-items: center;
