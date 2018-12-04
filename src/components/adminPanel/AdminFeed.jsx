@@ -32,8 +32,9 @@ class AdminFeed extends Component {
   }
 
   renderFeedAsRows() {
+    const {feed, changeContentSelection} = this.props;
     return this.props.feed.map(item =>
-      <Row>
+      <Row onClick={() => changeContentSelection(item.id)}>
         {tableCharacteristics.map(({value}) => {
           return <Data>{item[value]}</Data>
         })}

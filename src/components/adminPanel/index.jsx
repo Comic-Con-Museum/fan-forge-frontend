@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 
 import { fetchFeed, pageSize } from '../../utils/api';
 import AdminFeed from './AdminFeed';
+import { fetchFormattedSurveyData, fetchRawSurveyData} from './adminApi';
 import {
   AdminPanelWrapper,
   Title
@@ -18,11 +19,17 @@ class AdminPanel extends Component {
   componentDidMount() {
     const {feed, setFeed} = this.props;
     if (feed.length === 0) {
-      fetchFeed(0, 'recent', undefined).then(result => {
+      fetchFeed(0, 'popular', undefined).then(result => {
         setFeed(result.data.exhibits)
         this.setState({feedSize: result.data.count})
       })
     }
+  }
+
+  changeContentSelection(id) {
+    console.warn("ahh", id);
+    fetchFormattedSurveyData(id).then(console.warn)
+    fetchRawSurveyData(id).then(console.warn)
   }
 
   render() {
@@ -31,7 +38,7 @@ class AdminPanel extends Component {
     return (
       <AdminPanelWrapper>
         <Title>Welcome to the Admin Panel</Title>
-        { feed ? <AdminFeed feed={feed}/> : null }
+        { feed ? <AdminFeed changeContentSelection={this.changeContentSelection} feed={feed}/> : null }
       </AdminPanelWrapper>
     )
   }

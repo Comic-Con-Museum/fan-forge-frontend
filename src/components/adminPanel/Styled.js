@@ -10,21 +10,18 @@ export const Title = styled.h1`
 `;
 
 
-
-
 // ADMIN FEED ELEMENTS
 export const Wrapper = styled.table`
   background-color: white;
   border: 2px solid black;
   border-collapse: collapse;
+  width: 50%;
 `;
 
 export const Row = styled.tr`
   &:nth-child(even) {
     background-color: #dddddd;
   }
-
-  height: 10px;
 `;
 
 export const Header = styled.th`
