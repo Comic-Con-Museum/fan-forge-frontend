@@ -10,6 +10,12 @@ export const CenterContainer = styled.div`
   width: calc(100vw - 177px);
 `;
 
+export const FullPage = styled.main`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
 export const SideContainer = styled.div`
   display: flex;
   align-items: center;

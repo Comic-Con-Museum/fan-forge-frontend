@@ -1,5 +1,6 @@
 import { fetchFeed, pageSize } from '../../utils/api';
 import ExhibitCard from '../exhibitCard/index';
+import Footer from '../footer/index';
 import { moveTo } from '../../utils/helpers';
 import { defaultTag } from '../../utils/constants';
 import React, { Fragment, PureComponent } from 'react';
