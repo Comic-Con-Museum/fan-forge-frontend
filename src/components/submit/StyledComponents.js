@@ -55,3 +55,25 @@ export const RemoveArtifact = styled.button`
   right: 5px;
   text-shadow: 2px 2px 2px white;
 `;
+
+export const Splitter = styled.div`
+  margin: 10px;
+  display: flex;
+  flex-direction: horizontal;
+  align-content: stretch;
+  width: 100%;
+`;
+
+export const TextArea = styled.textarea`
+  display: block;
+  width: 100%;
+`;
+
+export const TitleInput = styled.input`
+  display: block;
+  width: 90%;
+`;
+
+export const Label = styled.label`
+   width: 50%;
+`;

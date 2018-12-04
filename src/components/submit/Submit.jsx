@@ -3,6 +3,9 @@ import AriaModal from 'react-aria-modal';
 import Dropzone from 'react-dropzone'
 import CreatableSelect from 'react-select/lib/Creatable';
 import { fetchTags } from '../../utils/api';
+import { createExhibit } from '../../utils/api';
+
+import axios from 'axios';
 
 
 import {
@@ -10,9 +13,13 @@ import {
   ArtifactImg,
   ImageSection,
   HorizontalSection,
+  Label,
   RemoveArtifact,
+  Splitter,
   SubmitButton,
-  SubmitForm
+  SubmitForm,
+  TextArea,
+  TitleInput
 } from './StyledComponents';
 
 class Submit extends PureComponent {
@@ -89,9 +96,38 @@ class Submit extends PureComponent {
   };
 
   submit = () => {
-    alert("submit clicked");
+    const { tags, title, description, images } = this.state;
+    if (!tags || !title || !description || !images) {
+        alert("All fields must be filled out, and there must be at least one image.");
+    }
+    const artifacts = [];
+    this.state.files.map(file => artifacts.push({
+        image: file.name,
+        cover: false,
+        // TODO add these fields to the form & detail page, required by backend
+        title: "A title",
+        description: "A description"
+    }));
+    // first one is cover
+    artifacts[0].cover = true;
 
-    this.props.deactivateModal();
+    const data = {
+      title, description, tags, artifacts
+    };
+
+    const sent = new FormData();
+    sent.append('data', JSON.stringify(data));
+    alert(JSON.stringify(data));
+    this.state.files.map(file =>
+        sent.append(file.name, file)
+    );
+
+    createExhibit(
+      sent,
+      () => alert("posted"),
+      () => alert("failed")
+    );
+    //this.props.deactivateModal();
   }
 
   renderImage = (data, index) => {
@@ -125,30 +161,33 @@ class Submit extends PureComponent {
             <ImageSection>
               {this.state.images.map((data, index) => this.renderImage(data, index))}
             </ImageSection>
-            <Dropzone
+            <Dropzone id="dropzone-images"
               accept={'image/*'}
               onDrop={this.onDrop}
             >
               Drag and drop some files here, or click to add them
             </Dropzone>
           </HorizontalSection>
-          <label>Title
-            <input
-              name="Title"
-              type="text"
-              value={this.state.title}
-              placeholder="My Cool Exhibit"
-              onChange={this.handleTitleChange} />
-          </label>
+          <Splitter>
+            <Label>
+              Title
+              <TitleInput
+                name="Title"
+                type="text"
+                value={this.state.title}
+                placeholder="My Cool Exhibit"
+                onChange={this.handleTitleChange} />
+            </Label>
 
-          <label>Description
-            <textarea
-              name="Description"
-              value={this.state.description}
-              placeholder="Why this is the best idea ever"
-              onChange={this.handleDescriptionChange} />
-          </label>
-
+            <Label>
+              Description
+              <TextArea
+                name="Description"
+                value={this.state.description}
+                placeholder="Why this is the best idea ever"
+                onChange={this.handleDescriptionChange} />
+            </Label>
+          </Splitter>
           <div>
             Select some tags to help identify your exhibit,
             or type to create your own.
