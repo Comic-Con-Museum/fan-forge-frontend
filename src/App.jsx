@@ -1,5 +1,5 @@
 import { sortOptions, defaultTag } from './utils/constants';
-import { Feed, Submit, Navigation, Title, Exhibit, AdminPanel } from './components';
+import { Feed, Submit, Navigation, Title, Exhibit, AdminPanel, Footer } from './components';
 import { LanguageProvider } from './utils/Language';
 import { ThemeProvider } from 'styled-components';
 import { TransitionGroup, CSSTransition } from "react-transition-group";
