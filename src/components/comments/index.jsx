@@ -15,9 +15,16 @@ import {
 
 //TODO Handle loading state on post for comment and resetting text afterwards
 export class Comments extends PureComponent {
+  state = {
+    sendText: 'Send'
+  };
+
   sendComment = () => {
     postComment(this.commentBox.value, this.props.exhibit)
+    this.setState({sendText: 'Your comment was sent!'})
     this.commentBox.value = ''
+    this.commentBox.disabled = true
+    this.commentBox.style.background = 'whitesmoke'
   }
 
   render() {
@@ -37,7 +44,7 @@ export class Comments extends PureComponent {
         )} </CommentList>
         <CommentInput>
           <CommentBox innerRef={node => this.commentBox = node}/>
-          <SendComment onClick={this.sendComment}> Send </SendComment>
+          <SendComment onClick={this.sendComment}>{this.state.sendText}</SendComment>
         </CommentInput>
       </CommentsWrapper>
     )
