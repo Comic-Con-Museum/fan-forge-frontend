@@ -15,7 +15,7 @@ import {
   CarouselDiv,
   ArtifactDiv,
   ArtifactImg,
-  InformationDiv, 
+  InformationDiv,
   DescriptionColumns,
   LikesDiv,
   LikesImg,
@@ -40,7 +40,7 @@ const DescriptionPlaceholder = props => {
       {[1,2,3,4,5,6,7].map(index => <SentencePlaceholder key={index} />)}
     </Fragment>
   )
-} 
+}
 
 class Exhibit extends PureComponent {
   state = {
@@ -59,7 +59,7 @@ class Exhibit extends PureComponent {
 
   componentDidUpdate = (prevProps) => {
     if (prevProps.match.params.id !== this.props.match.params.id) {
-     this.fetchExhibits() 
+     this.fetchExhibits()
     }
   }
 
@@ -70,7 +70,7 @@ class Exhibit extends PureComponent {
       this.setState({loading: false})
     })
   }
-  
+
   showSupportModal = () => {
     this.setState({ showModal: true });
   }
@@ -78,14 +78,14 @@ class Exhibit extends PureComponent {
   toggleComments = () => {
     this.setState((prevState) => ({commentsOpen: !prevState.commentsOpen}))
   }
-    
+
   renderArtifacts = (loading, artifacts) => {
     let artifactSlides;
 
     if (loading || artifacts.length == 0) { //TOOD: remove .length after we remove mock data from db
       artifactSlides = <ArtifactPlaceholder />
     } else {
-      artifactSlides = artifacts.map((item, key) => 
+      artifactSlides = artifacts.map((item, key) =>
         <ArtifactImg key={key} src={`${appURL}/image/${item.id}`} />
       )
     }
@@ -108,22 +108,22 @@ class Exhibit extends PureComponent {
   }
 
   render = () => {
-    const { loading, commentsOpen, showModal, supported } = this.state;
-    const {title, artifacts, tags, description, comments, supporters, id} = this.props.activeExhibit;
+    const { loading, commentsOpen, showModal } = this.state;
+    const {title, artifacts, tags, description, comments, supporters, supported, id} = this.props.activeExhibit;
 
     return (
       <Fragment>
         <Card onAnimationEnd={this.handleClosing} close={this.state.close}>
             <Close onClick={this.handleCloseButton} blackTheme={commentsOpen}> X </Close>
             {this.renderArtifacts(loading, artifacts)}
-            <InformationDiv>  
+            <InformationDiv>
               <Title> {loading ? <TitlePlaceholder /> : title}</Title>
               <DescriptionAndExtrasDiv>
                 <DescriptionColumns>{loading ? <DescriptionPlaceholder /> : description}</DescriptionColumns>
-                {loading ? '': 
-                  <ExtrasDiv> 
+                {loading ? '':
+                  <ExtrasDiv>
                     <LikesDiv>
-                      <LikesImg onClick={this.showSupportModal} src={LikesImgSrc}/>  
+                      <LikesImg onClick={this.showSupportModal} src={LikesImgSrc}/>
                       {supporters} likes
                     </LikesDiv>
                     {tags && <TagsDiv>

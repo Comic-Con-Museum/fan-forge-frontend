@@ -27,7 +27,7 @@ export class Comments extends PureComponent {
       <CommentsWrapper show={show}>
         <CommentTitle>Comment section</CommentTitle>
         <CommentList> {comments.map(comment =>
-          <CommentDiv>
+          <CommentDiv key={comment.created}>
             <p>{comment.text}</p>
             <CommentInfo>
               <p>{comment.author}</p>
@@ -45,4 +45,3 @@ export class Comments extends PureComponent {
 }
 
 export default Comments
-
