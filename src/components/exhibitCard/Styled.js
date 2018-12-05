@@ -17,6 +17,10 @@ export const ExhibitContainer = styled.div.attrs({
   
   :hover {
     background-color: yellow;
+
+    .likeButton {
+      fill: black;
+    }
   }
 `
 

@@ -20,3 +20,25 @@
     }
   }
 }
+
+.likeButton {
+  height: 30px;
+  fill: white;
+  stroke: black;
+  transition: all 0.4s ease;
+  margin-right: 10px;
+  cursor: pointer;
+
+  &--feed {
+    fill: yellow;
+    stroke: black;
+  }
+
+  &--active {
+    fill: black;
+  }
+
+  &:hover {
+    fill: black;
+  }
+}

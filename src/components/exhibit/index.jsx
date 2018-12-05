@@ -40,7 +40,7 @@ const DescriptionPlaceholder = props => {
       {[1,2,3,4,5,6,7].map(index => <SentencePlaceholder key={index} />)}
     </Fragment>
   )
-} 
+}
 
 class Exhibit extends PureComponent {
   state = {
@@ -123,8 +123,10 @@ class Exhibit extends PureComponent {
                 {loading ? '': 
                   <ExtrasDiv> 
                     <LikesDiv>
-                      <LikesImg onClick={this.showSupportModal} src={LikesImgSrc}/>  
-                      {supporters} SUPPORTERS
+                    <svg className="likeButton" onClick={this.showSupportModal} data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 33.94 24.31">
+                      <polygon points="13.71 24.31 0 12.96 1.16 11.56 5.58 13.76 2.76 9.63 3.68 8.51 13.35 16.5 29.85 0 31.15 1.3 28.67 5.32 32.83 2.98 33.94 4.08 13.71 24.31"/>
+                    </svg>
+                    {supporters} SUPPORTERS
                     </LikesDiv>
                     {tags && <TagsDiv>
                         <p>TAGS</p> {tags.map((item, key) => (<Tag key={key}>{item}</Tag>))}
