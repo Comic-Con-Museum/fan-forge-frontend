@@ -6,24 +6,6 @@ import { CollapsibleFilteringOptions } from './FilteringOptions/';
 import { NavBarContainer, NavButtonController, NavButton } from './Styled';
 import Submit from '../submit';
 
-const linkStyle = {
-  color: 'yellow',
-  fontFamily: "Helvetica Neue",
-  fontSize: '28px',
-  fontWeight: 500,
-  textTransform: 'uppercase',
-  margin: '0 20px',
-  textDecoration: 'none'
-}
-
-const activeStyle = {
-  color: '#b4b8c5',
-  fontFamily: "Helvetica Neue",
-  fontSize: '28px',
-  fontWeight: 500,
-  textTransform: 'uppercase',
-}
-
 export class Navigation extends PureComponent {
   state = {
     showFiltering: false
@@ -89,6 +71,7 @@ export class Navigation extends PureComponent {
         { this.state.showModal ?
             <Submit
               deactivateModal={() => this.setState({ showModal: false })}
+
             />
             : null
         }

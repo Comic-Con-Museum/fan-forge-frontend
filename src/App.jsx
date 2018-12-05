@@ -1,5 +1,5 @@
 import { sortOptions, defaultTag } from './utils/constants';
-import { Feed, Submit, Navigation, Title, Exhibit, Footer } from './components';
+import { Feed, Submit, Navigation, Title, Exhibit, AdminPanel, Footer } from './components';
 import { LanguageProvider } from './utils/Language';
 import { ThemeProvider } from 'styled-components';
 import { TransitionGroup, CSSTransition } from "react-transition-group";
@@ -58,7 +58,7 @@ export class App extends Component {
 
   render() {
     const {tags, filterTag, activeExhibit, sortOption, feed, feedIndex } = this.state
-      
+
     return (
       <ThemeProvider theme={colors}>
       <Fragment>
@@ -73,26 +73,34 @@ export class App extends Component {
                 <Route exact path='/submit' component={Submit}/>
                 <Route path='/exhibit/:id'
                   render={props => (
-                        <Exhibit {...props} 
-                          setActiveExhibit={this.setters.activeExhibit} 
+                        <Exhibit {...props}
+                          setActiveExhibit={this.setters.activeExhibit}
                           activeExhibit={activeExhibit}/>
-                  )} 
+                  )}
                 />
               </Switch>
-              <Route render={({location}) => (
-                <Feed
-                  setActiveCalls={this.setters.activeCalls}
-                  setIndex={this.setters.feedIndex}
-                  setErrors={this.setters.errors}
-                  setFeed={this.setters.feed}
-                  activeId={activeExhibit.id}
-                  feedIndex={feedIndex}
-                  sortOption={sortOption.value}
-                  filterTag={filterTag.value}
-                  location={location}
-                  feed={feed}
-                />
-              )}/>
+              <Switch>
+                <Route path='/admin' render={() =>
+                    <AdminPanel
+                      feed={feed}
+                      setFeed={this.setters.feed}
+                    />}
+                  />
+                <Route path='/' render={({location}) => (
+                  <Feed
+                    setActiveCalls={this.setters.activeCalls}
+                    setIndex={this.setters.feedIndex}
+                    setErrors={this.setters.errors}
+                    setFeed={this.setters.feed}
+                    activeId={activeExhibit.id}
+                    feedIndex={feedIndex}
+                    sortOption={sortOption.value}
+                    filterTag={filterTag.value}
+                    location={location}
+                    feed={feed}
+                  />
+                )}/>
+              </Switch>
             </CenterContainer>
             <SideContainer>
               <Navigation

@@ -45,6 +45,7 @@ const DescriptionPlaceholder = props => {
 class Exhibit extends PureComponent {
   state = {
     loading: true,
+    justSupported: false,
     commentsOpen: false,
     showModal: false
   }
@@ -101,6 +102,12 @@ class Exhibit extends PureComponent {
     }
   }
 
+  submissionSuccessCB = () => {
+    if (!this.props.activeExhibit.supported) {
+      this.setState({justSupported: true})
+    }
+  }
+
   handleClosing = () => {
     if (this.state.close) {
       this.props.history.push('/')
@@ -108,7 +115,7 @@ class Exhibit extends PureComponent {
   }
 
   render = () => {
-    const { loading, commentsOpen, showModal } = this.state;
+    const { loading, commentsOpen, showModal, justSupported } = this.state;
     const {title, artifacts, tags, description, comments, supporters, supported, id} = this.props.activeExhibit;
 
     return (
@@ -126,7 +133,7 @@ class Exhibit extends PureComponent {
                     <svg className="likeButton" onClick={this.showSupportModal} data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 33.94 24.31">
                       <polygon points="13.71 24.31 0 12.96 1.16 11.56 5.58 13.76 2.76 9.63 3.68 8.51 13.35 16.5 29.85 0 31.15 1.3 28.67 5.32 32.83 2.98 33.94 4.08 13.71 24.31"/>
                     </svg>
-                    {supporters} SUPPORTERS
+                    {justSupported ? supporters+1 : supporters} SUPPORTERS
                     </LikesDiv>
                     {tags && <TagsDiv>
                         <p>TAGS</p> {tags.map((item, key) => (<Tag key={key}>{item}</Tag>))}
@@ -144,6 +151,7 @@ class Exhibit extends PureComponent {
               alreadySupported={supported}
               title={title}
               parentRef={this}
+              successCB={this.submissionSuccessCB}
             />
         ) : null}
       </Fragment>

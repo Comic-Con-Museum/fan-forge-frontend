@@ -64,7 +64,7 @@ class Survey extends PureComponent {
     supportExhibit(this.props.exhibitId, data, () => {
       this.deactivateModal();
       // refresh parent page, showing the updated count
-      this.props.parentRef.componentDidMount();
+      this.props.successCB();
     });
   }
 
