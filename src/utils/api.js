@@ -23,7 +23,6 @@ const postComment = (text, id) => axios.post(`${appURL}/comment/`, {
   parent: parseInt(id)
 });
 
-// TODO: Still need to add request body as survey
 const supportExhibit = (id, body, onComplete) => axios.request({
     method: 'put',
     url: `${appURL}/support/exhibit/${id}`,
@@ -33,8 +32,8 @@ const supportExhibit = (id, body, onComplete) => axios.request({
 
 const createExhibit = (formData, onComplete, onFailed) =>
     axios.post(`${appURL}/exhibit`, formData)
-    .then( () => onComplete() )
-    .catch( () => onFailed() );
+    .then( ({data}) => onComplete(data))
+    .catch((e) => onFailed(e));
 
 export {
   fetchFeed,

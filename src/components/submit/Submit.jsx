@@ -127,10 +127,9 @@ class Submit extends PureComponent {
 
     createExhibit(
       sent,
-      () => alert("posted"),
-      () => alert("failed")
+      (id) => window.location.replace(`/exhibit/${id}`),
+      (e) => alert("failed", e)
     );
-    //this.props.deactivateModal();
   }
 
   renderImage = (data, index) => {
