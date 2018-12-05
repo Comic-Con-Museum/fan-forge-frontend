@@ -14,9 +14,9 @@ const fetchFeed = (startIndex, sortOption, tag) => axios.get(`${appURL}/feed/${s
   },
 })
 
-const fetchTags = () => axios.get(`${appURL}/tags`)
+const fetchTags = () => axios.get(`${appURL}/tags`);
 
-const fetchExhibit = (id) => axios.get(`${appURL}/exhibit/${id}`)
+const fetchExhibit = (id) => axios.get(`${appURL}/exhibit/${id}`);
 
 const postComment = (text, id) => axios.post(`${appURL}/comment/`, {
   text: text,
@@ -31,11 +31,17 @@ const supportExhibit = (id, body, onComplete) => axios.request({
     headers: {'Content-Type': 'application/json'}
 }).then( () => onComplete() );
 
+const createExhibit = (formData, onComplete, onFailed) =>
+    axios.post(`${appURL}/exhibit`, formData)
+    .then( () => onComplete() )
+    .catch( () => onFailed() );
+
 export {
   fetchFeed,
   fetchTags,
   fetchExhibit,
   postComment,
   pageSize,
-  supportExhibit
+  supportExhibit,
+  createExhibit
 }

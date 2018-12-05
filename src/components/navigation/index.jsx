@@ -4,6 +4,7 @@ import { fetchTags } from '../../utils/api';
 import { keyCodes, defaultTag } from '../../utils/constants';
 import { CollapsibleFilteringOptions } from './FilteringOptions/';
 import { NavBarContainer, NavButtonController, NavButton } from './Styled';
+import Submit from '../submit';
 
 const linkStyle = {
   color: 'yellow',
@@ -27,27 +28,27 @@ export class Navigation extends PureComponent {
   state = {
     showFiltering: false
   }
-  
+
   toggleFiltering = () => this.setState(prevState => ({ showFiltering: !prevState.showFiltering }));
 
   toggleFilteringOnKeyPress = (event) => {
     if (event.keyCode == keyCodes.enter || event.keyCode == keyCodes.space) {
       event.preventDefault()
       this.toggleFiltering()
-    } 
+    }
   }
 
   componentDidMount() {
     const {setTags, setErrors, setActiveCalls, setNetworkStatus} = this.props
 
-    if (setTags) {  
+    if (setTags) {
       setActiveCalls({'navigation': true})
       fetchTags().then(result => {
         const tagData = [defaultTag].concat(result.data.map(tag => ({
           label: tag,
           value: tag
         })));
-        
+
         setTags(tagData)
         setActiveCalls({'navigation': false})
       }).catch(error => {
@@ -56,6 +57,10 @@ export class Navigation extends PureComponent {
         setErrors({'navigation': error})
       })
     }
+  }
+
+  showModal = () => {
+      this.setState({ showModal: true });
   }
 
   render() {
@@ -80,8 +85,14 @@ export class Navigation extends PureComponent {
           tagValue={this.props.filterTag}
           tagOptions={this.props.tags}
         />
-        <NavButton yellow>SUBMIT AN IDEA</NavButton>
-        <NavButton>LOG IN</NavButton>
+        <NavButton yellow onClick={this.showModal}>SUBMIT AN IDEA</NavButton>
+        { this.state.showModal ?
+            <Submit
+              deactivateModal={() => this.setState({ showModal: false })}
+            />
+            : null
+        }
+        <NavButton disabled>LOG IN</NavButton>
       </NavBarContainer>
     );
   }
