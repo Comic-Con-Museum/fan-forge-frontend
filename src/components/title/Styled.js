@@ -16,6 +16,7 @@ export const TitleText = styled.p`
   font-size: 70px;
   font-weight: bold;
   text-transform: uppercase;
+  -webkit-text-stroke: 2px red;
   writing-mode: vertical-rl;
   color: ${colors.yellow_1};
   font-family: 'Roboto Condensed', sans-serif;
