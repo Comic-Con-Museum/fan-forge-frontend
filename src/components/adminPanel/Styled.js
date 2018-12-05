@@ -12,6 +12,11 @@ export const Title = styled.h1`
   -webkit-text-stroke: 2px red;
   font-weight: bold;
   margin: 30px;
+
+  ${({small}) => small ? `
+  font-size: 40px;
+  -webkit-text-stroke: 1px red;
+  `: ''}
 `;
 
 export const ActionWrapper = styled.div`
@@ -81,4 +86,15 @@ export const DataModelWrapper = styled.div`
 
 export const Controller = styled.div`
   width: 100%;
+`;
+
+export const Flex = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const SubTitle = styled.h5`
+  font-weight: bold;
+  text-align: center;
+  color: white;
 `;
