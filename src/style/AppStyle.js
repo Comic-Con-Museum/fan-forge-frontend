@@ -3,6 +3,7 @@ import { colors, media } from './theme';
 
 export const Main = styled.main`
   display: flex;
+  padding: 15px;
 `;
 
 export const CenterContainer = styled.div`

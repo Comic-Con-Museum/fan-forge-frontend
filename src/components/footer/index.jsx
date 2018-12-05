@@ -5,7 +5,9 @@ import {
     FooterBody,
     FooterColumn,
     FooterH1,
-    FooterH2
+    FooterH2,
+    FooterCopyright,
+    CopyrightRow
 } from './Styled';
 
 class Footer extends PureComponent {
@@ -49,7 +51,7 @@ class Footer extends PureComponent {
                     <FooterH2> WonderCon </FooterH2>
                     <FooterH2> APE </FooterH2>
                 </FooterColumn>
-                <FooterColumn>
+                <FooterColumn noBorder>
                     <FooterH1> Mission Statement </FooterH1>
                     <FooterH2> Comic-Con International: San Diego is a nonprofit
                         educational corporation dedicated to creating awareness
@@ -64,6 +66,10 @@ class Footer extends PureComponent {
                     <FooterH1> REFUNDS </FooterH1>
                 </FooterColumn>
             </FooterBody>
+        <FooterCopyright>
+            <CopyrightRow>© 2018 SAN DIEGO COMIC CONVENTION • All rights reserved.</CopyrightRow>
+            <CopyrightRow>Comic-Con, the Comic-Con logo and the WonderCon logo are Registered Trademarks of San Diego Comic Convention.</CopyrightRow>
+        </FooterCopyright>
         </FooterWrapper>
         )
     }
