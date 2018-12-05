@@ -70,12 +70,6 @@ export class App extends Component {
             </SideContainer>
             <CenterContainer>
               <Switch>
-                <Route path='/admin' render={() =>
-                  <AdminPanel
-                    feed={feed}
-                    setFeed={this.setters.feed}
-                  />}
-                />
                 <Route exact path='/submit' component={Submit}/>
                 <Route path='/exhibit/:id'
                   render={props => (
@@ -85,20 +79,28 @@ export class App extends Component {
                   )}
                 />
               </Switch>
-              <Route render={({location}) => (
-                <Feed
-                  setActiveCalls={this.setters.activeCalls}
-                  setIndex={this.setters.feedIndex}
-                  setErrors={this.setters.errors}
-                  setFeed={this.setters.feed}
-                  activeId={activeExhibit.id}
-                  feedIndex={feedIndex}
-                  sortOption={sortOption.value}
-                  filterTag={filterTag.value}
-                  location={location}
-                  feed={feed}
-                />
-              )}/>
+              <Switch>
+                <Route path='/admin' render={() =>
+                    <AdminPanel
+                      feed={feed}
+                      setFeed={this.setters.feed}
+                    />}
+                  />
+                <Route path='/' render={({location}) => (
+                  <Feed
+                    setActiveCalls={this.setters.activeCalls}
+                    setIndex={this.setters.feedIndex}
+                    setErrors={this.setters.errors}
+                    setFeed={this.setters.feed}
+                    activeId={activeExhibit.id}
+                    feedIndex={feedIndex}
+                    sortOption={sortOption.value}
+                    filterTag={filterTag.value}
+                    location={location}
+                    feed={feed}
+                  />
+                )}/>
+              </Switch>
             </CenterContainer>
             <SideContainer>
               <Navigation

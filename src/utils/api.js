@@ -20,7 +20,7 @@ const fetchExhibit = (id) => axios.get(`${appURL}/exhibit/${id}`);
 
 const postComment = (text, id) => axios.post(`${appURL}/comment/`, {
   text: text,
-  parent: parseInt(id)  
+  parent: parseInt(id)
 });
 
 // TODO: Still need to add request body as survey

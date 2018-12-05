@@ -4,7 +4,6 @@ import { fetchFeed, pageSize } from '../../utils/api';
 import AdminFeed from './AdminFeed';
 import { fetchFormattedSurveyData, fetchRawSurveyData} from './adminApi';
 import ExhibitDataModels from './ExhibitDataModels';
-import Exhibit from '../exhibit';
 import {
   AdminPanelWrapper,
   Title
@@ -30,8 +29,12 @@ class AdminPanel extends Component {
   }
 
   changeContentSelection = (id) => {
-    fetchFormattedSurveyData(id)
-    .then(({data}) => this.setState({surveyData: data, id}));
+    if (!id) {
+      this.setState({surveyData: null});
+    } else {
+      fetchFormattedSurveyData(id)
+        .then(({data}) => this.setState({surveyData: data, id}));
+    }
   }
 
   render() {
@@ -39,8 +42,8 @@ class AdminPanel extends Component {
     const {surveyData, id} = this.state;
     return (
       <AdminPanelWrapper>
-        <Title>Welcome to the Admin Panel</Title>
-        { feed ? <AdminFeed changeContentSelection={this.changeContentSelection} feed={feed}/> : null }
+        <Title>WELCOME TO THE ADMIN PANEL</Title>
+          { feed ? <AdminFeed changeContentSelection={this.changeContentSelection} feed={feed}/> : null }
         { surveyData ? <ExhibitDataModels {...surveyData}/> : null }
       </AdminPanelWrapper>
     )
@@ -48,3 +51,4 @@ class AdminPanel extends Component {
 }
 
 export default AdminPanel;
+

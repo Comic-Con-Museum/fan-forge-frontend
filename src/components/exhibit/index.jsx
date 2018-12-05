@@ -110,6 +110,7 @@ class Exhibit extends PureComponent {
   render = () => {
     const { loading, commentsOpen, showModal } = this.state;
     const {title, artifacts, tags, description, comments, supporters, supported, id} = this.props.activeExhibit;
+    console.warn(this.props)
 
     return (
       <Fragment>
