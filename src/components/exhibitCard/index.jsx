@@ -41,8 +41,8 @@ class ExhibitCard extends PureComponent {
 
 ExhibitCard.propTypes = {
   description: PropTypes.string,
-  imageUrl: PropTypes.string, 
-  supporters: PropTypes.num,
+  imageUrl: PropTypes.string,
+  supporters: PropTypes.number,
   featured: PropTypes.bool,
   title: PropTypes.string,
 }

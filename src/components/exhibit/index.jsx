@@ -15,7 +15,7 @@ import {
   CarouselDiv,
   ArtifactDiv,
   ArtifactImg,
-  InformationDiv, 
+  InformationDiv,
   DescriptionColumns,
   LikesDiv,
   LikesImg,
@@ -59,7 +59,7 @@ class Exhibit extends PureComponent {
 
   componentDidUpdate = (prevProps) => {
     if (prevProps.match.params.id !== this.props.match.params.id) {
-     this.fetchExhibits() 
+     this.fetchExhibits()
     }
   }
 
@@ -70,7 +70,7 @@ class Exhibit extends PureComponent {
       this.setState({loading: false})
     })
   }
-  
+
   showSupportModal = () => {
     this.setState({ showModal: true });
   }
@@ -78,14 +78,14 @@ class Exhibit extends PureComponent {
   toggleComments = () => {
     this.setState((prevState) => ({commentsOpen: !prevState.commentsOpen}))
   }
-    
+
   renderArtifacts = (loading, artifacts) => {
     let artifactSlides;
 
     if (loading || artifacts.length == 0) { //TOOD: remove .length after we remove mock data from db
       artifactSlides = <ArtifactPlaceholder />
     } else {
-      artifactSlides = artifacts.map((item, key) => 
+      artifactSlides = artifacts.map((item, key) =>
         <ArtifactImg key={key} src={`${appURL}/image/${item.id}`} />
       )
     }
@@ -108,20 +108,20 @@ class Exhibit extends PureComponent {
   }
 
   render = () => {
-    const { loading, commentsOpen, showModal, supported } = this.state;
-    const {title, artifacts, tags, description, comments, supporters, id} = this.props.activeExhibit;
+    const { loading, commentsOpen, showModal } = this.state;
+    const {title, artifacts, tags, description, comments, supporters, supported, id} = this.props.activeExhibit;
 
     return (
       <Fragment>
         <Card onAnimationEnd={this.handleClosing} close={this.state.close}>
             <Close onClick={this.handleCloseButton} blackTheme={commentsOpen}> X </Close>
             {this.renderArtifacts(loading, artifacts)}
-            <InformationDiv>  
+            <InformationDiv>
               <Title> {loading ? <TitlePlaceholder /> : title}</Title>
               <DescriptionAndExtrasDiv>
                 <DescriptionColumns>{loading ? <DescriptionPlaceholder /> : description}</DescriptionColumns>
-                {loading ? '': 
-                  <ExtrasDiv> 
+                {loading ? '':
+                  <ExtrasDiv>
                     <LikesDiv>
                     <svg className="likeButton" onClick={this.showSupportModal} data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 33.94 24.31">
                       <polygon points="13.71 24.31 0 12.96 1.16 11.56 5.58 13.76 2.76 9.63 3.68 8.51 13.35 16.5 29.85 0 31.15 1.3 28.67 5.32 32.83 2.98 33.94 4.08 13.71 24.31"/>
