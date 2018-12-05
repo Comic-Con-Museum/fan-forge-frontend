@@ -18,17 +18,17 @@ const fetchTags = () => axios.get(`${appURL}/tags`);
 
 const fetchExhibit = (id) => axios.get(`${appURL}/exhibit/${id}`);
 
-const postComment = (text, id) => axios.post(`${appURL}/comment/`, {
+const postComment = (text, id, callback) => axios.post(`${appURL}/comment/`, {
   text: text,
   parent: parseInt(id)
-});
+}).then(callback);
 
 const supportExhibit = (id, body, onComplete) => axios.request({
     method: 'put',
     url: `${appURL}/support/exhibit/${id}`,
     data: JSON.stringify(body),
     headers: {'Content-Type': 'application/json'}
-}).then( () => onComplete() );
+}).then(onComplete);
 
 const createExhibit = (formData, onComplete, onFailed) =>
     axios.post(`${appURL}/exhibit`, formData)

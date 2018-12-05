@@ -20,15 +20,23 @@ export class Comments extends PureComponent {
   };
 
   sendComment = () => {
-    postComment(this.commentBox.value, this.props.exhibit)
+    const newValue = this.commentBox.value;
+
     this.setState({sendText: 'Your comment was sent!'})
     this.commentBox.value = ''
     this.commentBox.disabled = true
     this.commentBox.style.background = 'whitesmoke'
+    postComment(newValue, this.props.exhibit, this.resetComment)
+  }
+
+  resetComment = (id) => {
+    this.commentBox.disabled = false;
+    this.commentBox.style.background = 'white'
+    this.setState({sendText: 'Send'})
   }
 
   render() {
-    const {show, comments} = this.props
+    const {show, comments} = this.props;
 
     return (
       <CommentsWrapper show={show}>
