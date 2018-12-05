@@ -28,16 +28,20 @@ export const SubmitButton = styled.button`
 export const ImageSection = styled.div`
   display: flex;
   flex-direction: horizontal;
-  width: calc(100% - 260px);
   height: 200px;
-  overflow-x: scroll;
+  overflow-y: hidden;
+  max-width: 450px;
+  margin-top: 20px;
+  align-items: flex-start;
 `;
 
-export const HorizontalSection = styled.div`
+export const VerticalSection = styled.div`
   margin: 10px;
   display: flex;
-  flex-direction: horizontal;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 100%;
 `;
 
@@ -46,7 +50,7 @@ export const Artifact = styled.div`
 `;
 
 export const ArtifactImg = styled.img`
-  height: 100%;
+  height: 200px;
 `;
 
 export const RemoveArtifact = styled.button`
@@ -62,18 +66,53 @@ export const Splitter = styled.div`
   flex-direction: horizontal;
   align-content: stretch;
   width: 100%;
+  flex-direction: column;
+  margin: 0;
 `;
 
 export const TextArea = styled.textarea`
   display: block;
   width: 100%;
+  padding: 5px;
+  margin-top: 5px;
+  resize: none;
+  height: 100px;
+  border-color: rgb(238, 238, 238);
 `;
 
 export const TitleInput = styled.input`
   display: block;
-  width: 90%;
+  padding: 5px;
+  margin-top: 3px;
+  width: 100%;
 `;
 
 export const Label = styled.label`
-   width: 50%;
+   font-weight: bold;
+   text-transform: uppercase;
+   margin-bottom: 12px;
 `;
+
+export const SubmitFormTitle = styled.div`
+  font-size: 22px;
+  text-transform: uppercase;
+  font-weight: bold;
+`;
+
+export const SubmitFormRow = styled.div`
+  margin-top: 10px;
+`
+export const TagContainer = styled.div`
+  text-transform: uppercase;
+`
+
+export const TagTitle = styled.div`
+  font-weight: bold;
+`
+
+export const TagSupport = styled.div`
+  margin-top: 3px;
+  font-size: 14px;
+  text-transform: none;
+  margin-bottom: 5px;
+`

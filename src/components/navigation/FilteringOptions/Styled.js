@@ -50,10 +50,10 @@ export const selectTheme = (theme) => ({
     ...theme,
     colors: {
         ...theme.colors,
-        primary: colors.yellow_1,
-        primary25: colors.yellow_2,
-        primary50: colors.yellow_1,
-        neutral0: colors.black,
-        neutral80: colors.yellow_1,
+        primary: 'black',
+        primary25: colors.yellow_1,
+        primary50: 'black',
+        neutral0: 'white',
+        neutral80: 'black',
     }
 });

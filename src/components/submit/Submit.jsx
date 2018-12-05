@@ -6,20 +6,25 @@ import { fetchTags } from '../../utils/api';
 import { createExhibit } from '../../utils/api';
 
 import axios from 'axios';
-
+import './style.scss';
 
 import {
   Artifact,
   ArtifactImg,
   ImageSection,
-  HorizontalSection,
+  VerticalSection,
   Label,
   RemoveArtifact,
   Splitter,
   SubmitButton,
   SubmitForm,
   TextArea,
-  TitleInput
+  TitleInput,
+  SubmitFormTitle,
+  SubmitFormRow,
+  TagSupport,
+  TagContainer,
+  TagTitle
 } from './StyledComponents';
 
 class Submit extends PureComponent {
@@ -28,7 +33,6 @@ class Submit extends PureComponent {
     this.state = {
         images: [], // base64 data array to show
         files: [], // references to the file objects
-
         // options for the dropdown
         options: [{ label: 'Loading', value: '' }],
         tags: [],
@@ -117,7 +121,6 @@ class Submit extends PureComponent {
 
     const sent = new FormData();
     sent.append('data', JSON.stringify(data));
-    alert(JSON.stringify(data));
     this.state.files.map(file =>
         sent.append(file.name, file)
     );
@@ -148,26 +151,24 @@ class Submit extends PureComponent {
       <AriaModal
         titleText={`Supporting exhibit: ${this.props.title}`}
         onExit={this.props.deactivateModal}
-        initialFocus="#dropzone-images"
+        focusDialog
         getApplicationNode={this.getApplicationNode}
         underlayStyle={{ paddingTop: '2em' }}
       >
         <SubmitForm>
-          <div>
-            Add some images to show off your exhibit,
-            the first one will be the cover
-          </div>
-          <HorizontalSection>
-            <ImageSection>
-              {this.state.images.map((data, index) => this.renderImage(data, index))}
-            </ImageSection>
+          <SubmitFormTitle>Submit an exhibit</SubmitFormTitle>
+          <SubmitFormRow>Add some images to show off your exhibit, the first one will be the cover </SubmitFormRow>
+          <VerticalSection>
             <Dropzone id="dropzone-images"
               accept={'image/*'}
               onDrop={this.onDrop}
             >
               Drag and drop some files here, or click to add them
             </Dropzone>
-          </HorizontalSection>
+            <ImageSection>
+              {this.state.images.map((data, index) => this.renderImage(data, index))}
+            </ImageSection>
+          </VerticalSection>
           <Splitter>
             <Label>
               Title
@@ -188,15 +189,15 @@ class Submit extends PureComponent {
                 onChange={this.handleDescriptionChange} />
             </Label>
           </Splitter>
-          <div>
-            Select some tags to help identify your exhibit,
-            or type to create your own.
-            <CreatableSelect
-              isMulti
-              options={this.state.options}
-              onChange={this.handleTagsChange}
-            />
-          </div>
+          <TagContainer>
+            <TagTitle>Tags</TagTitle>
+            <TagSupport>Select or type to create your own</TagSupport>
+              <CreatableSelect
+                isMulti
+                options={this.state.options}
+                onChange={this.handleTagsChange}
+              />
+          </TagContainer>
           <SubmitButton onClick={this.submit}>Submit</SubmitButton>
         </SubmitForm>
       </AriaModal>
