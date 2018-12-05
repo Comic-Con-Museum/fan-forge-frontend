@@ -8,7 +8,13 @@ const fetchRawSurveyData = (id) => axios.get(`${appURL}/admin/supports/${id}`);
 
 const fetchFormattedSurveyData = (id) => axios.get(`${appURL}/admin/survey-data/${id}`);
 
+const featureExhibit = (id) => axios.post(`${appURL}/admin/feature/${id}`);
+
+const removeExhibit = (id) => axios.delete(`${appURL}/exhibit/${id}`);
+
 export {
   fetchFormattedSurveyData,
-  fetchRawSurveyData
+  fetchRawSurveyData,
+  featureExhibit,
+  removeExhibit
 }

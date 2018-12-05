@@ -14,6 +14,7 @@ import {
   FeatureButton,
   DeleteButton
 } from './Styled';
+import { featureExhibit, removeExhibit } from './adminApi';
 
 const tableCharacteristics = [
   {
@@ -80,8 +81,8 @@ class AdminFeed extends Component {
         </Controller>
         {exploring ? null : <ButtonContainer>
           <BackButton onClick={this.goBack}>Back</BackButton>
-          <FeatureButton>Feature this!</FeatureButton>
-          <DeleteButton>Delete this!</DeleteButton>
+          <FeatureButton onClick={() => featureExhibit(id)}>Feature this!</FeatureButton>
+          <DeleteButton onClick={() => removeExhibit(id)}>Delete this!</DeleteButton>
         </ButtonContainer>}
       </ActionWrapper>
     );
