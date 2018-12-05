@@ -2,13 +2,15 @@ import React, { PureComponent } from 'react';
 import { Link } from 'react-router-dom';
 import { PropTypes } from 'prop-types';
 import { moveTo, randomInt } from '../../utils/helpers';
-
+import LikesImgSrc from '../../assets/like.svg';
+import './styles';
 import {
   ExhibitContainer,
   ExhibitImg,
   ExhibitTitle,
   ImgContainer,
   Supporters,
+  LikeImg,
   Featured
 } from './Styled';
 
@@ -22,14 +24,14 @@ class ExhibitCard extends PureComponent {
     const {id, title, description, supporters, featured, cover, active} = this.props
 
     return (  
-      <Link onClick={this.navigateToExhibit} to={`/exhibit/${this.props.id}`}>
-        <ExhibitContainer active={active}>
+      <ExhibitContainer active={active}>
+        <Link className="exhibit-card" onClick={this.navigateToExhibit} to={`/exhibit/${this.props.id}`}>
           <ExhibitImg open={open} src={`https://fan-forge-dev.herokuapp.com/image/${cover ? cover.image : ''}`}/>
           <ExhibitTitle>{title}</ExhibitTitle>
-          <Supporters>{supporters}</Supporters>
+          <Supporters><LikeImg src={LikesImgSrc}/>{supporters} SUPPORTERS</Supporters>
           {featured ? <Featured /> : ''}
-        </ExhibitContainer>
-      </Link>
+        </Link>
+      </ExhibitContainer>
     )
   }
 }

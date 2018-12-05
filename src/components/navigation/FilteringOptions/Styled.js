@@ -10,13 +10,16 @@ export const collapsibleContainerStyles = `
     width: 400px;
     
     opacity: .9;
-    background-color: #000;
-    color: ${colors.yellow_1};
+    color: black;
+    background-color: white;
     
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     
+    border-bottom: 1px solid black;
+    border-left: 1px solid;
+
     @media (max-width: ${deviceSizes.mobile}) {
         width: auto;
     }
@@ -28,7 +31,7 @@ export const FilterOptionContainer = styled.div`
     align-items: center;
     justify-content: space-between;
     text-transform: uppercase;
-    font-weight: 500;
+    font-weight: bold;
 `;
 
 export const Label = styled.span`
