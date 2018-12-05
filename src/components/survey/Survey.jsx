@@ -109,7 +109,8 @@ class Survey extends PureComponent {
           </LabelRow>
           { this.props.alreadySupported ?
               <AlreadySupported>
-                You already supported this exhibit. Re-sumbitting this will change your response.
+                You already supported this exhibit.
+                If you submit again, you will change your response.
               </AlreadySupported> : null
           }
           <FieldGroup>
