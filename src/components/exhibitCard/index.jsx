@@ -21,10 +21,10 @@ class ExhibitCard extends PureComponent {
   render() {
     const {id, title, description, supporters, featured, cover, active} = this.props
 
-    return (  
+    return (
       <Link onClick={this.navigateToExhibit} to={`/exhibit/${this.props.id}`}>
         <ExhibitContainer active={active}>
-          <ExhibitImg open={open} src={`https://fan-forge-dev.herokuapp.com/image/${cover ? cover.image : ''}`}/>
+          <ExhibitImg src={`https://fan-forge-dev.herokuapp.com/image/${cover ? cover.image : ''}`}/>
           <ExhibitTitle>{title}</ExhibitTitle>
           <Supporters>{supporters}</Supporters>
           {featured ? <Featured /> : ''}
@@ -36,8 +36,8 @@ class ExhibitCard extends PureComponent {
 
 ExhibitCard.propTypes = {
   description: PropTypes.string,
-  imageUrl: PropTypes.string, 
-  supporters: PropTypes.num,
+  imageUrl: PropTypes.string,
+  supporters: PropTypes.number,
   featured: PropTypes.bool,
   title: PropTypes.string,
 }
