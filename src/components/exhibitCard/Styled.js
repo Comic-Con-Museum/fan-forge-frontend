@@ -7,7 +7,7 @@ export const ExhibitContainer = styled.div.attrs({
   width: 325px;
   order: 1;
   height: 300px;
-  box-shadow: 5px 8px 6px rgba(0, 0, 0, 0.16);
+  box-shadow: 2px 0px 5px rgba(0,0,0,0.56);
   background-color: ${props => props.active ? 'yellow' : 'white'};
   border-radius: 5px;
   overflow: hidden;
