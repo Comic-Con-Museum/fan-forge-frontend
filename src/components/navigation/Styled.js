@@ -22,7 +22,7 @@ const buttonStyle = css`
   text-align: center;
 `
 
-export const NavButton = styled.a`
+export const NavButton = styled.button`
   flex: 1;
   ${buttonStyle}
 `
