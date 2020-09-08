@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import ReactSpeedometer from 'react-d3-speedometer'
-import {RadialChart} from 'react-vis'
+import {RadialChart, Hint} from 'react-vis'
 
 import {
   DataModelWrapper,
@@ -10,14 +10,19 @@ import {
 } from './Styled';
 
 class ExhibitDataModels extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {value: null}
+  }
 
   getRadialChartData(data) {
-    console.warn(data)
     return Object.keys(data).map(item => ({angle: data[item], subLabel: item}))
   }
 
   render() {
     const {nps, populationsExpected, visitsExpected} = this.props;
+    const {value, value2} = this.state;
+    console.warn(this.state)
 
     return (
       <div>
@@ -36,16 +41,21 @@ class ExhibitDataModels extends Component {
               data={this.getRadialChartData(populationsExpected)}
               width={300}
               height={300}
+              innerRadius={100}
+              onValueMouseOver={v => this.setState({value2: v})}
             />
             <SubTitle>Populations this exhibit will draw</SubTitle>
+            <SubTitle>{value2 ? `${value2.subLabel}: ${populationsExpected[value2.subLabel]}` : ''}</SubTitle>
           </Flex>
           <Flex>
             <RadialChart
+              onValueMouseOver={v => this.setState({value: v})}
               data={this.getRadialChartData(visitsExpected)}
               width={300}
               height={300}
             />
             <SubTitle>How many visits to expect</SubTitle>
+            <SubTitle>{value ? `${value.subLabel}: ${visitsExpected[value.subLabel]}` : ''}</SubTitle>
           </Flex>
         </DataModelWrapper>
       </div>

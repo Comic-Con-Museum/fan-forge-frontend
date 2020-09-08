@@ -33,18 +33,44 @@ export const ButtonContainer = styled.div`
 `;
 
 export const FeatureButton = styled.button`
-  padding: 15px;
+  padding: 18px;
   background-color: yellow;
+  transition: background-color .5s ease-in;
+  border: none;
+  font-weight: 700;
+  font-size: 16px;
+  :hover {
+    color: yellow;
+    background-color: black;
+  }
 `;
 
 export const DeleteButton = styled.button`
-  padding: 15px;
+  padding: 18px;
   background-color: red;
+  border: none;
+  transition: background-color .5s ease-in;
+  border-top-right-radius: 5px;
+  font-weight: 700;
+  font-size: 16px;
+  :hover {
+    color: red;
+    background-color: black;
+  }
 `;
 
 export const BackButton = styled.button`
-  padding: 15px;
+  padding: 18px;
   background-color: grey;
+  border-bottom-left-radius: 5px;
+  font-weight: 700;
+  font-size: 16px;
+  transition: background-color .5s ease-in;
+  border: none;
+  :hover {
+    color: grey;
+    background-color: black;
+  }
 `;
 
 // ADMIN FEED ELEMENTS
